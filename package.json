@@ -1,0 +1,28 @@
+{
+  "name": "@ttpos/url-monorepo",
+  "type": "module",
+  "private": true,
+  "packageManager": "pnpm@9.5.0",
+  "description": "A simple and efficient URL shortener",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ttpos/url.git"
+  },
+  "engines": {
+    "node": ">=18.20.3 || >=20.0.0"
+  },
+  "scripts": {
+    "build": "pnpm -r build",
+    "release": "pnpm publish -r --filter @ttpos/* --no-git-checks --tag=latest",
+    "release:beta": "pnpm publish -r --filter @ttpos/* --no-git-checks --tag=beta",
+    "clean": "bash ./scripts/clean.sh",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.25.1",
+    "@types/node": "^22.2.0",
+    "eslint": "^9.9.0",
+    "typescript": "^5.5.4"
+  }
+}
