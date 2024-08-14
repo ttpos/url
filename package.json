@@ -23,6 +23,7 @@
     "@antfu/eslint-config": "^2.25.1",
     "@types/node": "^22.2.0",
     "eslint": "^9.9.0",
+    "eslint-plugin-format": "^0.1.2",
     "typescript": "^5.5.4"
   }
 }
