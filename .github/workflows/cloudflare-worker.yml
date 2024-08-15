@@ -1,4 +1,4 @@
-name: Deploy to cloudflare worker
+name: Deploy to Cloudflare Worker
 
 on:
   workflow_dispatch:
@@ -17,7 +17,14 @@ jobs:
           npm install
           npm run pages:build
       - name: Deploy
+        id: deploy
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: ./apps/worker
           command: pages deploy --project-name=a-app-worker
+      - name: print wrangler command output
+        env:
+          CMD_OUTPUT: ${{ steps.deploy.outputs.command-output }}
+        run: echo $CMD_OUTPUT
