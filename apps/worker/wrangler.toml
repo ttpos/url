@@ -3,6 +3,7 @@ compatibility_date = "2024-08-06"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".vercel/output/static"
 send_metrics = false
+account_id = "97e8346e40643474c9dd6afb84a000c0"
 
 [[d1_databases]]
 binding = "DB"
