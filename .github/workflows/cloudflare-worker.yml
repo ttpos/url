@@ -7,6 +7,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Deploy
+    defaults:
+      run:
+        working-directory: ./apps/worker
     steps:
       - uses: actions/checkout@v4
       - name: Build
