@@ -4,11 +4,19 @@ import { getRequestContext } from '@cloudflare/next-on-pages'
 export const runtime = 'edge'
 
 export async function GET(request: NextRequest) {
-  let responseText = 'Hello World'
+  const context = getRequestContext();
 
-  const myKv = getRequestContext().env.KV;
-  await myKv.put("foo", "bar");
-  const foo = await myKv.get("foo");
+  const myKv = context.env.KV;
+  const kv = await myKv.get("kv");
 
-  return new Response(JSON.stringify({ responseText, foo }));
+  const ps = context.env.DB.prepare("SELECT * from users");
+  const data = await ps.first();
+
+  return new Response(
+    JSON.stringify({
+      msg: "hello word",
+      kv: kv,
+      db: data,
+    })
+  );
 }

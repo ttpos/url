@@ -3,5 +3,5 @@
 
 interface CloudflareEnv {
   KV: KVNamespace;
-  DB: D1Meta;
+  DB: D1Database;
 }
