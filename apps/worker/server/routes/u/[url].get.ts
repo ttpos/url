@@ -3,6 +3,7 @@ import { links } from '@@/database/schema'
 
 export default defineEventHandler(async (event) => {
   const urlId = event.context.params?.url as string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const db = event.context.db as any
 
   const data = await db.query.links.findFirst({
@@ -12,7 +13,7 @@ export default defineEventHandler(async (event) => {
   return {
     code: 0,
     urlId,
-    message: 'ok',
+    message: 'hello',
     data,
   }
 })

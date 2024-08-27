@@ -1,12 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-07-30',
-  eslint: {
-    config: {
-      standalone: false,
-      stylistic: true,
-    },
-  },
   future: {
     compatibilityVersion: 4,
   },
@@ -25,5 +19,4 @@ export default defineNuxtConfig({
   devtools: {
     enabled: true,
   },
-  modules: ['@nuxt/eslint'],
 })

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { defineConfig } from 'drizzle-kit'
 
 const cf = {
