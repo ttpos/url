@@ -1,3 +1,4 @@
+import { isNull } from 'drizzle-orm'
 import { blob, index, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core'
 
 export const links = sqliteTable('links', {
