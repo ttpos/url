@@ -4,7 +4,7 @@ import { defineConfig } from 'drizzle-kit'
 const cf = {
   accountId: process.env.CLOUDFLARE_ACCOUNT_ID || '',
   databaseId: process.env.CLOUDFLARE_DATABASE_ID || '',
-  token: process.env.CLOUDFLARE_D1_TOKEN || '',
+  token: process.env.CLOUDFLARE_API_TOKEN || '',
 }
 const libsql = {
   url: process.env.LIBSQL_URL || 'file:database/data.db',

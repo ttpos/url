@@ -24,23 +24,12 @@ jobs:
           MY_ENV_VAR: ${{ secrets.MY_ENV_VAR }}
           NUXT_DB_TYPE: 'cf'
           NUXT_DEBUG: false
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_DATABASE_ID: ${{ secrets.CLOUDFLARE_WORKER_D1 }}
-          CLOUDFLARE_D1_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
           pnpm install
           pnpm db:gen
           pnpm db:migrate
           pnpm build
-      - name: Deploy
-        id: deploy
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: ./apps/worker
-          command: pages deploy --project-name=a-app-worker
-      - name: print wrangler command output
-        env:
-          CMD_OUTPUT: ${{ steps.deploy.outputs.command-output }}
-        run: echo $CMD_OUTPUT
+          npx wrangler pages deploy dist/
