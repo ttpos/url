@@ -9,6 +9,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
+    "cf:dev": "wrangler pages --ip 0.0.0.0 --port 3000 dev dist ",
+    "cf:localdb": "wrangler d1 migrations apply a-app-url-short",
     "db:studio": "drizzle-kit studio --port 3003 --host 0.0.0.0",
     "db:pull": "drizzle-kit pull",
     "db:gen": "drizzle-kit generate",

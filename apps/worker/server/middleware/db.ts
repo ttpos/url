@@ -6,10 +6,11 @@ import { drizzle as drizzleD1 } from 'drizzle-orm/d1'
 import * as schema from '@@/database/schema'
 
 export function initializeDrizzle(event: H3Event<EventHandlerRequest>) {
-  const nuxt = useRuntimeConfig()
+  const nuxt = useRuntimeConfig(event)
 
   switch (nuxt.dbType) {
     case 'libsql': {
+      logger.info('Using libsql database')
       const db = createClient({
         url: nuxt.libsqlUrl,
         authToken: nuxt.libsqlAuthToken,
@@ -17,6 +18,7 @@ export function initializeDrizzle(event: H3Event<EventHandlerRequest>) {
       return drizzleSqlite(db, { schema })
     }
     case 'd1': {
+      logger.info('Using D1 database')
       const { DB = '' } = event.context.cloudflare?.env || {}
       if (!DB) {
         logger.error('D1 database not found')

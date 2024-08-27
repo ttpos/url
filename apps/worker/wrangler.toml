@@ -8,7 +8,11 @@ send_metrics = false
 binding = "DB"
 database_name = "a-app-url-short"
 database_id = "13769275-0589-4fac-a5f0-16a56689173d"
+migrations_dir = "database"
 
 [[kv_namespaces]]
 binding = "KV"
 id = "9d16d408f0874149a423d7b1b332037f"
+
+[vars]
+NUXT_DB_TYPE = "d1"
