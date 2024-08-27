@@ -8,7 +8,7 @@ COPY public ./public
 COPY server ./server
 COPY databases ./databases
 COPY package.json pnpm-lock.yaml tsconfig.json \
-     nuxt.config.ts eslint.config.js .env ./
+     nuxt.config.ts eslint.config.ts .env drizzle.config.ts ./
 
 RUN npm install -g pnpm && pnpm install && pnpm build
 
@@ -20,9 +20,9 @@ ENV PATH=$PATH:/build/bin:/work/bin
 
 COPY --from=zzci/init / /
 
-COPY --from=node-build /node/.output /app/movie-proxy
+COPY --from=node-build /node/.output /app/worker
 
-RUN apk add --no-cache wireguard-tools tcpdump iptables curl ipset iproute2
+RUN apk add --no-cache curl bash
 
 EXPOSE 3000
 
