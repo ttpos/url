@@ -14,8 +14,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
         name: Install pnpm
-        with:
-          version: 9
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
@@ -25,6 +23,7 @@ jobs:
         env:
           MY_ENV_VAR: ${{ secrets.MY_ENV_VAR }}
           NUXT_DB_TYPE: 'cf'
+          NUXT_DEBUG: false
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_DATABASE_ID: ${{ secrets.CLOUDFLARE_WORKER_D1 }}
           CLOUDFLARE_D1_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
