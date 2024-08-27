@@ -11,8 +11,8 @@ export default defineNuxtConfig({
     compatibilityVersion: 4,
   },
   runtimeConfig: {
-    dbType: 'libsql',
-    libsqlUrl: 'file:database/data.db',
+    dbType: '',
+    libsqlUrl: '',
     libsqlAuthToken: '',
     debug: true,
   },

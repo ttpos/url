@@ -22,7 +22,7 @@ jobs:
       - name: Build and migrate database
         env:
           MY_ENV_VAR: ${{ secrets.MY_ENV_VAR }}
-          NUXT_DB_TYPE: 'cf'
+          NUXT_DB_TYPE: d1
           NUXT_DEBUG: false
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

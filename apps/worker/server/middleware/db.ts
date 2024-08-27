@@ -16,7 +16,7 @@ export function initializeDrizzle(event: H3Event<EventHandlerRequest>) {
       })
       return drizzleSqlite(db, { schema })
     }
-    case 'cf': {
+    case 'd1': {
       const { DB = '' } = event.context.cloudflare?.env || {}
       if (!DB) {
         logger.error('D1 database not found')
