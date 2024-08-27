@@ -12,11 +12,27 @@ jobs:
         working-directory: ./apps/worker
     steps:
       - uses: actions/checkout@v4
-      - name: Build
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 9
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - name: Build and migrate database
+        env:
+          MY_ENV_VAR: ${{ secrets.MY_ENV_VAR }}
+          NUXT_DB_TYPE: 'cf'
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_DATABASE_ID: ${{ secrets.CLOUDFLARE_WORKER_D1 }}
+          CLOUDFLARE_D1_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
-          npx next telemetry disable
-          npm install
-          npm run pages:build
+          pnpm install
+          pnpm db:gen
+          pnpm db:migrate
+          pnpm build
       - name: Deploy
         id: deploy
         uses: cloudflare/wrangler-action@v3

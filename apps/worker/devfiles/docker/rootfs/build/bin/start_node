@@ -1,0 +1,11 @@
+#!/bin/sh
+name="node"
+home="/work/node"
+mkdir -p $home
+
+if [ ! -f "$home/start.sh" ]; then
+  echo 'node' > $home/start.sh
+  chmod +x $home/start.sh
+fi
+
+exec $home/start.sh
