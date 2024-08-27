@@ -5,9 +5,9 @@ export const links = sqliteTable('links', {
   domain: text('domain').notNull(),
   shortCode: text('short_code').notNull(),
   url: text('url').notNull(),
-  expiresAt: integer('expires_at').notNull(),
-  isDelete: integer('is_delete').notNull(),
   userId: integer('user_id').notNull(),
+  expiresAt: integer('expires_at'),
+  isDelete: integer('is_delete').default(0),
 }, (table) => {
   return {
     domain: index('links_domain').on(table.domain),
@@ -16,15 +16,14 @@ export const links = sqliteTable('links', {
 })
 
 export const pages = sqliteTable('pages', {
-  id: integer('id').primaryKey({ autoIncrement: true }).notNull(),
+  id: integer('id').primaryKey({ autoIncrement: true }),
   domain: text('domain').notNull(),
   shortCode: text('short_code').notNull(),
   userId: text('user_id').notNull(),
   template: text('template').notNull(),
   data: blob('data').notNull(),
-  isDelete: integer('is_delete').notNull(),
-  expiresAt: integer('expires_at').notNull(),
-  createAt: integer('create_at').notNull(),
+  isDelete: integer('is_delete').default(0),
+  expiresAt: integer('expires_at'),
 }, (table) => {
   return {
     domain: index('pages_domain').on(table.domain),

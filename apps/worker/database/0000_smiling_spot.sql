@@ -3,9 +3,9 @@ CREATE TABLE `links` (
 	`domain` text NOT NULL,
 	`short_code` text NOT NULL,
 	`url` text NOT NULL,
-	`expires_at` integer NOT NULL,
-	`is_delete` integer NOT NULL,
-	`user_id` integer NOT NULL
+	`expires_at` integer,
+	`is_delete` integer DEFAULT 0,
+	`user_id` integer
 );
 --> statement-breakpoint
 CREATE TABLE `pages` (
@@ -15,9 +15,8 @@ CREATE TABLE `pages` (
 	`user_id` text NOT NULL,
 	`template` text NOT NULL,
 	`data` blob NOT NULL,
-	`is_delete` integer NOT NULL,
-	`expires_at` integer NOT NULL,
-	`create_at` integer NOT NULL
+	`is_delete` integer DEFAULT 0,
+	`expires_at` integer
 );
 --> statement-breakpoint
 CREATE INDEX `links_domain` ON `links` (`domain`);--> statement-breakpoint
