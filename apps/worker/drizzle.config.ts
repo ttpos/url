@@ -1,16 +1,30 @@
 import { defineConfig } from 'drizzle-kit'
 
+// Define environment variables with default values
+const {
+  CLOUDFLARE_ACCOUNT_ID = '',
+  CLOUDFLARE_DATABASE_ID = '',
+  CLOUDFLARE_API_TOKEN = '',
+  LIBSQL_URL = 'file:database/data.db',
+  LIBSQL_AUTH_TOKEN = '',
+  NUXT_DB_TYPE = 'd1-http',
+} = process.env
+
+// Configure Cloudflare and LibSQL credentials
 const cf = {
-  accountId: process.env.CLOUDFLARE_ACCOUNT_ID || '',
-  databaseId: process.env.CLOUDFLARE_DATABASE_ID || '',
-  token: process.env.CLOUDFLARE_API_TOKEN || '',
+  accountId: CLOUDFLARE_ACCOUNT_ID,
+  databaseId: CLOUDFLARE_DATABASE_ID,
+  token: CLOUDFLARE_API_TOKEN,
 }
+
 const libsql = {
-  url: process.env.LIBSQL_URL || 'file:database/data.db',
-  authToken: process.env.LIBSQL_AUTH_TOKEN,
+  url: LIBSQL_URL,
+  authToken: LIBSQL_AUTH_TOKEN,
 }
-const driver = process.env.NUXT_DB_TYPE === 'libsql' ? 'turso' : 'd1-http'
-const dbCredentials = process.env.NUXT_DB_TYPE === 'libsql' ? libsql : cf
+
+// Determine the database driver and credentials
+const driver = NUXT_DB_TYPE === 'libsql' ? 'turso' : 'd1-http'
+const dbCredentials = NUXT_DB_TYPE === 'libsql' ? libsql : cf
 
 console.log('Using:', driver)
 

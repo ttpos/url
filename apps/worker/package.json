@@ -1,16 +1,18 @@
 {
-  "name": "@ttpos/url-app-worker",
+  "name": "@ttpos/a-app-worker",
   "type": "module",
   "private": true,
   "packageManager": "pnpm@9.7.1",
   "scripts": {
-    "build": "nuxt build",
     "dev": "nuxt dev",
+    "build": "nuxt build",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
+    "preview": "pnpm run build && wrangler pages dev",
     "postinstall": "nuxt prepare",
+    "typecheck": "nuxt typecheck",
+    "cf-typegen": "wrangler types",
     "cf:dev": "wrangler pages --ip 0.0.0.0 --port 3000 dev dist ",
-    "cf:localdb": "wrangler d1 migrations apply a-app-url-short",
+    "cf:localdb": "wrangler d1 migrations apply drizzle-demo-db",
     "db:studio": "drizzle-kit studio --port 3003 --host 0.0.0.0",
     "db:pull": "drizzle-kit pull",
     "db:gen": "drizzle-kit generate",
@@ -21,13 +23,18 @@
   "dependencies": {
     "@libsql/client": "^0.10.0",
     "drizzle-orm": "^0.33.0",
-    "nuxt": "^3.12.4",
+    "nuxt": "^3.13.0",
     "tracer": "^1.3.0",
-    "vue": "latest"
+    "vue": "latest",
+    "vue-router": "latest"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240821.1",
     "@nuxt/eslint-config": "^0.5.3",
     "drizzle-kit": "^0.24.2",
-    "eslint": "^9.9.0"
+    "eslint": "^9.9.0",
+    "nitro-cloudflare-dev": "^0.1.6",
+    "vue-tsc": "latest",
+    "wrangler": "^3.72.3"
   }
 }

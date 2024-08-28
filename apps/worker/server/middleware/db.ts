@@ -1,33 +1,33 @@
 import type { EventHandlerRequest, H3Event } from 'h3'
-import { drizzle as drizzleSqlite } from 'drizzle-orm/libsql'
 import { createClient } from '@libsql/client'
+import { drizzle as drizzleSqlite } from 'drizzle-orm/libsql'
 import { drizzle as drizzleD1 } from 'drizzle-orm/d1'
-
 import * as schema from '@@/database/schema'
 
 export function initializeDrizzle(event: H3Event<EventHandlerRequest>) {
-  const nuxt = useRuntimeConfig(event)
+  const { dbType, libsqlUrl, libsqlAuthToken } = useRuntimeConfig(event)
 
-  switch (nuxt.dbType) {
+  logger.info(`Using ${dbType} database`)
+
+  switch (dbType) {
     case 'libsql': {
-      logger.info('Using libsql database')
       const db = createClient({
-        url: nuxt.libsqlUrl,
-        authToken: nuxt.libsqlAuthToken,
+        url: libsqlUrl,
+        authToken: libsqlAuthToken,
       })
       return drizzleSqlite(db, { schema })
     }
     case 'd1': {
-      logger.info('Using D1 database')
       const { DB = '' } = event.context.cloudflare?.env || {}
       if (!DB) {
         logger.error('D1 database not found')
-        return false
+        return null
       }
       return drizzleD1(DB, { schema })
     }
     default: {
-      logger.error(`Unsupported DB type: ${nuxt.dbType}`)
+      logger.error(`Unsupported DB type: ${dbType}`)
+      return null
     }
   }
 }
