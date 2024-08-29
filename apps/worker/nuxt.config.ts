@@ -11,7 +11,7 @@ export default defineNuxtConfig({
     debug: process.env.NUXT_DEBUG === 'true',
   },
   nitro: {
-    preset: 'cloudflare-pages',
+    preset: process.env.DEPLOY_RUNTIME || '',
     experimental: {
       tasks: true,
     },
