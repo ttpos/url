@@ -1,5 +1,4 @@
-import { isNull } from 'drizzle-orm'
-import { blob, index, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core'
+import { blob, index, integer, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core'
 
 export const links = sqliteTable('links', {
   id: integer('id').primaryKey({ autoIncrement: true }).notNull(),
@@ -13,6 +12,7 @@ export const links = sqliteTable('links', {
   return {
     domain: index('links_domain').on(table.domain),
     shortCode: index('links_short_code').on(table.shortCode),
+    uniqueId: uniqueIndex('links_unique_id').on(table.domain, table.shortCode),
   }
 })
 
@@ -29,5 +29,6 @@ export const pages = sqliteTable('pages', {
   return {
     domain: index('pages_domain').on(table.domain),
     shortCode: index('pages_short_code').on(table.shortCode),
+    uniqueId: uniqueIndex('pages_unique_id').on(table.domain, table.shortCode),
   }
 })
