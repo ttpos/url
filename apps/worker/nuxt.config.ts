@@ -5,7 +5,7 @@ export default defineNuxtConfig({
     compatibilityVersion: 4,
   },
   runtimeConfig: {
-    dbType: process.env.NUXT_DB_TYPE || 'd1',
+    dbType: process.env.NUXT_DB_TYPE || 'libsql',
     libsqlUrl: process.env.NUXT_LIBSQL_URL || 'file:database/data.db',
     libsqlAuthToken: process.env.NUXT_LIBSQL_AUTH_TOKEN || '',
     debug: process.env.NUXT_DEBUG === 'true',
