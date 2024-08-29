@@ -2,9 +2,9 @@ import { defineConfig } from 'drizzle-kit'
 
 // Define environment variables with default values
 const {
-  NUXT_CLOUDFLARE_ACCOUNT_ID = '',
-  NUXT_CLOUDFLARE_DATABASE_ID = '',
-  NUXT_CLOUDFLARE_API_TOKEN = '',
+  CLOUDFLARE_ACCOUNT_ID = '',
+  CLOUDFLARE_DATABASE_ID = '',
+  CLOUDFLARE_API_TOKEN = '',
   NUXT_LIBSQL_URL = 'file:database/data.db',
   NUXT_LIBSQL_AUTH_TOKEN = '',
   NUXT_DB_TYPE = 'd1-http',
@@ -12,9 +12,9 @@ const {
 
 // Configure Cloudflare and LibSQL credentials
 const d1 = {
-  accountId: NUXT_CLOUDFLARE_ACCOUNT_ID,
-  databaseId: NUXT_CLOUDFLARE_DATABASE_ID,
-  token: NUXT_CLOUDFLARE_API_TOKEN,
+  accountId: CLOUDFLARE_ACCOUNT_ID,
+  databaseId: CLOUDFLARE_DATABASE_ID,
+  token: CLOUDFLARE_API_TOKEN,
 }
 
 const libsql = {
