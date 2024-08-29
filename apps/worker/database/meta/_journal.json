@@ -8,6 +8,20 @@
       "when": 1724787228764,
       "tag": "0000_keen_shinko_yamashiro",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1724925396623,
+      "tag": "0001_mixed_black_tarantula",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1724935993180,
+      "tag": "0002_dark_wong",
+      "breakpoints": true
     }
   ]
 }

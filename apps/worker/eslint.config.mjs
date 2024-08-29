@@ -7,7 +7,12 @@ const config = createConfigForNuxt(
     },
   },
   {
-    ignores: ['database/**', '**.md', '.nuxt/**'],
+    ignores: [
+      'database/**',
+      '**.md',
+      '.nuxt/**',
+      'server/types/worker-configuration.d.ts',
+    ],
   },
   {
     files: ['*.ts'],
@@ -18,4 +23,5 @@ const config = createConfigForNuxt(
     },
   },
 )
+
 export default config
