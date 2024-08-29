@@ -2,18 +2,36 @@ import { gte } from 'drizzle-orm'
 import { links } from '@@/database/schema'
 
 export default defineEventHandler(async (event) => {
-  const urlId = event.context.params?.url as string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const db = event.context.db as any
+  const { db } = event.context
 
-  const data = await db.query.links.findFirst({
-    where: gte(links.id, 0),
-  })
+  try {
+    const urlId = event.context.params?.url
 
-  return {
-    code: 0,
-    urlId,
-    message: 'hello',
-    data,
+    const data = await db?.query.links.findFirst({
+      where: gte(links.id, 0),
+    })
+
+    return {
+      code: 0,
+      message: 'hello',
+      data: {
+        urlId,
+        list: data || [],
+      },
+    }
+  }
+  catch (error) {
+    logger.error('🚀 ~ defineEventHandler ~ error:', error)
+    event.node.res.statusCode = 500
+    let errorMessage = 'Internal Server Error'
+    if (error instanceof Error) {
+      errorMessage = error.message
+    }
+
+    return {
+      code: 500,
+      message: errorMessage,
+      data: [],
+    }
   }
 })
