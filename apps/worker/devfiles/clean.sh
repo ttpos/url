@@ -4,6 +4,7 @@ DIRS_TO_DELETE=(
   ".nuxt"
   ".wrangler"
   ".output"
+  ".data"
   "dist"
   "node_modules"
 )

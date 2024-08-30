@@ -6,7 +6,7 @@ const {
   CLOUDFLARE_DATABASE_ID = '',
   CLOUDFLARE_API_TOKEN = '',
   NUXT_LIBSQL_URL = 'file:database/data.db',
-  NUXT_LIBSQL_AUTH_TOKEN = '',
+  NUXT_LIBSQL_AUTH_TOKEN = undefined,
   NUXT_DB_TYPE = 'd1-http',
 } = process.env
 
