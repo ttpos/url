@@ -20,6 +20,3 @@ NUXT_CDNURL = "https://aapp.static.ttpos.com/"
 
 [placement]
 mode = "smart"
-
-[site]
-bucket = ".output/empty"
