@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "8ac57109-5050-4dbe-ada7-7b7855ca2e1b",
+  "id": "ef70339e-ee02-4514-8797-ed1138e6a4a4",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "links": {
@@ -14,20 +14,6 @@
           "notNull": true,
           "autoincrement": true
         },
-        "domain": {
-          "name": "domain",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "short_code": {
-          "name": "short_code",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
         "url": {
           "name": "url",
           "type": "text",
@@ -37,7 +23,7 @@
         },
         "user_id": {
           "name": "user_id",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -56,22 +42,22 @@
           "notNull": false,
           "autoincrement": false,
           "default": 0
+        },
+        "hash": {
+          "name": "hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
         }
       },
       "indexes": {
-        "links_domain": {
-          "name": "links_domain",
+        "links_hash": {
+          "name": "links_hash",
           "columns": [
-            "domain"
+            "hash"
           ],
-          "isUnique": false
-        },
-        "links_short_code": {
-          "name": "links_short_code",
-          "columns": [
-            "short_code"
-          ],
-          "isUnique": false
+          "isUnique": true
         }
       },
       "foreignKeys": {},
@@ -87,20 +73,6 @@
           "primaryKey": true,
           "notNull": true,
           "autoincrement": true
-        },
-        "domain": {
-          "name": "domain",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "short_code": {
-          "name": "short_code",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
         },
         "user_id": {
           "name": "user_id",
@@ -137,22 +109,22 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
+        },
+        "hash": {
+          "name": "hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
         }
       },
       "indexes": {
-        "pages_domain": {
-          "name": "pages_domain",
+        "pages_hash": {
+          "name": "pages_hash",
           "columns": [
-            "domain"
+            "hash"
           ],
-          "isUnique": false
-        },
-        "pages_short_code": {
-          "name": "pages_short_code",
-          "columns": [
-            "short_code"
-          ],
-          "isUnique": false
+          "isUnique": true
         }
       },
       "foreignKeys": {},
