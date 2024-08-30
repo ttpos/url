@@ -26,6 +26,7 @@ export default defineEventHandler(async (event) => {
       ?.select()
       .from(links)
       .where(eq(links.hash, shortCode))
+      .limit(1)
       .get()
 
     if (!urlData) {
@@ -37,7 +38,17 @@ export default defineEventHandler(async (event) => {
       }
     }
 
-    const { url, expiresAt } = urlData
+    const { url, expiresAt, isDelete } = urlData
+
+    if (isDelete === 1) {
+      logger.warn('Short code deleted:', shortCode)
+
+      event.node.res.statusCode = 404
+      return {
+        code: 404,
+        message: 'Short code deleted',
+      }
+    }
 
     if (expiresAt && Date.now() > expiresAt) {
       logger.warn('Short code expired:', shortCode)
@@ -50,19 +61,6 @@ export default defineEventHandler(async (event) => {
     }
 
     return sendRedirect(event, url, 302)
-
-    // const data = await db?.query.links.findFirst({
-    //   where: gte(links.id, 0),
-    // })
-
-    // return {
-    //   code: 0,
-    //   message: 'hello',
-    //   data: {
-    //     shortCode,
-    //     list: data || [],
-    //   },
-    // }
   }
   catch (error) {
     logger.error('🚀 ~ defineEventHandler ~ error:', error)
