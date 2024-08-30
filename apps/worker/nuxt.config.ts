@@ -3,6 +3,10 @@ export default defineNuxtConfig({
   app: {
     cdnURL: process.env.NUXT_CDNURL || 'https://aapp.static.ttpos.com/',
   },
+  sourcemap: {
+    server: false,
+    client: false,
+  },
   compatibilityDate: '2024-07-30',
   future: {
     compatibilityVersion: 4,
@@ -19,6 +23,7 @@ export default defineNuxtConfig({
     experimental: {
       tasks: true,
     },
+    serveStatic: false,
     errorHandler: '~/error',
   },
   devtools: {
