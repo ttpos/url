@@ -23,6 +23,7 @@
   "dependencies": {
     "@libsql/client": "^0.10.0",
     "drizzle-orm": "^0.33.0",
+    "jose": "^5.8.0",
     "nuxt": "^3.13.0",
     "tracer": "^1.3.0",
     "vue": "latest",
