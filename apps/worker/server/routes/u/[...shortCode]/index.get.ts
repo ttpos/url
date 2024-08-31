@@ -1,8 +1,14 @@
 import { eq } from 'drizzle-orm'
+import { sha256 } from '@noble/hashes/sha2'
 import { links } from '@@/database/schema'
 
 export default defineEventHandler(async (event) => {
   const { db } = event.context
+  const url = new URL(
+    event.node.req.headers.host || '',
+    `http://${event.node.req.headers.host}`,
+  )
+  const domain = url.hostname
 
   try {
     const shortCode = event.context.params?.shortCode
@@ -22,10 +28,13 @@ export default defineEventHandler(async (event) => {
       return sendRedirect(event, `/u/${shortCode}/og`, 302)
     }
 
+    const hash = sha256(`${domain}:${shortCode}`)
+    const hexString = Buffer.from(hash).toString('hex')
+
     const urlData = await db
       ?.select()
       .from(links)
-      .where(eq(links.hash, shortCode))
+      .where(eq(links.hash, hexString))
       .limit(1)
       .get()
 

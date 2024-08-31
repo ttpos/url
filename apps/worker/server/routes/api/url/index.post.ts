@@ -4,23 +4,38 @@ import { eq } from 'drizzle-orm'
 import { links } from '@@/database/schema'
 import { generateShortCode } from '@@/server/utils'
 
+interface Query {
+  url: string
+  expiresAt: number
+  shortCode?: string
+  userId?: string
+}
+
 export default defineEventHandler(async (event) => {
   const { db } = event.context
+  const url = new URL(
+    event.node.req.headers.host || '',
+    `https://${event.node.req.headers.host}`,
+  )
+  const domain = url.hostname
 
   try {
     const {
       url,
-      userId,
-      domain,
-      shortCode = generateShortCode(),
       expiresAt,
-    } = await readBody(event)
+      userId = '',
+      // domain,
+      shortCode = generateShortCode(),
+    } = await readBody<Query>(event)
 
     const hash = sha256(`${domain}:${shortCode}`)
     const hexString = Buffer.from(hash).toString('hex')
 
-    const existingLink = await db?.select().from(links).where(eq(links.hash, hexString)).get()
-    // logger.error('🚀 ~ defineEventHandler ~ links.hash:', links.hash)
+    const existingLink = await db
+      ?.select()
+      .from(links)
+      .where(eq(links.hash, hexString))
+      .get()
 
     if (existingLink) {
       logger.warn('Link already exists:', existingLink)
@@ -39,12 +54,18 @@ export default defineEventHandler(async (event) => {
       isDelete: 0,
     })
 
-    logger.log('New link created:', { url, userId, expiresAt, hexString })
+    logger.log('New link created:', { url, userId, expiresAt, hexString, shortCode })
 
     return {
       code: 0,
       message: 'ok',
-      data: { url, userId, expiresAt, hexString },
+      data: {
+        url,
+        userId,
+        expiresAt,
+        hexString,
+        shortCode,
+      },
     }
   }
   catch (error) {
