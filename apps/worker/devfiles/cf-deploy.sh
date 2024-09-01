@@ -9,7 +9,7 @@ PUBLIC_DIR="$OUTPUT_DIR/public"
 EMPTY_DIR="$OUTPUT_DIR/empty"
 
 sed -i '/\[vars\]/a\
-NUXT_JWT_PUBKEY = "'$NUXT_JWT_PUBKEY'"\n\
+NUXT_JWT_PUBKEY = "'$NUXT_JWT_PUBKEY'"\
 NUXT_CDNURL = "'$NUXT_CDNURL'"' wrangler.toml
 
 mkdir -p "$EMPTY_DIR"
