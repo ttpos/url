@@ -1,70 +1,58 @@
 import { defineEventHandler, readBody } from 'h3'
-import { sha256 } from '@noble/hashes/sha2'
-import { eq } from 'drizzle-orm'
 import { links } from '@@/database/schema'
-import { generateShortCode } from '@@/server/utils'
 
 interface Query {
-  url: string
-  expiresAt: number
-  shortCode?: string
-  userId?: string
+  records: {
+    url: string
+    expiresAt: number
+    hash: string
+    userId?: string
+  }[]
 }
 
 export default defineEventHandler(async (event) => {
   const { db } = event.context
-  const url = new URL(
-    event.node.req.headers.host || '',
-    `https://${event.node.req.headers.host}`,
-  )
-  const domain = url.hostname
 
   try {
-    const {
-      url,
-      expiresAt,
-      userId = '',
-      // domain,
-      shortCode = generateShortCode(),
-    } = await readBody<Query>(event)
+    const { records } = await readBody<Query>(event)
 
-    const hash = sha256(`${domain}:${shortCode}`)
-    const hexString = Buffer.from(hash).toString('hex')
+    const results = await Promise.all(
+      records.map(async (record) => {
+        try {
+          await db?.insert(links).values({
+            url: record.url,
+            userId: record.userId || '',
+            expiresAt: record.expiresAt,
+            hash: record.hash,
+            isDelete: 0,
+          })
+          return {
+            ...record,
+            success: true,
+          }
+        }
+        catch (error) {
+          const errorMessage = error instanceof Error ? `${error.message}` : 'error'
+          return {
+            ...record,
+            success: false,
+            error: errorMessage,
+          }
+        }
+      }),
+    )
 
-    const existingLink = await db
-      ?.select()
-      .from(links)
-      .where(eq(links.hash, hexString))
-      .get()
+    const successes = results.filter(result => result.success)
+    const failures = results.filter(result => !result.success)
 
-    if (existingLink) {
-      logger.warn('Link already exists:', existingLink)
-      return {
-        code: 409,
-        message: 'Link already exists',
-        data: null,
-      }
-    }
-
-    await db?.insert(links).values({
-      url,
-      userId,
-      expiresAt,
-      hash: hexString,
-      isDelete: 0,
-    })
-
-    logger.log('New link created:', { url, userId, expiresAt, hexString, shortCode })
+    logger.log('Links processed:', { successes, failures })
 
     return {
       code: 0,
       message: 'ok',
       data: {
-        url,
-        userId,
-        expiresAt,
-        hexString,
-        shortCode,
+        successes,
+        failures,
       },
     }
   }
