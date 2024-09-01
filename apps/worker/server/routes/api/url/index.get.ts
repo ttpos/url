@@ -1,23 +1,18 @@
-import { gte } from 'drizzle-orm'
+import { defineEventHandler } from 'h3'
 import { links } from '@@/database/schema'
 
 export default defineEventHandler(async (event) => {
   const { db } = event.context
 
   try {
-    const urlId = event.context.params?.url
+    const allLinks = await db?.select().from(links).all()
 
-    const data = await db?.query.links.findFirst({
-      where: gte(links.id, 0),
-    })
+    logger.log('🚀 ~ defineEventHandler ~ allUrls:', allLinks)
 
     return {
       code: 0,
-      message: 'hello',
-      data: {
-        urlId,
-        list: data || [],
-      },
+      message: 'ok',
+      data: allLinks,
     }
   }
   catch (error) {
