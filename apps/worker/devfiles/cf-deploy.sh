@@ -8,6 +8,9 @@ OUTPUT_DIR="$SCRIPT_DIR/../.output"
 PUBLIC_DIR="$OUTPUT_DIR/public"
 EMPTY_DIR="$OUTPUT_DIR/empty"
 
+npx wrangler secret put NUXT_JWT_PUBKEY $NUXT_JWT_PUBKEY
+npx wrangler secret put NUXT_CDNURL $NUXT_CDNURL
+
 mkdir -p "$EMPTY_DIR"
 
 # Deploy to worker
