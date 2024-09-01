@@ -7,6 +7,7 @@ export const links = sqliteTable('links', {
   expiresAt: integer('expires_at'),
   isDelete: integer('is_delete').default(0),
   hash: text('hash').notNull(),
+  attribute: blob('attribute'),
 }, (table) => {
   return {
     sha1: uniqueIndex('links_hash').on(table.hash),
@@ -21,6 +22,7 @@ export const pages = sqliteTable('pages', {
   isDelete: integer('is_delete').default(0),
   expiresAt: integer('expires_at'),
   hash: text('hash').notNull(),
+  attribute: blob('attribute'),
 }, (table) => {
   return {
     sha1: uniqueIndex('pages_hash').on(table.hash),
