@@ -12,17 +12,8 @@ export default defineEventHandler(async (event) => {
   const domain = url.hostname
 
   try {
-    const shortCode = event.context.params?.shortCode
+    const shortCode = event.context.params?.shortCode || ''
     logger.warn('🚀 ~ defineEventHandler ~ shortCode:', shortCode)
-
-    if (!shortCode) {
-      logger.warn('Short code not provided')
-      event.node.res.statusCode = 400
-      return {
-        code: 400,
-        message: 'Short code not provided',
-      }
-    }
 
     const userAgent = event.node.req.headers['user-agent'] || ''
     if (userAgent.includes('facebookexternalhit') || userAgent.includes('twitterbot')) {
@@ -38,38 +29,17 @@ export default defineEventHandler(async (event) => {
       .limit(1)
       .get()
 
-    if (!urlData) {
-      logger.warn('Short code not found:', shortCode)
-      event.node.res.statusCode = 404
-      return {
-        code: 404,
-        message: 'Short code not found',
-      }
-    }
-
-    const { url, expiresAt, isDelete } = urlData
-
-    if (isDelete === 1) {
-      logger.warn('Short code deleted:', shortCode)
+    if (!urlData || urlData.isDelete === 1 || (urlData.expiresAt && Date.now() > urlData.expiresAt)) {
+      logger.warn('Short code issue:', shortCode)
 
       event.node.res.statusCode = 404
       return {
         code: 404,
-        message: 'Short code deleted',
+        message: 'Short code not found or expired or deleted',
       }
     }
 
-    if (expiresAt && Date.now() > expiresAt) {
-      logger.warn('Short code expired:', shortCode)
-
-      event.node.res.statusCode = 404
-      return {
-        code: 404,
-        message: 'Short code expired',
-      }
-    }
-
-    return sendRedirect(event, url, 302)
+    return sendRedirect(event, urlData.url, 302)
   }
   catch (error) {
     logger.error('🚀 ~ defineEventHandler ~ error:', error)

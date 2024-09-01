@@ -7,6 +7,7 @@ interface Query {
     expiresAt: number
     hash: string
     userId?: string
+    attribute?: Blob
   }[]
 }
 
@@ -25,16 +26,17 @@ export default defineEventHandler(async (event) => {
             expiresAt: record.expiresAt,
             hash: record.hash,
             isDelete: 0,
+            attribute: record.attribute,
           })
           return {
-            ...record,
+            hash: record.hash,
             success: true,
           }
         }
         catch (error) {
           const errorMessage = error instanceof Error ? `${error.message}` : 'error'
           return {
-            ...record,
+            hash: record.hash,
             success: false,
             error: errorMessage,
           }
