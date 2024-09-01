@@ -16,7 +16,6 @@ id = "9d16d408f0874149a423d7b1b332037f"
 
 [vars]
 NUXT_DB_TYPE = "d1"
-NUXT_CDNURL = "https://aapp.static.ttpos.com/"
 
 [placement]
 mode = "smart"
