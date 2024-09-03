@@ -1,13 +1,25 @@
 import { defineEventHandler } from 'h3'
 import { links } from '@@/database/schema'
+import { eq } from 'drizzle-orm'
+
+interface Query {
+  isDelete?: 0 | 1
+}
 
 export default defineEventHandler(async (event) => {
   const { db } = event.context
+  const { isDelete } = getQuery<Query>(event)
 
   try {
-    const allLinks = await db?.select().from(links).all()
+    const query = db?.select().from(links)
 
-    logger.log('🚀 ~ defineEventHandler ~ allUrls:', allLinks)
+    if (typeof isDelete !== 'undefined') {
+      query?.where(eq(links.isDelete, Number(isDelete)))
+    }
+
+    const allLinks = await query?.all()
+
+    logger.log('🚀 ~ defineEventHandler ~ allLinks:', allLinks)
 
     return {
       code: 0,
