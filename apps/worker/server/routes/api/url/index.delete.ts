@@ -23,10 +23,15 @@ export default defineEventHandler(async (event) => {
     const results = await Promise.all(
       hashList.map(async (hash) => {
         try {
-          const record = await db?.select().from(links).where(and(eq(links.hash, hash), eq(links.isDelete, 0))).get()
+          const record = await db
+            ?.select()
+            .from(links)
+            .where(and(eq(links.hash, hash), eq(links.isDelete, 0)))
+            .get()
 
           if (record) {
-            await db?.update(links)
+            await db
+              ?.update(links)
               .set({ isDelete: 1 })
               .where(eq(links.hash, hash))
               .execute()
