@@ -9,7 +9,7 @@ jobs:
     name: Deploy
     defaults:
       run:
-        working-directory: ./apps/worker
+        working-directory: ./apps/dashboard
     steps:
       - uses: actions/checkout@v4
       - uses: superfly/flyctl-actions/setup-flyctl@master
