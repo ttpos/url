@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   app: {
-    cdnURL: process.env.NUXT_CDNURL || 'https://aapp.static.ttpos.com/',
+    cdnURL: process.env.NUXT_CDNURL,
   },
   sourcemap: {
     server: false,
