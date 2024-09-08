@@ -1,4 +1,4 @@
-app = 'ttpos_dashboard'
+app = 'ttpos-dashboard'
 primary_region = 'hkg'
 
 [build]

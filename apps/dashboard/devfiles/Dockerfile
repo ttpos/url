@@ -18,9 +18,9 @@ FROM $IMAGES
 
 WORKDIR /app
 
-COPY --from=node-build /node/.output /app/
-
 RUN apk add --no-cache curl bash; npm install pm2 -g
+
+COPY --from=node-build /node/.output /app/
 
 EXPOSE 3000
 
