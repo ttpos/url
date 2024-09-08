@@ -13,11 +13,13 @@
   },
   "scripts": {
     "dev": "pnpm -C apps/worker dev",
+    "dev:dashboard": "pnpm -C apps/dashboard dev",
     "build": "pnpm -r build",
     "preview": "pnpm -C apps/worker preview",
     "clean": "bash ./scripts/clean.sh && pnpm -r clean",
     "release": "pnpm publish -r --filter @ttpos/* --no-git-checks --tag=latest",
-    "release:beta": "pnpm publish -r --filter @ttpos/* --no-git-checks --tag=beta"
+    "release:beta": "pnpm publish -r --filter @ttpos/* --no-git-checks --tag=beta",
+    "prepare": "bash ./scripts/init.sh"
   },
   "devDependencies": {
     "@types/node": "^22.2.0",
