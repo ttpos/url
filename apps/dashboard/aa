@@ -43,6 +43,7 @@ action_test() {
 action_deploy() {
     docker tag $NAME registry.fly.io/$NAME
     flyctl auth docker
+    flyctl volume create dashboard_db -r hkg -n 1
     flyctl deploy
 }
 
