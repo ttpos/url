@@ -7,7 +7,7 @@
 ```
 #用户端
 [get]   /:shortCode
-[get]   /:page
+[get]   /p/:page
 
 #管理端
 [post]  /api/url
@@ -49,10 +49,10 @@ attribute:  其他属性（可选）
 
 - **跳转URL**
   - 用户访问短链接时，系统会根据数据库中的记录跳转到对应的 URL。
-  - `t.a.app/u/url` - 跳转到指定 URL
+  - `t.a.app/:shortCode` - 跳转到指定 URL
 - **展示页面**
   - 用户访问页面 ID 时，系统会展示对应的页面内容。
-  - `t.a.app/id` - 访问指定页面。
+  - `t.a.app/p/id` - 访问指定页面。
 
 ### 管理功能
 
@@ -65,20 +65,29 @@ attribute:  其他属性（可选）
 
 ### 示例请求
 
+- 提示: 请求中的 `Authorization` 头部应替换为实际的 JWT 令牌。
+
 #### 获取短链接
 
 ```
-# 新增查询条件，`isDelete === 1` 查询软删除短链，反之则查询未删除的短链，不传则查询全部短链
 GET /api/url?isDelete=0
 Authorization: Bearer <JWT_TOKEN>
-
 ```
+
+**说明**:
+
+- `isDelete` 查询条件：
+  - `isDelete=1`：查询已软删除的短链接
+  - `isDelete=0`：查询未删除的短链接
+  - 不传该参数：查询所有短链接
 
 #### 添加短链接
 
 ```
 POST /api/url
 Authorization: Bearer <JWT_TOKEN>
+Content-Type: application/json
+
 {
   "records": [
     {
@@ -97,14 +106,23 @@ Authorization: Bearer <JWT_TOKEN>
     }
   ]
 }
-
 ```
+
+**说明**:
+
+- `url`: 短链接的原始 URL
+- `expiresAt`: 短链接过期时间（可为空）
+- `hash`: 短链接的唯一标识符
+- `userId`: 用户 ID（可为空）
+- `attribute`: 其他属性（可为空）
 
 #### 更新短链接
 
 ```
 PUT /api/url
 Authorization: Bearer <JWT_TOKEN>
+Content-Type: application/json
+
 {
   "records": [
     {
@@ -123,22 +141,34 @@ Authorization: Bearer <JWT_TOKEN>
     }
   ]
 }
-
 ```
+
+**说明**:
+
+- `hash`: 短链接的唯一标识符，用于识别需要更新的短链接
+- `url`: 短链接的原始 URL
+- `expiresAt`: 短链接的新过期时间
+- `userId`: 新的用户 ID
+- `attribute`: 其他属性（可为空）
 
 #### 删除短链接
 
 ```
 DELETE /api/url
 Authorization: Bearer <JWT_TOKEN>
+Content-Type: application/json
+
 {
   "hashList": [
-    // "00d0cd517ab6c87a7b762e20277bcad757ba77c99ede7bf125efacbfd73a1437",
-    "abc123"
+    "00d0cd517ab6c87a7b762e20277bcad757ba77c99ede7bf125efacbfd73a1437", // abc123
+    "cfc7f4f37363737dce099da790020aa53c1ab3dcfa173971765c6000f9f9ec84"  // def456
   ]
 }
-
 ```
+
+**说明**:
+
+- `hashList`: 需要删除的短链接的唯一标识符列表
 
 #### 添加页面数据
 
