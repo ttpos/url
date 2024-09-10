@@ -6,7 +6,6 @@ WORKDIR /node
 COPY app ./app
 COPY public ./public
 COPY server ./server
-COPY databases ./databases
 COPY package.json pnpm-lock.yaml tsconfig.json \
      nuxt.config.ts .env drizzle.config.ts ./
 
