@@ -1,6 +1,6 @@
-import { defineEventHandler, readBody } from 'h3'
 import { links } from '@@/database/schema'
 import { eq } from 'drizzle-orm'
+import { defineEventHandler, readBody } from 'h3'
 
 interface UpdateRecord {
   hash: string

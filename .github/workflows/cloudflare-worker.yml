@@ -18,7 +18,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm'
+          cache: pnpm
       - name: Build and migrate database
         env:
           NUXT_DB_TYPE: d1
@@ -36,4 +36,3 @@ jobs:
           pnpm db:migrate
           pnpm build
           pnpm cf:deploy
-

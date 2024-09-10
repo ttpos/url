@@ -17,12 +17,16 @@
     "build": "pnpm -r build",
     "preview": "pnpm -C apps/worker preview",
     "clean": "bash ./scripts/clean.sh && pnpm -r clean",
+    "prepare": "bash ./scripts/init.sh",
     "release": "pnpm publish -r --filter @ttpos/* --no-git-checks --tag=latest",
     "release:beta": "pnpm publish -r --filter @ttpos/* --no-git-checks --tag=beta",
-    "prepare": "bash ./scripts/init.sh"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^3.5.0",
     "@types/node": "^22.2.0",
+    "eslint": "^9.10.0",
     "typescript": "^5.5.4"
   }
 }

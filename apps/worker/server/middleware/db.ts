@@ -1,8 +1,8 @@
-import type { EventHandlerRequest, H3Event } from 'h3'
-import { createClient } from '@libsql/client'
-import { drizzle as drizzleSqlite } from 'drizzle-orm/libsql'
-import { drizzle as drizzleD1 } from 'drizzle-orm/d1'
 import * as schema from '@@/database/schema'
+import { createClient } from '@libsql/client'
+import { drizzle as drizzleD1 } from 'drizzle-orm/d1'
+import { drizzle as drizzleSqlite } from 'drizzle-orm/libsql'
+import type { EventHandlerRequest, H3Event } from 'h3'
 
 export function initializeDrizzle(event: H3Event<EventHandlerRequest>) {
   const { dbType, libsqlUrl, libsqlAuthToken } = useRuntimeConfig(event)

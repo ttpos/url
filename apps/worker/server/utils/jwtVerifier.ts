@@ -10,7 +10,8 @@ import * as jose from 'jose'
  * @param {string} jwtPubkey - The public key used to verify the JWT token, provided as a hexadecimal string.
  * @param {string} token - The JWT token to be verified.
  */
-export const jwtVerifyFn = async (jwtPubkey: string, token: string) => {
+export async function jwtVerifyFn(jwtPubkey: string, token: string) {
+  // eslint-disable-next-line node/prefer-global/buffer
   const publicKey = Buffer.from(jwtPubkey, 'hex')
 
   const alg = {

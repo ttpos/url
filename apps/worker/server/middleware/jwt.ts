@@ -1,5 +1,5 @@
-import { defineEventHandler } from 'h3'
 import { jwtVerifyFn } from '@@/server/utils/jwtVerifier'
+import { defineEventHandler } from 'h3'
 
 export default defineEventHandler(async (event) => {
   const url = event.node.req.url

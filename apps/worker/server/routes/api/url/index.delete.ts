@@ -1,6 +1,6 @@
-import { defineEventHandler, readBody } from 'h3'
 import { links } from '@@/database/schema'
-import { eq, and } from 'drizzle-orm'
+import { and, eq } from 'drizzle-orm'
+import { defineEventHandler, readBody } from 'h3'
 
 interface Query {
   hashList: string[]

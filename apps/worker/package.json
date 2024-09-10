@@ -18,8 +18,7 @@
     "db:pull": "drizzle-kit pull",
     "db:gen": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "db:up": "drizzle-kit up",
-    "lint": "eslint ."
+    "db:up": "drizzle-kit up"
   },
   "dependencies": {
     "@libsql/client": "^0.10.0",
@@ -33,9 +32,7 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240821.1",
-    "@nuxt/eslint-config": "^0.5.3",
     "drizzle-kit": "^0.24.2",
-    "eslint": "^9.9.0",
     "nitro-cloudflare-dev": "^0.1.6",
     "vue-tsc": "latest",
     "wrangler": "^3.72.3"

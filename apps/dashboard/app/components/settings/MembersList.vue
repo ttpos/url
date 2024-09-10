@@ -4,23 +4,31 @@ import type { Member } from '~/types'
 defineProps({
   members: {
     type: Array as PropType<Member[]>,
-    default: () => []
-  }
+    default: () => [],
+  },
 })
 
 function getItems(member: Member) {
-  return [[{
-    label: 'Edit member',
-    click: () => console.log('Edit', member)
-  }, {
-    label: 'Remove member',
-    labelClass: 'text-red-500 dark:text-red-400',
-    click: () => console.log('Remove', member)
-  }]]
+  return [
+    [
+      {
+        label: 'Edit member',
+        // eslint-disable-next-line no-console
+        click: () => console.log('Edit', member),
+      },
+      {
+        label: 'Remove member',
+        labelClass: 'text-red-500 dark:text-red-400',
+        // eslint-disable-next-line no-console
+        click: () => console.log('Remove', member),
+      },
+    ],
+  ]
 }
 
 function onRoleChange(member: Member, role: string) {
   // Do something with data
+  // eslint-disable-next-line no-console
   console.log(member.username, role)
 }
 </script>

@@ -1,5 +1,5 @@
-import { defineEventHandler, readBody } from 'h3'
 import { links } from '@@/database/schema'
+import { defineEventHandler, readBody } from 'h3'
 
 interface Query {
   records: {

@@ -1,6 +1,6 @@
-import { defineEventHandler } from 'h3'
-import { eq } from 'drizzle-orm'
 import { links } from '@@/database/schema'
+import { eq } from 'drizzle-orm'
+import { defineEventHandler } from 'h3'
 
 function escapeHtml(unsafe: string): string {
   return unsafe

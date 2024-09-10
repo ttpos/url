@@ -1,7 +1,7 @@
-import { eq } from 'drizzle-orm'
+import { links } from '@@/database/schema'
 import { sha256 } from '@noble/hashes/sha2'
 import { bytesToHex } from '@noble/hashes/utils'
-import { links } from '@@/database/schema'
+import { eq } from 'drizzle-orm'
 
 export default defineEventHandler(async (event) => {
   const { db } = event.context

@@ -1,6 +1,6 @@
-import { defineEventHandler } from 'h3'
 import { links } from '@@/database/schema'
 import { eq } from 'drizzle-orm'
+import { defineEventHandler } from 'h3'
 
 interface Query {
   isDelete?: 0 | 1
