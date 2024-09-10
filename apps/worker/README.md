@@ -4,16 +4,6 @@
 
 ### 路由定义
 
-<!-- - 用户端
-
-  - ✅ [get] `//domain/:shortCode`
-  - ❌ [get] `//domain/p/:page`
-
-- 管理端
-  - [post] /api/url
-  - [post] /api/page
- -->
-
 ```
 #用户端
 [get]   /:shortCode
