@@ -1,4 +1,4 @@
-import * as schema from '@@/database/schema'
+import * as schema from '@@/server/database/schema'
 import { createClient } from '@libsql/client'
 import { drizzle as drizzleD1 } from 'drizzle-orm/d1'
 import { drizzle as drizzleSqlite } from 'drizzle-orm/libsql'

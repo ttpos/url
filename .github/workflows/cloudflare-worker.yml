@@ -1,4 +1,4 @@
-name: Deploy worker to Cloudflare Worker
+name: Deploy worker to Cloudflare Links
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ jobs:
     name: Deploy
     defaults:
       run:
-        working-directory: ./apps/worker
+        working-directory: ./apps/links
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4

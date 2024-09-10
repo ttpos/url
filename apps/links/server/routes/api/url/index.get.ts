@@ -1,4 +1,4 @@
-import { links } from '@@/database/schema'
+import { links } from '@@/server/database/schema'
 import { eq } from 'drizzle-orm'
 import { defineEventHandler } from 'h3'
 

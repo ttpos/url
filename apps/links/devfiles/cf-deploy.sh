@@ -14,7 +14,7 @@ NUXT_CDNURL = "'$NUXT_CDNURL'"' wrangler.toml
 
 mkdir -p "$EMPTY_DIR"
 
-# Deploy to worker
+# Deploy to links
 npx wrangler deploy
 
 # Create _headers file to support static CORS

@@ -12,10 +12,10 @@
     "node": ">=18.20.3 || >=20.0.0"
   },
   "scripts": {
-    "dev": "pnpm -C apps/worker dev",
+    "dev": "pnpm -C apps/links dev",
     "dev:dashboard": "pnpm -C apps/dashboard dev",
     "build": "pnpm -r build",
-    "preview": "pnpm -C apps/worker preview",
+    "preview": "pnpm -C apps/links preview",
     "clean": "bash ./scripts/clean.sh && pnpm -r clean",
     "prepare": "bash ./scripts/init.sh",
     "release": "pnpm publish -r --filter @ttpos/* --no-git-checks --tag=latest",
