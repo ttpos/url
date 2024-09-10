@@ -14,18 +14,12 @@ RUN npm install -g pnpm && pnpm install && pnpm build
 
 FROM $IMAGES
 
-WORKDIR /work
+WORKDIR /app
 
-ENV PATH=$PATH:/build/bin:/work/bin
+RUN apk add --no-cache curl bash; npm install pm2 -g
 
-COPY --from=zzci/init / /
-
-COPY --from=node-build /node/.output /app/worker
-
-RUN apk add --no-cache curl bash
+COPY --from=node-build /node/.output /app/
 
 EXPOSE 3000
 
-COPY devfiles/docker/rootfs /
-
-CMD ["/start.sh"]
+CMD ["pm2-runtime", "server/index.mjs"]
