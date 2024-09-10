@@ -1,5 +1,5 @@
 {
-  "name": "@ttpos/a-app-worker",
+  "name": "@ttpos/a-app-links",
   "type": "module",
   "private": true,
   "packageManager": "pnpm@9.7.1",

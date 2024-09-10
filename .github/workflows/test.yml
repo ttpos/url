@@ -7,21 +7,14 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Deploy
-    defaults:
-      run:
-        working-directory: ./apps/worker
     steps:
       - uses: actions/checkout@v4
       - name: test env
         env:
           NUXT_DB_TYPE: d1
           NUXT_DEBUG: false
-          NUXT_CDNURL: ${{ vars.URL_WORKER_CDNURL }}
+          NUXT_CDNURL: ${{ vars.LINKS_CDN_URL }}
           DEPLOY_RUNTIME: cloudflare-module
-          PAGES_PROJECT: ${{ vars.URL_WORKER_PAGES_PROJECT }}
-          NUXT_JWT_PUBKEY: ${{ secrets.URL_WORKER_JWT_PUBKEY }}
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CLOUDFLARE_DATABASE_ID: ${{ secrets.CLOUDFLARE_WORKER_D1 }}
+          PAGES_PROJECT: ${{ vars.LINKS_STATIC_PAGES }}
         run: |
           env

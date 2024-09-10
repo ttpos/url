@@ -1,4 +1,4 @@
-# 短链 Workers
+# 短链 Links
 
 简单且高效的URL短链接生成器。
 

@@ -2,6 +2,10 @@
 
 DIRS_TO_DELETE=(
   "node_modules"
+  "apps/*/node_modules"
+  "apps/*/dist"
+  "apps/*/.nuxt"
+  "apps/*/.output"
 )
 
 echo "Start cleaning up directories: ${DIRS_TO_DELETE[*]}"
@@ -14,7 +18,7 @@ done
 echo ""
 
 DIRS_TO_BASH=(
-  "./apps/worker/devfiles/clean.sh"
+  "./apps/links/devfiles/clean.sh"
   "./apps/dashboard/devfiles/clean.sh"
 )
 

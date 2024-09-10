@@ -1,4 +1,4 @@
-import { links } from '@@/database/schema'
+import { links } from '@@/server/database/schema'
 import { sha256 } from '@noble/hashes/sha2'
 import { bytesToHex } from '@noble/hashes/utils'
 import { eq } from 'drizzle-orm'

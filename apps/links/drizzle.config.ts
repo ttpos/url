@@ -37,8 +37,8 @@ const dbCredentials = NUXT_DB_TYPE === 'libsql' ? libsql : d1
 console.log('Using:', driver)
 
 export default defineConfig({
-  schema: './database/schema.ts',
-  out: './database',
+  schema: './server/database/schema.ts',
+  out: './server/database',
   dialect: 'sqlite',
   driver,
   dbCredentials,
