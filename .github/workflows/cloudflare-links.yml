@@ -1,4 +1,4 @@
-name: Deploy worker to Cloudflare Links
+name: Deploy Links to Cloudflare worker
 
 on:
   workflow_dispatch:
