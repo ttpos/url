@@ -8,7 +8,7 @@ COPY public ./public
 COPY server ./server
 COPY databases ./databases
 COPY package.json pnpm-lock.yaml tsconfig.json \
-     nuxt.config.ts eslint.config.ts .env drizzle.config.ts ./
+     nuxt.config.ts .env drizzle.config.ts ./
 
 RUN npm install -g pnpm && pnpm install && pnpm build
 
