@@ -2,7 +2,7 @@
 
 subdirs=(
   "dashboard"
-  "worker"
+  "links"
 )
 
 cd apps || { echo "Directory 'apps' does not exist."; exit 1; }

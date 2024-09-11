@@ -2,7 +2,6 @@
   "name": "@ttpos/a-app-links",
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@9.7.1",
   "scripts": {
     "dev": "nuxt dev",
     "build": "nuxt build",
