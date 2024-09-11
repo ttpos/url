@@ -26,7 +26,7 @@ export default defineNuxtConfig({
       tasks: true,
     },
     serveStatic: false,
-    errorHandler: '~/error',
+    // errorHandler: '~/error',
   },
   devtools: {
     enabled: true,
