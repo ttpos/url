@@ -17,10 +17,7 @@ done
 
 echo ""
 
-DIRS_TO_BASH=(
-  "./apps/links/devfiles/clean.sh"
-  "./apps/dashboard/devfiles/clean.sh"
-)
+DIRS_TO_BASH=($(find ./apps -type f -path "*/devfiles/clean.sh"))
 
 for ba in "${DIRS_TO_BASH[@]}"
 do
