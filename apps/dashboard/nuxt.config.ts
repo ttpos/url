@@ -37,7 +37,7 @@ export default defineNuxtConfig({
     experimental: {
       tasks: true,
     },
-    serveStatic: false,
+    // serveStatic: false,
     // errorHandler: '~/error',
   },
 
