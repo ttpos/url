@@ -1,52 +1,73 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
+
 const { isHelpSlideoverOpen } = useDashboard()
 const { isDashboardSearchModalOpen } = useUIState()
 const { metaSymbol } = useShortcuts()
 
+const router = useRouter();
+
 const items = computed(() => [
-  [{
-    slot: 'account',
-    label: '',
-    disabled: true,
-  }],
-  [{
-    label: 'Settings',
-    icon: 'i-heroicons-cog-8-tooth',
-    to: '/settings',
-  }, {
-    label: 'Command menu',
-    icon: 'i-heroicons-command-line',
-    shortcuts: [metaSymbol.value, 'K'],
-    click: () => {
-      isDashboardSearchModalOpen.value = true
+  [
+    {
+      slot: 'account',
+      label: '',
+      disabled: true,
     },
-  }, {
-    label: 'Help & Support',
-    icon: 'i-heroicons-question-mark-circle',
-    shortcuts: ['?'],
-    click: () => isHelpSlideoverOpen.value = true,
-  }],
-  [{
-    label: 'Documentation',
-    icon: 'i-heroicons-book-open',
-    to: 'https://ui.nuxt.com/pro/getting-started',
-    target: '_blank',
-  }, {
-    label: 'GitHub repository',
-    icon: 'i-simple-icons-github',
-    to: 'https://github.com/nuxt-ui-pro/dashboard',
-    target: '_blank',
-  }, {
-    label: 'Buy Nuxt UI Pro',
-    icon: 'i-heroicons-credit-card',
-    to: 'https://ui.nuxt.com/pro/purchase',
-    target: '_blank',
-  }],
-  [{
-    label: 'Sign out',
-    icon: 'i-heroicons-arrow-left-on-rectangle',
-  }],
+  ],
+  [
+    {
+      label: 'Settings',
+      icon: 'i-heroicons-cog-8-tooth',
+      to: '/settings',
+    },
+    {
+      label: 'Command menu',
+      icon: 'i-heroicons-command-line',
+      shortcuts: [metaSymbol.value, 'K'],
+      click: () => {
+        isDashboardSearchModalOpen.value = true
+      },
+    },
+    {
+      label: 'Help & Support',
+      icon: 'i-heroicons-question-mark-circle',
+      shortcuts: ['?'],
+      click: () => isHelpSlideoverOpen.value = true,
+    },
+  ],
+  [
+    {
+      label: 'Documentation',
+      icon: 'i-heroicons-book-open',
+      to: 'https://ui.nuxt.com/pro/getting-started',
+      target: '_blank',
+    },
+    {
+      label: 'GitHub repository',
+      icon: 'i-simple-icons-github',
+      to: 'https://github.com/nuxt-ui-pro/dashboard',
+      target: '_blank',
+    },
+    {
+      label: 'Buy Nuxt UI Pro',
+      icon: 'i-heroicons-credit-card',
+      to: 'https://ui.nuxt.com/pro/purchase',
+      target: '_blank',
+    },
+  ],
+  [
+    {
+      label: 'Sign out',
+      icon: 'i-heroicons-arrow-left-on-rectangle',
+      click: signOut
+    },
+  ],
 ])
+
+function signOut() {
+  router.replace('/login');
+}
 </script>
 
 <template>

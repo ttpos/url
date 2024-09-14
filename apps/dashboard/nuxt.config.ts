@@ -32,6 +32,14 @@ export default defineNuxtConfig({
     compatibilityVersion: 4,
   },
 
+  vite: {
+    server: {
+      hmr: {
+        protocol: 'wss',
+      },
+    },
+  },
+
   eslint: {
     config: {
       stylistic: {
