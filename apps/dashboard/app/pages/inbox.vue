@@ -1,26 +1,38 @@
 <script setup lang="ts">
 import type { Mail } from '~/types'
 
-const tabItems = [{
-  label: 'All',
-}, {
-  label: 'Unread',
-}]
+const tabItems = [
+  {
+    label: 'All',
+  },
+  {
+    label: 'Unread',
+  },
+]
 const selectedTab = ref(0)
 
-const dropdownItems = [[{
-  label: 'Mark as unread',
-  icon: 'i-heroicons-check-circle',
-}, {
-  label: 'Mark as important',
-  icon: 'i-heroicons-exclamation-circle',
-}], [{
-  label: 'Star thread',
-  icon: 'i-heroicons-star',
-}, {
-  label: 'Mute thread',
-  icon: 'i-heroicons-pause-circle',
-}]]
+const dropdownItems = [
+  [
+    {
+      label: 'Mark as unread',
+      icon: 'i-heroicons-check-circle',
+    },
+    {
+      label: 'Mark as important',
+      icon: 'i-heroicons-exclamation-circle',
+    },
+  ],
+  [
+    {
+      label: 'Star thread',
+      icon: 'i-heroicons-star',
+    },
+    {
+      label: 'Mute thread',
+      icon: 'i-heroicons-pause-circle',
+    },
+  ],
+]
 
 const { data: mails } = await useFetch<Mail[]>('/api/mails', { default: () => [] })
 

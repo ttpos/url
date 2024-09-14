@@ -1,24 +1,30 @@
 <script setup lang="ts">
 import type { User } from '~/types'
 
-const defaultColumns = [{
-  key: 'id',
-  label: '#',
-}, {
-  key: 'name',
-  label: 'Name',
-  sortable: true,
-}, {
-  key: 'email',
-  label: 'Email',
-  sortable: true,
-}, {
-  key: 'location',
-  label: 'Location',
-}, {
-  key: 'status',
-  label: 'Status',
-}]
+const defaultColumns = [
+  {
+    key: 'id',
+    label: '#',
+  },
+  {
+    key: 'name',
+    label: 'Name',
+    sortable: true,
+  },
+  {
+    key: 'email',
+    label: 'Email',
+    sortable: true,
+  },
+  {
+    key: 'location',
+    label: 'Location',
+  },
+  {
+    key: 'status',
+    label: 'Status',
+  },
+]
 
 const q = ref('')
 const selected = ref<User[]>([])

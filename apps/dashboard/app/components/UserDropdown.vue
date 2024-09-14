@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
-
 const { isHelpSlideoverOpen } = useDashboard()
 const { isDashboardSearchModalOpen } = useUIState()
 const { metaSymbol } = useShortcuts()
 
-const router = useRouter();
+const user = useAuthenticatedUser()
 
 const items = computed(() => [
   [
@@ -60,13 +58,16 @@ const items = computed(() => [
     {
       label: 'Sign out',
       icon: 'i-heroicons-arrow-left-on-rectangle',
-      click: signOut
+      click: logout,
     },
   ],
 ])
 
-function signOut() {
-  router.replace('/login');
+async function logout() {
+  await $fetch('/api/logout', {
+    method: 'POST',
+  })
+  await navigateTo('/login')
 }
 </script>
 
@@ -83,7 +84,7 @@ function signOut() {
         color="gray"
         variant="ghost"
         class="w-full"
-        label="Benjamin"
+        :label="user.email"
         :class="[open && 'bg-gray-50 dark:bg-gray-800']"
       >
         <template #leading>
@@ -108,7 +109,7 @@ function signOut() {
           Signed in as
         </p>
         <p class="truncate font-medium text-gray-900 dark:text-white">
-          ben@nuxtlabs.com
+          {{ user.email }}
         </p>
       </div>
     </template>

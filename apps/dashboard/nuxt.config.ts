@@ -3,10 +3,12 @@ export default defineNuxtConfig({
   extends: ['@nuxt/ui-pro'],
 
   modules: ['@nuxt/fonts', '@nuxt/ui', '@vueuse/nuxt'],
+
   sourcemap: {
     server: false,
     client: false,
   },
+
   ui: {
     safelistColors: ['primary', 'red', 'orange', 'green'],
   },
@@ -20,16 +22,27 @@ export default defineNuxtConfig({
     '/': { prerender: true },
   },
 
-  devtools: {
-    enabled: true,
-  },
-
   typescript: {
     strict: false,
   },
 
   future: {
     compatibilityVersion: 4,
+  },
+
+  runtimeConfig: {
+  },
+
+  nitro: {
+    experimental: {
+      tasks: true,
+    },
+    serveStatic: false,
+    // errorHandler: '~/error',
+  },
+
+  devtools: {
+    enabled: true,
   },
 
   vite: {
@@ -40,6 +53,8 @@ export default defineNuxtConfig({
     },
   },
 
+  // eslint-disable-next-line ts/ban-ts-comment
+  // @ts-ignore
   eslint: {
     config: {
       stylistic: {
