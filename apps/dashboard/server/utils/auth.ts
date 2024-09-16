@@ -1,18 +1,18 @@
-import { BetterSqlite3Adapter } from '@lucia-auth/adapter-sqlite'
+import { DrizzleSQLiteAdapter } from '@lucia-auth/adapter-drizzle'
 import { Lucia } from 'lucia'
-import { db } from './db'
+import { sessionTable, userTable } from '../database/schema'
+import { useDrizzle } from './db'
 
-import type { DatabaseUser } from './db'
+const db = useDrizzle()
 
-const adapter = new BetterSqlite3Adapter(db, {
-  user: 'user',
-  session: 'session',
-})
+const adapter = new DrizzleSQLiteAdapter(db, sessionTable, userTable)
 
 export const lucia = new Lucia(adapter, {
   sessionCookie: {
     attributes: {
-      secure: !import.meta.dev,
+      // set to `true` when using HTTPS
+      // secure: import.meta.dev,
+      secure: true,
     },
   },
   getUserAttributes: (attributes) => {
@@ -22,9 +22,13 @@ export const lucia = new Lucia(adapter, {
   },
 })
 
+// IMPORTANT!
 declare module 'lucia' {
   interface Register {
     Lucia: typeof lucia
-    DatabaseUserAttributes: Omit<DatabaseUser, 'id'>
+    DatabaseUserAttributes: {
+      email: string
+      password_hash: string
+    }
   }
 }

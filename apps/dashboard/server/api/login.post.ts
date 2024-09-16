@@ -1,7 +1,6 @@
+import { userTable } from '@@/server/database/schema'
 import { verify } from '@node-rs/argon2'
-import { db } from '../utils/db'
-
-import type { DatabaseUser } from '../utils/db'
+import { eq } from 'drizzle-orm'
 
 interface Query {
   email: string
@@ -9,12 +8,11 @@ interface Query {
 }
 
 export default eventHandler(async (event) => {
+  // const { db } = event.context
+  const db = useDrizzle()
   const { email, password } = await readBody<Query>(event)
 
-  if (
-    typeof email !== 'string'
-    || !/^[^\s@]+@[^\s@][^\s.@]*\.[^\s@]+$/.test(email) // Basic email format validation
-  ) {
+  if (typeof email !== 'string' || !/^[^\s@]+@[^\s@][^\s.@]*\.[^\s@]+$/.test(email)) {
     throw createError({
       message: 'Invalid email',
       statusCode: 400,
@@ -27,9 +25,12 @@ export default eventHandler(async (event) => {
     })
   }
 
-  const existingUser = db.prepare('SELECT * FROM user WHERE email = ?').get(email) as
-    | DatabaseUser
-    | undefined
+  const existingUser = await db
+    .select()
+    .from(userTable)
+    .where(eq(userTable.email, email))
+    .get()
+
   if (!existingUser) {
     throw createError({
       message: 'Incorrect email or password',
@@ -37,12 +38,7 @@ export default eventHandler(async (event) => {
     })
   }
 
-  const validPassword = await verify(existingUser.password_hash, password, {
-    memoryCost: 19456,
-    timeCost: 2,
-    outputLen: 32,
-    parallelism: 1,
-  })
+  const validPassword = await verifyPassword(existingUser.passwordHash, password)
   if (!validPassword) {
     // NOTE:
     // Returning immediately allows malicious actors to figure out valid usernames from response times,

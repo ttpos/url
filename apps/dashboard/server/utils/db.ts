@@ -1,22 +1,24 @@
-import sqlite from 'better-sqlite3'
+/* eslint-disable node/prefer-global/process */
 
-export const db = sqlite(':memory:')
+import * as schema from '@@/server/database/schema'
+import { createClient } from '@libsql/client'
+import { drizzle as drizzleSqlite } from 'drizzle-orm/libsql'
 
-db.exec(`CREATE TABLE IF NOT EXISTS user (
-    id TEXT NOT NULL PRIMARY KEY,
-    email TEXT NOT NULL UNIQUE,
-    password_hash TEXT NOT NULL
-)`)
+// const {
+//   NUXT_LIBSQL_URL = 'file:database/data.db',
+//   NUXT_LIBSQL_AUTH_TOKEN = undefined,
+// } = useRuntimeConfig()
 
-db.exec(`CREATE TABLE IF NOT EXISTS session (
-    id TEXT NOT NULL PRIMARY KEY,
-    expires_at INTEGER NOT NULL,
-    user_id TEXT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES user(id)
-)`)
+const {
+  NUXT_LIBSQL_URL = 'file:database/data.db',
+  NUXT_LIBSQL_AUTH_TOKEN = undefined,
+} = process.env
 
-export interface DatabaseUser {
-  id: string
-  email: string
-  password_hash: string
+const db = createClient({
+  url: NUXT_LIBSQL_URL,
+  authToken: NUXT_LIBSQL_AUTH_TOKEN,
+})
+
+export function useDrizzle() {
+  return drizzleSqlite(db, { schema })
 }

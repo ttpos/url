@@ -29,9 +29,9 @@ importers:
       '@iconify-json/simple-icons':
         specifier: ^1.2.1
         version: 1.2.1
-      '@lucia-auth/adapter-sqlite':
-        specifier: ^3.0.2
-        version: 3.0.2(better-sqlite3@11.3.0)(lucia@3.2.0)
+      '@lucia-auth/adapter-drizzle':
+        specifier: ^1.1.0
+        version: 1.1.0(drizzle-orm@0.33.0(@cloudflare/workers-types@4.20240909.0)(@types/react@18.3.3)(better-sqlite3@11.3.0)(react@18.3.1))(lucia@3.2.0)
       '@node-rs/argon2':
         specifier: ^1.8.3
         version: 1.8.3
@@ -49,19 +49,22 @@ importers:
         version: 1.4.4(@unovis/ts@1.4.4)(vue@3.5.4(typescript@5.5.4))
       '@vueuse/nuxt':
         specifier: ^11.0.3
-        version: 11.0.3(magicast@0.3.5)(nuxt@3.13.1(@parcel/watcher@2.4.1)(@types/node@22.3.0)(better-sqlite3@11.3.0)(eslint@9.10.0(jiti@1.21.6))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.21.1)(terser@5.31.6)(typescript@5.5.4)(vite@5.4.4(@types/node@22.3.0)(terser@5.31.6))(vue-tsc@2.1.4(typescript@5.5.4))(webpack-sources@3.2.3))(rollup@4.21.1)(vue@3.5.4(typescript@5.5.4))
+        version: 11.0.3(magicast@0.3.5)(nuxt@3.13.1(@parcel/watcher@2.4.1)(@types/node@22.3.0)(better-sqlite3@11.3.0)(drizzle-orm@0.33.0(@cloudflare/workers-types@4.20240909.0)(@types/react@18.3.3)(better-sqlite3@11.3.0)(react@18.3.1))(eslint@9.10.0(jiti@1.21.6))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.21.1)(terser@5.31.6)(typescript@5.5.4)(vite@5.4.4(@types/node@22.3.0)(terser@5.31.6))(vue-tsc@2.1.4(typescript@5.5.4))(webpack-sources@3.2.3))(rollup@4.21.1)(vue@3.5.4(typescript@5.5.4))
       better-sqlite3:
         specifier: ^11.3.0
         version: 11.3.0
       date-fns:
         specifier: ^3.6.0
         version: 3.6.0
+      drizzle-orm:
+        specifier: ^0.33.0
+        version: 0.33.0(@cloudflare/workers-types@4.20240909.0)(@libsql/client@0.10.0)(@types/react@18.3.3)(better-sqlite3@11.3.0)(react@18.3.1)
       lucia:
         specifier: 3.2.0
         version: 3.2.0
       nuxt:
         specifier: ^3.13.1
-        version: 3.13.1(@parcel/watcher@2.4.1)(@types/node@22.3.0)(better-sqlite3@11.3.0)(eslint@9.10.0(jiti@1.21.6))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.21.1)(terser@5.31.6)(typescript@5.5.4)(vite@5.4.4(@types/node@22.3.0)(terser@5.31.6))(vue-tsc@2.1.4(typescript@5.5.4))(webpack-sources@3.2.3)
+        version: 3.13.1(@parcel/watcher@2.4.1)(@types/node@22.3.0)(better-sqlite3@11.3.0)(drizzle-orm@0.33.0(@cloudflare/workers-types@4.20240909.0)(@types/react@18.3.3)(better-sqlite3@11.3.0)(react@18.3.1))(eslint@9.10.0(jiti@1.21.6))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.21.1)(terser@5.31.6)(typescript@5.5.4)(vite@5.4.4(@types/node@22.3.0)(terser@5.31.6))(vue-tsc@2.1.4(typescript@5.5.4))(webpack-sources@3.2.3)
       tracer:
         specifier: ^1.3.0
         version: 1.3.0
@@ -69,6 +72,9 @@ importers:
         specifier: ^3.1.2
         version: 3.1.2(@popperjs/core@2.11.8)(vue@3.5.4(typescript@5.5.4))
     devDependencies:
+      drizzle-kit:
+        specifier: ^0.24.2
+        version: 0.24.2
       vue-tsc:
         specifier: latest
         version: 2.1.4(typescript@5.5.4)
@@ -1536,17 +1542,11 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@lucia-auth/adapter-sqlite@3.0.2':
-    resolution: {integrity: sha512-UlXpF+2UoFEdm1AsriJii5BOARwqko6SX29rQ8T8Za7rnjj9KLXLaRVQUgBhGmggAyvzCtguJ2+XOZDsfWm6Sw==}
+  '@lucia-auth/adapter-drizzle@1.1.0':
+    resolution: {integrity: sha512-iCTnZWvfI5lLZOdUHZYiXA1jaspIFEeo2extLxQ3DjP3uOVys7IPwBi7zezLIRu9dhro4H4Kji+7gSYyjcef2A==}
     peerDependencies:
-      '@libsql/client': ^0.3.0
-      better-sqlite3: 8.x - 11.x
+      drizzle-orm: '>= 0.29 <1'
       lucia: 3.x
-    peerDependenciesMeta:
-      '@libsql/client':
-        optional: true
-      better-sqlite3:
-        optional: true
 
   '@mapbox/geojson-rewind@0.5.2':
     resolution: {integrity: sha512-tJaT+RbYGJYStt7wI3cq4Nl4SXxG8W7JDG5DMJu97V25RnbNg3QtQtf+KD+VLjNpWKYsRvXDNmNrBgEETr1ifA==}
@@ -7846,11 +7846,10 @@ snapshots:
   '@libsql/win32-x64-msvc@0.4.1':
     optional: true
 
-  '@lucia-auth/adapter-sqlite@3.0.2(better-sqlite3@11.3.0)(lucia@3.2.0)':
+  '@lucia-auth/adapter-drizzle@1.1.0(drizzle-orm@0.33.0(@cloudflare/workers-types@4.20240909.0)(@types/react@18.3.3)(better-sqlite3@11.3.0)(react@18.3.1))(lucia@3.2.0)':
     dependencies:
+      drizzle-orm: 0.33.0(@cloudflare/workers-types@4.20240909.0)(@libsql/client@0.10.0)(@types/react@18.3.3)(better-sqlite3@11.3.0)(react@18.3.1)
       lucia: 3.2.0
-    optionalDependencies:
-      better-sqlite3: 11.3.0
 
   '@mapbox/geojson-rewind@0.5.2':
     dependencies:
@@ -9534,13 +9533,13 @@ snapshots:
 
   '@vueuse/metadata@11.0.3': {}
 
-  '@vueuse/nuxt@11.0.3(magicast@0.3.5)(nuxt@3.13.1(@parcel/watcher@2.4.1)(@types/node@22.3.0)(better-sqlite3@11.3.0)(eslint@9.10.0(jiti@1.21.6))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.21.1)(terser@5.31.6)(typescript@5.5.4)(vite@5.4.4(@types/node@22.3.0)(terser@5.31.6))(vue-tsc@2.1.4(typescript@5.5.4))(webpack-sources@3.2.3))(rollup@4.21.1)(vue@3.5.4(typescript@5.5.4))':
+  '@vueuse/nuxt@11.0.3(magicast@0.3.5)(nuxt@3.13.1(@parcel/watcher@2.4.1)(@types/node@22.3.0)(better-sqlite3@11.3.0)(drizzle-orm@0.33.0(@cloudflare/workers-types@4.20240909.0)(@types/react@18.3.3)(better-sqlite3@11.3.0)(react@18.3.1))(eslint@9.10.0(jiti@1.21.6))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.21.1)(terser@5.31.6)(typescript@5.5.4)(vite@5.4.4(@types/node@22.3.0)(terser@5.31.6))(vue-tsc@2.1.4(typescript@5.5.4))(webpack-sources@3.2.3))(rollup@4.21.1)(vue@3.5.4(typescript@5.5.4))':
     dependencies:
       '@nuxt/kit': 3.13.0(magicast@0.3.5)(rollup@4.21.1)
       '@vueuse/core': 11.0.3(vue@3.5.4(typescript@5.5.4))
       '@vueuse/metadata': 11.0.3
       local-pkg: 0.5.0
-      nuxt: 3.13.1(@parcel/watcher@2.4.1)(@types/node@22.3.0)(better-sqlite3@11.3.0)(eslint@9.10.0(jiti@1.21.6))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.21.1)(terser@5.31.6)(typescript@5.5.4)(vite@5.4.4(@types/node@22.3.0)(terser@5.31.6))(vue-tsc@2.1.4(typescript@5.5.4))(webpack-sources@3.2.3)
+      nuxt: 3.13.1(@parcel/watcher@2.4.1)(@types/node@22.3.0)(better-sqlite3@11.3.0)(drizzle-orm@0.33.0(@cloudflare/workers-types@4.20240909.0)(@types/react@18.3.3)(better-sqlite3@11.3.0)(react@18.3.1))(eslint@9.10.0(jiti@1.21.6))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.21.1)(terser@5.31.6)(typescript@5.5.4)(vite@5.4.4(@types/node@22.3.0)(terser@5.31.6))(vue-tsc@2.1.4(typescript@5.5.4))(webpack-sources@3.2.3)
       vue-demi: 0.14.10(vue@3.5.4(typescript@5.5.4))
     transitivePeerDependencies:
       - '@vue/composition-api'
@@ -12489,7 +12488,7 @@ snapshots:
       - webpack-sources
       - xml2js
 
-  nuxt@3.13.1(@parcel/watcher@2.4.1)(@types/node@22.3.0)(better-sqlite3@11.3.0)(eslint@9.10.0(jiti@1.21.6))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.21.1)(terser@5.31.6)(typescript@5.5.4)(vite@5.4.4(@types/node@22.3.0)(terser@5.31.6))(vue-tsc@2.1.4(typescript@5.5.4))(webpack-sources@3.2.3):
+  nuxt@3.13.1(@parcel/watcher@2.4.1)(@types/node@22.3.0)(better-sqlite3@11.3.0)(drizzle-orm@0.33.0(@cloudflare/workers-types@4.20240909.0)(@types/react@18.3.3)(better-sqlite3@11.3.0)(react@18.3.1))(eslint@9.10.0(jiti@1.21.6))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.21.1)(terser@5.31.6)(typescript@5.5.4)(vite@5.4.4(@types/node@22.3.0)(terser@5.31.6))(vue-tsc@2.1.4(typescript@5.5.4))(webpack-sources@3.2.3):
     dependencies:
       '@nuxt/devalue': 2.0.2
       '@nuxt/devtools': 1.4.1(rollup@4.21.1)(vite@5.4.4(@types/node@22.3.0)(terser@5.31.6))

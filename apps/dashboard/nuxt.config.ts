@@ -1,3 +1,5 @@
+/* eslint-disable node/prefer-global/process */
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   extends: ['@nuxt/ui-pro'],
@@ -31,6 +33,8 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    libsqlUrl: process.env.NUXT_LIBSQL_URL || 'file:database/data.db',
+    libsqlAuthToken: process.env.NUXT_LIBSQL_AUTH_TOKEN || undefined,
   },
 
   nitro: {
