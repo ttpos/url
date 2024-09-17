@@ -19,6 +19,8 @@ jobs:
           POD_NAME: dashboard
           NUXT_UI_PRO_LICENSE: ${{ secrets.NUXT_UI_PRO_LICENSE }}
           NUXT_PUBLIC_SITE_URL: ${{ vars.DASHBOARD_URL }}
+          NUXT_LIBSQL_URL: ${{ vars.USER_LIBSQL_URL }}
+          NUXT_LIBSQL_AUTH_TOKEN: ${{ secrets.USER_LIBSQL_AUTH_TOKEN }}
         run: |
           ./aa build
           ./aa deploy
