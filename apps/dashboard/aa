@@ -33,6 +33,8 @@ action_build() {
     docker build --rm -t $NAME \
     --build-arg NUXT_UI_PRO_LICENSE=$NUXT_UI_PRO_LICENSE \
     --build-arg NUXT_PUBLIC_SITE_URL=$NUXT_PUBLIC_SITE_URL \
+    --build-arg NUXT_LIBSQL_URL=$NUXT_LIBSQL_URL \
+    --build-arg NUXT_LIBSQL_AUTH_TOKEN=$NUXT_LIBSQL_AUTH_TOKEN \
     -f devfiles/Dockerfile .
 }
 
