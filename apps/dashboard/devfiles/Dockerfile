@@ -12,7 +12,7 @@ COPY app ./app
 COPY public ./public
 COPY server ./server
 COPY package.json renovate.json tailwind.config.ts tsconfig.json \
-     nuxt.config.ts ./
+     nuxt.config.ts drizzle.config.ts ./
 
 RUN npm install -g pnpm; \
     pnpm install; \
