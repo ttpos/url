@@ -16,7 +16,3 @@ primary_region = 'hkg'
   memory = '1gb'
   cpu_kind = 'shared'
   cpus = 1
-
-[mounts]
-  source = "dashboard_db"
-  destination = "/app/db"
