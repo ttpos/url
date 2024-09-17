@@ -14,7 +14,11 @@ COPY server ./server
 COPY package.json renovate.json tailwind.config.ts tsconfig.json \
      nuxt.config.ts ./
 
-RUN npm install -g pnpm && pnpm install && pnpm build
+RUN npm install -g pnpm; \
+    pnpm install; \
+    pnpm build; \
+    pnpm db:gen; \
+    pnpm db:migrate
 
 FROM $IMAGES
 
