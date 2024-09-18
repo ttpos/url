@@ -10,6 +10,7 @@ useSeoMeta({
 })
 
 const toast = useToast()
+const loading = ref(false)
 
 const fields = [
   {
@@ -24,6 +25,11 @@ const fields = [
     type: 'password',
     placeholder: 'Enter your password',
   },
+  {
+    name: 'remember',
+    label: 'Remember me',
+    type: 'checkbox',
+  },
 ]
 
 function validate(state: any): FormError[] {
@@ -37,7 +43,9 @@ function validate(state: any): FormError[] {
 
 async function onSubmit(data: FormSubmitEvent<any>) {
   try {
-    await $fetch('/api/login', {
+    loading.value = true
+
+    await $fetch('/api/auth/login', {
       method: 'POST',
       body: data,
     })
@@ -45,6 +53,9 @@ async function onSubmit(data: FormSubmitEvent<any>) {
   }
   catch (error) {
     toast.add({ title: error.data?.message ?? null })
+  }
+  finally {
+    loading.value = false
   }
 }
 </script>
@@ -59,6 +70,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
       icon="i-heroicons-user-circle"
       :ui="{ base: 'text-center', footer: 'text-center' }"
       :submit-button="{ trailingIcon: 'i-heroicons-arrow-right-20-solid' }"
+      :loading="loading"
       @submit="onSubmit"
     >
       <template #description>

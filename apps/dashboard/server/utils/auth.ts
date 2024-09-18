@@ -1,7 +1,7 @@
+import { sessionTable, userTable } from '@@/server/database/schema'
+import { useDrizzle } from '@@/server/utils/db'
 import { DrizzleSQLiteAdapter } from '@lucia-auth/adapter-drizzle'
 import { Lucia } from 'lucia'
-import { sessionTable, userTable } from '../database/schema'
-import { useDrizzle } from './db'
 
 const db = useDrizzle()
 

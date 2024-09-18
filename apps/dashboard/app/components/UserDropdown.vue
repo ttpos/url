@@ -64,10 +64,10 @@ const items = computed(() => [
 ])
 
 async function logout() {
-  await $fetch('/api/logout', {
+  await $fetch('/api/auth/logout', {
     method: 'POST',
   })
-  await navigateTo('/login')
+  await navigateTo('/auth/login')
 }
 </script>
 

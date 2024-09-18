@@ -1,4 +1,5 @@
 import { userTable } from '@@/server/database/schema'
+import { useDrizzle } from '@@/server/utils/db'
 import Database from 'libsql'
 import { generateId } from 'lucia'
 

@@ -1,4 +1,5 @@
 import { userTable } from '@@/server/database/schema'
+import { useDrizzle } from '@@/server/utils/db'
 import { verify } from '@node-rs/argon2'
 import { eq } from 'drizzle-orm'
 
