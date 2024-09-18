@@ -1,4 +1,5 @@
 import { userTable } from '@@/server/database/schema'
+import Database from 'libsql'
 import { generateId } from 'lucia'
 
 interface Query {
@@ -39,7 +40,7 @@ export default eventHandler(async (event) => {
   }
   catch (e) {
     logger.error('🚀 ~ defineEventHandler ~ error:', e)
-    if (e.code === 'SQLITE_CONSTRAINT_UNIQUE') {
+    if (e instanceof Database.SqliteError && e.code === 'SQLITE_CONSTRAINT_UNIQUE') {
       throw createError({
         message: 'Email already used',
         statusCode: 500,
