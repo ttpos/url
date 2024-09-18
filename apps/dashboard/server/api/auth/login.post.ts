@@ -1,6 +1,5 @@
 import { userTable } from '@@/server/database/schema'
-import { useDrizzle } from '@@/server/utils/db'
-import { verify } from '@node-rs/argon2'
+import { lucia, useDrizzle } from '@@/server/utils'
 import { eq } from 'drizzle-orm'
 
 interface Query {
@@ -9,7 +8,6 @@ interface Query {
 }
 
 export default eventHandler(async (event) => {
-  // const { db } = event.context
   const db = useDrizzle()
   const { email, password } = await readBody<Query>(event)
 

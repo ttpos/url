@@ -32,6 +32,25 @@ const fields = [
   },
 ]
 
+const providers = [
+  {
+    label: 'Continue with GitHub',
+    icon: 'i-simple-icons-github',
+    color: 'white' as const,
+    click: () => {
+      console.log('Redirect to GitHub')
+    },
+  },
+  {
+    label: 'Continue with Google',
+    icon: 'i-simple-icons-google',
+    color: 'white' as const,
+    click: () => {
+      console.log('Redirect to Google')
+    },
+  },
+]
+
 function validate(state: any): FormError[] {
   const errors = []
   if (!state.email)
@@ -65,6 +84,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
     <UAuthForm
       :fields="fields"
       :validate="validate"
+      :providers="providers"
       title="Welcome back"
       align="top"
       icon="i-heroicons-user-circle"
@@ -76,7 +96,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
       <template #description>
         Don't have an account?
         <NuxtLink
-          to="/signup"
+          to="/auth/signup"
           class="text-primary font-medium"
         >
           Sign up

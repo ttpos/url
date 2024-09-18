@@ -35,6 +35,14 @@ export default defineNuxtConfig({
   runtimeConfig: {
     libsqlUrl: process.env.NUXT_LIBSQL_URL || 'file:database/data.db',
     libsqlAuthToken: process.env.NUXT_LIBSQL_AUTH_TOKEN || undefined,
+
+    public: {
+      googleClientId: process.env.NUXT_OAUTH_GOOGLE_CLIENT_ID,
+      googleClientSecret: process.env.NUXT_OAUTH_GOOGLE_CLIENT_SECRET,
+      googleRedirectURI: process.env.NUXT_OAUTH_GOOGLE_REDIRECT_URI,
+      githubClientId: process.env.NUXT_OAUTH_GITHUB_CLIENT_ID,
+      githubClientSecret: process.env.NUXT_OAUTH_GITHUB_CLIENT_SECRET,
+    },
   },
 
   nitro: {

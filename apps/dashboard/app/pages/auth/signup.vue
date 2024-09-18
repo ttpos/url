@@ -26,6 +26,25 @@ const fields = [
   },
 ]
 
+const providers = [
+  {
+    label: 'Continue with GitHub',
+    icon: 'i-simple-icons-github',
+    color: 'white' as const,
+    click: () => {
+      console.log('Redirect to GitHub')
+    },
+  },
+  {
+    label: 'Continue with Google',
+    icon: 'i-simple-icons-google',
+    color: 'white' as const,
+    click: () => {
+      console.log('Redirect to Google')
+    },
+  },
+]
+
 function validate(state: any): FormError[] {
   const errors = []
   if (!state.email)
@@ -37,7 +56,7 @@ function validate(state: any): FormError[] {
 
 async function onSubmit(data: FormSubmitEvent<any>) {
   try {
-    await $fetch('/api/signup', {
+    await $fetch('/api/auth/signup', {
       method: 'POST',
       body: data,
     })
@@ -54,6 +73,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
     <UAuthForm
       :fields="fields"
       :validate="validate"
+      :providers="providers"
       align="top"
       icon="i-heroicons-user-circle"
       title="Create an account"
@@ -64,7 +84,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
       <template #description>
         Already have an account?
         <NuxtLink
-          to="/login"
+          to="/auth/login"
           class="text-primary font-medium"
         >
           Login
