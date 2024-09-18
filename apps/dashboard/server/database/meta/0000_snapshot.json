@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "c01ffbd7-24ec-44f2-9d52-dae4f486d4c5",
+  "id": "ea2a3dae-24e2-4ea3-90be-849024e74fb7",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "activity_log": {
@@ -34,7 +34,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726656945848
+          "default": 1726661324160
         },
         "ip_address": {
           "name": "ip_address",
@@ -45,6 +45,13 @@
         },
         "details": {
           "name": "details",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "session_id": {
+          "name": "session_id",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
@@ -97,6 +104,13 @@
         "expires_at": {
           "name": "expires_at",
           "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ip_address": {
+          "name": "ip_address",
+          "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -175,8 +189,8 @@
           "notNull": false,
           "autoincrement": false
         },
-        "last_type": {
-          "name": "last_type",
+        "last_mfa_id": {
+          "name": "last_mfa_id",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
@@ -188,7 +202,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726656945847
+          "default": 1726661324160
         },
         "updated_at": {
           "name": "updated_at",
@@ -196,95 +210,14 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726656945847
-        }
-      },
-      "indexes": {
-        "user_mfa_index": {
-          "name": "user_mfa_index",
-          "columns": [
-            "user_id",
-            "type"
-          ],
-          "isUnique": true
-        }
-      },
-      "foreignKeys": {
-        "mfa_user_id_user_id_fk": {
-          "name": "mfa_user_id_user_id_fk",
-          "tableFrom": "mfa",
-          "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "oauth_account": {
-      "name": "oauth_account",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "user_id": {
-          "name": "user_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "provider": {
-          "name": "provider",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "provider_user_id": {
-          "name": "provider_user_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "access_token": {
-          "name": "access_token",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "refresh_token": {
-          "name": "refresh_token",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "expires_at": {
-          "name": "expires_at",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "default": 1726661324160
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "oauth_account_user_id_user_id_fk": {
-          "name": "oauth_account_user_id_user_id_fk",
-          "tableFrom": "oauth_account",
+        "mfa_user_id_user_id_fk": {
+          "name": "mfa_user_id_user_id_fk",
+          "tableFrom": "mfa",
           "tableTo": "user",
           "columnsFrom": [
             "user_id"
@@ -359,92 +292,6 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "session_history": {
-      "name": "session_history",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "user_id": {
-          "name": "user_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "session_id": {
-          "name": "session_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "date": {
-          "name": "date",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": 1726656945847
-        },
-        "ip_address": {
-          "name": "ip_address",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "country": {
-          "name": "country",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "device_info": {
-          "name": "device_info",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "session_history_user_id_user_id_fk": {
-          "name": "session_history_user_id_user_id_fk",
-          "tableFrom": "session_history",
-          "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "session_history_session_id_session_id_fk": {
-          "name": "session_history_session_id_session_id_fk",
-          "tableFrom": "session_history",
-          "tableTo": "session",
-          "columnsFrom": [
-            "session_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
     "session": {
       "name": "session",
       "columns": {
@@ -475,7 +322,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726656945847
+          "default": 1726661324160
         },
         "updated_at": {
           "name": "updated_at",
@@ -483,13 +330,49 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726656945847
+          "default": 1726661324160
         },
         "expires_at": {
           "name": "expires_at",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
+          "autoincrement": false
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "date": {
+          "name": "date",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": 1726661324160
+        },
+        "ip_address": {
+          "name": "ip_address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "country": {
+          "name": "country",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "device_info": {
+          "name": "device_info",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
           "autoincrement": false
         }
       },
@@ -550,8 +433,8 @@
           "notNull": true,
           "autoincrement": false
         },
-        "hashed_password": {
-          "name": "hashed_password",
+        "password": {
+          "name": "password",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
@@ -587,7 +470,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726656945844
+          "default": 1726661324157
         },
         "updated_at": {
           "name": "updated_at",
@@ -595,7 +478,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726656945844
+          "default": 1726661324157
         },
         "nickname": {
           "name": "nickname",
@@ -653,8 +536,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "users_oidc": {
-      "name": "users_oidc",
+    "users_oauth": {
+      "name": "users_oauth",
       "columns": {
         "id": {
           "name": "id",
@@ -677,11 +560,32 @@
           "notNull": true,
           "autoincrement": false
         },
-        "provider_uid": {
-          "name": "provider_uid",
+        "provider_user_id": {
+          "name": "provider_user_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
+          "autoincrement": false
+        },
+        "access_token": {
+          "name": "access_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "refresh_token": {
+          "name": "refresh_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
           "autoincrement": false
         },
         "created_at": {
@@ -690,7 +594,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726656945847
+          "default": 1726661324160
         },
         "updated_at": {
           "name": "updated_at",
@@ -698,22 +602,23 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726656945847
+          "default": 1726661324160
         }
       },
       "indexes": {
-        "provider_uid_index": {
-          "name": "provider_uid_index",
+        "unique_provider_user_index": {
+          "name": "unique_provider_user_index",
           "columns": [
-            "provider_uid"
+            "provider",
+            "provider_user_id"
           ],
           "isUnique": true
         }
       },
       "foreignKeys": {
-        "users_oidc_user_id_user_id_fk": {
-          "name": "users_oidc_user_id_user_id_fk",
-          "tableFrom": "users_oidc",
+        "users_oauth_user_id_user_id_fk": {
+          "name": "users_oauth_user_id_user_id_fk",
+          "tableFrom": "users_oauth",
           "tableTo": "user",
           "columnsFrom": [
             "user_id"

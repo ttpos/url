@@ -6,7 +6,7 @@ export const userTable = sqliteTable('user', {
   emailHash: text('email_hash').notNull(),
   phone: text('phone').unique(),
   phoneHash: text('phone_hash').notNull(),
-  password: text('hashed_password').notNull(),
+  password: text('password').notNull(),
   isEmailVerified: integer('is_email_verified').default(0),
   isPhoneVerified: integer('is_phone_verified').default(0),
   /**
@@ -36,6 +36,7 @@ export const emailVerificationTable = sqliteTable(
       .references(() => userTable.id),
     code: text('code').notNull(),
     expiresAt: integer('expires_at').notNull(),
+    ip: text('ip_address').notNull(),
   },
   table => ({
     index: uniqueIndex('idx_email_verification_userId_code').on(table.userId, table.code),
@@ -57,7 +58,7 @@ export const passwordResetTable = sqliteTable(
   }),
 )
 
-export const oauthAccountTable = sqliteTable('oauth_account', {
+export const usersOauthTable = sqliteTable('users_oauth', {
   id: text('id').primaryKey(),
   userId: text('user_id')
     .notNull()
@@ -67,20 +68,11 @@ export const oauthAccountTable = sqliteTable('oauth_account', {
   accessToken: text('access_token').notNull(),
   refreshToken: text('refresh_token'),
   expiresAt: integer('expires_at'),
-})
-
-export const usersOidcTable = sqliteTable('users_oidc', {
-  id: text('id').primaryKey(),
-  userId: text('user_id')
-    .notNull()
-    .references(() => userTable.id),
-  provider: text('provider').notNull(),
-  providerUid: text('provider_uid').notNull(),
   created: integer('created_at').default(Date.now()),
   updated: integer('updated_at').default(Date.now()),
 }, (table) => {
   return {
-    providerUidIndex: uniqueIndex('provider_uid_index').on(table.providerUid),
+    uniqueProviderUserIndex: uniqueIndex('unique_provider_user_index').on(table.provider, table.providerUserId),
   }
 })
 
@@ -93,13 +85,9 @@ export const mfaTable = sqliteTable('mfa', {
   name: text('name').notNull(),
   status: text('status').notNull(),
   lastVerified: integer('last_verified_at'),
-  lastType: text('last_type'),
+  lastMfaId: text('last_mfa_id'),
   created: integer('created_at').default(Date.now()),
   updated: integer('updated_at').default(Date.now()),
-}, (table) => {
-  return {
-    userMfaIndex: uniqueIndex('user_mfa_index').on(table.userId, table.type),
-  }
 })
 
 export const sessionTable = sqliteTable('session', {
@@ -107,20 +95,11 @@ export const sessionTable = sqliteTable('session', {
   userId: text('user_id')
     .notNull()
     .references(() => userTable.id),
-  session: text('session_token').notNull(),
+  sessionToken: text('session_token').notNull(),
   created: integer('created_at').default(Date.now()),
   updated: integer('updated_at').default(Date.now()),
   expiresAt: integer('expires_at').notNull(),
-})
-
-export const sessionHistoryTable = sqliteTable('session_history', {
-  id: text('id').primaryKey(),
-  userId: text('user_id')
-    .notNull()
-    .references(() => userTable.id),
-  sessionId: text('session_id')
-    .notNull()
-    .references(() => sessionTable.id),
+  status: text('status').notNull(),
   date: integer('date').default(Date.now()),
   ip: text('ip_address').notNull(),
   country: text('country'),
@@ -136,4 +115,5 @@ export const activityLogTable = sqliteTable('activity_log', {
   timestamp: integer('timestamp').default(Date.now()),
   ipAddress: text('ip_address').notNull(),
   details: text('details'),
+  sessionId: text('session_id'),
 })
