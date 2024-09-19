@@ -2,12 +2,12 @@ CREATE TABLE `activity_log` (
 	`id` text PRIMARY KEY NOT NULL,
 	`user_id` text NOT NULL,
 	`action` text NOT NULL,
-	`timestamp` integer DEFAULT 1726714020711,
+	`timestamp` integer DEFAULT 1726714588798,
 	`ip_address` text NOT NULL,
 	`details` text,
 	`session_id` text NOT NULL,
-	`created_at` integer DEFAULT 1726714020711,
-	`updated_at` integer DEFAULT 1726714020711,
+	`created_at` integer DEFAULT 1726714588798,
+	`updated_at` integer DEFAULT 1726714588798,
 	FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE no action,
 	FOREIGN KEY (`session_id`) REFERENCES `session`(`id`) ON UPDATE no action ON DELETE no action
 );
@@ -20,8 +20,8 @@ CREATE TABLE `email_verification` (
 	`expires_at` integer NOT NULL,
 	`create_ip` text,
 	`verify_ip` text,
-	`created_at` integer DEFAULT 1726714020710,
-	`updated_at` integer DEFAULT 1726714020710,
+	`created_at` integer DEFAULT 1726714588796,
+	`updated_at` integer DEFAULT 1726714588796,
 	FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
@@ -33,8 +33,8 @@ CREATE TABLE `mfa` (
 	`status` text NOT NULL,
 	`mfa_id` text NOT NULL,
 	`last_verified_at` integer,
-	`created_at` integer DEFAULT 1726714020710,
-	`updated_at` integer DEFAULT 1726714020710,
+	`created_at` integer DEFAULT 1726714588797,
+	`updated_at` integer DEFAULT 1726714588797,
 	FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE no action,
 	FOREIGN KEY (`mfa_id`) REFERENCES `mfa`(`id`) ON UPDATE no action ON DELETE no action
 );
@@ -47,8 +47,8 @@ CREATE TABLE `password_reset` (
 	`expires_at` integer NOT NULL,
 	`create_ip` text,
 	`verify_ip` text,
-	`created_at` integer DEFAULT 1726714020710,
-	`updated_at` integer DEFAULT 1726714020710,
+	`created_at` integer DEFAULT 1726714588797,
+	`updated_at` integer DEFAULT 1726714588797,
 	FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
@@ -58,13 +58,12 @@ CREATE TABLE `session` (
 	`session_token` text NOT NULL,
 	`expires_at` integer NOT NULL,
 	`status` text NOT NULL,
-	`date` integer DEFAULT 1726714020711,
-	`ip_address` text NOT NULL,
-	`country` text,
-	`device_info` text,
-	`created_at` integer DEFAULT 1726714020711,
-	`updated_at` integer DEFAULT 1726714020711,
-	FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE no action
+	`mfa_id` text NOT NULL,
+	`metadata` blob NOT NULL,
+	`created_at` integer DEFAULT 1726714588798,
+	`updated_at` integer DEFAULT 1726714588798,
+	FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`mfa_id`) REFERENCES `mfa`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
 CREATE TABLE `user` (
@@ -80,8 +79,8 @@ CREATE TABLE `user` (
 	`nickname` text,
 	`language` text,
 	`country` text,
-	`created_at` integer DEFAULT 1726714020708,
-	`updated_at` integer DEFAULT 1726714020708
+	`created_at` integer DEFAULT 1726714588794,
+	`updated_at` integer DEFAULT 1726714588794
 );
 --> statement-breakpoint
 CREATE TABLE `users_oauth` (
@@ -92,8 +91,8 @@ CREATE TABLE `users_oauth` (
 	`access_token` text,
 	`refresh_token` text,
 	`expires_at` integer,
-	`created_at` integer DEFAULT 1726714020710,
-	`updated_at` integer DEFAULT 1726714020710,
+	`created_at` integer DEFAULT 1726714588797,
+	`updated_at` integer DEFAULT 1726714588797,
 	FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint

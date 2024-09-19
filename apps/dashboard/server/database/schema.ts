@@ -1,4 +1,4 @@
-import { integer, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core'
+import { blob, integer, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core'
 
 export const userTable = sqliteTable(
   'user',
@@ -114,10 +114,10 @@ export const sessionTable = sqliteTable(
     sessionToken: text('session_token').notNull(),
     expiresAt: integer('expires_at').notNull(),
     status: text('status').notNull(),
-    date: integer('date').default(Date.now()),
-    ip: text('ip_address').notNull(),
-    country: text('country'),
-    deviceInfo: text('device_info'),
+    mfaId: text('mfa_id')
+      .notNull()
+      .references(() => mfaTable.id),
+    metadata: blob('metadata').notNull(),
     createdAt: integer('created_at').default(Date.now()),
     updatedAt: integer('updated_at').default(Date.now()),
   },
