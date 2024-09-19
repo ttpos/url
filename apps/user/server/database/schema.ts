@@ -79,8 +79,16 @@ export const verificationTable = sqliteTable(
      * - phone
      */
     type: text('type'),
-    // Used to validate type records
-    active: text('active'),
+    /**
+     * Used to validate type records, Write routing address
+     *
+     * example:
+     * - 1 retrieve password
+     * - 2 modify email
+     * - 3 modify phone
+     * - 4 other
+     */
+    action: text('action'),
     createdAt: integer('created_at').default(Date.now()),
     updatedAt: integer('updated_at').default(Date.now()),
     isDeleted: integer('is_deleted'),
