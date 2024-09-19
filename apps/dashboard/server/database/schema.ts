@@ -72,7 +72,7 @@ export const usersOauthTable = sqliteTable(
       .references(() => userTable.id),
     provider: text('provider').notNull(),
     providerUserId: text('provider_user_id').notNull(),
-    accessToken: text('access_token').notNull(),
+    accessToken: text('access_token'),
     refreshToken: text('refresh_token'),
     expiresAt: integer('expires_at'),
     createdAt: integer('created_at').default(Date.now()),
@@ -95,8 +95,10 @@ export const mfaTable = sqliteTable(
     type: text('type').notNull(),
     name: text('name').notNull(),
     status: text('status').notNull(),
-    lastVerified: integer('last_verified_at'),
-    lastMfaId: text('last_mfa_id'),
+    mfaId: text('mfa_id')
+      .notNull()
+      .references(() => mfaTable.id),
+    lastVerifiedAt: integer('last_verified_at'),
     createdAt: integer('created_at').default(Date.now()),
     updatedAt: integer('updated_at').default(Date.now()),
   },

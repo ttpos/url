@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "54f00f14-5f44-42c5-bb0c-71aa964874e3",
+  "id": "cb5bb6f2-f8dd-42a6-b228-5f0b46822a77",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "activity_log": {
@@ -34,7 +34,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726712713725
+          "default": 1726714020711
         },
         "ip_address": {
           "name": "ip_address",
@@ -63,7 +63,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726712713725
+          "default": 1726714020711
         },
         "updated_at": {
           "name": "updated_at",
@@ -71,7 +71,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726712713725
+          "default": 1726714020711
         }
       },
       "indexes": {},
@@ -165,7 +165,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726712713724
+          "default": 1726714020710
         },
         "updated_at": {
           "name": "updated_at",
@@ -173,7 +173,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726712713724
+          "default": 1726714020710
         }
       },
       "indexes": {},
@@ -233,16 +233,16 @@
           "notNull": true,
           "autoincrement": false
         },
+        "mfa_id": {
+          "name": "mfa_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "last_verified_at": {
           "name": "last_verified_at",
           "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "last_mfa_id": {
-          "name": "last_mfa_id",
-          "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
@@ -253,7 +253,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726712713725
+          "default": 1726714020710
         },
         "updated_at": {
           "name": "updated_at",
@@ -261,7 +261,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726712713725
+          "default": 1726714020710
         }
       },
       "indexes": {},
@@ -272,6 +272,19 @@
           "tableTo": "user",
           "columnsFrom": [
             "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "mfa_mfa_id_mfa_id_fk": {
+          "name": "mfa_mfa_id_mfa_id_fk",
+          "tableFrom": "mfa",
+          "tableTo": "mfa",
+          "columnsFrom": [
+            "mfa_id"
           ],
           "columnsTo": [
             "id"
@@ -342,7 +355,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726712713725
+          "default": 1726714020710
         },
         "updated_at": {
           "name": "updated_at",
@@ -350,7 +363,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726712713725
+          "default": 1726714020710
         }
       },
       "indexes": {},
@@ -416,7 +429,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726712713725
+          "default": 1726714020711
         },
         "ip_address": {
           "name": "ip_address",
@@ -445,7 +458,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726712713725
+          "default": 1726714020711
         },
         "updated_at": {
           "name": "updated_at",
@@ -453,7 +466,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726712713725
+          "default": 1726714020711
         }
       },
       "indexes": {},
@@ -571,7 +584,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726712713723
+          "default": 1726714020708
         },
         "updated_at": {
           "name": "updated_at",
@@ -579,7 +592,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726712713723
+          "default": 1726714020708
         }
       },
       "indexes": {
@@ -645,7 +658,7 @@
           "name": "access_token",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "refresh_token": {
@@ -668,7 +681,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726712713725
+          "default": 1726714020710
         },
         "updated_at": {
           "name": "updated_at",
@@ -676,7 +689,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726712713725
+          "default": 1726714020710
         }
       },
       "indexes": {
