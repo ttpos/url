@@ -73,7 +73,10 @@ export const verificationTable = sqliteTable(
     expiresAt: integer('expires_at').notNull(),
     createIp: text('create_ip'),
     verifyIp: text('verify_ip'),
-    name: text('name'),
+    /**
+     * serial number
+     */
+    serial: text('serial'),
     /**
      * - email
      * - phone
