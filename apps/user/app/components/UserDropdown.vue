@@ -64,7 +64,7 @@ const items = computed(() => [
 ])
 
 async function logout() {
-  await $fetch('/api/auth/logout', {
+  await $fetch('/api/auth/signout', {
     method: 'POST',
   })
   await navigateTo('/auth/login')

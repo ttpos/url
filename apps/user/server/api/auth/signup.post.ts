@@ -80,16 +80,21 @@ export default defineEventHandler(async (event) => {
         verifyId: generateId(15),
       })
 
-    const htmlTemplate = emailVerificationTemplate(code)
-    logger.log('🚀 ~ defineEventHandler ~ htmlTemplate:', htmlTemplate)
+    // const htmlTemplate = emailVerificationTemplate(code)
+    // logger.log('🚀 ~ defineEventHandler ~ htmlTemplate:', htmlTemplate)
 
-    await sendEmail({
-      html: htmlTemplate,
-      to: email,
-      subject: 'Verify your email address!',
+    // await sendEmail({
+    //   html: htmlTemplate,
+    //   to: email,
+    //   subject: 'Verify your email address!',
+    // })
+
+    const session = await lucia.createSession(userId, {
+      status: 1,
+      sessionToken: 'testing',
+      metadata: {},
     })
-
-    const session = await lucia.createSession(userId, {})
+    logger.log('🚀 ~ defineEventHandler ~ session:', session)
 
     appendHeader(
       event,
