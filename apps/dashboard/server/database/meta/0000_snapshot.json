@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "ea2a3dae-24e2-4ea3-90be-849024e74fb7",
+  "id": "d9b621e1-1ebc-4a78-86da-db411fe2695f",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "activity_log": {
@@ -34,7 +34,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726661324160
+          "default": 1726708441372
         },
         "ip_address": {
           "name": "ip_address",
@@ -54,7 +54,7 @@
           "name": "session_id",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         }
       },
@@ -66,6 +66,19 @@
           "tableTo": "user",
           "columnsFrom": [
             "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "activity_log_session_id_session_id_fk": {
+          "name": "activity_log_session_id_session_id_fk",
+          "tableFrom": "activity_log",
+          "tableTo": "session",
+          "columnsFrom": [
+            "session_id"
           ],
           "columnsTo": [
             "id"
@@ -101,6 +114,21 @@
           "notNull": true,
           "autoincrement": false
         },
+        "status": {
+          "name": "status",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": 0
+        },
+        "verify_id": {
+          "name": "verify_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "expires_at": {
           "name": "expires_at",
           "type": "integer",
@@ -108,11 +136,18 @@
           "notNull": true,
           "autoincrement": false
         },
-        "ip_address": {
-          "name": "ip_address",
+        "create_ip": {
+          "name": "create_ip",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "verify_ip": {
+          "name": "verify_ip",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
           "autoincrement": false
         }
       },
@@ -202,7 +237,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726661324160
+          "default": 1726708441372
         },
         "updated_at": {
           "name": "updated_at",
@@ -210,7 +245,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726661324160
+          "default": 1726708441372
         }
       },
       "indexes": {},
@@ -256,11 +291,40 @@
           "notNull": true,
           "autoincrement": false
         },
+        "status": {
+          "name": "status",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": 0
+        },
+        "verify_id": {
+          "name": "verify_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "expires_at": {
           "name": "expires_at",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
+          "autoincrement": false
+        },
+        "create_ip": {
+          "name": "create_ip",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "verify_ip": {
+          "name": "verify_ip",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
           "autoincrement": false
         }
       },
@@ -322,7 +386,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726661324160
+          "default": 1726708441372
         },
         "updated_at": {
           "name": "updated_at",
@@ -330,7 +394,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726661324160
+          "default": 1726708441372
         },
         "expires_at": {
           "name": "expires_at",
@@ -352,7 +416,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726661324160
+          "default": 1726708441372
         },
         "ip_address": {
           "name": "ip_address",
@@ -470,7 +534,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726661324157
+          "default": 1726708441370
         },
         "updated_at": {
           "name": "updated_at",
@@ -478,7 +542,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726661324157
+          "default": 1726708441370
         },
         "nickname": {
           "name": "nickname",
@@ -517,16 +581,10 @@
           ],
           "isUnique": true
         },
-        "email_index": {
-          "name": "email_index",
+        "user_unique_index": {
+          "name": "user_unique_index",
           "columns": [
-            "email"
-          ],
-          "isUnique": true
-        },
-        "phone_index": {
-          "name": "phone_index",
-          "columns": [
+            "email",
             "phone"
           ],
           "isUnique": true
@@ -594,7 +652,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726661324160
+          "default": 1726708441372
         },
         "updated_at": {
           "name": "updated_at",
@@ -602,7 +660,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726661324160
+          "default": 1726708441372
         }
       },
       "indexes": {
