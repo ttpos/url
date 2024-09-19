@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "8643166c-a214-4b68-98ba-637790500438",
+  "id": "c28dca77-c62a-45aa-946f-46ac381b6b6c",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "activity_log": {
@@ -48,7 +48,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726715495284
+          "default": 1726733886485
         },
         "is_deleted": {
           "name": "is_deleted",
@@ -149,7 +149,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726715495283
+          "default": 1726733886483
         },
         "updated_at": {
           "name": "updated_at",
@@ -157,7 +157,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726715495283
+          "default": 1726733886483
         },
         "is_deleted": {
           "name": "is_deleted",
@@ -228,7 +228,7 @@
           "name": "mfa_id",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "last_verified_at": {
@@ -244,7 +244,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726715495284
+          "default": 1726733886484
         },
         "updated_at": {
           "name": "updated_at",
@@ -252,7 +252,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726715495284
+          "default": 1726733886484
         },
         "is_deleted": {
           "name": "is_deleted",
@@ -270,19 +270,6 @@
           "tableTo": "user",
           "columnsFrom": [
             "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "mfa_mfa_id_mfa_id_fk": {
-          "name": "mfa_mfa_id_mfa_id_fk",
-          "tableFrom": "mfa",
-          "tableTo": "mfa",
-          "columnsFrom": [
-            "mfa_id"
           ],
           "columnsTo": [
             "id"
@@ -353,7 +340,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726715495284
+          "default": 1726733886484
         },
         "updated_at": {
           "name": "updated_at",
@@ -361,7 +348,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726715495284
+          "default": 1726733886484
         },
         "is_deleted": {
           "name": "is_deleted",
@@ -432,7 +419,7 @@
           "name": "mfa_id",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "metadata": {
@@ -448,7 +435,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726715495284
+          "default": 1726733886484
         },
         "updated_at": {
           "name": "updated_at",
@@ -456,7 +443,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726715495284
+          "default": 1726733886484
         },
         "is_deleted": {
           "name": "is_deleted",
@@ -474,19 +461,6 @@
           "tableTo": "user",
           "columnsFrom": [
             "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "session_mfa_id_mfa_id_fk": {
-          "name": "session_mfa_id_mfa_id_fk",
-          "tableFrom": "session",
-          "tableTo": "mfa",
-          "columnsFrom": [
-            "mfa_id"
           ],
           "columnsTo": [
             "id"
@@ -549,7 +523,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726715495285
+          "default": 1726733886485
         },
         "updated_at": {
           "name": "updated_at",
@@ -557,7 +531,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726715495285
+          "default": 1726733886485
         },
         "last_used_at": {
           "name": "last_used_at",
@@ -565,7 +539,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726715495285
+          "default": 1726733886485
         },
         "is_deleted": {
           "name": "is_deleted",
@@ -690,7 +664,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726715495282
+          "default": 1726733886481
         },
         "updated_at": {
           "name": "updated_at",
@@ -698,7 +672,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726715495282
+          "default": 1726733886481
         },
         "is_deleted": {
           "name": "is_deleted",
@@ -794,7 +768,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726715495284
+          "default": 1726733886484
         },
         "updated_at": {
           "name": "updated_at",
@@ -802,7 +776,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726715495284
+          "default": 1726733886484
         },
         "is_deleted": {
           "name": "is_deleted",

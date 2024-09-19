@@ -99,9 +99,7 @@ export const mfaTable = sqliteTable(
     type: text('type').notNull(),
     name: text('name').notNull(),
     status: text('status').notNull(),
-    mfaId: text('mfa_id')
-      .notNull()
-      .references(() => mfaTable.id),
+    mfaId: text('mfa_id'),
     lastVerifiedAt: integer('last_verified_at'),
     createdAt: integer('created_at').default(Date.now()),
     updatedAt: integer('updated_at').default(Date.now()),
@@ -119,9 +117,7 @@ export const sessionTable = sqliteTable(
     sessionToken: text('session_token').notNull(),
     expiresAt: integer('expires_at').notNull(),
     status: text('status').notNull(),
-    mfaId: text('mfa_id')
-      .notNull()
-      .references(() => mfaTable.id),
+    mfaId: text('mfa_id'),
     metadata: blob('metadata').notNull(),
     createdAt: integer('created_at').default(Date.now()),
     updatedAt: integer('updated_at').default(Date.now()),
