@@ -66,13 +66,13 @@ export const verificationTable = sqliteTable(
   {
     id: text('id').primaryKey(),
     userId: text('user_id')
-      .notNull()
       .references(() => userTable.id),
     status: integer('status').default(0),
     verifyId: text('verify_id').notNull(),
     expiresAt: integer('expires_at').notNull(),
     createIp: text('create_ip'),
     verifyIp: text('verify_ip'),
+    verifyData: text('verify_data'),
     /**
      * serial number
      */
