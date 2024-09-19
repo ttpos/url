@@ -21,6 +21,7 @@ export const userTable = sqliteTable(
     country: text('country'),
     createdAt: integer('created_at').default(Date.now()),
     updatedAt: integer('updated_at').default(Date.now()),
+    isDeleted: integer('is_deleted'),
   },
   (table) => {
     return {
@@ -43,6 +44,7 @@ export const emailVerificationTable = sqliteTable(
     verifyIp: text('verify_ip'),
     createdAt: integer('created_at').default(Date.now()),
     updatedAt: integer('updated_at').default(Date.now()),
+    isDeleted: integer('is_deleted'),
   },
 )
 
@@ -60,6 +62,7 @@ export const passwordResetTable = sqliteTable(
     verifyIp: text('verify_ip'),
     createdAt: integer('created_at').default(Date.now()),
     updatedAt: integer('updated_at').default(Date.now()),
+    isDeleted: integer('is_deleted'),
   },
 )
 
@@ -77,6 +80,7 @@ export const usersOauthTable = sqliteTable(
     expiresAt: integer('expires_at'),
     createdAt: integer('created_at').default(Date.now()),
     updatedAt: integer('updated_at').default(Date.now()),
+    isDeleted: integer('is_deleted'),
   },
   (table) => {
     return {
@@ -101,6 +105,7 @@ export const mfaTable = sqliteTable(
     lastVerifiedAt: integer('last_verified_at'),
     createdAt: integer('created_at').default(Date.now()),
     updatedAt: integer('updated_at').default(Date.now()),
+    isDeleted: integer('is_deleted'),
   },
 )
 
@@ -120,6 +125,7 @@ export const sessionTable = sqliteTable(
     metadata: blob('metadata').notNull(),
     createdAt: integer('created_at').default(Date.now()),
     updatedAt: integer('updated_at').default(Date.now()),
+    isDeleted: integer('is_deleted'),
   },
 )
 
@@ -131,13 +137,29 @@ export const activityLogTable = sqliteTable(
       .notNull()
       .references(() => userTable.id),
     action: text('action').notNull(),
-    timestamp: integer('timestamp').default(Date.now()),
-    ipAddress: text('ip_address').notNull(),
     details: text('details'),
     sessionId: text('session_id')
       .notNull()
       .references(() => sessionTable.id),
     createdAt: integer('created_at').default(Date.now()),
+    isDeleted: integer('is_deleted'),
+  },
+)
+
+export const tokens = sqliteTable(
+  'tokens',
+  {
+    id: text('id').primaryKey(),
+    userId: text('user_id')
+      .notNull()
+      .references(() => userTable.id),
+    token: text('token').notNull(),
+    resources: blob('resources'),
+    accesses: blob('accesses'),
+    expiresAt: integer('expires_at'),
+    createdAt: integer('created_at').default(Date.now()),
     updatedAt: integer('updated_at').default(Date.now()),
+    lastUsedAt: integer('last_used_at').default(Date.now()),
+    isDeleted: integer('is_deleted'),
   },
 )
