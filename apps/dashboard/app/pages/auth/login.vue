@@ -64,7 +64,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
   try {
     loading.value = true
 
-    await $fetch('/api/auth/login', {
+    await $fetch('/api/auth/signin', {
       method: 'POST',
       body: data,
     })

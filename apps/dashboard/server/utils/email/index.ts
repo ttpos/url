@@ -10,8 +10,8 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: process.env.GMAIL_EMAIL_USER,
-    pass: process.env.GMAIL_EMAIL_PASSWORD,
+    user: process.env.NUXT_GMAIL_EMAIL_USER,
+    pass: process.env.NUXT_GMAIL_EMAIL_PASSWORD,
   },
 })
 
@@ -25,7 +25,7 @@ export async function sendEmail({
   html: string
 }) {
   const info = await transporter.sendMail({
-    from: `"Nuxt Lucia Auth" <${process.env.GMAIL_EMAIL_USER}>`, // sender address
+    from: `"Nuxt Lucia Auth" <${process.env.NUXT_GMAIL_EMAIL_USER}>`, // sender address
     to, // list of receivers
     subject, // Subject line
     // text: "Hello world?", // plain text body

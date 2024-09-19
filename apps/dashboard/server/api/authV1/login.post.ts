@@ -17,7 +17,7 @@ export default eventHandler(async (event) => {
       statusCode: 400,
     })
   }
-  if (typeof password !== 'string' || password.length < 6 || password.length > 255) {
+  if (typeof password !== 'string' || password.length < 8 || password.length > 255) {
     throw createError({
       message: 'Invalid password',
       statusCode: 400,
@@ -37,7 +37,7 @@ export default eventHandler(async (event) => {
     })
   }
 
-  const validPassword = await verifyPassword(existingUser.passwordHash, password)
+  const validPassword = await verifyPassword(existingUser.password, password)
   if (!validPassword) {
     // NOTE:
     // Returning immediately allows malicious actors to figure out valid usernames from response times,

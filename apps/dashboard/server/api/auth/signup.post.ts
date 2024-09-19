@@ -11,9 +11,11 @@ interface Query {
 }
 
 export default defineEventHandler(async (event) => {
-  const db = useDrizzle()
   const { email, password } = await readBody<Query>(event)
+  logger.log('🚀 ~ defineEventHandler ~ password:', password)
+  logger.log('🚀 ~ defineEventHandler ~ email:', email)
 
+  // Validate email
   if (!email || typeof email !== 'string' || !isValidEmail(email)) {
     throw createError({
       message: 'Invalid Email',
@@ -21,6 +23,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
+  // Validate password length
   if (typeof password !== 'string' || password.length < 8 || password.length > 255) {
     throw createError({
       message: 'Invalid Password Length',
@@ -32,6 +35,8 @@ export default defineEventHandler(async (event) => {
   const userId = generateId(15)
 
   try {
+    const db = useDrizzle()
+
     // Check if user exists
     const user = await db.query.userTable.findFirst({
       where: eq(userTable.email, email),
@@ -39,38 +44,44 @@ export default defineEventHandler(async (event) => {
 
     if (user) {
       throw createError({
-        message: 'Username already used',
+        message: 'Email already used',
         statusCode: 400,
       })
     }
 
+    // Insert user into userTable
     await db.insert(userTable).values({
       id: userId,
       email,
-      emailHash: '',
-      phone: null,
-      phoneHash: '',
+      emailHash: '', // 传入需要的hash，可以根据需求更新
+      phone: null, // 未来可以添加处理
+      phoneHash: '', // 时间仍未处理
       password: passwordHash,
-      // isEmailVerified: 0,
-      // isPhoneVerified: 0,
-      // status: 1,
-      // created: Date.now(),
-      // updated: Date.now(),
+      isEmailVerified: 0, // 用户注册时默认未验证
+      isPhoneVerified: 0, // 默认未验证电话
+      status: 1, // 用户注册后默认激活状态
+      createdAt: Date.now(), // 根据新的schema，更改为createdAt
+      updatedAt: Date.now(), // 根据新的schema，更改为updatedAt
+      nickname: null, // 默认昵称
+      language: null, // 可以设置为null
+      country: null, // 可以设置为null
     })
 
-    // generate a random 8 digit code
+    // Generate a random 8 digit code
     const code = generateRandomString(8, alphabet('0-9')) // 8 digit code
 
     await db
       .insert(emailVerificationTable)
       .values({
-        code,
+        id: generateId(15), // 生成唯一ID
         userId,
-        id: generateId(15),
+        code,
         expiresAt: createDate(new TimeSpan(10, 'm')), // 10 minutes
+        verifyId: generateId(15),
       })
 
     const htmlTemplate = emailVerificationTemplate(code)
+    logger.log('🚀 ~ defineEventHandler ~ htmlTemplate:', htmlTemplate)
 
     await sendEmail({
       html: htmlTemplate,
@@ -87,11 +98,11 @@ export default defineEventHandler(async (event) => {
     )
 
     return {
-      message:
-        'We\'ve sent a verification email to your inbox. Please verify your email.',
+      message: 'We\'ve sent a verification email to your inbox. Please verify your email.',
     }
   }
   catch (error: any) {
+    logger.error('🚀 ~ defineEventHandler ~ error:', error)
     throw createError({
       message: error.message,
       statusCode: 400,

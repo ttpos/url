@@ -10,6 +10,7 @@ useSeoMeta({
 })
 
 const toast = useToast()
+const loading = ref(false)
 
 const fields = [
   {
@@ -56,6 +57,8 @@ function validate(state: any): FormError[] {
 
 async function onSubmit(data: FormSubmitEvent<any>) {
   try {
+    loading.value = true
+
     await $fetch('/api/auth/signup', {
       method: 'POST',
       body: data,
@@ -64,6 +67,9 @@ async function onSubmit(data: FormSubmitEvent<any>) {
   }
   catch (error) {
     toast.add({ title: error.data?.message ?? null })
+  }
+  finally {
+    loading.value = false
   }
 }
 </script>
@@ -79,6 +85,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
       title="Create an account"
       :ui="{ base: 'text-center', footer: 'text-center' }"
       :submit-button="{ label: 'Create account' }"
+      :loading="loading"
       @submit="onSubmit"
     >
       <template #description>

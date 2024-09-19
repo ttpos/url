@@ -1,4 +1,4 @@
-import { oauthAccountTable, userTable } from '@@/server/database/schema'
+import { usersOauthTable, userTable } from '@@/server/database/schema'
 import { github, useDrizzle } from '@@/server/utils'
 import { OAuth2RequestError } from 'arctic'
 import { eq } from 'drizzle-orm'
@@ -9,6 +9,7 @@ export default defineEventHandler(async (event) => {
   const code = query.code?.toString() ?? null
   const state = query.state?.toString() ?? null
   const storedState = getCookie(event, 'github_oauth_state') ?? null
+
   if (!code || !state || !storedState || state !== storedState) {
     throw createError({
       status: 400,
@@ -27,30 +28,29 @@ export default defineEventHandler(async (event) => {
 
     const githubUser: GitHubUser = await githubUserResponse.json()
 
-    // check if email is already used
+    // Check if email is already used
     if (githubUser.email) {
-      const isEmailIsUsed = await db.query.userTable.findFirst({
+      const isEmailUsed = await db.query.userTable.findFirst({
         where: eq(userTable.email, githubUser.email),
       })
 
-      if (isEmailIsUsed) {
+      if (isEmailUsed) {
         await db.update(userTable).set({
-          isEmailVerified: true,
-          name: githubUser.login,
-          profilePictureUrl: githubUser.avatar_url,
-        })
+          isEmailVerified: 1,
+          nickname: githubUser.login,
+        }).where(eq(userTable.id, isEmailUsed.id))
 
-        const oauthId = generateId(15)
-
-        await db.insert(oauthAccountTable).values({
-          id: oauthId,
-          userId: isEmailIsUsed.id,
+        await db.insert(usersOauthTable).values({
+          id: generateId(15),
+          userId: isEmailUsed.id,
           provider: 'github',
           providerUserId: githubUser.id.toString(),
           accessToken: tokens.accessToken,
+          refreshToken: null,
+          expiresAt: null,
         })
 
-        const session = await lucia.createSession(isEmailIsUsed.id, {})
+        const session = await lucia.createSession(isEmailUsed.id, {})
         appendHeader(
           event,
           'Set-Cookie',
@@ -71,26 +71,24 @@ export default defineEventHandler(async (event) => {
         'Set-Cookie',
         lucia.createSessionCookie(session.id).serialize(),
       )
-      return sendRedirect(event, '/dashboard')
+      return sendRedirect(event, '/')
     }
 
-    await db
-      .insert(userTable)
-      .values({
-        email: githubUser.email ? githubUser.email : '',
-        id: githubUser.id.toString(),
-        isEmailVerified: true,
-        name: githubUser.login,
-        profilePictureUrl: githubUser.avatar_url,
-      })
+    await db.insert(userTable).values({
+      email: githubUser.email || '',
+      id: githubUser.id.toString(),
+      isEmailVerified: 1,
+      nickname: githubUser.login,
+    })
 
-    const oauthId = generateId(15)
-    await db.insert(oauthAccountTable).values({
-      id: oauthId,
+    await db.insert(usersOauthTable).values({
+      id: generateId(15),
       userId: githubUser.id.toString(),
       provider: 'github',
       providerUserId: githubUser.id.toString(),
       accessToken: tokens.accessToken,
+      refreshToken: null,
+      expiresAt: null,
     })
 
     const session = await lucia.createSession(githubUser.id.toString(), {})
@@ -99,14 +97,11 @@ export default defineEventHandler(async (event) => {
       'Set-Cookie',
       lucia.createSessionCookie(session.id).serialize(),
     )
-    return sendRedirect(event, '/dashboard')
+    return sendRedirect(event, '/')
   }
   catch (e) {
-    if (
-      e instanceof OAuth2RequestError
-      && e.message === 'bad_verification_code'
-    ) {
-      // invalid code
+    if (e instanceof OAuth2RequestError && e.message === 'bad_verification_code') {
+      // Invalid code
       throw createError({
         status: 400,
       })
