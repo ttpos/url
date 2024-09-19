@@ -1,14 +1,17 @@
+/* eslint-disable ts/no-use-before-define */
+
 import { blob, integer, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core'
 
 export const userTable = sqliteTable(
   'user',
   {
     id: text('id').primaryKey(),
-    email: text('email').unique(),
-    emailHash: text('email_hash').notNull(),
-    phone: text('phone').unique(),
-    phoneHash: text('phone_hash').notNull(),
-    password: text('password').notNull(),
+    email: text('email'),
+    emailHash: text('email_hash'),
+    phone: text('phone'),
+    phoneHash: text('phone_hash'),
+    oauth_register_id: text('oauth_register_id').references(() => usersOauthTable.id),
+    password: text('password'),
     isEmailVerified: integer('is_email_verified').default(0),
     isPhoneVerified: integer('is_phone_verified').default(0),
     /**
@@ -25,44 +28,12 @@ export const userTable = sqliteTable(
   },
   (table) => {
     return {
-      userUniqueIndex: uniqueIndex('user_unique_index').on(table.email, table.phone),
+      userUniqueIndex: uniqueIndex('user_unique_index').on(
+        table.email,
+        table.phone,
+        table.oauth_register_id,
+      ),
     }
-  },
-)
-
-export const emailVerificationTable = sqliteTable(
-  'email_verification',
-  {
-    id: text('id').primaryKey(),
-    userId: text('user_id')
-      .notNull()
-      .references(() => userTable.id),
-    status: integer('status').default(0),
-    verifyId: text('verify_id').notNull(),
-    expiresAt: integer('expires_at').notNull(),
-    createIp: text('create_ip'),
-    verifyIp: text('verify_ip'),
-    createdAt: integer('created_at').default(Date.now()),
-    updatedAt: integer('updated_at').default(Date.now()),
-    isDeleted: integer('is_deleted'),
-  },
-)
-
-export const passwordResetTable = sqliteTable(
-  'password_reset',
-  {
-    id: text('id').primaryKey(),
-    userId: text('user_id')
-      .notNull()
-      .references(() => userTable.id),
-    status: integer('status').default(0),
-    verifyId: text('verify_id').notNull(),
-    expiresAt: integer('expires_at').notNull(),
-    createIp: text('create_ip'),
-    verifyIp: text('verify_ip'),
-    createdAt: integer('created_at').default(Date.now()),
-    updatedAt: integer('updated_at').default(Date.now()),
-    isDeleted: integer('is_deleted'),
   },
 )
 
@@ -70,9 +41,7 @@ export const usersOauthTable = sqliteTable(
   'users_oauth',
   {
     id: text('id').primaryKey(),
-    userId: text('user_id')
-      .notNull()
-      .references(() => userTable.id),
+    userId: text('user_id').references(() => userTable.id),
     provider: text('provider').notNull(),
     providerUserId: text('provider_user_id').notNull(),
     accessToken: text('access_token'),
@@ -84,8 +53,37 @@ export const usersOauthTable = sqliteTable(
   },
   (table) => {
     return {
-      uniqueProviderUserIndex: uniqueIndex('unique_provider_user_index').on(table.provider, table.providerUserId),
+      uniqueProviderUserIndex: uniqueIndex('unique_provider_user_index').on(
+        table.provider,
+        table.providerUserId,
+      ),
     }
+  },
+)
+
+export const verificationTable = sqliteTable(
+  'verification',
+  {
+    id: text('id').primaryKey(),
+    userId: text('user_id')
+      .notNull()
+      .references(() => userTable.id),
+    status: integer('status').default(0),
+    verifyId: text('verify_id').notNull(),
+    expiresAt: integer('expires_at').notNull(),
+    createIp: text('create_ip'),
+    verifyIp: text('verify_ip'),
+    name: text('name'),
+    /**
+     * - email
+     * - phone
+     */
+    type: text('type'),
+    // Used to validate type records
+    active: text('active'),
+    createdAt: integer('created_at').default(Date.now()),
+    updatedAt: integer('updated_at').default(Date.now()),
+    isDeleted: integer('is_deleted'),
   },
 )
 
@@ -99,7 +97,7 @@ export const mfaTable = sqliteTable(
     type: text('type').notNull(),
     name: text('name').notNull(),
     status: text('status').notNull(),
-    mfaId: text('mfa_id'),
+    value: text('value'),
     lastVerifiedAt: integer('last_verified_at'),
     createdAt: integer('created_at').default(Date.now()),
     updatedAt: integer('updated_at').default(Date.now()),
@@ -117,7 +115,16 @@ export const sessionTable = sqliteTable(
     sessionToken: text('session_token').notNull(),
     expiresAt: integer('expires_at').notNull(),
     status: text('status').notNull(),
-    mfaId: text('mfa_id'),
+    mfaId: text('mfa_id')
+      .references(() => mfaTable.id),
+    // [
+    //   {
+    //     ip: '',
+    //     country: '',
+    //     deviceInfo: '',
+    //     createdAt: Date.now(),
+    //   },
+    // ]
     metadata: blob('metadata').notNull(),
     createdAt: integer('created_at').default(Date.now()),
     updatedAt: integer('updated_at').default(Date.now()),
