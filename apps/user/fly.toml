@@ -1,8 +1,8 @@
-app = 'ttpos-dashboard'
+app = 'ttpos-user'
 primary_region = 'hkg'
 
 [build]
-  image = "dashboard:latest"
+  image = "user:latest"
 
 [http_service]
   internal_port = 3000

@@ -1,5 +1,5 @@
 {
-  "name": "@ttpos/a-app-dashboard",
+  "name": "@ttpos/a-app-user",
   "type": "module",
   "private": true,
   "scripts": {

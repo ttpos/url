@@ -66,7 +66,7 @@ export default defineEventHandler(async (event) => {
         'Set-Cookie',
         lucia.createSessionCookie(session.id).serialize(),
       )
-      return sendRedirect(event, '/dashboard')
+      return sendRedirect(event, '/')
     }
 
     const existingUser = await db.query.userTable.findFirst({
