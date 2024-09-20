@@ -10,20 +10,53 @@ useSeoMeta({
 })
 
 const toast = useToast()
+/**
+ * - 0: Email
+ * - 1: Phone
+ */
+const selectedMethod = ref(0)
 const loading = ref(false)
 
-const fields = [
+const fields = computed(() => {
+  const commonFields = [
+    {
+      name: 'password',
+      label: 'Password',
+      type: 'password',
+      placeholder: 'Enter your password',
+    },
+  ]
+
+  const methodFields = selectedMethod.value === 0
+    ? [
+        {
+          name: 'email',
+          type: 'email',
+          label: 'Email',
+          placeholder: 'Enter your email',
+        },
+      ]
+    : [
+        {
+          name: 'phone',
+          type: 'tel',
+          label: 'Phone',
+          placeholder: 'Enter your phone number',
+        },
+      ]
+
+  return [...methodFields, ...commonFields]
+})
+
+const items = [
   {
-    name: 'email',
-    type: 'email',
     label: 'Email',
-    placeholder: 'Enter your email',
+    icon: 'i-simple-line-icons:envelope',
   },
   {
-    name: 'password',
-    label: 'Password',
-    type: 'password',
-    placeholder: 'Enter your password',
+    label: 'Phone',
+    icon: 'i-simple-line-icons:screen-smartphone',
+    disabled: true,
   },
 ]
 
@@ -47,11 +80,22 @@ const providers = [
 ]
 
 function validate(state: any): FormError[] {
-  const errors = []
-  if (!state.email)
+  const errors: FormError[] = []
+
+  if (selectedMethod.value === 0 && !state.email) {
     errors.push({ path: 'email', message: 'Email is required' })
-  if (!state.password)
+  }
+  if (selectedMethod.value === 1 && !state.phone) {
+    errors.push({ path: 'phone', message: 'Phone is required' })
+  }
+
+  if (!state.password) {
     errors.push({ path: 'password', message: 'Password is required' })
+  }
+  else if (state.password.length < 8) {
+    errors.push({ path: 'password', message: 'Password must be at least 8 characters long' })
+  }
+
   return errors
 }
 
@@ -59,14 +103,24 @@ async function onSubmit(data: FormSubmitEvent<any>) {
   try {
     loading.value = true
 
+    const key = selectedMethod.value === 0 ? 'email' : 'phone'
+    const payload = {
+      [key]: data[key],
+      // eslint-disable-next-line ts/ban-ts-comment
+      // @ts-expect-error
+      password: data.password,
+    }
+    console.log('🚀 ~ onSubmit ~ payload:', payload)
+
     await $fetch('/api/auth/signup', {
       method: 'POST',
-      body: data,
+      body: payload,
     })
-    await navigateTo('/')
+
+    await navigateTo(selectedMethod.value === 0 ? '/auth/verify-email' : '/auth/verify-phone')
   }
   catch (error) {
-    toast.add({ title: error.data?.message ?? null })
+    toast.add({ title: error.data?.message ?? null, color: 'red' })
   }
   finally {
     loading.value = false
@@ -75,7 +129,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
 </script>
 
 <template>
-  <UCard class="max-w-sm w-full bg-white/75 dark:bg-white/5 backdrop-blur">
+  <UCard class="bg-white/75 dark:bg-white/5 backdrop-blur">
     <UAuthForm
       :fields="fields"
       :validate="validate"
@@ -91,11 +145,24 @@ async function onSubmit(data: FormSubmitEvent<any>) {
       <template #description>
         Already have an account?
         <NuxtLink
-          to="/auth/login"
+          to="/auth/signin"
           class="text-primary font-medium"
         >
-          Login
-        </NuxtLink>.
+          Signin
+        </NuxtLink>
+
+        <!-- <UTabs v-model="selectedMethod" :items="items" class="mt-2" /> -->
+
+        <UTabs v-model="selectedMethod" :items="items" class="w-full mt-2">
+          <template #icon="{ item, selected }">
+            <UIcon :name="item.icon" class="w-4 h-4 flex-shrink-0 mr-2" :class="[selected && 'text-primary-500 dark:text-primary-400']" />
+          </template>
+          <template #default="{ item, selected }">
+            <span class="truncate" :class="[selected && 'text-primary-500 dark:text-primary-400']">
+              {{ item.label }}
+            </span>
+          </template>
+        </UTabs>
       </template>
     </UAuthForm>
   </UCard>

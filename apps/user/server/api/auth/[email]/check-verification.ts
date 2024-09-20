@@ -12,6 +12,7 @@ export default defineEventHandler(async (event) => {
         isEmailVerified: true,
       },
     })
+    logger.log("🚀 ~ userEmail ~ userEmail:", userEmail)
 
     return {
       isEmailVerified: userEmail?.isEmailVerified,

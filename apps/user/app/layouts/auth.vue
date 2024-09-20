@@ -10,7 +10,13 @@ useHead({
   <div class="h-screen flex items-center justify-center overlay">
     <div class="gradient" />
 
-    <slot />
+    <main class="max-w-sm w-full">
+      <div class="flex justify-end mb-2">
+        <UColorModeToggle />
+        <!-- <UColorModeButton /> -->
+      </div>
+      <slot />
+    </main>
   </div>
 </template>
 

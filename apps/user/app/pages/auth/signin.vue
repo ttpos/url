@@ -6,7 +6,7 @@ definePageMeta({
 })
 
 useSeoMeta({
-  title: 'Login',
+  title: 'Signin',
 })
 
 const toast = useToast()
@@ -80,7 +80,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
 </script>
 
 <template>
-  <UCard class="max-w-sm w-full bg-white/75 dark:bg-white/5 backdrop-blur">
+  <UCard class="bg-white/75 dark:bg-white/5 backdrop-blur">
     <UAuthForm
       :fields="fields"
       :validate="validate"
@@ -99,8 +99,8 @@ async function onSubmit(data: FormSubmitEvent<any>) {
           to="/auth/signup"
           class="text-primary font-medium"
         >
-          Sign up
-        </NuxtLink>.
+          Signup
+        </NuxtLink>
       </template>
 
       <template #password-hint>

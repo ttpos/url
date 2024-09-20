@@ -67,7 +67,7 @@ async function logout() {
   await $fetch('/api/auth/signout', {
     method: 'POST',
   })
-  await navigateTo('/auth/login')
+  await navigateTo('/auth/signin')
 }
 </script>
 
