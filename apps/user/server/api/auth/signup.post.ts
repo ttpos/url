@@ -106,7 +106,7 @@ export default defineEventHandler(async (event) => {
       userId,
       status: 0, // 默认状态为0（未验证）
       verifyId: generateId(15),
-      expiresAt: createDate(new TimeSpan(10, 'm')), // 10分钟的有效期
+      expiresAt: createDate(new TimeSpan(10, 'm')), // 10 minutes
       createIp: null, // 根据需求填写 IP 地址
       verifyIp: null, // 根据需求填写验证时的 IP 地址
       verifyData: code, // 存储验证码数据

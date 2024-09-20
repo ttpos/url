@@ -48,7 +48,7 @@ const fields = computed(() => {
   return [...methodFields, ...commonFields]
 })
 
-const items = [
+const tabItems = [
   {
     label: 'Email',
     icon: 'i-simple-line-icons:envelope',
@@ -151,9 +151,9 @@ async function onSubmit(data: FormSubmitEvent<any>) {
           Signin
         </NuxtLink>
 
-        <!-- <UTabs v-model="selectedMethod" :items="items" class="mt-2" /> -->
+        <!-- <UTabs v-model="selectedMethod" :items="tabItems" class="mt-2" /> -->
 
-        <UTabs v-model="selectedMethod" :items="items" class="w-full mt-2">
+        <UTabs v-model="selectedMethod" :items="tabItems" class="w-full mt-2">
           <template #icon="{ item, selected }">
             <UIcon :name="item.icon" class="w-4 h-4 flex-shrink-0 mr-2" :class="[selected && 'text-primary-500 dark:text-primary-400']" />
           </template>

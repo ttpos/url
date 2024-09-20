@@ -37,7 +37,7 @@ const fields = [
   },
 ]
 
-const items = [
+const tabItems = [
   {
     label: 'Email',
     icon: 'i-simple-line-icons:envelope',
@@ -69,11 +69,22 @@ const providers = [
 ]
 
 function validate(state: any): FormError[] {
-  const errors = []
-  if (!state.email)
+  const errors: FormError[] = []
+
+  if (selectedMethod.value === 0 && !state.email) {
     errors.push({ path: 'email', message: 'Email is required' })
-  if (!state.password)
+  }
+  if (selectedMethod.value === 1 && !state.phone) {
+    errors.push({ path: 'phone', message: 'Phone is required' })
+  }
+
+  if (!state.password) {
     errors.push({ path: 'password', message: 'Password is required' })
+  }
+  else if (state.password.length < 8) {
+    errors.push({ path: 'password', message: 'Password must be at least 8 characters long' })
+  }
+
   return errors
 }
 
@@ -119,9 +130,9 @@ async function onSubmit(data: FormSubmitEvent<any>) {
           Signup
         </NuxtLink>
 
-        <!-- <UTabs v-model="selectedMethod" :items="items" class="mt-2" /> -->
+        <!-- <UTabs v-model="selectedMethod" :items="tabItems" class="mt-2" /> -->
 
-        <UTabs v-model="selectedMethod" :items="items" class="w-full mt-2">
+        <UTabs v-model="selectedMethod" :items="tabItems" class="w-full mt-2">
           <template #icon="{ item, selected }">
             <UIcon :name="item.icon" class="w-4 h-4 flex-shrink-0 mr-2" :class="[selected && 'text-primary-500 dark:text-primary-400']" />
           </template>
@@ -135,7 +146,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
 
       <template #password-hint>
         <NuxtLink
-          to="/"
+          to="/auth/reset-password"
           class="text-primary font-medium"
         >
           Forgot password?
