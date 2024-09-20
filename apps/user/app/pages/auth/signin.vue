@@ -10,6 +10,11 @@ useSeoMeta({
 })
 
 const toast = useToast()
+/**
+ * - 0: Email
+ * - 1: Phone
+ */
+const selectedMethod = ref(0)
 const loading = ref(false)
 
 const fields = [
@@ -29,6 +34,18 @@ const fields = [
     name: 'remember',
     label: 'Remember me',
     type: 'checkbox',
+  },
+]
+
+const items = [
+  {
+    label: 'Email',
+    icon: 'i-simple-line-icons:envelope',
+  },
+  {
+    label: 'Phone',
+    icon: 'i-simple-line-icons:screen-smartphone',
+    disabled: true,
   },
 ]
 
@@ -101,6 +118,19 @@ async function onSubmit(data: FormSubmitEvent<any>) {
         >
           Signup
         </NuxtLink>
+
+        <!-- <UTabs v-model="selectedMethod" :items="items" class="mt-2" /> -->
+
+        <UTabs v-model="selectedMethod" :items="items" class="w-full mt-2">
+          <template #icon="{ item, selected }">
+            <UIcon :name="item.icon" class="w-4 h-4 flex-shrink-0 mr-2" :class="[selected && 'text-primary-500 dark:text-primary-400']" />
+          </template>
+          <template #default="{ item, selected }">
+            <span class="truncate" :class="[selected && 'text-primary-500 dark:text-primary-400']">
+              {{ item.label }}
+            </span>
+          </template>
+        </UTabs>
       </template>
 
       <template #password-hint>
