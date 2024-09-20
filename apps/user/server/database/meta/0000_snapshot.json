@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "c28dca77-c62a-45aa-946f-46ac381b6b6c",
+  "id": "6d39d1d7-5329-42f9-8807-002ad3c44cd7",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "activity_log": {
@@ -48,7 +48,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726733886485
+          "default": 1726792331344
         },
         "is_deleted": {
           "name": "is_deleted",
@@ -79,102 +79,6 @@
           "tableTo": "session",
           "columnsFrom": [
             "session_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "email_verification": {
-      "name": "email_verification",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "user_id": {
-          "name": "user_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "status": {
-          "name": "status",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": 0
-        },
-        "verify_id": {
-          "name": "verify_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "expires_at": {
-          "name": "expires_at",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "create_ip": {
-          "name": "create_ip",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "verify_ip": {
-          "name": "verify_ip",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": 1726733886483
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": 1726733886483
-        },
-        "is_deleted": {
-          "name": "is_deleted",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "email_verification_user_id_user_id_fk": {
-          "name": "email_verification_user_id_user_id_fk",
-          "tableFrom": "email_verification",
-          "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
           ],
           "columnsTo": [
             "id"
@@ -224,8 +128,8 @@
           "notNull": true,
           "autoincrement": false
         },
-        "mfa_id": {
-          "name": "mfa_id",
+        "value": {
+          "name": "value",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
@@ -244,7 +148,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726733886484
+          "default": 1726792331344
         },
         "updated_at": {
           "name": "updated_at",
@@ -252,7 +156,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726733886484
+          "default": 1726792331344
         },
         "is_deleted": {
           "name": "is_deleted",
@@ -267,102 +171,6 @@
         "mfa_user_id_user_id_fk": {
           "name": "mfa_user_id_user_id_fk",
           "tableFrom": "mfa",
-          "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "password_reset": {
-      "name": "password_reset",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "user_id": {
-          "name": "user_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "status": {
-          "name": "status",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": 0
-        },
-        "verify_id": {
-          "name": "verify_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "expires_at": {
-          "name": "expires_at",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "create_ip": {
-          "name": "create_ip",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "verify_ip": {
-          "name": "verify_ip",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": 1726733886484
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": 1726733886484
-        },
-        "is_deleted": {
-          "name": "is_deleted",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "password_reset_user_id_user_id_fk": {
-          "name": "password_reset_user_id_user_id_fk",
-          "tableFrom": "password_reset",
           "tableTo": "user",
           "columnsFrom": [
             "user_id"
@@ -435,7 +243,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726733886484
+          "default": 1726792331344
         },
         "updated_at": {
           "name": "updated_at",
@@ -443,7 +251,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726733886484
+          "default": 1726792331344
         },
         "is_deleted": {
           "name": "is_deleted",
@@ -461,6 +269,19 @@
           "tableTo": "user",
           "columnsFrom": [
             "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "session_mfa_id_mfa_id_fk": {
+          "name": "session_mfa_id_mfa_id_fk",
+          "tableFrom": "session",
+          "tableTo": "mfa",
+          "columnsFrom": [
+            "mfa_id"
           ],
           "columnsTo": [
             "id"
@@ -523,7 +344,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726733886485
+          "default": 1726792331345
         },
         "updated_at": {
           "name": "updated_at",
@@ -531,7 +352,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726733886485
+          "default": 1726792331345
         },
         "last_used_at": {
           "name": "last_used_at",
@@ -539,7 +360,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726733886485
+          "default": 1726792331345
         },
         "is_deleted": {
           "name": "is_deleted",
@@ -589,7 +410,7 @@
           "name": "email_hash",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "phone": {
@@ -603,14 +424,21 @@
           "name": "phone_hash",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "oauth_register_id": {
+          "name": "oauth_register_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
           "autoincrement": false
         },
         "password": {
           "name": "password",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "is_email_verified": {
@@ -664,7 +492,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726733886481
+          "default": 1726792331341
         },
         "updated_at": {
           "name": "updated_at",
@@ -672,7 +500,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726733886481
+          "default": 1726792331341
         },
         "is_deleted": {
           "name": "is_deleted",
@@ -683,30 +511,31 @@
         }
       },
       "indexes": {
-        "user_email_unique": {
-          "name": "user_email_unique",
-          "columns": [
-            "email"
-          ],
-          "isUnique": true
-        },
-        "user_phone_unique": {
-          "name": "user_phone_unique",
-          "columns": [
-            "phone"
-          ],
-          "isUnique": true
-        },
         "user_unique_index": {
           "name": "user_unique_index",
           "columns": [
             "email",
-            "phone"
+            "phone",
+            "oauth_register_id"
           ],
           "isUnique": true
         }
       },
-      "foreignKeys": {},
+      "foreignKeys": {
+        "user_oauth_register_id_users_oauth_id_fk": {
+          "name": "user_oauth_register_id_users_oauth_id_fk",
+          "tableFrom": "user",
+          "tableTo": "users_oauth",
+          "columnsFrom": [
+            "oauth_register_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -724,7 +553,7 @@
           "name": "user_id",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "provider": {
@@ -768,7 +597,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726733886484
+          "default": 1726792331343
         },
         "updated_at": {
           "name": "updated_at",
@@ -776,7 +605,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726733886484
+          "default": 1726792331343
         },
         "is_deleted": {
           "name": "is_deleted",
@@ -800,6 +629,130 @@
         "users_oauth_user_id_user_id_fk": {
           "name": "users_oauth_user_id_user_id_fk",
           "tableFrom": "users_oauth",
+          "tableTo": "user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "verification": {
+      "name": "verification",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "status": {
+          "name": "status",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": 0
+        },
+        "verify_id": {
+          "name": "verify_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "create_ip": {
+          "name": "create_ip",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "verify_ip": {
+          "name": "verify_ip",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "verify_data": {
+          "name": "verify_data",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "serial": {
+          "name": "serial",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "type": {
+          "name": "type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "action": {
+          "name": "action",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": 1726792331343
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": 1726792331343
+        },
+        "is_deleted": {
+          "name": "is_deleted",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "verification_user_id_user_id_fk": {
+          "name": "verification_user_id_user_id_fk",
+          "tableFrom": "verification",
           "tableTo": "user",
           "columnsFrom": [
             "user_id"
