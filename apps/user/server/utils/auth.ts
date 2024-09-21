@@ -57,12 +57,12 @@ interface DatabaseSession {
 }
 
 export const github = new GitHub(
-  config.public.githubClientId,
-  config.public.githubClientSecret,
+  config.githubClientId,
+  config.githubClientSecret,
 )
 
 export const google = new Google(
-  config.public.googleClientId,
-  config.public.googleClientSecret,
-  config.public.googleRedirectURI,
+  config.googleClientId,
+  config.googleClientSecret,
+  config.googleRedirectURI,
 )

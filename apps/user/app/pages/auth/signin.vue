@@ -54,6 +54,8 @@ const providers = [
     label: 'Continue with GitHub',
     icon: 'i-simple-icons-github',
     color: 'white' as const,
+    to: '/api/oauth/github',
+    external: true,
     click: () => {
       console.log('Redirect to GitHub')
     },
@@ -62,6 +64,8 @@ const providers = [
     label: 'Continue with Google',
     icon: 'i-simple-icons-google',
     color: 'white' as const,
+    to: '/api/oauth/google',
+    external: true,
     click: () => {
       console.log('Redirect to Google')
     },

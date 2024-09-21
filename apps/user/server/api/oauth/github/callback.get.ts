@@ -4,6 +4,8 @@ import { OAuth2RequestError } from 'arctic'
 import { eq } from 'drizzle-orm'
 import { generateId } from 'lucia'
 
+// https://url-b.d.hj.io/api/oauth/github/callback?code=279343f7ff2ab3acad10&state=K0FEXeTWE8INtqsEqfL9KAKmxWvgWGSTjLOqo5hWtgg
+
 export default defineEventHandler(async (event) => {
   const query = getQuery(event)
   const code = query.code?.toString() ?? null
@@ -27,6 +29,7 @@ export default defineEventHandler(async (event) => {
     })
 
     const githubUser: GitHubUser = await githubUserResponse.json()
+    logger.log('🚀 ~ defineEventHandler ~ githubUser:', githubUser)
 
     // Check if email is already used
     if (githubUser.email) {
@@ -36,21 +39,44 @@ export default defineEventHandler(async (event) => {
 
       if (isEmailUsed) {
         await db.update(userTable).set({
-          isEmailVerified: 1,
+          // 第三方的验证不表示当前系统的验证
+          // isEmailVerified: 1,
           nickname: githubUser.login,
         }).where(eq(userTable.id, isEmailUsed.id))
 
-        await db.insert(usersOauthTable).values({
-          id: generateId(15),
-          userId: isEmailUsed.id,
-          provider: 'github',
-          providerUserId: githubUser.id.toString(),
-          accessToken: tokens.accessToken,
-          refreshToken: null,
-          expiresAt: null,
+        // Check if the user already has a GitHub OAuth record
+        const existingOauthRecord = await db.query.usersOauthTable.findFirst({
+          where: table => eq(table.provider, 'github') && eq(table.providerUserId, githubUser.id.toString()),
         })
 
-        const session = await lucia.createSession(isEmailUsed.id, {})
+        if (existingOauthRecord) {
+          // If record exists, update the access token
+          await db.update(usersOauthTable)
+            .set({
+              accessToken: tokens.accessToken,
+              refreshToken: null,
+              expiresAt: null,
+            })
+            .where(eq(usersOauthTable.id, existingOauthRecord.id))
+        }
+        else {
+          // Insert new OAuth record
+          await db.insert(usersOauthTable).values({
+            id: generateId(15),
+            userId: isEmailUsed.id,
+            provider: 'github',
+            providerUserId: githubUser.id.toString(),
+            accessToken: tokens.accessToken,
+            refreshToken: null,
+            expiresAt: null,
+          })
+        }
+
+        const session = await lucia.createSession(isEmailUsed.id, {
+          status: 1,
+          sessionToken: 'testing',
+          metadata: {},
+        })
         appendHeader(
           event,
           'Set-Cookie',
@@ -65,7 +91,11 @@ export default defineEventHandler(async (event) => {
     })
 
     if (existingUser) {
-      const session = await lucia.createSession(existingUser.id, {})
+      const session = await lucia.createSession(existingUser.id, {
+        status: 1,
+        sessionToken: 'testing',
+        metadata: {},
+      })
       appendHeader(
         event,
         'Set-Cookie',
@@ -91,7 +121,11 @@ export default defineEventHandler(async (event) => {
       expiresAt: null,
     })
 
-    const session = await lucia.createSession(githubUser.id.toString(), {})
+    const session = await lucia.createSession(githubUser.id.toString(), {
+      status: 1,
+      sessionToken: 'testing',
+      metadata: {},
+    })
     appendHeader(
       event,
       'Set-Cookie',
@@ -99,8 +133,9 @@ export default defineEventHandler(async (event) => {
     )
     return sendRedirect(event, '/')
   }
-  catch (e) {
-    if (e instanceof OAuth2RequestError && e.message === 'bad_verification_code') {
+  catch (error) {
+    logger.error('🚀 ~ defineEventHandler ~ error:', error)
+    if (error instanceof OAuth2RequestError && error.message === 'bad_verification_code') {
       // Invalid code
       throw createError({
         status: 400,
