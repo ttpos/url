@@ -10,7 +10,7 @@ export const userTable = sqliteTable(
     emailHash: text('email_hash'),
     phone: text('phone'),
     phoneHash: text('phone_hash'),
-    oauth_register_id: text('oauth_register_id').references(() => usersOauthTable.id),
+    oauthRegisterId: text('oauth_register_id').references(() => usersOauthTable.id),
     password: text('password'),
     isEmailVerified: integer('is_email_verified').default(0),
     isPhoneVerified: integer('is_phone_verified').default(0),
@@ -31,7 +31,7 @@ export const userTable = sqliteTable(
       userUniqueIndex: uniqueIndex('user_unique_index').on(
         table.email,
         table.phone,
-        table.oauth_register_id,
+        table.oauthRegisterId,
       ),
     }
   },

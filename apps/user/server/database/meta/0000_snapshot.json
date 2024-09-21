@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "6d39d1d7-5329-42f9-8807-002ad3c44cd7",
+  "id": "00825ec1-904e-4129-8d08-ccf93be8313d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "activity_log": {
@@ -48,7 +48,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726792331344
+          "default": 1726900922078
         },
         "is_deleted": {
           "name": "is_deleted",
@@ -148,7 +148,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726792331344
+          "default": 1726900922077
         },
         "updated_at": {
           "name": "updated_at",
@@ -156,7 +156,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726792331344
+          "default": 1726900922077
         },
         "is_deleted": {
           "name": "is_deleted",
@@ -243,7 +243,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726792331344
+          "default": 1726900922078
         },
         "updated_at": {
           "name": "updated_at",
@@ -251,7 +251,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726792331344
+          "default": 1726900922078
         },
         "is_deleted": {
           "name": "is_deleted",
@@ -344,7 +344,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726792331345
+          "default": 1726900922078
         },
         "updated_at": {
           "name": "updated_at",
@@ -352,7 +352,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726792331345
+          "default": 1726900922078
         },
         "last_used_at": {
           "name": "last_used_at",
@@ -360,7 +360,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726792331345
+          "default": 1726900922079
         },
         "is_deleted": {
           "name": "is_deleted",
@@ -492,7 +492,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726792331341
+          "default": 1726900922075
         },
         "updated_at": {
           "name": "updated_at",
@@ -500,7 +500,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726792331341
+          "default": 1726900922075
         },
         "is_deleted": {
           "name": "is_deleted",
@@ -597,7 +597,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726792331343
+          "default": 1726900922077
         },
         "updated_at": {
           "name": "updated_at",
@@ -605,7 +605,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726792331343
+          "default": 1726900922077
         },
         "is_deleted": {
           "name": "is_deleted",
@@ -730,7 +730,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726792331343
+          "default": 1726900922077
         },
         "updated_at": {
           "name": "updated_at",
@@ -738,7 +738,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 1726792331343
+          "default": 1726900922077
         },
         "is_deleted": {
           "name": "is_deleted",
