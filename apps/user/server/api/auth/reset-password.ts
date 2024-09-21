@@ -80,6 +80,7 @@ export default defineEventHandler(async (event) => {
     }
   }
   catch (error: any) {
+    logger.error('🚀 ~ defineEventHandler ~ error:', error)
     throw createError({
       statusMessage: error.message,
       statusCode: 400,

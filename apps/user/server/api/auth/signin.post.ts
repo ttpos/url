@@ -1,4 +1,4 @@
-import { mfaTable, userTable } from '@@/server/database/schema'
+import { userTable } from '@@/server/database/schema'
 import { isValidEmail, lucia, useDrizzle, verifyPassword } from '@@/server/utils'
 import { eq } from 'drizzle-orm'
 
@@ -70,23 +70,6 @@ export default defineEventHandler(async (event) => {
         statusCode: 400,
       })
     }
-
-    // // INSERT MFA DATA
-    // const mfaRecord = {
-    //   id: 'mfa-1', // 在实际代码中，你应该生成唯一的 ID
-    //   userId: user.id,
-    //   type: 'SMS', // 假设你在这里使用 SMS 作为 MFA 类型
-    //   name: 'SMS Authentication', // 记录的名称
-    //   status: 'active', // 记录当前状态
-    //   mfaId: null, // 初始记录，不关联其他记录
-    //   lastVerifiedAt: Date.now(),
-    //   createdAt: Date.now(),
-    //   updatedAt: Date.now(),
-    //   isDeleted: null, // 软删除标记
-    // }
-
-    // // 插入 MFA 记录
-    // await db.insert(mfaTable).values(mfaRecord).returning('*')
 
     // Create a session
     const session = await lucia.createSession(user.id, {

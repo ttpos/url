@@ -51,7 +51,8 @@ export default defineEventHandler(async (event) => {
       }
     }
 
-    await db.update(verificationTable)
+    await db
+      .update(verificationTable)
       .set({
         status: 1,
         isDeleted: 1,
@@ -59,7 +60,8 @@ export default defineEventHandler(async (event) => {
       })
       .where(eq(verificationTable.userId, userId))
 
-    await db.update(userTable)
+    await db
+      .update(userTable)
       .set({
         isEmailVerified: 1,
         updatedAt: Date.now(),
@@ -71,6 +73,7 @@ export default defineEventHandler(async (event) => {
     }
   }
   catch (error: any) {
+    logger.error('🚀 ~ defineEventHandler ~ error:', error)
     throw createError({
       statusMessage: error.message,
       statusCode: 400,

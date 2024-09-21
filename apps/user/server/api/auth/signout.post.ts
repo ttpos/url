@@ -9,11 +9,7 @@ export default defineEventHandler(async (event) => {
     }
 
     await lucia.invalidateSession(event.context.user?.id)
-    appendHeader(
-      event,
-      'Set-Cookie',
-      lucia.createBlankSessionCookie().serialize(),
-    )
+    appendHeader(event, 'Set-Cookie', lucia.createBlankSessionCookie().serialize())
 
     return {
       message: 'Successfully signed out!',

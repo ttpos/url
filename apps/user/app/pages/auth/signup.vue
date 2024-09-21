@@ -117,7 +117,8 @@ async function onSubmit(data: FormSubmitEvent<any>) {
       body: payload,
     })
 
-    await navigateTo(selectedMethod.value === 0 ? '/auth/verify-email' : '/auth/verify-phone')
+    // await navigateTo(selectedMethod.value === 0 ? '/auth/verify-email' : '/auth/verify-phone')
+    await navigateTo('/')
   }
   catch (error) {
     toast.add({ title: error.data?.message ?? null, color: 'red' })
