@@ -4,7 +4,12 @@
 export default defineNuxtConfig({
   extends: ['@nuxt/ui-pro'],
 
-  modules: ['@nuxt/fonts', '@nuxt/ui', '@vueuse/nuxt'],
+  modules: [
+    '@nuxt/fonts',
+    '@nuxt/ui',
+    '@vueuse/nuxt',
+    '@nuxtjs/turnstile',
+  ],
 
   sourcemap: {
     server: false,
@@ -32,16 +37,25 @@ export default defineNuxtConfig({
     compatibilityVersion: 4,
   },
 
+  turnstile: {
+    siteKey: process.env.NUXT_PUBLIC_TURNSTILE_SITE_KEY,
+  },
+
   runtimeConfig: {
     debug: process.env.NUXT_DEBUG === 'true',
     libsqlUrl: process.env.NUXT_LIBSQL_URL || 'file:database/data.db',
     libsqlAuthToken: process.env.NUXT_LIBSQL_AUTH_TOKEN || undefined,
-
+    // Google OAuth
     googleClientId: process.env.NUXT_OAUTH_GOOGLE_CLIENT_ID,
     googleClientSecret: process.env.NUXT_OAUTH_GOOGLE_CLIENT_SECRET,
     googleRedirectURI: process.env.NUXT_OAUTH_GOOGLE_REDIRECT_URI,
+    // GitHub OAuth
     githubClientId: process.env.NUXT_OAUTH_GITHUB_CLIENT_ID,
     githubClientSecret: process.env.NUXT_OAUTH_GITHUB_CLIENT_SECRET,
+
+    turnstile: {
+      secretKey: process.env.NUXT_TURNSTILE_SECRET_KEY,
+    },
   },
 
   nitro: {

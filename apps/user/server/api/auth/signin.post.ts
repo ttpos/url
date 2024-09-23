@@ -5,11 +5,13 @@ import { eq } from 'drizzle-orm'
 interface Query {
   email: string
   password: string
+  captchaToken: string
 }
 
 export default defineEventHandler(async (event) => {
   try {
-    const { email, password } = await readBody<Query>(event)
+    const body = await readBody<Query>(event)
+    const { email, password, captchaToken } = body
 
     // Validate email
     if (!email || typeof email !== 'string' || !isValidEmail(email)) {
@@ -26,6 +28,15 @@ export default defineEventHandler(async (event) => {
         statusCode: 400,
       })
     }
+
+    const turnstileResponse = await verifyTurnstileToken(captchaToken || body['cf-turnstile-response'])
+    if (!turnstileResponse.success) {
+      throw createError({
+        message: `The provided Turnstile token was not valid! \n${JSON.stringify(turnstileResponse)}`,
+        statusCode: 400,
+      })
+    }
+    logger.log('🚀 ~ defineEventHandler ~ turnstileResponse:', turnstileResponse)
 
     const db = useDrizzle()
 
@@ -80,8 +91,8 @@ export default defineEventHandler(async (event) => {
     logger.log('🚀 ~ defineEventHandler ~ session:', session)
 
     // Set the session cookie
-    const token = lucia.createSessionCookie(session.id)
-    setCookie(event, token.name, token.value, token.attributes)
+    const luciaToken = lucia.createSessionCookie(session.id)
+    setCookie(event, luciaToken.name, luciaToken.value, luciaToken.attributes)
 
     return {
       message: 'Signin successful!',

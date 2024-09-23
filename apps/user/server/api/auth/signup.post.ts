@@ -7,11 +7,13 @@ interface Query {
   email?: string
   phone?: string
   password: string
+  captchaToken: string
 }
 
 export default defineEventHandler(async (event) => {
   try {
-    const { email, phone, password } = await readBody<Query>(event)
+    const body = await readBody<Query>(event)
+    const { email, phone, password, captchaToken } = body
 
     // Validate email
     if (!email || typeof email !== 'string' || !isValidEmail(email)) {
@@ -36,6 +38,15 @@ export default defineEventHandler(async (event) => {
         statusCode: 400,
       })
     }
+
+    const turnstileResponse = await verifyTurnstileToken(captchaToken || body['cf-turnstile-response'])
+    if (!turnstileResponse.success) {
+      throw createError({
+        message: `The provided Turnstile token was not valid! \n${JSON.stringify(turnstileResponse)}`,
+        statusCode: 400,
+      })
+    }
+    logger.log('🚀 ~ defineEventHandler ~ turnstileResponse:', turnstileResponse)
 
     const passwordHash = await hashPassword(password)
     const userId = generateId(15)

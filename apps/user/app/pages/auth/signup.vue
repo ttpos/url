@@ -16,6 +16,8 @@ const toast = useToast()
  */
 const selectedMethod = ref(0)
 const loading = ref(false)
+const token = ref()
+const turnstile = ref()
 
 const fields = computed(() => {
   const commonFields = [
@@ -109,6 +111,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
       // eslint-disable-next-line ts/ban-ts-comment
       // @ts-expect-error
       password: data.password,
+      captchaToken: token.value,
     }
     console.log('🚀 ~ onSubmit ~ payload:', payload)
 
@@ -124,6 +127,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
     toast.add({ title: error.data?.message ?? null, color: 'red' })
   }
   finally {
+    turnstile.value?.reset()
     loading.value = false
   }
 }
@@ -139,7 +143,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
       icon="i-heroicons-user-circle"
       title="Create an account"
       :ui="{ base: 'text-center', footer: 'text-center' }"
-      :submit-button="{ label: 'Create account' }"
+      :submit-button="{ label: loading ? 'Please wait...' : 'Continue', }"
       :loading="loading"
       @submit="onSubmit"
     >
@@ -164,6 +168,13 @@ async function onSubmit(data: FormSubmitEvent<any>) {
             </span>
           </template>
         </UTabs>
+      </template>
+      <template #validation>
+        <NuxtTurnstile
+          ref="turnstile"
+          v-model="token"
+          :options="{ action: 'native' }"
+        />
       </template>
     </UAuthForm>
   </UCard>

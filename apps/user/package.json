@@ -37,6 +37,7 @@
     "v-calendar": "^3.1.2"
   },
   "devDependencies": {
+    "@nuxtjs/turnstile": "^0.9.7",
     "drizzle-kit": "^0.24.2",
     "vue-tsc": "latest"
   }

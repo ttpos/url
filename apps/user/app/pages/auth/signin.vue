@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// import { NuxtTurnstile } from '#components'
 import type { FormError, FormSubmitEvent } from '#ui/types'
 
 definePageMeta({
@@ -16,6 +17,10 @@ const toast = useToast()
  */
 const selectedMethod = ref(0)
 const loading = ref(false)
+const token = ref()
+const turnstile = ref()
+// const turnstile = ref<InstanceType<typeof NuxtTurnstile> | null>()
+// const turnstile = useTemplateRef<typeof NuxtTurnstile>(null)
 
 const fields = [
   {
@@ -98,7 +103,10 @@ async function onSubmit(data: FormSubmitEvent<any>) {
 
     await $fetch('/api/auth/signin', {
       method: 'POST',
-      body: data,
+      body: {
+        ...data,
+        captchaToken: token.value,
+      },
     })
     await navigateTo('/')
   }
@@ -106,6 +114,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
     toast.add({ title: error.data?.message ?? null })
   }
   finally {
+    turnstile.value?.reset()
     loading.value = false
   }
 }
@@ -121,7 +130,10 @@ async function onSubmit(data: FormSubmitEvent<any>) {
       align="top"
       icon="i-heroicons-user-circle"
       :ui="{ base: 'text-center', footer: 'text-center' }"
-      :submit-button="{ trailingIcon: 'i-heroicons-arrow-right-20-solid' }"
+      :submit-button="{
+        trailingIcon: 'i-heroicons-arrow-right-20-solid',
+        label: loading ? 'Please wait...' : 'Continue',
+      }"
       :loading="loading"
       @submit="onSubmit"
     >
@@ -155,6 +167,13 @@ async function onSubmit(data: FormSubmitEvent<any>) {
         >
           Forgot password?
         </NuxtLink>
+      </template>
+      <template #validation>
+        <NuxtTurnstile
+          ref="turnstile"
+          v-model="token"
+          :options="{ action: 'native' }"
+        />
       </template>
     </UAuthForm>
   </UCard>
