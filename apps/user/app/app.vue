@@ -10,24 +10,24 @@ useHead({
     { key: 'theme-color', name: 'theme-color', content: color },
   ],
   link: [
-    { rel: 'icon', href: '/favicon.ico' },
+    { rel: 'icon', href: '/logo.svg' },
   ],
   htmlAttrs: {
     lang: 'en',
   },
 })
 
-const title = 'Nuxt UI Pro - Dashboard template'
-const description = 'Nuxt UI Pro is a collection of premium Vue components built on top of Nuxt UI to create beautiful & responsive Nuxt applications in minutes.'
+const title = '@ttpos/a-app-user'
+const description = '@ttpos/a-app-user Dashboard'
 
 useSeoMeta({
   title,
   description,
   ogTitle: title,
   ogDescription: description,
-  ogImage: 'https://dashboard-template.nuxt.dev/social-card.png',
-  twitterImage: 'https://dashboard-template.nuxt.dev/social-card.png',
-  twitterCard: 'summary_large_image',
+  // ogImage: 'https://dashboard-template.nuxt.dev/social-card.png',
+  // twitterImage: 'https://dashboard-template.nuxt.dev/social-card.png',
+  // twitterCard: 'summary_large_image',
 })
 </script>
 

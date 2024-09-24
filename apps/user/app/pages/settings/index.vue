@@ -4,12 +4,12 @@ import type { FormError, FormSubmitEvent } from '#ui/types'
 const fileRef = ref<HTMLInputElement>()
 const isDeleteAccountModalOpen = ref(false)
 
+const user = useAuthenticatedUser()
+
 const state = reactive({
-  name: 'Benjamin Canac',
-  email: 'ben@nuxtlabs.com',
-  username: 'benjamincanac',
-  avatar: '',
-  bio: '',
+  name: user.value.nickname,
+  email: user.value.email,
+  phone: '',
   password_current: '',
   password_new: '',
 })
@@ -25,16 +25,6 @@ function validate(state: any): FormError[] {
   if ((state.password_current && !state.password_new) || (!state.password_current && state.password_new))
     errors.push({ path: 'password', message: 'Please enter a valid password.' })
   return errors
-}
-
-function onFileChange(e: Event) {
-  const input = e.target as HTMLInputElement
-
-  if (!input.files?.length) {
-    return
-  }
-
-  state.avatar = URL.createObjectURL(input.files[0])
 }
 
 function onFileClick() {
@@ -115,66 +105,18 @@ async function onSubmit(event: FormSubmitEvent<any>) {
         </UFormGroup>
 
         <UFormGroup
-          name="username"
-          label="Username"
-          description="Your unique username for logging in and your profile URL."
+          name="phone"
+          label="Phone"
+          description="Used to sign in"
           required
           class="grid grid-cols-2 gap-2"
           :ui="{ container: '' }"
         >
           <UInput
-            v-model="state.username"
-            type="username"
+            v-model="state.phone"
+            type="phone"
             autocomplete="off"
-            size="md"
-            input-class="ps-[77px]"
-          >
-            <template #leading>
-              <span class="text-gray-500 dark:text-gray-400 text-sm">nuxt.com/</span>
-            </template>
-          </UInput>
-        </UFormGroup>
-
-        <UFormGroup
-          name="avatar"
-          label="Avatar"
-          class="grid grid-cols-2 gap-2"
-          help="JPG, GIF or PNG. 1MB Max."
-          :ui="{ container: 'flex flex-wrap items-center gap-3', help: 'mt-0' }"
-        >
-          <UAvatar
-            :src="state.avatar"
-            :alt="state.name"
-            size="lg"
-          />
-
-          <UButton
-            label="Choose"
-            color="white"
-            size="md"
-            @click="onFileClick"
-          />
-
-          <input
-            ref="fileRef"
-            type="file"
-            class="hidden"
-            accept=".jpg, .jpeg, .png, .gif"
-            @change="onFileChange"
-          >
-        </UFormGroup>
-
-        <UFormGroup
-          name="bio"
-          label="Bio"
-          description="Brief description for your profile. URLs are hyperlinked."
-          class="grid grid-cols-2 gap-2"
-          :ui="{ container: '' }"
-        >
-          <UTextarea
-            v-model="state.bio"
-            :rows="5"
-            autoresize
+            icon="i-heroicons-envelope"
             size="md"
           />
         </UFormGroup>

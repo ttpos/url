@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// import { NuxtTurnstile } from '#components'
+import { NuxtTurnstile } from '#components'
 import type { FormError, FormSubmitEvent } from '#ui/types'
 
 definePageMeta({
@@ -18,8 +18,8 @@ const toast = useToast()
 const selectedMethod = ref(0)
 const loading = ref(false)
 const token = ref()
-const turnstile = ref()
-// const turnstile = ref<InstanceType<typeof NuxtTurnstile> | null>()
+// const turnstile = ref()
+const turnstile = ref<InstanceType<typeof NuxtTurnstile> | null>()
 // const turnstile = useTemplateRef<typeof NuxtTurnstile>(null)
 
 const fields = [

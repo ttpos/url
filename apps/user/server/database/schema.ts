@@ -42,6 +42,7 @@ export const usersOauthTable = sqliteTable(
   {
     id: text('id').primaryKey(),
     userId: text('user_id').references(() => userTable.id),
+    /** github/google */
     provider: text('provider').notNull(),
     providerUserId: text('provider_user_id').notNull(),
     accessToken: text('access_token'),

@@ -38,19 +38,13 @@ const items = computed(() => [
     {
       label: 'Documentation',
       icon: 'i-heroicons-book-open',
-      to: 'https://ui.nuxt.com/pro/getting-started',
+      to: 'https://github.com/ttpos/url',
       target: '_blank',
     },
     {
       label: 'GitHub repository',
       icon: 'i-simple-icons-github',
-      to: 'https://github.com/nuxt-ui-pro/dashboard',
-      target: '_blank',
-    },
-    {
-      label: 'Buy Nuxt UI Pro',
-      icon: 'i-heroicons-credit-card',
-      to: 'https://ui.nuxt.com/pro/purchase',
+      to: 'https://github.com/ttpos/url',
       target: '_blank',
     },
   ],
@@ -84,7 +78,7 @@ async function logout() {
         color="gray"
         variant="ghost"
         class="w-full"
-        :label="user.email"
+        :label="user.nickname || user.email"
         :class="[open && 'bg-gray-50 dark:bg-gray-800']"
       >
         <template #leading>
@@ -109,7 +103,7 @@ async function logout() {
           Signed in as
         </p>
         <p class="truncate font-medium text-gray-900 dark:text-white">
-          {{ user.email }}
+          {{ user.nickname || user.email }}
         </p>
       </div>
     </template>

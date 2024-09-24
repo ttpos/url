@@ -7,28 +7,12 @@ const links = [
       to: '/settings',
       exact: true,
     },
-    {
-      label: 'Members',
-      icon: 'i-heroicons-user-group',
-      to: '/settings/members',
-    },
-    {
-      label: 'Notifications',
-      icon: 'i-heroicons-bell',
-      to: '/settings/notifications',
-    },
   ],
   [
     {
       label: 'Documentation',
       icon: 'i-heroicons-book-open',
-      to: 'https://ui.nuxt.com/pro',
-      target: '_blank',
-    },
-    {
-      label: 'Buy now',
-      icon: 'i-heroicons-credit-card',
-      to: 'https://ui.nuxt.com/pro/purchase',
+      to: 'https://github.com/ttpos/url',
       target: '_blank',
     },
   ],

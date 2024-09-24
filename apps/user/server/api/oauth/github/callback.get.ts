@@ -1,7 +1,7 @@
-import { usersOauthTable, userTable } from '@@/server/database/schema'
+import { sessionTable, usersOauthTable, userTable } from '@@/server/database/schema'
 import { github, useDrizzle } from '@@/server/utils'
 import { OAuth2RequestError } from 'arctic'
-import { eq, sql } from 'drizzle-orm'
+import { and, eq, sql } from 'drizzle-orm'
 import { generateId } from 'lucia'
 
 export default defineEventHandler(async (event) => {
@@ -13,6 +13,7 @@ export default defineEventHandler(async (event) => {
   if (!code || !state || !storedState || state !== storedState) {
     throw createError({
       status: 400,
+      message: 'Invalid OAuth state',
     })
   }
 
@@ -30,199 +31,153 @@ export default defineEventHandler(async (event) => {
     const githubUser: GitHubUser = await githubUserResponse.json()
     logger.log('🚀 ~ defineEventHandler ~ githubUser:', githubUser)
 
-    // Check if email is already used
-    if (githubUser.email) {
-      const isEmailUsed = await db.query.userTable.findFirst({
-        where: eq(userTable.email, githubUser.email),
+    /**
+     * Check if the user already has a GitHub OAuth record
+     *
+     * 检查用户是否已经有GitHub OAuth记录
+     */
+    // const existingOauthRecord = await db.query.usersOauthTable.findFirst({
+    //   where: table => eq(table.provider, 'github') && eq(table.providerUserId, githubUser.id.toString()),
+    // })
+    const existingOauthRecord = await db.query.usersOauthTable.findFirst({
+      where: and(
+        eq(usersOauthTable.provider, 'github'),
+        eq(usersOauthTable.providerUserId, githubUser.id.toString()),
+      ),
+    })
+
+    logger.log('Existing OAuth Record:', existingOauthRecord)
+
+    /**
+     * Check if there's an active session
+     *
+     * 检查是否有活动会话
+     */
+    const sessionId = getCookie(event, 'Set-Cookie')
+    const activeSession = sessionId
+      ? await db.query.sessionTable.findFirst({
+        where: eq(sessionTable.id, sessionId),
+      })
+      : null
+
+    if (existingOauthRecord) {
+      /**
+       * GitHub account is already linked to a user
+       *
+       * GitHub 帐户已链接到用户
+       */
+      const existingUser = await db.query.userTable.findFirst({
+        where: eq(userTable.id, existingOauthRecord.userId),
       })
 
-      if (isEmailUsed) {
-        await db
-          .update(userTable)
-          .set({
-            nickname: githubUser.name,
-          })
-          .where(eq(userTable.id, isEmailUsed.id))
-
-        // Check if the user already has a GitHub OAuth record
-        const existingOauthRecord = await db.query.usersOauthTable.findFirst({
-          where: table => eq(table.provider, 'github') && eq(table.providerUserId, githubUser.id.toString()),
-        })
-
-        if (existingOauthRecord) {
-          // If record exists, update the access token
-          await db
-            .update(usersOauthTable)
-            .set({
-              accessToken: tokens.accessToken,
-              refreshToken: null,
-              expiresAt: null,
-            })
-            .where(eq(usersOauthTable.id, existingOauthRecord.id))
-        }
-        else {
-          // Insert new OAuth record
-          await db.insert(usersOauthTable).values({
-            userId: isEmailUsed.id,
-            provider: 'github',
-            providerUserId: githubUser.id.toString(),
-            accessToken: tokens.accessToken,
-            refreshToken: null,
-            expiresAt: null,
-          })
+      if (existingUser) {
+        if (activeSession && activeSession.userId !== existingUser.id) {
+          /**
+           * TODO: pending
+           *
+           * User is logged in but with a different account
+           * Ask user if they want to link accounts or log out and log in with GitHub
+           *
+           * 用户登录，但使用不同的帐户
+           * 询问用户是否要链接帐户或注销并登录GitHub
+           */
+          return sendRedirect(event, '/oauth/link-accounts?provider=github')
         }
 
-        const session = await lucia.createSession(isEmailUsed.id, {
+        // Log in the user
+        const session = await lucia.createSession(existingUser.id, {
           status: 1,
-          sessionToken: 'testing',
+          sessionToken: generateId(32),
           metadata: {},
         })
         appendHeader(event, 'Set-Cookie', lucia.createSessionCookie(session.id).serialize())
         return sendRedirect(event, '/')
       }
     }
+    else {
+      /**
+       * No existing OAuth record
+       *
+       * 没有现有的 OAuth 记录
+       */
+      if (activeSession) {
+        /**
+         * User is logged in, bind GitHub to current account
+         *
+         * 用户已登录，将GitHub绑定到当前账户
+         */
+        await db.insert(usersOauthTable).values({
+          id: generateId(15),
+          userId: activeSession.userId,
+          provider: 'github',
+          providerUserId: githubUser.id.toString(),
+        })
+        // TODO: pending
+        return sendRedirect(event, '/profile?oauth_linked=github')
+      }
+      else {
+        /**
+         * User is not logged in
+         * Check if there's an existing user with the same email
+         *
+         *
+         * 用户未登录
+         * 检查是否存在具有相同电子邮件地址的现有用户
+         */
+        const existingUser = await db.query.userTable.findFirst({
+          where: eq(userTable.email, githubUser.email || ''),
+        })
 
-    // const userID = getUserFrom().userId;
+        if (existingUser) {
+          /**
+           * TODO: pending
+           *
+           * Existing user found, ask to link or create new account
+           *
+           * 已找到现有用户，要求关联或创建新帐户
+           */
+          return sendRedirect(event, `/oauth/link-or-create?provider=github&email=${githubUser.email}`)
+        }
+        else {
+          /**
+           * No existing user, create new account
+           *
+           * 没有现有用户，创建新帐户
+           */
+          const userId = githubUser.id.toString()
+          // Generate a unique ID for the OAuth record
+          const oauthId = generateId(15)
 
-    // const existingOauthRecord = await db.query.usersOauthTable.findFirst({
-    //   where: table => eq(table.provider, 'github') && eq(table.providerUserId, githubUser.id.toString()),
-    // })
-    // if(existingOauthRecord) {
-    //   // local user is not login
+          // Insert a new user with the GitHub information
+          await db.insert(userTable).values({
+            id: userId,
+            email: githubUser.email || '',
+            // oauthRegisterId: oauthId,
+            nickname: githubUser.name, // Use the name from the GitHub user
+          })
 
-    //   const user = await db.query.userTable.findFirst({
-    //     where: eq(userTable.id, existingOauthRecord.userId),
-    //   })
+          // Insert the new OAuth record
+          await db.insert(usersOauthTable).values({
+            id: oauthId,
+            userId,
+            provider: 'github',
+            providerUserId: userId,
+          })
 
-    //   // do login.
+          await db.update(userTable).set({
+            oauthRegisterId: oauthId,
+          }).where(eq(userTable.id, userId))
 
-    //   return sendRedirect(event, '/')
-    // }
-    // else
-    // {
-    //   const githubRes = {
-    //     login: 'WuChenDi',
-    //     id: 31385662,
-    //     node_id: 'MDQ6VXNlcjMxMzg1NjYy',
-    //     email: 'wuchendi96@gmail.com',
-    //     name: 'wudi',
-    //   };
-
-    //   //### local user is login, bind to github user
-    //   const session = await db.query.sessionTable.findFirst({
-    //     where: eq(sessionTable.id, 'aaaaaaaa'),
-    //   })
-
-    //   const userID = session.userId;
-
-    //   await db.insert(usersOauthTable).values({
-    //     id: generateId(15),
-    //     userId: userID,
-    //     provider: 'github',
-    //     providerUserId: githubRes.id.toString(),
-    //   })
-
-    //   //### local user is not login, register with github user
-    //   const oauth = await db.insert(usersOauthTable).values({
-    //     id: generateId(15),
-    //     userId: "",
-    //     provider: 'github',
-    //     providerUserId: githubRes.id.toString(),
-    //   })
-
-    //   // ask user if have account in our system, if have then go to login, if have then login.
-    //   // 1. bind github user to local user
-    //   // 2. register with github user
-    //   // show login page, if have account then bind, if not then register.
-    //   const session = await db.query.sessionTable.findFirst({
-    //     where: eq(sessionTable.id, 'aaaaaaaa'),
-    //   })
-
-    //   const user = await db.query.userTable.findFirst({
-    //     where: eq(userTable.email, githubRes.email),
-    //   });
-
-    //   // check if user is already used, ask to bind or register
-    //   if(user){
-
-    //   }
-
-    //   const userID = session.userId;
-
-    //   const oauth = await db.update(usersOauthTable).values({
-    //     userId: userID,
-    //   })
-    //   // ask user if have account in our system, if have then go to login, if have then login.
-    //   // 1. bind github user to local user
-    //   // 2. register with github user
-    //   // show login page, if have account then bind, if not then register.
-
-    //   //### local user is not login, register with github user
-
-    //   const oauth = await db.insert(usersOauthTable).values({
-    //     id: generateId(15),
-    //     userId: "",
-    //     provider: 'github',
-    //     providerUserId: githubRes.id.toString(),
-    //   })
-
-    //   const user = await db.insert(userTable).values({
-    //     email: githubRes.email || '',
-    //     nickname: githubRes.name,
-    //     oauth_register_id: oauth.id,
-    //   })
-
-    //   const oauth = await oauth.update(usersOauthTable).values({
-    //     userId: user.id,
-    //   })
-    // }
-
-    const existingUser = await db.query.userTable.findFirst({
-      where: eq(userTable.id, githubUser.id.toString()),
-      // where: table => sql`${table.providerUserId} = ${githubUser.id.toString()}` && eq(table.provider, 'github'),
-    })
-
-    if (existingUser) {
-      const session = await lucia.createSession(existingUser.id, {
-        status: 1,
-        sessionToken: 'testing',
-        metadata: {},
-      })
-      appendHeader(event, 'Set-Cookie', lucia.createSessionCookie(session.id).serialize())
-      return sendRedirect(event, '/')
+          const session = await lucia.createSession(userId, {
+            status: 1,
+            sessionToken: 'testing',
+            metadata: {},
+          })
+          appendHeader(event, 'Set-Cookie', lucia.createSessionCookie(session.id).serialize())
+          return sendRedirect(event, '/')
+        }
+      }
     }
-
-    const userId = githubUser.id.toString()
-    // Generate a unique ID for the OAuth record
-    const oauthId = generateId(15)
-
-    // Insert a new user with the GitHub information
-    await db.insert(userTable).values({
-      id: userId,
-      email: githubUser.email || '',
-      // oauthRegisterId: oauthId,
-      nickname: githubUser.name, // Use the name from the GitHub user
-    })
-
-    // Insert the new OAuth record
-    await db.insert(usersOauthTable).values({
-      id: oauthId,
-      userId,
-      provider: 'github',
-      providerUserId: userId,
-    })
-
-    await db.update(userTable).set({
-      oauthRegisterId: oauthId,
-    }).where(eq(userTable.id, userId))
-
-    const session = await lucia.createSession(userId, {
-      status: 1,
-      sessionToken: 'testing',
-      metadata: {},
-    })
-    appendHeader(event, 'Set-Cookie', lucia.createSessionCookie(session.id).serialize())
-    return sendRedirect(event, '/')
   }
   catch (error) {
     logger.error('🚀 ~ defineEventHandler ~ error:', error)
@@ -230,10 +185,12 @@ export default defineEventHandler(async (event) => {
       // Invalid code
       throw createError({
         status: 400,
+        message: 'Invalid verification code',
       })
     }
     throw createError({
       status: 500,
+      message: 'Internal server error during OAuth process',
     })
   }
 })
