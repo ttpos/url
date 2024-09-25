@@ -1,4 +1,4 @@
-name = "a-app-user"
+name = "a-app-links"
 compatibility_date = "2024-08-06"
 send_metrics = false
 main = "./.output/server/index.mjs"
@@ -6,13 +6,9 @@ workers_dev = true
 
 [[d1_databases]]
 binding = "DB"
-database_name = "a-app-user"
-database_id = "3b9150b2-749d-4873-a72c-980f94ccc4f9"
+database_name = "a-app-links"
+database_id = "abbfd748-2701-46c7-8f8a-b1f65b2964eb"
 migrations_dir = "server/database"
-
-[[kv_namespaces]]
-binding = "KV"
-id = "9d16d408f0874149a423d7b1b332037f"
 
 [vars]
 NUXT_DB_TYPE = "d1"

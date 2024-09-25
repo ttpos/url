@@ -3,7 +3,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   extends: ['@nuxt/ui-pro'],
-
+  app: {
+    cdnURL: process.env.NUXT_CDNURL,
+  },
   modules: [
     '@nuxt/fonts',
     '@nuxt/ui',
@@ -59,10 +61,11 @@ export default defineNuxtConfig({
   },
 
   nitro: {
+    preset: process.env.DEPLOY_RUNTIME || '',
     experimental: {
       tasks: true,
     },
-    // serveStatic: false,
+    serveStatic: false,
     // errorHandler: '~/error',
   },
 
