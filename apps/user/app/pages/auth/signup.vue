@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { NuxtTurnstile } from '#components'
 import type { FormError, FormSubmitEvent } from '#ui/types'
 
 definePageMeta({
@@ -16,8 +17,9 @@ const toast = useToast()
  */
 const selectedMethod = ref(0)
 const loading = ref(false)
+const oauthLoading = ref(false)
 const token = ref()
-const turnstile = ref()
+const turnstile = ref<InstanceType<typeof NuxtTurnstile> | null>()
 
 const fields = computed(() => {
   const commonFields = [
@@ -62,24 +64,32 @@ const tabItems = [
   },
 ]
 
-const providers = [
+const providers = computed(() => [
   {
     label: 'Continue with GitHub',
     icon: 'i-simple-icons-github',
     color: 'white' as const,
+    to: '/api/oauth/github',
+    external: true,
+    // loading: oauthLoading.value,
+    disabled: !token.value,
     click: () => {
-      console.log('Redirect to GitHub')
+      oauthLoading.value = true
     },
   },
   {
     label: 'Continue with Google',
     icon: 'i-simple-icons-google',
     color: 'white' as const,
+    to: '/api/oauth/google',
+    external: true,
+    // loading: oauthLoading.value,
+    disabled: !token.value,
     click: () => {
-      console.log('Redirect to Google')
+      oauthLoading.value = true
     },
   },
-]
+])
 
 function validate(state: any): FormError[] {
   const errors: FormError[] = []
@@ -143,7 +153,10 @@ async function onSubmit(data: FormSubmitEvent<any>) {
       icon="i-heroicons-user-circle"
       title="Create an account"
       :ui="{ base: 'text-center', footer: 'text-center' }"
-      :submit-button="{ label: loading ? 'Please wait...' : 'Continue', }"
+      :submit-button="{
+        label: loading ? 'Please wait...' : 'Continue',
+        disabled: !token || oauthLoading,
+      }"
       :loading="loading"
       @submit="onSubmit"
     >

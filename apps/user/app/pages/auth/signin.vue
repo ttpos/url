@@ -17,10 +17,9 @@ const toast = useToast()
  */
 const selectedMethod = ref(0)
 const loading = ref(false)
+const oauthLoading = ref(false)
 const token = ref()
-// const turnstile = ref()
 const turnstile = ref<InstanceType<typeof NuxtTurnstile> | null>()
-// const turnstile = useTemplateRef<typeof NuxtTurnstile>(null)
 
 const fields = [
   {
@@ -54,15 +53,17 @@ const tabItems = [
   },
 ]
 
-const providers = [
+const providers = computed(() => [
   {
     label: 'Continue with GitHub',
     icon: 'i-simple-icons-github',
     color: 'white' as const,
     to: '/api/oauth/github',
     external: true,
+    // loading: oauthLoading.value,
+    disabled: !token.value,
     click: () => {
-      console.log('Redirect to GitHub')
+      oauthLoading.value = true
     },
   },
   {
@@ -71,11 +72,13 @@ const providers = [
     color: 'white' as const,
     to: '/api/oauth/google',
     external: true,
+    // loading: oauthLoading.value,
+    disabled: !token.value,
     click: () => {
-      console.log('Redirect to Google')
+      oauthLoading.value = true
     },
   },
-]
+])
 
 function validate(state: any): FormError[] {
   const errors: FormError[] = []
@@ -133,6 +136,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
       :submit-button="{
         trailingIcon: 'i-heroicons-arrow-right-20-solid',
         label: loading ? 'Please wait...' : 'Continue',
+        disabled: !token || oauthLoading,
       }"
       :loading="loading"
       @submit="onSubmit"
