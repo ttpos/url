@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 
 # Get the current working directory
 PWD="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"
@@ -40,13 +39,6 @@ action_build() {
 
 action_test() {
     docker run --rm -ti --network traefik --name "$NAME" "$NAME"
-}
-
-action_deploy() {
-    docker tag $NAME registry.fly.io/$NAME
-    flyctl auth docker
-    flyctl volume create dashboard_db -r hkg -n 1
-    flyctl deploy
 }
 
 action_clean() {
