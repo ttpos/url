@@ -1,5 +1,5 @@
 import { userTable } from '@@/server/database/schema'
-import { hashPassword, isValidEmail, lucia } from '@@/server/utils'
+import { AuthSingleton, hashPassword, isValidEmail, lucia } from '@@/server/utils'
 import { eq } from 'drizzle-orm'
 import { generateId } from 'lucia'
 
@@ -12,6 +12,8 @@ interface Query {
 
 export default defineEventHandler(async (event) => {
   try {
+    const db = useDrizzle(event)
+
     const body = await readBody<Query>(event)
     const { email, phone, password, captchaToken } = body
 
@@ -50,7 +52,6 @@ export default defineEventHandler(async (event) => {
 
     const passwordHash = await hashPassword(password)
     const userId = generateId(15)
-    const db = useDrizzle()
 
     if (email) {
       // Check if user exists
@@ -122,7 +123,7 @@ export default defineEventHandler(async (event) => {
       status: 1, // 用户激活状态
     })
 
-    const session = await lucia.createSession(userId, {
+    const session = await lucia().createSession(userId, {
       status: 1,
       sessionToken: 'testing',
       metadata: {},
@@ -132,7 +133,7 @@ export default defineEventHandler(async (event) => {
     appendHeader(
       event,
       'Set-Cookie',
-      lucia.createSessionCookie(session.id).serialize(),
+      lucia().createSessionCookie(session.id).serialize(),
     )
 
     return {

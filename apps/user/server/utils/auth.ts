@@ -1,38 +1,8 @@
-import { sessionTable, userTable } from '@@/server/database/schema'
-import { useDrizzle } from '@@/server/utils'
-import { DrizzleSQLiteAdapter } from '@lucia-auth/adapter-drizzle'
 import { GitHub, Google } from 'arctic'
-import { Lucia } from 'lucia'
+import { AuthSingleton } from './authSingleton'
 
 const config = useRuntimeConfig()
-const db = useDrizzle()
-
-const adapter = new DrizzleSQLiteAdapter(db, sessionTable, userTable)
-
-export const lucia = new Lucia(adapter, {
-  sessionCookie: {
-    attributes: {
-      // set to `true` when using HTTPS
-      secure: import.meta.dev,
-      // secure: true,
-    },
-  },
-  getUserAttributes: (attributes) => {
-    return {
-      id: attributes.id,
-      nickname: attributes.nickname,
-      email: attributes.email,
-      isEmailVerified: attributes.isEmailVerified,
-    }
-  },
-  getSessionAttributes: (attributes) => {
-    return {
-      status: attributes.status,
-      sessionToken: attributes.sessionToken,
-      metadata: attributes.metadata,
-    }
-  },
-})
+export const lucia = () => AuthSingleton.getInstance()?.getLucia()
 
 // IMPORTANT!
 declare module 'lucia' {

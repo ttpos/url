@@ -1,21 +1,48 @@
-/* eslint-disable node/prefer-global/process */
-
 import * as schema from '@@/server/database/schema'
 import { createClient } from '@libsql/client'
+import { drizzle as drizzleD1 } from 'drizzle-orm/d1'
 import { drizzle as drizzleSqlite } from 'drizzle-orm/libsql'
-import type { LibSQLDatabase } from 'drizzle-orm/libsql'
+import type { EventHandlerRequest, H3Event } from 'h3'
+
+export function initializeDrizzle(event: H3Event<EventHandlerRequest>) {
+  const { dbType, libsqlUrl, libsqlAuthToken } = useRuntimeConfig(event)
+
+  logger.info(`Using ${dbType} database`)
+
+  switch (dbType) {
+    case 'libsql': {
+      const db = createClient({
+        url: libsqlUrl,
+        authToken: libsqlAuthToken,
+      })
+      return drizzleSqlite(db, { schema })
+    }
+    case 'd1': {
+      const { DB = '' } = event.context.cloudflare?.env || {}
+      if (!DB) {
+        logger.error('D1 database not found')
+        return null
+      }
+      return drizzleD1(DB, { schema })
+    }
+    default: {
+      logger.error(`Unsupported DB type: ${dbType}`)
+      return null
+    }
+  }
+}
 
 type Constructor = new (...args: any) => any
 
 export function singleton<C extends Constructor>(
   ClassName: C,
-  args?: ConstructorParameters<C>,
+  ...args: ConstructorParameters<C>
 ) {
   let instance: InstanceType<C>
 
   const ProxyClass = new Proxy(ClassName, {
     get(_target, prop, receiver) {
-      instance = instance ?? (new ClassName(args) as typeof instance)
+      instance = instance ?? new ClassName(...args)
       return Reflect.get(instance, prop, receiver)
     },
   })
@@ -24,31 +51,13 @@ export function singleton<C extends Constructor>(
 }
 
 class dbConnect {
-  public db: LibSQLDatabase<typeof schema>
+  public db: ReturnType<typeof initializeDrizzle>
 
-  constructor() {
-    this.db = this.init()
-  }
-
-  init() {
-    logger.info('dbConnect init')
-
-    const {
-      NUXT_LIBSQL_URL = 'file:database/data.db',
-      NUXT_LIBSQL_AUTH_TOKEN = undefined,
-    } = process.env
-
-    const libsqlClient = createClient({
-      url: NUXT_LIBSQL_URL,
-      authToken: NUXT_LIBSQL_AUTH_TOKEN,
-    })
-
-    const db = drizzleSqlite(libsqlClient, { schema })
-
-    return db
+  constructor(event: H3Event<EventHandlerRequest>) {
+    this.db = initializeDrizzle(event)
   }
 }
 
-export function useDrizzle(env?: any) {
-  return singleton(dbConnect, env).db
+export function useDrizzle(event: H3Event<EventHandlerRequest>) {
+  return singleton(dbConnect, event).db
 }

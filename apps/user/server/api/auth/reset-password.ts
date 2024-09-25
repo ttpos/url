@@ -27,7 +27,7 @@ export default defineEventHandler(async (event) => {
         statusCode: 400,
       })
     }
-    const db = useDrizzle()
+    const db = useDrizzle(event)
 
     const user = await db.query.userTable.findFirst({
       where: table => eq(table.email, email),

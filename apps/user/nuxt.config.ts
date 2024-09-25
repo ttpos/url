@@ -45,6 +45,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     debug: process.env.NUXT_DEBUG === 'true',
+    dbType: process.env.NUXT_DB_TYPE || 'libsql',
     libsqlUrl: process.env.NUXT_LIBSQL_URL || 'file:database/data.db',
     libsqlAuthToken: process.env.NUXT_LIBSQL_AUTH_TOKEN || undefined,
     // Google OAuth

@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const db = useDrizzle()
+    const db = useDrizzle(event)
 
     // Check if user exists
     const user = await db.query.userTable.findFirst({
