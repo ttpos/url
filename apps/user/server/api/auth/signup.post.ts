@@ -1,5 +1,5 @@
 import { userTable } from '@@/server/database/schema'
-import { hashPassword, isValidEmail } from '@@/server/utils'
+import { hashPassword, isValidEmail, useDrizzle } from '@@/server/utils'
 import { eq } from 'drizzle-orm'
 import { generateId } from 'lucia'
 
@@ -12,7 +12,8 @@ interface Query {
 
 export default defineEventHandler(async (event) => {
   try {
-    const { db, lucia } = event.context
+    const db = useDrizzle(event)
+    const { lucia } = event.context
 
     const body = await readBody<Query>(event)
     const { email, phone, password, captchaToken } = body

@@ -1,21 +1,16 @@
-import { initializeDrizzle, initializeLucia } from '@@/server/utils'
+import { initializeLucia, useDrizzle } from '@@/server/utils'
 import { verifyRequestOrigin } from 'lucia'
 
 import type { Session, User } from 'lucia'
 
 let luciaInstance: ReturnType<typeof initializeLucia> | null = null
-let drizzleDB: ReturnType<typeof initializeDrizzle> | null = null
 
 export default defineEventHandler(async (event) => {
-  // Initialize database if not already initialized
-  if (!drizzleDB) {
-    drizzleDB = initializeDrizzle(event)
-  }
-  event.context.db = drizzleDB
+  const db = useDrizzle(event)
 
   // Initialize Lucia if not already initialized
   if (!luciaInstance) {
-    luciaInstance = initializeLucia(drizzleDB)
+    luciaInstance = initializeLucia(db)
   }
   event.context.lucia = luciaInstance
 
@@ -53,6 +48,5 @@ declare module 'h3' {
     user: User | null
     session: Session | null
     lucia: ReturnType<typeof initializeLucia>
-    db: ReturnType<typeof initializeDrizzle>
   }
 }

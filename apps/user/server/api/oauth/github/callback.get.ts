@@ -1,5 +1,5 @@
 import { sessionTable, usersOauthTable, userTable } from '@@/server/database/schema'
-import { github } from '@@/server/utils'
+import { github, useDrizzle } from '@@/server/utils'
 import { OAuth2RequestError } from 'arctic'
 import { and, eq, sql } from 'drizzle-orm'
 import { generateId } from 'lucia'
@@ -18,7 +18,8 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const { db, lucia } = event.context
+    const db = useDrizzle(event)
+    const { lucia } = event.context
 
     // Validate the authorization code and get tokens
     const tokens = await github.validateAuthorizationCode(code)

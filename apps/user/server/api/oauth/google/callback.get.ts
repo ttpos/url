@@ -1,12 +1,13 @@
 import { usersOauthTable, userTable } from '@@/server/database/schema'
-import { google } from '@@/server/utils'
+import { google, useDrizzle } from '@@/server/utils'
 import { OAuth2RequestError } from 'arctic'
 import { eq } from 'drizzle-orm'
 import { generateId } from 'lucia'
 import type { GoogleTokens } from 'arctic'
 
 export default defineEventHandler(async (event) => {
-  const { db, lucia } = event.context
+  const db = useDrizzle(event)
+  const { lucia } = event.context
 
   const query = getQuery(event)
   const code = query.code?.toString() ?? null

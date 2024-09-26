@@ -1,4 +1,5 @@
 import { userTable, verificationTable } from '@@/server/database/schema'
+import { useDrizzle } from '@@/server/utils'
 import { eq } from 'drizzle-orm'
 import { isWithinExpirationDate } from 'oslo'
 
@@ -9,7 +10,7 @@ interface Query {
 
 export default defineEventHandler(async (event) => {
   try {
-    const { db } = event.context
+    const db = useDrizzle(event)
     const { debug } = useRuntimeConfig()
     const { code, userId } = await readBody<Query>(event)
 
@@ -26,7 +27,6 @@ export default defineEventHandler(async (event) => {
         statusCode: 400,
       })
     }
-
 
     // * dev mode only
     if (!debug) {

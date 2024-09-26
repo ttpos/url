@@ -1,9 +1,10 @@
 import { userTable } from '@@/server/database/schema'
+import { useDrizzle } from '@@/server/utils'
 import { sql } from 'drizzle-orm'
 
 export default defineEventHandler(async (event) => {
   try {
-    const { db } = event.context
+    const db = useDrizzle(event)
 
     const email = getRouterParam(event, 'email')
 
