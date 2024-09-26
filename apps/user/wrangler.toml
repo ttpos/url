@@ -1,13 +1,13 @@
-name = "a-app-links"
+name = "a-app-user"
 compatibility_date = "2024-08-06"
 send_metrics = false
-main = "./.output/server/index.mjs"
+main = ".output/server/index.mjs"
 workers_dev = true
 
 [[d1_databases]]
 binding = "DB"
-database_name = "a-app-links"
-database_id = "abbfd748-2701-46c7-8f8a-b1f65b2964eb"
+database_name = "a-app-user"
+database_id = "3b9150b2-749d-4873-a72c-980f94ccc4f9"
 migrations_dir = "server/database"
 
 [vars]
