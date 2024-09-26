@@ -3,8 +3,9 @@ import { sql } from 'drizzle-orm'
 
 export default defineEventHandler(async (event) => {
   try {
+    const { db } = event.context
+
     const email = getRouterParam(event, 'email')
-    const db = useDrizzle(event)
 
     // Check if user exists
     const userEmail = await db.query.userTable.findFirst({

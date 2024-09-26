@@ -1,15 +1,15 @@
-import { lucia } from '@@/server/utils'
-
 export default defineEventHandler(async (event) => {
   try {
+    const { lucia } = event.context
+
     if (!event.context.user?.id) {
       throw createError({
         statusCode: 403,
       })
     }
 
-    await lucia().invalidateSession(event.context.user?.id)
-    appendHeader(event, 'Set-Cookie', lucia().createBlankSessionCookie().serialize())
+    await lucia.invalidateSession(event.context.user?.id)
+    appendHeader(event, 'Set-Cookie', lucia.createBlankSessionCookie().serialize())
 
     return {
       message: 'Successfully signed out!',

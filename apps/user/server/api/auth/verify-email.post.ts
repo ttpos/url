@@ -1,5 +1,4 @@
 import { userTable, verificationTable } from '@@/server/database/schema'
-import { emailVerificationTemplate, hashPassword, isValidEmail, lucia, sendEmail } from '@@/server/utils'
 import { eq } from 'drizzle-orm'
 import { isWithinExpirationDate } from 'oslo'
 
@@ -10,6 +9,7 @@ interface Query {
 
 export default defineEventHandler(async (event) => {
   try {
+    const { db } = event.context
     const { debug } = useRuntimeConfig()
     const { code, userId } = await readBody<Query>(event)
 
@@ -27,7 +27,6 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    const db = useDrizzle()
 
     // * dev mode only
     if (!debug) {

@@ -1,5 +1,5 @@
 import { sessionTable, usersOauthTable, userTable } from '@@/server/database/schema'
-import { AuthSingleton, github, lucia, useDrizzle } from '@@/server/utils'
+import { github } from '@@/server/utils'
 import { OAuth2RequestError } from 'arctic'
 import { and, eq, sql } from 'drizzle-orm'
 import { generateId } from 'lucia'
@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const db = useDrizzle(event)
+    const { db, lucia } = event.context
 
     // Validate the authorization code and get tokens
     const tokens = await github.validateAuthorizationCode(code)
@@ -86,12 +86,12 @@ export default defineEventHandler(async (event) => {
         }
 
         // Log in the user
-        const session = await lucia().createSession(existingUser.id, {
+        const session = await lucia.createSession(existingUser.id, {
           status: 1,
           sessionToken: generateId(32),
           metadata: {},
         })
-        appendHeader(event, 'Set-Cookie', lucia().createSessionCookie(session.id).serialize())
+        appendHeader(event, 'Set-Cookie', lucia.createSessionCookie(session.id).serialize())
         return sendRedirect(event, '/')
       }
     }
@@ -169,12 +169,12 @@ export default defineEventHandler(async (event) => {
             oauthRegisterId: oauthId,
           }).where(eq(userTable.id, userId))
 
-          const session = await lucia().createSession(userId, {
+          const session = await lucia.createSession(userId, {
             status: 1,
             sessionToken: 'testing',
             metadata: {},
           })
-          appendHeader(event, 'Set-Cookie', lucia().createSessionCookie(session.id).serialize())
+          appendHeader(event, 'Set-Cookie', lucia.createSessionCookie(session.id).serialize())
           return sendRedirect(event, '/')
         }
       }

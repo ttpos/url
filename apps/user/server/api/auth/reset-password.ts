@@ -1,5 +1,4 @@
-import { userTable, verificationTable } from '@@/server/database/schema'
-import { isValidEmail, lucia, useDrizzle, verifyPassword } from '@@/server/utils'
+import { userTable } from '@@/server/database/schema'
 import { eq, sql } from 'drizzle-orm'
 import { isWithinExpirationDate } from 'oslo'
 
@@ -11,6 +10,7 @@ interface Query {
 
 export default defineEventHandler(async (event) => {
   try {
+    const { db } = event.context
     const { debug } = useRuntimeConfig()
     const { code, password, email } = await readBody<Query>(event)
 
@@ -27,7 +27,6 @@ export default defineEventHandler(async (event) => {
         statusCode: 400,
       })
     }
-    const db = useDrizzle(event)
 
     const user = await db.query.userTable.findFirst({
       where: table => eq(table.email, email),

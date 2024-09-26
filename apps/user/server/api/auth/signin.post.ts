@@ -1,5 +1,5 @@
 import { userTable } from '@@/server/database/schema'
-import { AuthSingleton, isValidEmail, lucia, useDrizzle, verifyPassword } from '@@/server/utils'
+import { isValidEmail, verifyPassword } from '@@/server/utils'
 import { eq } from 'drizzle-orm'
 
 interface Query {
@@ -10,7 +10,7 @@ interface Query {
 
 export default defineEventHandler(async (event) => {
   try {
-    const db = useDrizzle(event)
+    const { db, lucia } = event.context
 
     const body = await readBody<Query>(event)
     const { email, password, captchaToken } = body
@@ -83,7 +83,7 @@ export default defineEventHandler(async (event) => {
     }
 
     // Create a session
-    const session = await lucia().createSession(user.id, {
+    const session = await lucia.createSession(user.id, {
       status: 1,
       sessionToken: 'testing',
       metadata: {},
@@ -91,7 +91,7 @@ export default defineEventHandler(async (event) => {
     logger.log('🚀 ~ defineEventHandler ~ session:', session)
 
     // Set the session cookie
-    const luciaToken = lucia().createSessionCookie(session.id)
+    const luciaToken = lucia.createSessionCookie(session.id)
     setCookie(event, luciaToken.name, luciaToken.value, luciaToken.attributes)
 
     return {

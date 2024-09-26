@@ -1,5 +1,4 @@
 export * from './auth'
-export * from './authSingleton'
 export * from './db'
 export * from './email'
 export * from './generatorUtils'

@@ -1,5 +1,5 @@
 import { userTable, verificationTable } from '@@/server/database/schema'
-import { isValidEmail, lucia, useDrizzle, verifyPassword } from '@@/server/utils'
+import { isValidEmail } from '@@/server/utils'
 import { eq } from 'drizzle-orm'
 import { generateId } from 'lucia'
 import { createDate, TimeSpan } from 'oslo'
@@ -10,6 +10,7 @@ interface Query {
 }
 
 export default defineEventHandler(async (event) => {
+  const { db } = event.context
   const { email } = await readBody<Query>(event)
 
   if (!email || typeof email !== 'string' || !isValidEmail(email)) {
@@ -20,7 +21,6 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const db = useDrizzle(event)
 
     // Check if user exists
     const user = await db.query.userTable.findFirst({

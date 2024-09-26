@@ -1,13 +1,47 @@
+import { sessionTable, userTable } from '@@/server/database/schema'
+import { DrizzleSQLiteAdapter } from '@lucia-auth/adapter-drizzle'
+import { D1Adapter } from '@lucia-auth/adapter-sqlite'
 import { GitHub, Google } from 'arctic'
-import { AuthSingleton } from './authSingleton'
+import { Lucia } from 'lucia'
 
 const config = useRuntimeConfig()
-export const lucia = () => AuthSingleton.getInstance()?.getLucia()
+
+export function initializeLucia(db: ReturnType<typeof initializeDrizzle>) {
+  const adapter = config.dbType === 'libsql'
+    ? new DrizzleSQLiteAdapter(db, sessionTable, userTable)
+    : new D1Adapter(db, { user: 'userTable', session: 'sessionTable' })
+    // : new D1Adapter(db, { sessionTable, userTable })
+
+  return new Lucia(adapter, {
+    sessionCookie: {
+      attributes: {
+        // set to `true` when using HTTPS
+        secure: import.meta.dev,
+        // secure: true,
+      },
+    },
+    getUserAttributes: (attributes) => {
+      return {
+        id: attributes.id,
+        nickname: attributes.nickname,
+        email: attributes.email,
+        isEmailVerified: attributes.isEmailVerified,
+      }
+    },
+    getSessionAttributes: (attributes) => {
+      return {
+        status: attributes.status,
+        sessionToken: attributes.sessionToken,
+        metadata: attributes.metadata,
+      }
+    },
+  })
+}
 
 // IMPORTANT!
 declare module 'lucia' {
   interface Register {
-    Lucia: typeof lucia
+    Lucia: ReturnType<typeof initializeLucia>
     DatabaseUserAttributes: Omit<DatabaseUser, 'password'>
     DatabaseSessionAttributes: Omit<DatabaseSession, 'password'>
   }

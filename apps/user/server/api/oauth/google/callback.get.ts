@@ -1,12 +1,12 @@
 import { usersOauthTable, userTable } from '@@/server/database/schema'
-import { AuthSingleton, google, lucia, useDrizzle } from '@@/server/utils'
+import { google } from '@@/server/utils'
 import { OAuth2RequestError } from 'arctic'
 import { eq } from 'drizzle-orm'
 import { generateId } from 'lucia'
 import type { GoogleTokens } from 'arctic'
 
 export default defineEventHandler(async (event) => {
-  const db = useDrizzle(event)
+  const { db, lucia } = event.context
 
   const query = getQuery(event)
   const code = query.code?.toString() ?? null
@@ -60,8 +60,8 @@ export default defineEventHandler(async (event) => {
         expiresAt: tokens.accessTokenExpiresAt ?? null,
       })
 
-      const session = await lucia().createSession(isEmailUsed.id, {})
-      appendHeader(event, 'Set-Cookie', lucia().createSessionCookie(session.id).serialize())
+      const session = await lucia.createSession(isEmailUsed.id, {})
+      appendHeader(event, 'Set-Cookie', lucia.createSessionCookie(session.id).serialize())
       return sendRedirect(event, '/')
     }
 
@@ -70,8 +70,8 @@ export default defineEventHandler(async (event) => {
     })
 
     if (existingUser) {
-      const session = await lucia().createSession(existingUser.id, {})
-      appendHeader(event, 'Set-Cookie', lucia().createSessionCookie(session.id).serialize())
+      const session = await lucia.createSession(existingUser.id, {})
+      appendHeader(event, 'Set-Cookie', lucia.createSessionCookie(session.id).serialize())
       return sendRedirect(event, '/')
     }
 
@@ -95,8 +95,8 @@ export default defineEventHandler(async (event) => {
       expiresAt: tokens.accessTokenExpiresAt ?? null,
     })
 
-    const session = await lucia().createSession(userId, {})
-    appendHeader(event, 'Set-Cookie', lucia().createSessionCookie(session.id).serialize())
+    const session = await lucia.createSession(userId, {})
+    appendHeader(event, 'Set-Cookie', lucia.createSessionCookie(session.id).serialize())
     return sendRedirect(event, '/')
   }
   catch (e) {
