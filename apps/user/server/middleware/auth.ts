@@ -1,19 +1,25 @@
+import { initializeDrizzle, initializeLucia } from '@@/server/utils'
 import { verifyRequestOrigin } from 'lucia'
 
 import type { Session, User } from 'lucia'
 
-let lucia: ReturnType<typeof initializeLucia>
+let luciaInstance: ReturnType<typeof initializeLucia> | null = null
+let drizzleDB: ReturnType<typeof initializeDrizzle> | null = null
 
 export default defineEventHandler(async (event) => {
-  const db = event.context.db ?? initializeDrizzle(event)
-
-  // Initialize auth (Lucia)
-  if (!lucia) {
-    lucia = initializeLucia(db)
+  // Initialize database if not already initialized
+  if (!drizzleDB) {
+    drizzleDB = initializeDrizzle(event)
   }
+  event.context.db = drizzleDB
 
-  event.context.lucia = lucia
+  // Initialize Lucia if not already initialized
+  if (!luciaInstance) {
+    luciaInstance = initializeLucia(drizzleDB)
+  }
+  event.context.lucia = luciaInstance
 
+  // Verify request origin for non-GET requests
   if (event.node.req.method !== 'GET') {
     const originHeader = getHeader(event, 'Origin') ?? null
     const hostHeader = getHeader(event, 'Host') ?? null
@@ -22,23 +28,21 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  const sessionId = getCookie(event, lucia.sessionCookieName) ?? null
+  // Validate session
+  const sessionId = getCookie(event, luciaInstance.sessionCookieName) ?? null
   if (!sessionId) {
     event.context.session = null
     event.context.user = null
     return
   }
 
-  // const { session, user } = await lucia.validateSession(sessionId)
-  const data = await lucia.validateSession(sessionId)
-  logger.log('🚀 ~ defineEventHandler ~ data:', data)
+  const { session, user } = await luciaInstance.validateSession(sessionId)
 
-  const { session, user } = data
   if (session && session.fresh) {
-    appendHeader(event, 'Set-Cookie', lucia.createSessionCookie(session.id).serialize())
+    appendHeader(event, 'Set-Cookie', luciaInstance.createSessionCookie(session.id).serialize())
   }
   if (!session) {
-    appendHeader(event, 'Set-Cookie', lucia.createBlankSessionCookie().serialize())
+    appendHeader(event, 'Set-Cookie', luciaInstance.createBlankSessionCookie().serialize())
   }
   event.context.session = session
   event.context.user = user
@@ -49,5 +53,6 @@ declare module 'h3' {
     user: User | null
     session: Session | null
     lucia: ReturnType<typeof initializeLucia>
+    db: ReturnType<typeof initializeDrizzle>
   }
 }
