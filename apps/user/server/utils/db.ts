@@ -31,15 +31,13 @@ class DatabaseManger {
       case 'd1': {
         const { DB = '' } = event.context.cloudflare?.env || {}
         if (!DB) {
-          logger.error('D1 database not found')
-          return null
+          throw new Error('D1 database not found')
         }
         this.db = drizzleD1(DB, { schema })
         return this
       }
       default: {
-        logger.error(`Unsupported DB type: ${dbType}`)
-        return null
+        throw new Error(`Unsupported DB type: ${dbType}`)
       }
     }
   }

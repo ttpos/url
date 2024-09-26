@@ -3,10 +3,11 @@ import { DrizzleSQLiteAdapter } from '@lucia-auth/adapter-drizzle'
 import { D1Adapter } from '@lucia-auth/adapter-sqlite'
 import { GitHub, Google } from 'arctic'
 import { Lucia } from 'lucia'
+import type { useDrizzle } from '@@/server/utils'
 
 const config = useRuntimeConfig()
 
-export function initializeLucia(db: ReturnType<typeof initializeDrizzle>) {
+export function initializeLucia(db: ReturnType<typeof useDrizzle>) {
   const adapter = config.dbType === 'libsql'
     ? new DrizzleSQLiteAdapter(db, sessionTable, userTable)
     : new D1Adapter(db, { user: 'userTable', session: 'sessionTable' })
