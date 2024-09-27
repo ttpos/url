@@ -10,6 +10,7 @@ useSeoMeta({
   title: 'Sign up',
 })
 
+const { $csrfFetch } = useNuxtApp()
 const toast = useToast()
 /**
  * - 0: Email
@@ -125,7 +126,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
     }
     console.log('🚀 ~ onSubmit ~ payload:', payload)
 
-    await $fetch('/api/auth/signup', {
+    await $csrfFetch('/api/auth/signup', {
       method: 'POST',
       body: payload,
     })

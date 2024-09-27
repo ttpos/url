@@ -1,9 +1,11 @@
 import { sessionTable, userTable } from '@@/server/database/schema'
+import { useDrizzle } from '@@/server/utils'
 import { DrizzleSQLiteAdapter } from '@lucia-auth/adapter-drizzle'
 import { D1Adapter } from '@lucia-auth/adapter-sqlite'
 import { GitHub, Google } from 'arctic'
 import { Lucia } from 'lucia'
-import type { useDrizzle } from '@@/server/utils'
+import type { EventHandlerRequest, H3Event } from 'h3'
+import type { Session, User } from 'lucia'
 
 const config = useRuntimeConfig()
 
@@ -39,7 +41,64 @@ export function initializeLucia(db: ReturnType<typeof useDrizzle>) {
   })
 }
 
+class AuthManager {
+  private static instance: AuthManager
+  public lucia: ReturnType<typeof initializeLucia>
+  private event: H3Event<EventHandlerRequest>
+
+  constructor(event: H3Event<EventHandlerRequest>, db: ReturnType<typeof useDrizzle>) {
+    // TODO: Can't use singleton patterns, event
+    // if (AuthManager.instance) {
+    //   return AuthManager.instance
+    // }
+    // AuthManager.instance = this
+
+    logger.info('Creating AuthManager instance')
+
+    this.event = event
+    this.lucia = initializeLucia(db)
+  }
+
+  public async getAuth() {
+    const sessionId = getCookie(this.event, this.lucia.sessionCookieName) ?? null
+    if (!sessionId) {
+      return {
+        user: null,
+        session: null,
+      }
+    }
+
+    const { session, user } = await this.lucia.validateSession(sessionId)
+
+    if (session && session.fresh) {
+      appendHeader(this.event, 'Set-Cookie', this.lucia.createSessionCookie(session.id).serialize())
+    }
+    if (!session) {
+      appendHeader(this.event, 'Set-Cookie', this.lucia.createBlankSessionCookie().serialize())
+    }
+
+    return {
+      user,
+      session,
+    }
+  }
+}
+
+export function useAuth(event: H3Event<EventHandlerRequest>) {
+  const db = useDrizzle(event)
+
+  return new AuthManager(event, db)
+}
+
 // IMPORTANT!
+declare module 'h3' {
+  interface H3EventContext {
+    user: User | null
+    session: Session | null
+    // lucia: ReturnType<typeof initializeLucia>
+  }
+}
+
 declare module 'lucia' {
   interface Register {
     Lucia: ReturnType<typeof initializeLucia>

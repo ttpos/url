@@ -1,5 +1,5 @@
 import { sessionTable, usersOauthTable, userTable } from '@@/server/database/schema'
-import { github, useDrizzle } from '@@/server/utils'
+import { github, useAuth, useDrizzle } from '@@/server/utils'
 import { OAuth2RequestError } from 'arctic'
 import { and, eq, sql } from 'drizzle-orm'
 import { generateId } from 'lucia'
@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     const db = useDrizzle(event)
-    const { lucia } = event.context
+    const { lucia } = await useAuth(event)
 
     // Validate the authorization code and get tokens
     const tokens = await github.validateAuthorizationCode(code)
@@ -92,6 +92,7 @@ export default defineEventHandler(async (event) => {
           sessionToken: generateId(32),
           metadata: {},
         })
+        logger.log('🚀 ~ defineEventHandler ~ session:', session)
         appendHeader(event, 'Set-Cookie', lucia.createSessionCookie(session.id).serialize())
         return sendRedirect(event, '/')
       }

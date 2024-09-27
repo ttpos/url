@@ -1,5 +1,5 @@
 import { userTable } from '@@/server/database/schema'
-import { hashPassword, isValidEmail, useDrizzle } from '@@/server/utils'
+import { hashPassword, isValidEmail, useAuth, useDrizzle } from '@@/server/utils'
 import { eq } from 'drizzle-orm'
 import { generateId } from 'lucia'
 
@@ -13,7 +13,6 @@ interface Query {
 export default defineEventHandler(async (event) => {
   try {
     const db = useDrizzle(event)
-    const { lucia } = event.context
 
     const body = await readBody<Query>(event)
     const { email, phone, password, captchaToken } = body
@@ -124,6 +123,8 @@ export default defineEventHandler(async (event) => {
       status: 1, // 用户激活状态
     })
 
+    const { lucia } = await useAuth(event)
+
     const session = await lucia.createSession(userId, {
       status: 1,
       sessionToken: 'testing',
@@ -131,11 +132,7 @@ export default defineEventHandler(async (event) => {
     })
     logger.log('🚀 ~ defineEventHandler ~ session:', session)
 
-    appendHeader(
-      event,
-      'Set-Cookie',
-      lucia.createSessionCookie(session.id).serialize(),
-    )
+    appendHeader(event, 'Set-Cookie', lucia.createSessionCookie(session.id).serialize())
 
     return {
       message: 'We\'ve sent a verification email to your inbox. Please verify your email.',

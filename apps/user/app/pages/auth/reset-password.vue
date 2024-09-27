@@ -9,6 +9,7 @@ useSeoMeta({
   title: 'Reset Password',
 })
 
+const { $csrfFetch } = useNuxtApp()
 const toast = useToast()
 const isResetPassword = ref(false)
 const loading = ref(false)
@@ -71,7 +72,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
       ? '/api/auth/reset-password'
       : '/api/auth/send-reset-password-code'
 
-    const { message } = await $fetch(url, {
+    const { message } = await $csrfFetch(url, {
       method: 'POST',
       body: data,
     })

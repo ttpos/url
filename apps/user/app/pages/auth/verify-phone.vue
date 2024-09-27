@@ -10,6 +10,7 @@ useSeoMeta({
   title: 'Verify Phone',
 })
 
+const { $csrfFetch } = useNuxtApp()
 const user = useAuthenticatedUser()
 const toast = useToast()
 const loading = ref(false)
@@ -35,7 +36,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
   try {
     loading.value = true
 
-    await $fetch('/api/auth/verify-phone', {
+    await $csrfFetch('/api/auth/verify-phone', {
       method: 'POST',
       body: {
         ...data,
@@ -53,7 +54,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
 }
 
 const { data, error, status } = await useAsyncData('isPhoneVerified', () =>
-  $fetch(`/api/auth/${user.value.phone}/check-verification`))
+  $csrfFetch(`/api/auth/${user.value.phone}/check-verification`))
 
 onBeforeMount(async () => {
   if (data.value?.isPhoneVerified) {

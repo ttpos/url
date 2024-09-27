@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@vueuse/nuxt',
     '@nuxtjs/turnstile',
+    'nuxt-csurf',
   ],
 
   sourcemap: {
@@ -80,6 +81,13 @@ export default defineNuxtConfig({
         protocol: 'wss',
       },
     },
+  },
+
+  csurf: {
+    https: true, // process.env.NODE_ENV === 'production'
+    methodsToProtect: ['POST', 'PUT', 'PATCH'],
+    addCsrfTokenToEventCtx: true,
+    headerName: 'X-CSRF-TOKEN'
   },
 
   // eslint-disable-next-line ts/ban-ts-comment

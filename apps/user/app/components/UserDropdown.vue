@@ -3,6 +3,7 @@ const { isHelpSlideoverOpen } = useDashboard()
 const { isDashboardSearchModalOpen } = useUIState()
 const { metaSymbol } = useShortcuts()
 
+const { $csrfFetch } = useNuxtApp()
 const user = useAuthenticatedUser()
 
 const items = computed(() => [
@@ -58,7 +59,7 @@ const items = computed(() => [
 ])
 
 async function logout() {
-  await $fetch('/api/auth/signout', {
+  await $csrfFetch('/api/auth/signout', {
     method: 'POST',
   })
   await navigateTo('/auth/signin')

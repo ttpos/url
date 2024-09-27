@@ -10,6 +10,7 @@ useSeoMeta({
   title: 'Verify Email',
 })
 
+const { $csrfFetch } = useNuxtApp()
 const user = useAuthenticatedUser()
 const toast = useToast()
 const loading = ref(false)
@@ -35,7 +36,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
   try {
     loading.value = true
 
-    await $fetch('/api/auth/verify-email', {
+    await $csrfFetch('/api/auth/verify-email', {
       method: 'POST',
       body: {
         ...data,
@@ -53,7 +54,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
 }
 
 const { data, error, status } = await useAsyncData('isEmailVerified', () =>
-  $fetch(`/api/auth/${user.value.email}/check-verification`))
+  $csrfFetch(`/api/auth/${user.value.email}/check-verification`))
 
 onBeforeMount(async () => {
   if (data.value?.isEmailVerified) {

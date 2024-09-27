@@ -1,5 +1,5 @@
 import { usersOauthTable, userTable } from '@@/server/database/schema'
-import { google, useDrizzle } from '@@/server/utils'
+import { google, useAuth, useDrizzle } from '@@/server/utils'
 import { OAuth2RequestError } from 'arctic'
 import { eq } from 'drizzle-orm'
 import { generateId } from 'lucia'
@@ -7,7 +7,6 @@ import type { GoogleTokens } from 'arctic'
 
 export default defineEventHandler(async (event) => {
   const db = useDrizzle(event)
-  const { lucia } = event.context
 
   const query = getQuery(event)
   const code = query.code?.toString() ?? null
@@ -60,6 +59,8 @@ export default defineEventHandler(async (event) => {
         refreshToken: tokens.refreshToken ?? null,
         expiresAt: tokens.accessTokenExpiresAt ?? null,
       })
+
+      const { lucia } = await useAuth(event)
 
       const session = await lucia.createSession(isEmailUsed.id, {})
       appendHeader(event, 'Set-Cookie', lucia.createSessionCookie(session.id).serialize())
