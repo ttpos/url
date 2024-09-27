@@ -3,60 +3,87 @@ import { useDrizzle } from '@@/server/utils'
 import { DrizzleSQLiteAdapter } from '@lucia-auth/adapter-drizzle'
 import { D1Adapter } from '@lucia-auth/adapter-sqlite'
 import { GitHub, Google } from 'arctic'
+import { appendHeader, getCookie } from 'h3'
 import { Lucia } from 'lucia'
 import type { EventHandlerRequest, H3Event } from 'h3'
 import type { Session, User } from 'lucia'
 
-const config = useRuntimeConfig()
-
-export function initializeLucia(db: ReturnType<typeof useDrizzle>) {
-  const adapter = config.dbType === 'libsql'
-    ? new DrizzleSQLiteAdapter(db, sessionTable, userTable)
-    : new D1Adapter(db, { user: 'userTable', session: 'sessionTable' })
-    // : new D1Adapter(db, { sessionTable, userTable })
-
-  return new Lucia(adapter, {
-    sessionCookie: {
-      attributes: {
-        // set to `true` when using HTTPS
-        secure: import.meta.dev,
-        // secure: true,
-      },
-    },
-    getUserAttributes: (attributes) => {
-      return {
-        id: attributes.id,
-        nickname: attributes.nickname,
-        email: attributes.email,
-        isEmailVerified: attributes.isEmailVerified,
-      }
-    },
-    getSessionAttributes: (attributes) => {
-      return {
-        status: attributes.status,
-        sessionToken: attributes.sessionToken,
-        metadata: attributes.metadata,
-      }
-    },
-  })
-}
-
 class AuthManager {
-  private static instance: AuthManager
-  public lucia: ReturnType<typeof initializeLucia>
+  private static luciaInstance: ReturnType<typeof initializeLucia>
+  private static githubInstance: GitHub
+  private static googleInstance: Google
   private event: H3Event<EventHandlerRequest>
+  private config: ReturnType<typeof useRuntimeConfig>
+  public lucia: ReturnType<typeof initializeLucia>
+  public github: GitHub
+  public google: Google
 
-  constructor(event: H3Event<EventHandlerRequest>, db: ReturnType<typeof useDrizzle>) {
-    // TODO: Can't use singleton patterns, event
-    // if (AuthManager.instance) {
-    //   return AuthManager.instance
-    // }
-    // AuthManager.instance = this
-
+  constructor(event: H3Event<EventHandlerRequest>) {
     logger.info('Creating AuthManager instance')
 
+    const db = useDrizzle(event)
+
     this.event = event
-    this.lucia = initializeLucia(db)
+    this.config = useRuntimeConfig()
+    this.lucia = this.getLuciaInstance(db)
+    this.github = this.getGitHubInstance()
+    this.google = this.getGoogleInstance()
+  }
+
+  private getLuciaInstance(db: ReturnType<typeof useDrizzle>) {
+    if (!AuthManager.luciaInstance) {
+      logger.info('AuthManager Init Lucia')
+      const adapter = this.config.dbType === 'libsql'
+        ? new DrizzleSQLiteAdapter(db, sessionTable, userTable)
+        : new D1Adapter(db, { user: 'userTable', session: 'sessionTable' })
+
+      AuthManager.luciaInstance = new Lucia(adapter, {
+        sessionCookie: {
+          attributes: {
+            // set to `true` when using HTTPS
+            secure: import.meta.dev,
+            // secure: true,
+          },
+        },
+        getUserAttributes: (attributes) => {
+          return {
+            id: attributes.id,
+            nickname: attributes.nickname,
+            email: attributes.email,
+            isEmailVerified: attributes.isEmailVerified,
+          }
+        },
+        getSessionAttributes: (attributes) => {
+          return {
+            status: attributes.status,
+            sessionToken: attributes.sessionToken,
+            metadata: attributes.metadata,
+          }
+        },
+      })
+    }
+    return AuthManager.luciaInstance
+  }
+
+  private getGitHubInstance() {
+    if (!AuthManager.githubInstance) {
+      AuthManager.githubInstance = new GitHub(
+        this.config.githubClientId,
+        this.config.githubClientSecret,
+      )
+    }
+    return AuthManager.githubInstance
+  }
+
+  private getGoogleInstance() {
+    if (!AuthManager.googleInstance) {
+      AuthManager.googleInstance = new Google(
+        this.config.googleClientId,
+        this.config.googleClientSecret,
+        this.config.googleRedirectURI,
+      )
+    }
+    return AuthManager.googleInstance
   }
 
   public async getAuth() {
@@ -85,9 +112,7 @@ class AuthManager {
 }
 
 export function useAuth(event: H3Event<EventHandlerRequest>) {
-  const db = useDrizzle(event)
-
-  return new AuthManager(event, db)
+  return new AuthManager(event)
 }
 
 // IMPORTANT!
@@ -119,14 +144,3 @@ interface DatabaseSession {
   sessionToken: string
   metadata: object
 }
-
-export const github = new GitHub(
-  config.githubClientId,
-  config.githubClientSecret,
-)
-
-export const google = new Google(
-  config.googleClientId,
-  config.googleClientSecret,
-  config.googleRedirectURI,
-)

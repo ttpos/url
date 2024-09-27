@@ -1,9 +1,10 @@
 /* eslint-disable node/prefer-global/process */
 
-import { github } from '@@/server/utils'
+import { useAuth } from '@@/server/utils'
 import { generateState } from 'arctic'
 
 export default defineEventHandler(async (event) => {
+  const { github } = useAuth(event)
   const state = generateState()
   const url = await github.createAuthorizationURL(state, {
     scopes: ['user:email'],

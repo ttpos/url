@@ -1,9 +1,10 @@
 /* eslint-disable node/prefer-global/process */
 
-import { google } from '@@/server/utils'
+import { useAuth } from '@@/server/utils'
 import { generateCodeVerifier, generateState } from 'arctic'
 
 export default defineEventHandler(async (event) => {
+  const { google } = useAuth(event)
   const state = generateState()
   const codeVerifier = generateCodeVerifier()
 
