@@ -6,7 +6,7 @@ import { GitHub, Google } from 'arctic'
 import { appendHeader, getCookie } from 'h3'
 import { Lucia } from 'lucia'
 import type { EventHandlerRequest, H3Event } from 'h3'
-import type { Session, User } from 'lucia'
+import type { Adapter, Session, User } from 'lucia'
 
 class AuthManager {
   private static luciaInstance: ReturnType<typeof initializeLucia>
@@ -37,30 +37,7 @@ class AuthManager {
         ? new DrizzleSQLiteAdapter(db, sessionTable, userTable)
         : new D1Adapter(db, { user: 'userTable', session: 'sessionTable' })
 
-      AuthManager.luciaInstance = new Lucia(adapter, {
-        sessionCookie: {
-          attributes: {
-            // set to `true` when using HTTPS
-            secure: import.meta.dev,
-            // secure: true,
-          },
-        },
-        getUserAttributes: (attributes) => {
-          return {
-            id: attributes.id,
-            nickname: attributes.nickname,
-            email: attributes.email,
-            isEmailVerified: attributes.isEmailVerified,
-          }
-        },
-        getSessionAttributes: (attributes) => {
-          return {
-            status: attributes.status,
-            sessionToken: attributes.sessionToken,
-            metadata: attributes.metadata,
-          }
-        },
-      })
+      AuthManager.luciaInstance = initializeLucia(adapter)
     }
     return AuthManager.luciaInstance
   }
@@ -111,6 +88,33 @@ class AuthManager {
   }
 }
 
+function initializeLucia(adapter: Adapter) {
+  return new Lucia(adapter, {
+    sessionCookie: {
+      attributes: {
+        // set to `true` when using HTTPS
+        secure: import.meta.dev,
+        // secure: true,
+      },
+    },
+    getUserAttributes: (attributes) => {
+      return {
+        id: attributes.id,
+        nickname: attributes.nickname,
+        email: attributes.email,
+        isEmailVerified: attributes.isEmailVerified,
+      }
+    },
+    getSessionAttributes: (attributes) => {
+      return {
+        status: attributes.status,
+        sessionToken: attributes.sessionToken,
+        metadata: attributes.metadata,
+      }
+    },
+  })
+}
+
 export function useAuth(event: H3Event<EventHandlerRequest>) {
   return new AuthManager(event)
 }
@@ -120,7 +124,6 @@ declare module 'h3' {
   interface H3EventContext {
     user: User | null
     session: Session | null
-    // lucia: ReturnType<typeof initializeLucia>
   }
 }
 
