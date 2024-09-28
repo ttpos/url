@@ -1,7 +1,6 @@
 import { sessionTable, userTable } from '@@/server/database/schema'
 import { useDrizzle } from '@@/server/utils'
 import { DrizzleSQLiteAdapter } from '@lucia-auth/adapter-drizzle'
-import { D1Adapter } from '@lucia-auth/adapter-sqlite'
 import { GitHub, Google } from 'arctic'
 import { appendHeader, getCookie } from 'h3'
 import { Lucia } from 'lucia'
@@ -33,10 +32,8 @@ class AuthManager {
   private getLuciaInstance(db: ReturnType<typeof useDrizzle>) {
     if (!AuthManager.luciaInstance) {
       logger.info('AuthManager Init Lucia')
-      const adapter = this.config.dbType === 'libsql'
-        ? new DrizzleSQLiteAdapter(db, sessionTable, userTable)
-        : new D1Adapter(db, { user: 'userTable', session: 'sessionTable' })
 
+      const adapter = new DrizzleSQLiteAdapter(db, sessionTable, userTable)
       AuthManager.luciaInstance = initializeLucia(adapter)
     }
     return AuthManager.luciaInstance
