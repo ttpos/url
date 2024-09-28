@@ -8,12 +8,12 @@ import type { EventHandlerRequest, H3Event } from 'h3'
 import type { Adapter, Session, User } from 'lucia'
 
 class AuthManager {
-  private static luciaInstance: ReturnType<typeof initializeLucia>
+  private static luciaInstance: ReturnType<AuthManager['initializeLucia']>
   private static githubInstance: GitHub
   private static googleInstance: Google
   private event: H3Event<EventHandlerRequest>
   private config: ReturnType<typeof useRuntimeConfig>
-  public lucia: ReturnType<typeof initializeLucia>
+  public lucia: ReturnType<AuthManager['initializeLucia']>
   public github: GitHub
   public google: Google
 
@@ -34,7 +34,7 @@ class AuthManager {
       logger.info('AuthManager Init Lucia')
 
       const adapter = new DrizzleSQLiteAdapter(db, sessionTable, userTable)
-      AuthManager.luciaInstance = initializeLucia(adapter)
+      AuthManager.luciaInstance = this.initializeLucia(adapter)
     }
     return AuthManager.luciaInstance
   }
@@ -58,6 +58,33 @@ class AuthManager {
       )
     }
     return AuthManager.googleInstance
+  }
+
+  private initializeLucia(adapter: Adapter) {
+    return new Lucia(adapter, {
+      sessionCookie: {
+        attributes: {
+          // set to `true` when using HTTPS
+          secure: import.meta.dev,
+          // secure: true,
+        },
+      },
+      getUserAttributes: (attributes) => {
+        return {
+          id: attributes.id,
+          nickname: attributes.nickname,
+          email: attributes.email,
+          isEmailVerified: attributes.isEmailVerified,
+        }
+      },
+      getSessionAttributes: (attributes) => {
+        return {
+          status: attributes.status,
+          sessionToken: attributes.sessionToken,
+          metadata: attributes.metadata,
+        }
+      },
+    })
   }
 
   public async getAuth() {
@@ -85,33 +112,6 @@ class AuthManager {
   }
 }
 
-function initializeLucia(adapter: Adapter) {
-  return new Lucia(adapter, {
-    sessionCookie: {
-      attributes: {
-        // set to `true` when using HTTPS
-        secure: import.meta.dev,
-        // secure: true,
-      },
-    },
-    getUserAttributes: (attributes) => {
-      return {
-        id: attributes.id,
-        nickname: attributes.nickname,
-        email: attributes.email,
-        isEmailVerified: attributes.isEmailVerified,
-      }
-    },
-    getSessionAttributes: (attributes) => {
-      return {
-        status: attributes.status,
-        sessionToken: attributes.sessionToken,
-        metadata: attributes.metadata,
-      }
-    },
-  })
-}
-
 export function useAuth(event: H3Event<EventHandlerRequest>) {
   return new AuthManager(event)
 }
@@ -126,7 +126,7 @@ declare module 'h3' {
 
 declare module 'lucia' {
   interface Register {
-    Lucia: ReturnType<typeof initializeLucia>
+    Lucia: ReturnType<AuthManager['initializeLucia']>
     DatabaseUserAttributes: Omit<DatabaseUser, 'password'>
     DatabaseSessionAttributes: Omit<DatabaseSession, 'password'>
   }
