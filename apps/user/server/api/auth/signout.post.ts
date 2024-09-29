@@ -2,9 +2,8 @@ import { useAuth } from '@@/server/utils'
 
 export default defineEventHandler(async (event) => {
   try {
-    // const { lucia, getAuth } = await useAuth(event)
     const auth = useAuth(event)
-    const { user } = await auth.getAuth()
+    const { user, session } = await auth.getAuth()
 
     if (!user?.id) {
       throw createError({
@@ -12,8 +11,8 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    await auth.lucia.invalidateSession(user?.id)
-    appendHeader(event, 'Set-Cookie', auth.lucia.createBlankSessionCookie().serialize())
+    await auth.lucia.invalidateSession(session.id)
+    auth.setBlankSessionCookie()
 
     return {
       message: 'Successfully signed out!',

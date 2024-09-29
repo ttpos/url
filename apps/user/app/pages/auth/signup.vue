@@ -21,6 +21,7 @@ const loading = ref(false)
 const oauthLoading = ref(false)
 const token = ref()
 const turnstile = ref<InstanceType<typeof NuxtTurnstile> | null>()
+const show = ref(false)
 
 const fields = computed(() => {
   const commonFields = [
@@ -124,12 +125,15 @@ async function onSubmit(data: FormSubmitEvent<any>) {
       password: data.password,
       captchaToken: token.value,
     }
-    console.log('🚀 ~ onSubmit ~ payload:', payload)
 
-    await $csrfFetch('/api/auth/signup', {
+    const { message } = await $csrfFetch('/api/auth/signup', {
       method: 'POST',
       body: payload,
     })
+
+    if (message) {
+      toast.add({ title: message })
+    }
 
     // await navigateTo(selectedMethod.value === 0 ? '/auth/verify-email' : '/auth/verify-phone')
     await navigateTo('/')
@@ -142,6 +146,10 @@ async function onSubmit(data: FormSubmitEvent<any>) {
     loading.value = false
   }
 }
+
+onMounted(() => {
+  show.value = true
+})
 </script>
 
 <template>
@@ -185,6 +193,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
       </template>
       <template #validation>
         <NuxtTurnstile
+          v-if="show"
           ref="turnstile"
           v-model="token"
           :options="{ action: 'native' }"

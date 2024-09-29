@@ -19,10 +19,10 @@ export default defineEventHandler(async (event) => {
 
   try {
     const db = useDrizzle(event)
-    const { lucia, github } = await useAuth(event)
+    const auth = useAuth(event)
 
     // Validate the authorization code and get tokens
-    const tokens = await github.validateAuthorizationCode(code)
+    const tokens = await auth.github.validateAuthorizationCode(code)
     const githubUserResponse = await fetch('https://api.github.com/user', {
       headers: {
         Authorization: `Bearer ${tokens.accessToken}`,
@@ -86,14 +86,7 @@ export default defineEventHandler(async (event) => {
           return sendRedirect(event, '/oauth/link-accounts?provider=github')
         }
 
-        // Log in the user
-        const session = await lucia.createSession(existingUser.id, {
-          status: 1,
-          sessionToken: generateId(32),
-          metadata: {},
-        })
-        logger.log('🚀 ~ defineEventHandler ~ session:', session)
-        appendHeader(event, 'Set-Cookie', lucia.createSessionCookie(session.id).serialize())
+        await auth.createSession(existingUser.id, null, true)
         return sendRedirect(event, '/')
       }
     }
@@ -151,32 +144,29 @@ export default defineEventHandler(async (event) => {
           // Generate a unique ID for the OAuth record
           const oauthId = generateId(15)
 
-          // Insert a new user with the GitHub information
-          await db.insert(userTable).values({
-            id: userId,
-            email: githubUser.email || '',
-            // oauthRegisterId: oauthId,
-            nickname: githubUser.name, // Use the name from the GitHub user
-          })
+          await db.batch([
+            // Insert a new user with the GitHub information
+            db.insert(userTable).values({
+              id: userId,
+              email: githubUser.email || '',
+              // oauthRegisterId: oauthId,
+              nickname: githubUser.name, // Use the name from the GitHub user
+            }),
 
-          // Insert the new OAuth record
-          await db.insert(usersOauthTable).values({
-            id: oauthId,
-            userId,
-            provider: 'github',
-            providerUserId: userId,
-          })
+            // Insert the new OAuth record
+            db.insert(usersOauthTable).values({
+              id: oauthId,
+              userId,
+              provider: 'github',
+              providerUserId: userId,
+            }),
 
-          await db.update(userTable).set({
-            oauthRegisterId: oauthId,
-          }).where(eq(userTable.id, userId))
+            db.update(userTable).set({
+              oauthRegisterId: oauthId,
+            }).where(eq(userTable.id, userId)),
+          ])
 
-          const session = await lucia.createSession(userId, {
-            status: 1,
-            sessionToken: 'testing',
-            metadata: {},
-          })
-          appendHeader(event, 'Set-Cookie', lucia.createSessionCookie(session.id).serialize())
+          await auth.createSession(userId, null, true)
           return sendRedirect(event, '/')
         }
       }

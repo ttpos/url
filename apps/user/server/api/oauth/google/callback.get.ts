@@ -20,9 +20,9 @@ export default defineEventHandler(async (event) => {
 
   try {
     const db = useDrizzle(event)
-    const { lucia, google } = await useAuth(event)
+    const auth = useAuth(event)
 
-    const tokens: GoogleTokens = await google.validateAuthorizationCode(
+    const tokens: GoogleTokens = await auth.google.validateAuthorizationCode(
       code,
       codeVerifier as string,
     )
@@ -61,8 +61,7 @@ export default defineEventHandler(async (event) => {
         expiresAt: tokens.accessTokenExpiresAt ?? null,
       })
 
-      const session = await lucia.createSession(isEmailUsed.id, {})
-      appendHeader(event, 'Set-Cookie', lucia.createSessionCookie(session.id).serialize())
+      await auth.createSession(isEmailUsed.id, null, true)
       return sendRedirect(event, '/')
     }
 
@@ -71,8 +70,7 @@ export default defineEventHandler(async (event) => {
     })
 
     if (existingUser) {
-      const session = await lucia.createSession(existingUser.id, {})
-      appendHeader(event, 'Set-Cookie', lucia.createSessionCookie(session.id).serialize())
+      await auth.createSession(existingUser.id, null, true)
       return sendRedirect(event, '/')
     }
 
@@ -96,8 +94,7 @@ export default defineEventHandler(async (event) => {
       expiresAt: tokens.accessTokenExpiresAt ?? null,
     })
 
-    const session = await lucia.createSession(userId, {})
-    appendHeader(event, 'Set-Cookie', lucia.createSessionCookie(session.id).serialize())
+    await auth.createSession(userId, null, true)
     return sendRedirect(event, '/')
   }
   catch (e) {

@@ -2,8 +2,8 @@ import { sessionTable, userTable } from '@@/server/database/schema'
 import { useDrizzle } from '@@/server/utils'
 import { DrizzleSQLiteAdapter } from '@lucia-auth/adapter-drizzle'
 import { GitHub, Google } from 'arctic'
-import { appendHeader, getCookie } from 'h3'
-import { Lucia } from 'lucia'
+import { appendHeader, getCookie, setCookie } from 'h3'
+import { generateId, Lucia } from 'lucia'
 import type { EventHandlerRequest, H3Event } from 'h3'
 import type { Adapter, Session, User } from 'lucia'
 
@@ -87,6 +87,9 @@ class AuthManager {
     })
   }
 
+  /**
+   * Authenticates and returns user and session information.
+   */
   public async getAuth() {
     const sessionId = getCookie(this.event, this.lucia.sessionCookieName) ?? null
     if (!sessionId) {
@@ -110,6 +113,72 @@ class AuthManager {
       session,
     }
   }
+
+  /**
+   * Creates a session for a user
+   */
+  public async createSession(
+    userId: string,
+    sessionData?: {
+      status?: number
+      sessionToken?: string
+      metadata?: Record<string, any>
+    },
+    useAppendHeader = false,
+  ) {
+    const { headers } = this.event.node.req
+
+    const metadata = {
+      ip: headers?.['x-forwarded-for'] || '',
+      country: '',
+      deviceInfo: headers?.['user-agent'] || '',
+      createdAt: Date.now(),
+    }
+
+    // Create a session
+    const session = await this.lucia.createSession(
+      userId,
+      Object.assign(
+        {
+          status: 1,
+          sessionToken: generateId(32),
+          // eslint-disable-next-line node/prefer-global/buffer
+          metadata: Buffer.from(JSON.stringify(metadata)),
+        },
+        sessionData,
+      ),
+    )
+
+    // Set the session cookie
+    const sessionCookie = this.lucia.createSessionCookie(session.id)
+
+    if (useAppendHeader) {
+      appendHeader(this.event, 'Set-Cookie', sessionCookie.serialize())
+    }
+    else {
+      setCookie(this.event, sessionCookie.name, sessionCookie.value, sessionCookie.attributes)
+    }
+
+    return session
+  }
+
+  /**
+   * Sets a session cookie for a given session ID.
+   */
+  public setSessionCookie(sessionId: string) {
+    const luciaToken = this.lucia.createSessionCookie(sessionId)
+    setCookie(this.event, luciaToken.name, luciaToken.value, luciaToken.attributes)
+  }
+
+  /**
+   * Sets a blank session cookie.
+   */
+  public setBlankSessionCookie() {
+    const blankSessionCookie = this.lucia.createBlankSessionCookie()
+    setCookie(this.event, blankSessionCookie.name, blankSessionCookie.value, blankSessionCookie.attributes)
+  }
+
+  // etc.
 }
 
 export function useAuth(event: H3Event<EventHandlerRequest>) {
