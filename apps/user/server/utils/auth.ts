@@ -1,0 +1,215 @@
+import { sessionTable, userTable } from '@@/server/database/schema'
+import { useDrizzle } from '@@/server/utils'
+import { DrizzleSQLiteAdapter } from '@lucia-auth/adapter-drizzle'
+import { GitHub, Google } from 'arctic'
+import { appendHeader, getCookie, setCookie } from 'h3'
+import { generateId, Lucia } from 'lucia'
+import type { EventHandlerRequest, H3Event } from 'h3'
+import type { Adapter, Session, User } from 'lucia'
+
+class AuthManager {
+  private static luciaInstance: ReturnType<AuthManager['initializeLucia']>
+  private static githubInstance: GitHub
+  private static googleInstance: Google
+  private event: H3Event<EventHandlerRequest>
+  private config: ReturnType<typeof useRuntimeConfig>
+  public lucia: ReturnType<AuthManager['initializeLucia']>
+  public github: GitHub
+  public google: Google
+
+  constructor(event: H3Event<EventHandlerRequest>) {
+    logger.info('Creating AuthManager instance')
+
+    const db = useDrizzle(event)
+
+    this.event = event
+    this.config = useRuntimeConfig()
+    this.lucia = this.getLuciaInstance(db)
+    this.github = this.getGitHubInstance()
+    this.google = this.getGoogleInstance()
+  }
+
+  private getLuciaInstance(db: ReturnType<typeof useDrizzle>) {
+    if (!AuthManager.luciaInstance) {
+      logger.info('AuthManager Init Lucia')
+
+      const adapter = new DrizzleSQLiteAdapter(db, sessionTable, userTable)
+      AuthManager.luciaInstance = this.initializeLucia(adapter)
+    }
+    return AuthManager.luciaInstance
+  }
+
+  private getGitHubInstance() {
+    if (!AuthManager.githubInstance) {
+      AuthManager.githubInstance = new GitHub(
+        this.config.githubClientId,
+        this.config.githubClientSecret,
+      )
+    }
+    return AuthManager.githubInstance
+  }
+
+  private getGoogleInstance() {
+    if (!AuthManager.googleInstance) {
+      AuthManager.googleInstance = new Google(
+        this.config.googleClientId,
+        this.config.googleClientSecret,
+        this.config.googleRedirectURI,
+      )
+    }
+    return AuthManager.googleInstance
+  }
+
+  private initializeLucia(adapter: Adapter) {
+    return new Lucia(adapter, {
+      sessionCookie: {
+        attributes: {
+          // set to `true` when using HTTPS
+          secure: import.meta.dev,
+          // secure: true,
+        },
+      },
+      getUserAttributes: (attributes) => {
+        return {
+          id: attributes.id,
+          nickname: attributes.nickname,
+          email: attributes.email,
+          isEmailVerified: attributes.isEmailVerified,
+        }
+      },
+      getSessionAttributes: (attributes) => {
+        return {
+          status: attributes.status,
+          sessionToken: attributes.sessionToken,
+          metadata: attributes.metadata,
+        }
+      },
+    })
+  }
+
+  /**
+   * Authenticates and returns user and session information.
+   */
+  public async getAuth() {
+    const sessionId = getCookie(this.event, this.lucia.sessionCookieName) ?? null
+    if (!sessionId) {
+      return {
+        user: null,
+        session: null,
+      }
+    }
+
+    const { session, user } = await this.lucia.validateSession(sessionId)
+
+    if (session && session.fresh) {
+      appendHeader(this.event, 'Set-Cookie', this.lucia.createSessionCookie(session.id).serialize())
+    }
+    if (!session) {
+      appendHeader(this.event, 'Set-Cookie', this.lucia.createBlankSessionCookie().serialize())
+    }
+
+    return {
+      user,
+      session,
+    }
+  }
+
+  /**
+   * Creates a session for a user
+   */
+  public async createSession(
+    userId: string,
+    sessionData?: {
+      status?: number
+      sessionToken?: string
+      metadata?: Record<string, any>
+    },
+    useAppendHeader = false,
+  ) {
+    const { headers } = this.event.node.req
+
+    const metadata = {
+      ip: headers?.['x-forwarded-for'] || '',
+      country: '',
+      deviceInfo: headers?.['user-agent'] || '',
+      createdAt: Date.now(),
+    }
+
+    // Create a session
+    const session = await this.lucia.createSession(
+      userId,
+      Object.assign(
+        {
+          status: 1,
+          sessionToken: generateId(32),
+          // eslint-disable-next-line node/prefer-global/buffer
+          metadata: Buffer.from(JSON.stringify(metadata)),
+        },
+        sessionData,
+      ),
+    )
+
+    // Set the session cookie
+    const sessionCookie = this.lucia.createSessionCookie(session.id)
+
+    if (useAppendHeader) {
+      appendHeader(this.event, 'Set-Cookie', sessionCookie.serialize())
+    }
+    else {
+      setCookie(this.event, sessionCookie.name, sessionCookie.value, sessionCookie.attributes)
+    }
+
+    return session
+  }
+
+  /**
+   * Sets a session cookie for a given session ID.
+   */
+  public setSessionCookie(sessionId: string) {
+    const luciaToken = this.lucia.createSessionCookie(sessionId)
+    setCookie(this.event, luciaToken.name, luciaToken.value, luciaToken.attributes)
+  }
+
+  /**
+   * Sets a blank session cookie.
+   */
+  public setBlankSessionCookie() {
+    const blankSessionCookie = this.lucia.createBlankSessionCookie()
+    setCookie(this.event, blankSessionCookie.name, blankSessionCookie.value, blankSessionCookie.attributes)
+  }
+
+  // etc.
+}
+
+export function useAuth(event: H3Event<EventHandlerRequest>) {
+  return new AuthManager(event)
+}
+
+// IMPORTANT!
+declare module 'h3' {
+  interface H3EventContext {
+    user: User | null
+    session: Session | null
+  }
+}
+
+declare module 'lucia' {
+  interface Register {
+    Lucia: ReturnType<AuthManager['initializeLucia']>
+    DatabaseUserAttributes: Omit<DatabaseUser, 'password'>
+    DatabaseSessionAttributes: Omit<DatabaseSession, 'password'>
+  }
+}
+
+interface DatabaseUser {
+  id: string
+  nickname: string
+  email: string
+  isEmailVerified: string
+}
+
+interface DatabaseSession {
+  status: number
+  sessionToken: string
+  metadata: object
+}

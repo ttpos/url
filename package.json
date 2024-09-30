@@ -13,9 +13,9 @@
   },
   "scripts": {
     "dev:links": "pnpm -C apps/links dev",
-    "dev:dashboard": "pnpm -C apps/dashboard dev",
+    "dev:user": "pnpm -C apps/user dev",
     "preview:links": "pnpm -C apps/links preview",
-    "preview:dashboard": "pnpm -C apps/dashboard preview",
+    "preview:user": "pnpm -C apps/user preview",
     "build": "pnpm -r build",
     "clean": "bash ./scripts/clean.sh",
     "prepare": "bash ./scripts/init.sh",
