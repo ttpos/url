@@ -1,4 +1,5 @@
 import { links } from '@@/server/database/schema'
+import { useDrizzle } from '@@/server/utils'
 import { defineEventHandler, readBody } from 'h3'
 
 interface Query {
@@ -12,9 +13,8 @@ interface Query {
 }
 
 export default defineEventHandler(async (event) => {
-  const { db } = event.context
-
   try {
+    const db = useDrizzle(event)
     const { records } = await readBody<Query>(event)
 
     const results = await Promise.all(

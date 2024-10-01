@@ -1,4 +1,6 @@
 import { links } from '@@/server/database/schema'
+import { useDrizzle } from '@@/server/utils'
+
 import { eq } from 'drizzle-orm'
 import { defineEventHandler } from 'h3'
 
@@ -7,10 +9,10 @@ interface Query {
 }
 
 export default defineEventHandler(async (event) => {
-  const { db } = event.context
   const { isDelete } = getQuery<Query>(event)
 
   try {
+    const db = useDrizzle(event)
     const query = db?.select().from(links)
 
     if (typeof isDelete !== 'undefined') {

@@ -1,10 +1,10 @@
 import { links } from '@@/server/database/schema'
+import { useDrizzle } from '@@/server/utils'
 import { sha256 } from '@noble/hashes/sha2'
 import { bytesToHex } from '@noble/hashes/utils'
 import { eq } from 'drizzle-orm'
 
 export default defineEventHandler(async (event) => {
-  const { db } = event.context
   const url = new URL(
     event.node.req.headers.host || '',
     `http://${event.node.req.headers.host}`,
@@ -12,6 +12,8 @@ export default defineEventHandler(async (event) => {
   const domain = url.hostname
 
   try {
+    const db = useDrizzle(event)
+
     const shortCode = event.context.params?.shortCode || ''
     logger.warn('🚀 ~ defineEventHandler ~ shortCode:', shortCode)
 

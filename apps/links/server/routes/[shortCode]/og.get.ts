@@ -1,4 +1,5 @@
 import { links } from '@@/server/database/schema'
+import { useDrizzle } from '@@/server/utils'
 import { eq } from 'drizzle-orm'
 import { defineEventHandler } from 'h3'
 
@@ -12,9 +13,8 @@ function escapeHtml(unsafe: string): string {
 }
 
 export default defineEventHandler(async (event) => {
-  const { db } = event.context
-
   try {
+    const db = useDrizzle(event)
     const shortCode = event.context.params?.shortCode
 
     if (!shortCode) {
