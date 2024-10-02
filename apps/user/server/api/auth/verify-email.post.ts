@@ -55,7 +55,6 @@ export default defineEventHandler(async (event) => {
       .set({
         status: 1,
         isDeleted: 1,
-        updatedAt: Date.now(),
       })
       .where(eq(verificationTable.userId, userId))
 
@@ -63,7 +62,6 @@ export default defineEventHandler(async (event) => {
       .update(userTable)
       .set({
         isEmailVerified: 1,
-        updatedAt: Date.now(),
       })
       .where(eq(userTable.id, userId))
 

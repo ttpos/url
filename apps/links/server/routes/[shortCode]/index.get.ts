@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
       .limit(1)
       .get()
 
-    if (!urlData || urlData.isDelete === 1 || (urlData.expiresAt && Date.now() > urlData.expiresAt)) {
+    if (!urlData || urlData.isDeleted === 1 || (urlData.expiresAt && Date.now() > urlData.expiresAt)) {
       logger.warn('Short code issue:', shortCode)
 
       event.node.res.statusCode = 404

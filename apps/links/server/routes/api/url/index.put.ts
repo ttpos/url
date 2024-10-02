@@ -50,7 +50,6 @@ export default defineEventHandler(async (event) => {
             userId: record.userId,
             expiresAt: record.expiresAt,
             attribute: record.attribute,
-            isDelete: 0,
           }
 
           const fieldsToUpdate = Object.fromEntries(

@@ -25,7 +25,6 @@ export default defineEventHandler(async (event) => {
             userId: record.userId || '',
             expiresAt: record.expiresAt,
             hash: record.hash,
-            isDelete: 0,
             attribute: record.attribute,
           })
           return {

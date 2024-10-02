@@ -5,18 +5,18 @@ import { eq } from 'drizzle-orm'
 import { defineEventHandler } from 'h3'
 
 interface Query {
-  isDelete?: 0 | 1
+  isDeleted?: 0 | 1
 }
 
 export default defineEventHandler(async (event) => {
-  const { isDelete } = getQuery<Query>(event)
+  const { isDeleted } = getQuery<Query>(event)
 
   try {
     const db = useDrizzle(event)
     const query = db?.select().from(links)
 
-    if (typeof isDelete !== 'undefined') {
-      query?.where(eq(links.isDelete, Number(isDelete)))
+    if (typeof isDeleted !== 'undefined') {
+      query?.where(eq(links.isDeleted, Number(isDeleted)))
     }
 
     const allLinks = await query?.all()

@@ -26,13 +26,13 @@ export default defineEventHandler(async (event) => {
           const record = await db
             ?.select()
             .from(links)
-            .where(and(eq(links.hash, hash), eq(links.isDelete, 0)))
+            .where(and(eq(links.hash, hash), eq(links.isDeleted, 0)))
             .get()
 
           if (record) {
             await db
               ?.update(links)
-              .set({ isDelete: 1 })
+              .set({ isDeleted: 1 })
               .where(eq(links.hash, hash))
               .execute()
 
