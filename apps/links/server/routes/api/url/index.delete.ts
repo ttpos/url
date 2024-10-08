@@ -1,4 +1,5 @@
 import { links } from '@@/server/database/schema'
+import { useDrizzle } from '@@/server/utils'
 import { and, eq } from 'drizzle-orm'
 import { defineEventHandler, readBody } from 'h3'
 
@@ -7,9 +8,8 @@ interface Query {
 }
 
 export default defineEventHandler(async (event) => {
-  const { db } = event.context
-
   try {
+    const db = useDrizzle(event)
     const { hashList } = await readBody<Query>(event)
 
     if (!hashList || hashList.length === 0) {
@@ -26,13 +26,13 @@ export default defineEventHandler(async (event) => {
           const record = await db
             ?.select()
             .from(links)
-            .where(and(eq(links.hash, hash), eq(links.isDelete, 0)))
+            .where(and(eq(links.hash, hash), eq(links.isDeleted, 0)))
             .get()
 
           if (record) {
             await db
               ?.update(links)
-              .set({ isDelete: 1 })
+              .set({ isDeleted: 1 })
               .where(eq(links.hash, hash))
               .execute()
 

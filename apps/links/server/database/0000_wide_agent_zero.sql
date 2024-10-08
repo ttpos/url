@@ -3,8 +3,11 @@ CREATE TABLE `links` (
 	`url` text NOT NULL,
 	`user_id` text NOT NULL,
 	`expires_at` integer,
-	`is_delete` integer DEFAULT 0,
-	`hash` text NOT NULL
+	`hash` text NOT NULL,
+	`attribute` blob,
+	`created_at` integer NOT NULL,
+	`updated_at` integer NOT NULL,
+	`is_deleted` integer DEFAULT 0 NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE `pages` (
@@ -12,9 +15,12 @@ CREATE TABLE `pages` (
 	`user_id` text NOT NULL,
 	`template` text NOT NULL,
 	`data` blob NOT NULL,
-	`is_delete` integer DEFAULT 0,
 	`expires_at` integer,
-	`hash` text NOT NULL
+	`hash` text NOT NULL,
+	`attribute` blob,
+	`created_at` integer NOT NULL,
+	`updated_at` integer NOT NULL,
+	`is_deleted` integer DEFAULT 0 NOT NULL
 );
 --> statement-breakpoint
 CREATE UNIQUE INDEX `links_hash` ON `links` (`hash`);--> statement-breakpoint

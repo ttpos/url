@@ -2,6 +2,19 @@
 
 import { blob, integer, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core'
 
+const trackingFields = {
+  createdAt: integer('created_at', { mode: 'timestamp' })
+    .notNull()
+    .$defaultFn(() => new Date()),
+  updatedAt: integer('updated_at', { mode: 'timestamp' })
+    .notNull()
+    .$defaultFn(() => new Date())
+    .$onUpdateFn(() => new Date()),
+  isDeleted: integer('is_deleted')
+    .notNull()
+    .default(0),
+}
+
 export const userTable = sqliteTable(
   'user',
   {
@@ -22,9 +35,7 @@ export const userTable = sqliteTable(
     nickname: text('nickname'),
     language: text('language'),
     country: text('country'),
-    createdAt: integer('created_at').default(Date.now()),
-    updatedAt: integer('updated_at').default(Date.now()),
-    isDeleted: integer('is_deleted'),
+    ...trackingFields,
   },
   (table) => {
     return {
@@ -48,9 +59,7 @@ export const usersOauthTable = sqliteTable(
     accessToken: text('access_token'),
     refreshToken: text('refresh_token'),
     expiresAt: integer('expires_at'),
-    createdAt: integer('created_at').default(Date.now()),
-    updatedAt: integer('updated_at').default(Date.now()),
-    isDeleted: integer('is_deleted'),
+    ...trackingFields,
   },
   (table) => {
     return {
@@ -93,9 +102,7 @@ export const verificationTable = sqliteTable(
      * - 4 other
      */
     action: text('action'),
-    createdAt: integer('created_at').default(Date.now()),
-    updatedAt: integer('updated_at').default(Date.now()),
-    isDeleted: integer('is_deleted'),
+    ...trackingFields,
   },
 )
 
@@ -111,9 +118,7 @@ export const mfaTable = sqliteTable(
     status: text('status').notNull(),
     value: text('value'),
     lastVerifiedAt: integer('last_verified_at'),
-    createdAt: integer('created_at').default(Date.now()),
-    updatedAt: integer('updated_at').default(Date.now()),
-    isDeleted: integer('is_deleted'),
+    ...trackingFields,
   },
 )
 
@@ -129,18 +134,19 @@ export const sessionTable = sqliteTable(
     status: text('status').notNull(),
     mfaId: text('mfa_id')
       .references(() => mfaTable.id),
-    // [
-    //   {
-    //     ip: '',
-    //     country: '',
-    //     deviceInfo: '',
-    //     createdAt: Date.now(),
-    //   },
-    // ]
+    /**
+     * Example metadata structure:
+     * [
+     *   {
+     *     ip: '',
+     *     country: '',
+     *     deviceInfo: '',
+     *     createdAt: Date.now(),
+     *   }
+     * ]
+     */
     metadata: blob('metadata').notNull(),
-    createdAt: integer('created_at').default(Date.now()),
-    updatedAt: integer('updated_at').default(Date.now()),
-    isDeleted: integer('is_deleted'),
+    ...trackingFields,
   },
 )
 
@@ -156,8 +162,7 @@ export const activityLogTable = sqliteTable(
     sessionId: text('session_id')
       .notNull()
       .references(() => sessionTable.id),
-    createdAt: integer('created_at').default(Date.now()),
-    isDeleted: integer('is_deleted'),
+    ...trackingFields,
   },
 )
 
@@ -172,9 +177,9 @@ export const tokens = sqliteTable(
     resources: blob('resources'),
     accesses: blob('accesses'),
     expiresAt: integer('expires_at'),
-    createdAt: integer('created_at').default(Date.now()),
-    updatedAt: integer('updated_at').default(Date.now()),
-    lastUsedAt: integer('last_used_at').default(Date.now()),
-    isDeleted: integer('is_deleted'),
+    lastUsedAt: integer('last_used_at', { mode: 'timestamp' })
+      .notNull()
+      .$defaultFn(() => new Date()),
+    ...trackingFields,
   },
 )

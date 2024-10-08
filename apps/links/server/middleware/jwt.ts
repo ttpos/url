@@ -1,4 +1,4 @@
-import { jwtVerifyFn } from '@@/server/utils/jwtVerifier'
+import { jwtVerifyFn } from '@@/server/utils'
 import { defineEventHandler } from 'h3'
 
 export default defineEventHandler(async (event) => {

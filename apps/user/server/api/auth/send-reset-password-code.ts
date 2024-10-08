@@ -58,8 +58,6 @@ export default defineEventHandler(async (event) => {
       // type: email ? 'email' : phone ? 'phone' : null, // 类型（'email' 或 'phone'）
       type: 'email', // 类型（'email' 或 'phone'）
       action: '/auth/reset-password', // 代表某个动作，传入 URL
-      createdAt: Date.now(), // 创建时间
-      updatedAt: Date.now(), // 更新时间
       isDeleted: 0, // 默认未删除（0表示未删除）
     })
 

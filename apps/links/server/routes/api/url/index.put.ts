@@ -1,4 +1,5 @@
 import { links } from '@@/server/database/schema'
+import { useDrizzle } from '@@/server/utils'
 import { eq } from 'drizzle-orm'
 import { defineEventHandler, readBody } from 'h3'
 
@@ -15,9 +16,8 @@ interface Query {
 }
 
 export default defineEventHandler(async (event) => {
-  const { db } = event.context
-
   try {
+    const db = useDrizzle(event)
     const { records } = await readBody<Query>(event)
 
     if (!records || records.length === 0) {
@@ -50,7 +50,6 @@ export default defineEventHandler(async (event) => {
             userId: record.userId,
             expiresAt: record.expiresAt,
             attribute: record.attribute,
-            isDelete: 0,
           }
 
           const fieldsToUpdate = Object.fromEntries(

@@ -1,10 +1,10 @@
 import { links } from '@@/server/database/schema'
+import { useDrizzle } from '@@/server/utils'
 import { sha256 } from '@noble/hashes/sha2'
 import { bytesToHex } from '@noble/hashes/utils'
 import { eq } from 'drizzle-orm'
 
 export default defineEventHandler(async (event) => {
-  const { db } = event.context
   const url = new URL(
     event.node.req.headers.host || '',
     `http://${event.node.req.headers.host}`,
@@ -12,6 +12,8 @@ export default defineEventHandler(async (event) => {
   const domain = url.hostname
 
   try {
+    const db = useDrizzle(event)
+
     const shortCode = event.context.params?.shortCode || ''
     logger.warn('🚀 ~ defineEventHandler ~ shortCode:', shortCode)
 
@@ -29,7 +31,7 @@ export default defineEventHandler(async (event) => {
       .limit(1)
       .get()
 
-    if (!urlData || urlData.isDelete === 1 || (urlData.expiresAt && Date.now() > urlData.expiresAt)) {
+    if (!urlData || urlData.isDeleted === 1 || (urlData.expiresAt && Date.now() > urlData.expiresAt)) {
       logger.warn('Short code issue:', shortCode)
 
       event.node.res.statusCode = 404
