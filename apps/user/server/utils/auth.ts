@@ -171,12 +171,46 @@ class AuthManager {
 
   // etc.
   public async setUserSession(user: UserSession) {
+    // Check for existing sessions
+    const existingSession = await this.db.query.sessionTable.findFirst({
+      where: eq(sessionTable.userId, user.id.toString()),
+    })
+
+    const sessionData = {
+      userId: user.id.toString(),
+      sessionToken: generateCode(32),
+      expiresAt: Date.now() + 4 * 60 * 60 * 1000, // Expires in 4 hours
+      status: 'active',
+      isDeleted: 0,
+      // eslint-disable-next-line node/prefer-global/buffer
+      metadata: Buffer.from(JSON.stringify({
+        ip: this.event.node.req.headers['x-forwarded-for'] || '',
+        country: '',
+        deviceInfo: this.event.node.req.headers['user-agent'] || '',
+        createdAt: Date.now(),
+      })),
+    }
+
+    if (existingSession) {
+      await this.db
+        .update(sessionTable)
+        .set(sessionData)
+        .where(eq(sessionTable.id, existingSession[0].id))
+    }
+    else {
+      await this.db.insert(sessionTable).values({
+        id: generateCode(15),
+        ...sessionData,
+      })
+    }
+
     return await replaceUserSession(this.event, {
       user: {
         id: user.id,
         name: user.name!,
         email: user.email!,
       },
+      id: user.id,
       loggedInAt: Date.now(),
     })
   }
@@ -210,6 +244,19 @@ class AuthManager {
   }
 
   public async clearUserSession() {
+    const currentSession = await getUserSession(this.event)
+
+    if (currentSession && currentSession.user) {
+      await this.db
+        .update(sessionTable)
+        .set({
+          // eslint-disable-next-line ts/ban-ts-comment
+          // @ts-expect-error
+          isDeleted: 1,
+        })
+        .where(eq(sessionTable.userId, currentSession.user.id.toString()))
+    }
+
     // Clear the current user session
     return await clearUserSession(this.event)
   }
