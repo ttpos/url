@@ -32,7 +32,8 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    await auth.createSession(_user.id, null, true)
+    // await auth.createSession(_user.id, null, true)
+    await auth.setUserSession(_user)
 
     return {
       message: 'We\'ve sent a verification email to your inbox. Please verify your email.',
