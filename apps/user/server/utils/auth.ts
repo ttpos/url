@@ -191,11 +191,11 @@ class AuthManager {
       })),
     }
 
-    if (existingSession) {
+    if (existingSession && existingSession.id) {
       await this.db
         .update(sessionTable)
         .set(sessionData)
-        .where(eq(sessionTable.id, existingSession[0].id))
+        .where(eq(sessionTable.id, existingSession.id))
     }
     else {
       await this.db.insert(sessionTable).values({
