@@ -75,9 +75,6 @@ importers:
       '@libsql/client':
         specifier: ^0.10.0
         version: 0.10.0
-      '@lucia-auth/adapter-drizzle':
-        specifier: ^1.1.0
-        version: 1.1.0(drizzle-orm@0.33.0(@cloudflare/workers-types@4.20240909.0)(@libsql/client@0.10.0)(@types/react@18.3.3)(react@18.3.1))(lucia@3.2.0)
       '@node-rs/argon2':
         specifier: ^1.8.3
         version: 1.8.3
@@ -96,18 +93,12 @@ importers:
       '@vueuse/nuxt':
         specifier: ^11.0.3
         version: 11.0.3(magicast@0.3.5)(nuxt@3.13.1(@libsql/client@0.10.0)(@parcel/watcher@2.4.1)(@types/node@22.3.0)(drizzle-orm@0.33.0(@cloudflare/workers-types@4.20240909.0)(@libsql/client@0.10.0)(@types/react@18.3.3)(react@18.3.1))(eslint@9.10.0(jiti@1.21.6))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.21.1)(terser@5.31.6)(typescript@5.5.4)(vite@5.4.4(@types/node@22.3.0)(terser@5.31.6))(vue-tsc@2.1.6(typescript@5.5.4))(webpack-sources@3.2.3))(rollup@4.21.1)(vue@3.5.4(typescript@5.5.4))
-      arctic:
-        specifier: ^1.9.2
-        version: 1.9.2
       date-fns:
         specifier: ^3.6.0
         version: 3.6.0
       drizzle-orm:
         specifier: ^0.33.0
         version: 0.33.0(@cloudflare/workers-types@4.20240909.0)(@libsql/client@0.10.0)(@types/react@18.3.3)(react@18.3.1)
-      lucia:
-        specifier: 3.2.0
-        version: 3.2.0
       nanoid:
         specifier: ^5.0.7
         version: 5.0.7
@@ -1602,12 +1593,6 @@ packages:
     resolution: {integrity: sha512-IdODVqV/PrdOnHA/004uWyorZQuRsB7U7bCRCE3vXgABj3eJLJGc6cv2C6ksEaEoVxJbD8k53H4VVAGrtYwXzQ==}
     cpu: [x64]
     os: [win32]
-
-  '@lucia-auth/adapter-drizzle@1.1.0':
-    resolution: {integrity: sha512-iCTnZWvfI5lLZOdUHZYiXA1jaspIFEeo2extLxQ3DjP3uOVys7IPwBi7zezLIRu9dhro4H4Kji+7gSYyjcef2A==}
-    peerDependencies:
-      drizzle-orm: '>= 0.29 <1'
-      lucia: 3.x
 
   '@lukeed/ms@2.0.2':
     resolution: {integrity: sha512-9I2Zn6+NJLfaGoz9jN3lpwDgAYvfGeNYdbAIjJOqzs4Tpc+VU3Jqq4IofSUBKajiDS8k9fZIg18/z13mpk1bsA==}
@@ -3192,9 +3177,6 @@ packages:
   archiver@7.0.1:
     resolution: {integrity: sha512-ZcbTaIqJOfCc03QwD468Unz/5Ir8ATtvAHsK+FdXbDIbGfihqh9mrvdcYunQzqn4HrvWWaFyaxJhGZagaJJpPQ==}
     engines: {node: '>= 14'}
-
-  arctic@1.9.2:
-    resolution: {integrity: sha512-VTnGpYx+ypboJdNrWnK17WeD7zN/xSCHnpecd5QYsBfVZde/5i+7DJ1wrf/ioSDMiEjagXmyNWAE3V2C9f1hNg==}
 
   are-docs-informative@0.0.2:
     resolution: {integrity: sha512-ixiS0nLNNG5jNQzgZJNoUpBKdo9yTYZMGJ+QgT2jmjR7G7+QHRCc4v6LQ3NgE7EBJq+o0ams3waJwkrlBom8Ig==}
@@ -5121,9 +5103,6 @@ packages:
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
-  lucia@3.2.0:
-    resolution: {integrity: sha512-eXMxXwk6hqtjRTj4W/x3EnTUtAztLPm0p2N2TEBMDEbakDLXiYnDQ9z/qahjPdPdhPguQc+vwO0/88zIWxlpuw==}
-
   magic-regexp@0.8.0:
     resolution: {integrity: sha512-lOSLWdE156csDYwCTIGiAymOLN7Epu/TU5e/oAnISZfU6qP+pgjkE+xbVjVn3yLPKN8n1G2yIAYTAM5KRk6/ow==}
 
@@ -5618,9 +5597,6 @@ packages:
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
     engines: {node: '>= 0.8.0'}
-
-  oslo@1.2.0:
-    resolution: {integrity: sha512-OoFX6rDsNcOQVAD2gQD/z03u4vEjWZLzJtwkmgfRF+KpQUXwdgEXErD7zNhyowmHwHefP+PM9Pw13pgpHMRlzw==}
 
   oslo@1.2.1:
     resolution: {integrity: sha512-HfIhB5ruTdQv0XX2XlncWQiJ5SIHZ7NHZhVyHth0CSZ/xzge00etRyYy/3wp/Dsu+PkxMC+6+B2lS/GcKoewkA==}
@@ -8425,11 +8401,6 @@ snapshots:
   '@libsql/win32-x64-msvc@0.4.1':
     optional: true
 
-  '@lucia-auth/adapter-drizzle@1.1.0(drizzle-orm@0.33.0(@cloudflare/workers-types@4.20240909.0)(@libsql/client@0.10.0)(@types/react@18.3.3)(react@18.3.1))(lucia@3.2.0)':
-    dependencies:
-      drizzle-orm: 0.33.0(@cloudflare/workers-types@4.20240909.0)(@libsql/client@0.10.0)(@types/react@18.3.3)(react@18.3.1)
-      lucia: 3.2.0
-
   '@lukeed/ms@2.0.2': {}
 
   '@mapbox/geojson-rewind@0.5.2':
@@ -10764,10 +10735,6 @@ snapshots:
       tar-stream: 3.1.7
       zip-stream: 6.0.1
 
-  arctic@1.9.2:
-    dependencies:
-      oslo: 1.2.0
-
   are-docs-informative@0.0.2: {}
 
   are-we-there-yet@2.0.0:
@@ -12851,10 +12818,6 @@ snapshots:
     dependencies:
       yallist: 3.1.1
 
-  lucia@3.2.0:
-    dependencies:
-      oslo: 1.2.0
-
   magic-regexp@0.8.0(webpack-sources@3.2.3):
     dependencies:
       estree-walker: 3.0.3
@@ -13745,11 +13708,6 @@ snapshots:
       prelude-ls: 1.2.1
       type-check: 0.4.0
       word-wrap: 1.2.5
-
-  oslo@1.2.0:
-    dependencies:
-      '@node-rs/argon2': 1.7.0
-      '@node-rs/bcrypt': 1.9.0
 
   oslo@1.2.1:
     dependencies:

@@ -1,7 +1,6 @@
 import { userTable, verificationTable } from '@@/server/database/schema'
-import { isValidEmail, useDrizzle } from '@@/server/utils'
+import { generateCode, isValidEmail, useDrizzle } from '@@/server/utils'
 import { eq } from 'drizzle-orm'
-import { generateId } from 'lucia'
 import { createDate, TimeSpan } from 'oslo'
 import { alphabet, generateRandomString } from 'oslo/crypto'
 
@@ -41,15 +40,15 @@ export default defineEventHandler(async (event) => {
     //   .values({
     //     code,
     //     userId: user?.id,
-    //     id: generateId(15),
+    //     id: generateCode(15),
     //     expiresAt: createDate(new TimeSpan(10, 'm')), // 10 minutes
     //   })
 
     await db.insert(verificationTable).values({
-      id: generateId(15), // 生成唯一ID
+      id: generateCode(15), // 生成唯一ID
       userId: user?.id,
       status: 0, // 默认状态为0（未验证）
-      verifyId: generateId(15),
+      verifyId: generateCode(15),
       expiresAt: createDate(new TimeSpan(10, 'm')), // 10 minutes
       createIp: null, // 根据需求填写 IP 地址
       verifyIp: null, // 根据需求填写验证时的 IP 地址

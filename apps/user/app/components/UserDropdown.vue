@@ -4,7 +4,7 @@ const { isDashboardSearchModalOpen } = useUIState()
 const { metaSymbol } = useShortcuts()
 
 const { $csrfFetch } = useNuxtApp()
-const user = useAuthenticatedUser()
+const { user } = useUserSession()
 
 const items = computed(() => [
   [

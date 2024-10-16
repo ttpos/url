@@ -1,7 +1,6 @@
 import { userTable } from '@@/server/database/schema'
-import { hashPassword, isValidEmail, useDrizzle, verifyPassword } from '@@/server/utils'
+import { generateCode, hashPasswordFn, isValidEmail, useDrizzle, verifyPasswordFn } from '@@/server/utils'
 import { eq } from 'drizzle-orm'
-import { generateId } from 'lucia'
 import type { EventHandlerRequest, H3Event } from 'h3'
 
 interface ValidationResult {
@@ -128,7 +127,7 @@ class UserManager {
     }
 
     // Verify the password
-    const validPassword = await verifyPassword(user.password, password)
+    const validPassword = await verifyPasswordFn(user.password, password)
 
     if (!validPassword) {
       return {
@@ -159,8 +158,8 @@ class UserManager {
       return inputValidation
     }
 
-    const passwordHash = await hashPassword(password)
-    const userId = generateId(15)
+    const passwordHash = await hashPasswordFn(password)
+    const userId = generateCode(15)
 
     if (email) {
       // Check if user exists

@@ -11,7 +11,7 @@ useSeoMeta({
 })
 
 const { $csrfFetch } = useNuxtApp()
-const user = useAuthenticatedUser()
+const { user } = useUserSession()
 const toast = useToast()
 const loading = ref(false)
 

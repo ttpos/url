@@ -32,7 +32,6 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    // await auth.createSession(_user.id, null, true)
     await auth.setUserSession(_user)
 
     return {

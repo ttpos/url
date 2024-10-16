@@ -69,7 +69,6 @@ export default defineOAuthGitHubEventHandler({
             return sendRedirect(event, '/oauth/link-accounts?provider=github')
           }
 
-          // await auth.createSession(existingUser.id, null, true)
           await auth.setUserSession(existingUser)
 
           return sendRedirect(event, '/')
@@ -156,13 +155,7 @@ export default defineOAuthGitHubEventHandler({
               where: eq(userTable.id, userId),
             })
 
-            // await auth.createSession(userId, null, true)
-            const data = await auth.setUserSession(userRow)
-            logger.log('🚀 ~ onSuccess ~ data:', data)
-
-            // await setUserSession(event, {
-            //   user,
-            // })
+            await auth.setUserSession(userRow)
             return sendRedirect(event, '/')
           }
         }

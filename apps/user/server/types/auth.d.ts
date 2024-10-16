@@ -1,8 +1,9 @@
 declare module '#auth-utils' {
   interface User {
     id: string | number
-    name: string
+    nickname: string
     email: string
+    phone: string
 
     webauthn?: string
     email?: string
@@ -13,9 +14,10 @@ declare module '#auth-utils' {
   }
 
   interface UserSession {
-    id: string | number
-    name?: string
+    id?: string | number
+    nickname?: string
     email?: string
+    phone?: string
     extended?: any
     loggedInAt: number
     secure?: Record<string, unknown>
