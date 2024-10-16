@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
     // auth.setBlankSessionCookie()
 
     await auth.clearUserSession()
-    // await sendRedirect(event, '/', 302)
+    await sendRedirect(event, '/', 302)
 
     return {
       message: 'Successfully signed out!',

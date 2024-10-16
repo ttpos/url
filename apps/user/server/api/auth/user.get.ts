@@ -10,17 +10,4 @@ export default defineEventHandler(async (event) => {
   logger.log('🚀 ~ defineEventHandler ~ user:', user)
 
   return user
-
-  // return {
-  //   id: user.id,
-  //   name: user.name,
-  //   // get some additional data not stored in the session as an example
-  //   email: user.email,
-  // };
-
-  // const { user } = await auth.getAuth()
-
-  // logger.log('🚀 ~ defineEventHandler ~ user:', user)
-
-  // return user
 })
