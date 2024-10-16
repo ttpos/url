@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     cdnURL: process.env.NUXT_CDNURL,
   },
   modules: [
+    'nuxt-auth-utils',
     '@nuxt/fonts',
     '@nuxt/ui',
     '@vueuse/nuxt',

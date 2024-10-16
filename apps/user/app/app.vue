@@ -29,6 +29,9 @@ useSeoMeta({
   // twitterImage: 'https://dashboard-template.nuxt.dev/social-card.png',
   // twitterCard: 'summary_large_image',
 })
+
+const userSession = useUserSession()
+console.log('🚀 ~ defineNuxtRouteMiddleware ~ userSession:', userSession)
 </script>
 
 <template>

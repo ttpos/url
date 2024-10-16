@@ -2,19 +2,20 @@ import { sessionTable, userTable } from '@@/server/database/schema'
 import { useDrizzle } from '@@/server/utils'
 import { DrizzleSQLiteAdapter } from '@lucia-auth/adapter-drizzle'
 import { GitHub, Google } from 'arctic'
+import { eq } from 'drizzle-orm'
 import { appendHeader, getCookie, setCookie } from 'h3'
 import { generateId, Lucia } from 'lucia'
+import type { UserSession } from '#auth-utils'
 import type { EventHandlerRequest, H3Event } from 'h3'
 import type { Adapter, Session, User } from 'lucia'
 
 class AuthManager {
   private static luciaInstance: ReturnType<AuthManager['initializeLucia']>
-  private static githubInstance: GitHub
   private static googleInstance: Google
   private event: H3Event<EventHandlerRequest>
   private config: ReturnType<typeof useRuntimeConfig>
+  public db: ReturnType<typeof useDrizzle>
   public lucia: ReturnType<AuthManager['initializeLucia']>
-  public github: GitHub
   public google: Google
 
   constructor(event: H3Event<EventHandlerRequest>) {
@@ -24,8 +25,8 @@ class AuthManager {
 
     this.event = event
     this.config = useRuntimeConfig()
+    this.db = db
     this.lucia = this.getLuciaInstance(db)
-    this.github = this.getGitHubInstance()
     this.google = this.getGoogleInstance()
   }
 
@@ -37,16 +38,6 @@ class AuthManager {
       AuthManager.luciaInstance = this.initializeLucia(adapter)
     }
     return AuthManager.luciaInstance
-  }
-
-  private getGitHubInstance() {
-    if (!AuthManager.githubInstance) {
-      AuthManager.githubInstance = new GitHub(
-        this.config.githubClientId,
-        this.config.githubClientSecret,
-      )
-    }
-    return AuthManager.githubInstance
   }
 
   private getGoogleInstance() {
@@ -179,6 +170,49 @@ class AuthManager {
   }
 
   // etc.
+  public async setUserSession(user: UserSession) {
+    return await replaceUserSession(this.event, {
+      user: {
+        id: user.id,
+        name: user.name!,
+        email: user.email!,
+      },
+      loggedInAt: Date.now(),
+    })
+  }
+
+  public async getCurrentUser() {
+    // Get the current user session
+    const session = await getUserSession(this.event)
+
+    // return null if there's no user
+    if (!session.user) {
+      return null
+    }
+
+    // we're getting the whole user object by default for convenience, but always remove the password
+    const result = (await this.db.select().from(userTable).where(eq(userTable.id, session.user.id)).limit(1))?.[0]
+    delete result.password
+    return result
+  }
+
+  public async requireUserSession() {
+    // Get the current user session
+    const session = await getUserSession(this.event)
+
+    // return null if there's no user
+    if (!session.user) {
+      return null
+    }
+
+    // Require a user session (send back 401 if no `user` key in session)
+    return await requireUserSession(this.event)
+  }
+
+  public async clearUserSession() {
+    // Clear the current user session
+    return await clearUserSession(this.event)
+  }
 }
 
 export function useAuth(event: H3Event<EventHandlerRequest>) {

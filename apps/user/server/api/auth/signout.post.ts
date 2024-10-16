@@ -3,16 +3,20 @@ import { useAuth } from '@@/server/utils'
 export default defineEventHandler(async (event) => {
   try {
     const auth = useAuth(event)
-    const { user, session } = await auth.getAuth()
 
-    if (!user?.id) {
-      throw createError({
-        statusCode: 403,
-      })
-    }
+    // const { user, session } = await auth.getAuth()
 
-    await auth.lucia.invalidateSession(session.id)
-    auth.setBlankSessionCookie()
+    // if (!user?.id) {
+    //   throw createError({
+    //     statusCode: 403,
+    //   })
+    // }
+
+    // await auth.lucia.invalidateSession(session.id)
+    // auth.setBlankSessionCookie()
+
+    await auth.clearUserSession()
+    // await sendRedirect(event, '/', 302)
 
     return {
       message: 'Successfully signed out!',
