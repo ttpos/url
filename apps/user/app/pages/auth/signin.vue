@@ -106,6 +106,10 @@ async function onSubmit(data: FormSubmitEvent<any>) {
       toast.add({ title: message })
     }
 
+    // refresh the session status now that the user is logged in
+    const { fetch } = useUserSession()
+    await fetch()
+
     await navigateTo('/')
   }
   catch (error) {
