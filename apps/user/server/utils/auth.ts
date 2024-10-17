@@ -20,17 +20,12 @@ class AuthManager {
   }
 
   public async setUserSession(user: UserSession) {
-    // Check for existing sessions
-    const existingSession = await this.db.query.sessionTable.findFirst({
-      where: eq(sessionTable.userId, user.id.toString()),
-    })
-
     const sessionData = {
+      id: generateCode(15),
       userId: user.id.toString(),
       sessionToken: generateCode(32),
       expiresAt: Date.now() + 4 * 60 * 60 * 1000, // Expires in 4 hours
       status: 'active',
-      isDeleted: 0,
       // eslint-disable-next-line node/prefer-global/buffer
       metadata: Buffer.from(JSON.stringify({
         ip: this.event.node.req.headers['x-forwarded-for'] || '',
@@ -40,18 +35,7 @@ class AuthManager {
       })),
     }
 
-    if (existingSession && existingSession.id) {
-      await this.db
-        .update(sessionTable)
-        .set(sessionData)
-        .where(eq(sessionTable.id, existingSession.id))
-    }
-    else {
-      await this.db.insert(sessionTable).values({
-        id: generateCode(15),
-        ...sessionData,
-      })
-    }
+    await this.db.insert(sessionTable).values(sessionData)
 
     return await replaceUserSession(this.event, {
       user: {
