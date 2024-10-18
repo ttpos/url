@@ -47,6 +47,9 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     debug: process.env.NUXT_DEBUG === 'true',
+    cookieKey: process.env.NUXT_COOKIE_KEY,
+    sessionExpiryDays: process.env.NUXT_SESSION_EXPIRY_DAYS || 30,
+    encryptionKey: process.env.NUXT_ENCRYPTION_KEY,
     dbType: process.env.NUXT_DB_TYPE || 'libsql',
     libsqlUrl: process.env.NUXT_LIBSQL_URL || 'file:database/data.db',
     libsqlAuthToken: process.env.NUXT_LIBSQL_AUTH_TOKEN || undefined,
@@ -88,7 +91,7 @@ export default defineNuxtConfig({
     https: true, // process.env.NODE_ENV === 'production'
     methodsToProtect: ['POST', 'PUT', 'PATCH'],
     addCsrfTokenToEventCtx: true,
-    headerName: 'X-CSRF-TOKEN'
+    headerName: 'X-CSRF-TOKEN',
   },
 
   // eslint-disable-next-line ts/ban-ts-comment

@@ -4,7 +4,7 @@ import type { FormError, FormSubmitEvent } from '#ui/types'
 const fileRef = ref<HTMLInputElement>()
 const isDeleteAccountModalOpen = ref(false)
 
-const { user } = useUserSession()
+const user = useAuthenticatedUser()
 
 const state = reactive({
   name: user.value.nickname,

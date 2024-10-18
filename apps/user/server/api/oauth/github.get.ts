@@ -7,12 +7,11 @@ export default defineOAuthGitHubEventHandler({
   config: {
     emailRequired: true,
   },
-  async onSuccess(event, { user, tokens }: { user: GitHubUser, tokens: any }) {
+  async onSuccess(event, { user }: { user: GitHubUser }) {
     try {
       const db = useDrizzle(event)
       const auth = useAuth(event)
       logger.log('🚀 ~ onSuccess ~ githubUser:', user)
-      logger.log('🚀 ~ onSuccess ~ tokens:', tokens)
 
       /**
        * Check if the user already has a GitHub OAuth record
@@ -69,7 +68,7 @@ export default defineOAuthGitHubEventHandler({
             return sendRedirect(event, '/oauth/link-accounts?provider=github')
           }
 
-          await auth.setUserSession(existingUser)
+          await auth.createUserSession(existingUser, 'github')
 
           return sendRedirect(event, '/')
         }
@@ -155,7 +154,7 @@ export default defineOAuthGitHubEventHandler({
               where: eq(userTable.id, userId),
             })
 
-            await auth.setUserSession(userRow)
+            await auth.createUserSession(userRow, 'github')
             return sendRedirect(event, '/')
           }
         }

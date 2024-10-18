@@ -1,13 +1,24 @@
 import { useAuth } from '@@/server/utils'
 
 export default defineEventHandler(async (event) => {
-  const auth = useAuth(event)
+  /**
+   * Get user information in the following order
+   * 1. session
+   * 2. check user cookie
+   */
+  try {
+    const auth = useAuth(event)
+    const user = await auth.getCurrentUser()
+    if (user) {
+      return user
+    }
 
-  await auth.requireUserSession()
+    const userCookie = await auth.checkUserCookie()
+    return userCookie || null
+  }
+  catch (error) {
+    logger.error('Error in auth handler:', error)
 
-  const user = await auth.getCurrentUser();
-
-  logger.log('🚀 ~ defineEventHandler ~ user:', user)
-
-  return user
+    return null
+  }
 })

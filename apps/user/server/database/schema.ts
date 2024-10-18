@@ -2,6 +2,8 @@
 
 import { blob, integer, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core'
 
+import type { SessionSource, VerificationType } from '~~/server/types'
+
 const trackingFields = {
   createdAt: integer('created_at', { mode: 'timestamp' })
     .notNull()
@@ -87,11 +89,7 @@ export const verificationTable = sqliteTable(
      * serial number
      */
     serial: text('serial'),
-    /**
-     * - email
-     * - phone
-     */
-    type: text('type'),
+    type: text('type').$type<VerificationType>().notNull(),
     /**
      * Used to validate type records, Write routing address
      *
@@ -129,7 +127,7 @@ export const sessionTable = sqliteTable(
     userId: text('user_id')
       .notNull()
       .references(() => userTable.id),
-    sessionToken: text('session_token').notNull(),
+    source: text('source').$type<SessionSource>().notNull(),
     expiresAt: integer('expires_at').notNull(),
     status: text('status').notNull(),
     mfaId: text('mfa_id')

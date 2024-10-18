@@ -30,8 +30,8 @@ useSeoMeta({
   // twitterCard: 'summary_large_image',
 })
 
-const userSession = useUserSession()
-console.log('🚀 ~ defineNuxtRouteMiddleware ~ userSession:', userSession)
+// const userSession = useUserSession()
+// console.log('🚀 ~ defineNuxtRouteMiddleware ~ userSession:', userSession)
 </script>
 
 <template>
