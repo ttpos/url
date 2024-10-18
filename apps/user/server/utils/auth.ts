@@ -92,7 +92,7 @@ class AuthManager {
 
   public async setUserCookie(user: UserSession, remember: boolean = false) {
     const { cookieKey, sessionExpiryDays } = this.config
-    const encryptedData = encrypt(JSON.stringify(user))
+    const encryptedData = encrypt(this.config.encryptionKey, JSON.stringify(user))
 
     setCookie(
       this.event,
@@ -117,7 +117,7 @@ class AuthManager {
         return null
       }
 
-      const decryptedData = decrypt(encryptedCookie)
+      const decryptedData = decrypt(this.config.encryptionKey, encryptedCookie)
       const userData = JSON.parse(decryptedData)
       logger.log('🚀 ~ AuthManager ~ checkUserCookie ~ userData:', userData)
 
