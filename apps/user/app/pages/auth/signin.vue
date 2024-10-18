@@ -68,18 +68,6 @@ const providers = computed(() => [
       oauthLoading.value = true
     },
   },
-  {
-    label: 'Continue with Google',
-    icon: 'i-simple-icons-google',
-    color: 'white' as const,
-    to: '/api/oauth/google',
-    external: true,
-    // loading: oauthLoading.value,
-    disabled: !token.value,
-    click: () => {
-      oauthLoading.value = true
-    },
-  },
 ])
 
 function validate(state: any): FormError[] {

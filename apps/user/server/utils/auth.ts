@@ -1,215 +1,219 @@
 import { sessionTable, userTable } from '@@/server/database/schema'
-import { useDrizzle } from '@@/server/utils'
-import { DrizzleSQLiteAdapter } from '@lucia-auth/adapter-drizzle'
-import { GitHub, Google } from 'arctic'
-import { appendHeader, getCookie, setCookie } from 'h3'
-import { generateId, Lucia } from 'lucia'
+import { decrypt, encrypt, generateCode, useDrizzle } from '@@/server/utils'
+import { and, eq } from 'drizzle-orm'
+import type { UserSession } from '#auth-utils'
+import type { SessionSource } from '~~/server/types'
 import type { EventHandlerRequest, H3Event } from 'h3'
-import type { Adapter, Session, User } from 'lucia'
 
 class AuthManager {
-  private static luciaInstance: ReturnType<AuthManager['initializeLucia']>
-  private static githubInstance: GitHub
-  private static googleInstance: Google
   private event: H3Event<EventHandlerRequest>
   private config: ReturnType<typeof useRuntimeConfig>
-  public lucia: ReturnType<AuthManager['initializeLucia']>
-  public github: GitHub
-  public google: Google
+  public db: ReturnType<typeof useDrizzle>
 
   constructor(event: H3Event<EventHandlerRequest>) {
-    logger.info('Creating AuthManager instance')
-
-    const db = useDrizzle(event)
-
     this.event = event
     this.config = useRuntimeConfig()
-    this.lucia = this.getLuciaInstance(db)
-    this.github = this.getGitHubInstance()
-    this.google = this.getGoogleInstance()
+    this.db = useDrizzle(event)
   }
 
-  private getLuciaInstance(db: ReturnType<typeof useDrizzle>) {
-    if (!AuthManager.luciaInstance) {
-      logger.info('AuthManager Init Lucia')
+  public async createUserSession(user: UserSession, source: SessionSource, remember: boolean = false) {
+    const { sessionExpiryDays } = this.config
+    const maxRetries = 3
+    let retries = 0
 
-      const adapter = new DrizzleSQLiteAdapter(db, sessionTable, userTable)
-      AuthManager.luciaInstance = this.initializeLucia(adapter)
-    }
-    return AuthManager.luciaInstance
-  }
+    while (retries < maxRetries) {
+      const sessionData = {
+        id: generateCode(15),
+        userId: user.id.toString(),
+        sessionToken: generateCode(32),
+        expiresAt: remember ? Date.now() + Number(sessionExpiryDays) * 24 * 60 * 60 * 1000 : 0,
+        source,
+        status: 'active',
+        // eslint-disable-next-line node/prefer-global/buffer
+        metadata: Buffer.from(JSON.stringify({
+          ip: this.event.node.req.headers['x-forwarded-for'] || '',
+          country: '',
+          deviceInfo: this.event.node.req.headers['user-agent'] || '',
+          createdAt: Date.now(),
+        })),
+      }
 
-  private getGitHubInstance() {
-    if (!AuthManager.githubInstance) {
-      AuthManager.githubInstance = new GitHub(
-        this.config.githubClientId,
-        this.config.githubClientSecret,
-      )
-    }
-    return AuthManager.githubInstance
-  }
+      try {
+        await this.db.insert(sessionTable).values(sessionData)
 
-  private getGoogleInstance() {
-    if (!AuthManager.googleInstance) {
-      AuthManager.googleInstance = new Google(
-        this.config.googleClientId,
-        this.config.googleClientSecret,
-        this.config.googleRedirectURI,
-      )
-    }
-    return AuthManager.googleInstance
-  }
-
-  private initializeLucia(adapter: Adapter) {
-    return new Lucia(adapter, {
-      sessionCookie: {
-        attributes: {
-          // set to `true` when using HTTPS
-          secure: import.meta.dev,
-          // secure: true,
-        },
-      },
-      getUserAttributes: (attributes) => {
-        return {
-          id: attributes.id,
-          nickname: attributes.nickname,
-          email: attributes.email,
-          isEmailVerified: attributes.isEmailVerified,
+        // set user cookie
+        if (remember) {
+          await this.setUserCookie(
+            {
+              id: user.id,
+              sessionId: sessionData.id,
+              nickname: user.nickname,
+              email: user.email || '',
+              phone: user.phone || '',
+              loggedInAt: Date.now(),
+            },
+            remember,
+          )
         }
-      },
-      getSessionAttributes: (attributes) => {
-        return {
-          status: attributes.status,
-          sessionToken: attributes.sessionToken,
-          metadata: attributes.metadata,
-        }
-      },
-    })
-  }
 
-  /**
-   * Authenticates and returns user and session information.
-   */
-  public async getAuth() {
-    const sessionId = getCookie(this.event, this.lucia.sessionCookieName) ?? null
-    if (!sessionId) {
-      return {
-        user: null,
-        session: null,
+        return await replaceUserSession(
+          this.event,
+          {
+            user: {
+              id: user.id,
+              sessionId: sessionData.id,
+              nickname: user.nickname,
+              email: user.email || '',
+              phone: user.phone || '',
+            },
+            secure: {
+              ...sessionData,
+            },
+            loggedInAt: Date.now(),
+          },
+          {
+            maxAge: remember ? Number(sessionExpiryDays) * 24 * 60 * 60 : 0,
+          },
+        )
+      }
+      catch (error) {
+        logger.error(`Failed to insert session data. Attempt ${retries + 1} of ${maxRetries}`, error)
+        retries++
+
+        if (retries >= maxRetries) {
+          throw new Error('Failed to create user session after multiple attempts')
+        }
+
+        // retry after a short delay
+        await new Promise(resolve => setTimeout(resolve, 100))
       }
     }
+  }
 
-    const { session, user } = await this.lucia.validateSession(sessionId)
+  public async setUserCookie(user: UserSession, remember: boolean = false) {
+    const { cookieKey, sessionExpiryDays } = this.config
+    const encryptedData = encrypt(this.config.encryptionKey, JSON.stringify(user))
 
-    if (session && session.fresh) {
-      appendHeader(this.event, 'Set-Cookie', this.lucia.createSessionCookie(session.id).serialize())
+    setCookie(
+      this.event,
+      cookieKey,
+      encryptedData,
+      {
+        maxAge: remember ? Number(sessionExpiryDays) * 24 * 60 * 60 : undefined,
+        httpOnly: true,
+        secure: true, // process.env.NODE_ENV === 'production'
+        sameSite: 'lax',
+        path: '/',
+      },
+    )
+  }
+
+  public async checkUserCookie() {
+    try {
+      const { cookieKey, sessionExpiryDays } = this.config
+
+      const encryptedCookie = getCookie(this.event, cookieKey)
+      if (!encryptedCookie) {
+        return null
+      }
+
+      const decryptedData = decrypt(this.config.encryptionKey, encryptedCookie)
+      const userData = JSON.parse(decryptedData)
+      logger.log('🚀 ~ AuthManager ~ checkUserCookie ~ userData:', userData)
+
+      // 如果 _nn.sessionId 在反查 sessionTable 是否存在
+      // 存在是否在有效期内 expiresAt 并且 删除状态是否正确
+      // 如果在有效期内，更新 sessionTable 表 expiresAt 字段 + 30 day
+      // 之后再更新 setUserCookie
+      const session = await this.db.query.sessionTable.findFirst({
+        where: and(
+          eq(sessionTable.id, userData.sessionId),
+          eq(sessionTable.isDeleted, 0),
+        ),
+      })
+
+      if (session) {
+        const newExpiryDate = Date.now() + Number(sessionExpiryDays) * 24 * 60 * 60 * 1000
+
+        await this.db
+          .update(sessionTable)
+          .set({ expiresAt: newExpiryDate })
+          .where(eq(sessionTable.id, userData.sessionId))
+
+        await this.setUserCookie(
+          {
+            id: userData.id,
+            sessionId: userData.sessionId,
+            nickname: userData.nickname,
+            email: userData.email || '',
+            phone: userData.phone || '',
+            loggedInAt: Date.now(),
+          },
+          true,
+        )
+
+        return userData
+      }
+      else {
+        logger.warn('The session does not exist or has expired')
+        return null
+      }
     }
-    if (!session) {
-      appendHeader(this.event, 'Set-Cookie', this.lucia.createBlankSessionCookie().serialize())
-    }
+    catch (error) {
+      logger.error('Failed to decrypt, failed to determine cookie', error)
 
-    return {
-      user,
-      session,
+      return null
     }
   }
 
-  /**
-   * Creates a session for a user
-   */
-  public async createSession(
-    userId: string,
-    sessionData?: {
-      status?: number
-      sessionToken?: string
-      metadata?: Record<string, any>
-    },
-    useAppendHeader = false,
-  ) {
-    const { headers } = this.event.node.req
-
-    const metadata = {
-      ip: headers?.['x-forwarded-for'] || '',
-      country: '',
-      deviceInfo: headers?.['user-agent'] || '',
-      createdAt: Date.now(),
+  public async getCurrentUser() {
+    const session = await getUserSession(this.event)
+    if (!session?.user) {
+      return null
     }
 
-    // Create a session
-    const session = await this.lucia.createSession(
-      userId,
-      Object.assign(
-        {
-          status: 1,
-          sessionToken: generateId(32),
-          // eslint-disable-next-line node/prefer-global/buffer
-          metadata: Buffer.from(JSON.stringify(metadata)),
-        },
-        sessionData,
-      ),
-    )
+    const user = await this.db.query.userTable.findFirst({
+      where: eq(userTable.id, session.user.id),
+    })
 
-    // Set the session cookie
-    const sessionCookie = this.lucia.createSessionCookie(session.id)
+    if (user) {
+      delete user.password
+    }
+    return user
+  }
 
-    if (useAppendHeader) {
-      appendHeader(this.event, 'Set-Cookie', sessionCookie.serialize())
+  /**
+   * Clear all sessions for a user
+   */
+  public async clearUserSession(isAll: boolean = false) {
+    const currentSession = await getUserSession(this.event)
+    if (!currentSession?.user)
+      return await clearUserSession(this.event)
+
+    // eslint-disable-next-line ts/ban-ts-comment
+    // @ts-expect-error
+    const updateQuery = this.db.update(sessionTable).set({ isDeleted: 1 })
+
+    if (isAll) {
+      await updateQuery.where(eq(sessionTable.userId, currentSession.user.id.toString()))
     }
     else {
-      setCookie(this.event, sessionCookie.name, sessionCookie.value, sessionCookie.attributes)
+      await updateQuery.where(eq(sessionTable.id, currentSession.user.sessionId))
     }
 
-    return session
+    return await clearUserSession(this.event)
   }
 
-  /**
-   * Sets a session cookie for a given session ID.
-   */
-  public setSessionCookie(sessionId: string) {
-    const luciaToken = this.lucia.createSessionCookie(sessionId)
-    setCookie(this.event, luciaToken.name, luciaToken.value, luciaToken.attributes)
+  public async getUserActiveSessions(userId: string) {
+    return await this.db.query.sessionTable.findMany({
+      where: and(
+        eq(sessionTable.userId, userId),
+        eq(sessionTable.isDeleted, 1),
+      ),
+    })
   }
-
-  /**
-   * Sets a blank session cookie.
-   */
-  public setBlankSessionCookie() {
-    const blankSessionCookie = this.lucia.createBlankSessionCookie()
-    setCookie(this.event, blankSessionCookie.name, blankSessionCookie.value, blankSessionCookie.attributes)
-  }
-
-  // etc.
 }
 
 export function useAuth(event: H3Event<EventHandlerRequest>) {
   return new AuthManager(event)
-}
-
-// IMPORTANT!
-declare module 'h3' {
-  interface H3EventContext {
-    user: User | null
-    session: Session | null
-  }
-}
-
-declare module 'lucia' {
-  interface Register {
-    Lucia: ReturnType<AuthManager['initializeLucia']>
-    DatabaseUserAttributes: Omit<DatabaseUser, 'password'>
-    DatabaseSessionAttributes: Omit<DatabaseSession, 'password'>
-  }
-}
-
-interface DatabaseUser {
-  id: string
-  nickname: string
-  email: string
-  isEmailVerified: string
-}
-
-interface DatabaseSession {
-  status: number
-  sessionToken: string
-  metadata: object
 }

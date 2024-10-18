@@ -1,4 +1,4 @@
-export async function hashPassword(
+export async function hashPasswordFn(
   password: string,
   providedSalt?: Uint8Array,
 ): Promise<string> {
@@ -33,7 +33,7 @@ export async function hashPassword(
   return `${saltHex}:${hashHex}`
 }
 
-export async function verifyPassword(
+export async function verifyPasswordFn(
   storedHash: string,
   passwordAttempt: string,
 ): Promise<boolean> {
@@ -45,7 +45,7 @@ export async function verifyPassword(
   }
 
   const salt = new Uint8Array(matchResult.map(byte => Number.parseInt(byte, 16)))
-  const attemptHashWithSalt = await hashPassword(passwordAttempt, salt)
+  const attemptHashWithSalt = await hashPasswordFn(passwordAttempt, salt)
   const [, attemptHash] = attemptHashWithSalt.split(':')
 
   return attemptHash === originalHash

@@ -1,4 +1,4 @@
-import type { User } from 'lucia'
+import type { User } from '#auth-utils'
 
 export function useUser() {
   const user = useState<User | null>('user', () => null)

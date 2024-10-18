@@ -28,7 +28,7 @@ CREATE TABLE `mfa` (
 CREATE TABLE `session` (
 	`id` text PRIMARY KEY NOT NULL,
 	`user_id` text NOT NULL,
-	`session_token` text NOT NULL,
+	`source` text NOT NULL,
 	`expires_at` integer NOT NULL,
 	`status` text NOT NULL,
 	`mfa_id` text,
@@ -98,7 +98,7 @@ CREATE TABLE `verification` (
 	`verify_ip` text,
 	`verify_data` text,
 	`serial` text,
-	`type` text,
+	`type` text NOT NULL,
 	`action` text,
 	`created_at` integer NOT NULL,
 	`updated_at` integer NOT NULL,

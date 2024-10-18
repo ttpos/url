@@ -1,5 +1,5 @@
 import { userTable } from '@@/server/database/schema'
-import { useDrizzle } from '@@/server/utils'
+import { hashPasswordFn, useDrizzle } from '@@/server/utils'
 import { eq, sql } from 'drizzle-orm'
 import { isWithinExpirationDate } from 'oslo'
 
@@ -66,7 +66,7 @@ export default defineEventHandler(async (event) => {
     //   .delete(verificationTable)
     //   .where(sql`${verificationTable.userId} = ${user?.id}`)
 
-    const hashedPassword = await hashPassword(password)
+    const hashedPassword = await hashPasswordFn(password)
 
     await db
       .update(userTable)
