@@ -1,6 +1,6 @@
 import { sessionTable, userTable } from '@@/server/database/schema'
-import { decrypt, encrypt, useDrizzle } from '@@/server/utils'
-import { and, eq, gt } from 'drizzle-orm'
+import { decrypt, encrypt, generateCode, useDrizzle } from '@@/server/utils'
+import { and, eq } from 'drizzle-orm'
 import type { UserSession } from '#auth-utils'
 import type { SessionSource } from '~~/server/types'
 import type { EventHandlerRequest, H3Event } from 'h3'
@@ -129,7 +129,6 @@ class AuthManager {
         where: and(
           eq(sessionTable.id, userData.sessionId),
           eq(sessionTable.isDeleted, 0),
-          gt(sessionTable.expiresAt, Date.now()),
         ),
       })
 
@@ -169,18 +168,18 @@ class AuthManager {
 
   public async getCurrentUser() {
     const session = await getUserSession(this.event)
-    if (!session || !session.user) {
+    if (!session?.user) {
       return null
     }
 
-    const result = await this.db.query.userTable.findFirst({
+    const user = await this.db.query.userTable.findFirst({
       where: eq(userTable.id, session.user.id),
     })
 
-    if (result) {
-      delete result.password
+    if (user) {
+      delete user.password
     }
-    return result
+    return user
   }
 
   /**
@@ -188,29 +187,20 @@ class AuthManager {
    */
   public async clearUserSession(isAll: boolean = false) {
     const currentSession = await getUserSession(this.event)
+    if (!currentSession?.user)
+      return await clearUserSession(this.event)
 
-    if (currentSession && currentSession.user) {
-      if (isAll) {
-        // Clear all sessions
-        await this.db
-          .update(sessionTable)
-          // eslint-disable-next-line ts/ban-ts-comment
-          // @ts-expect-error
-          .set({ isDeleted: 1 })
-          .where(eq(sessionTable.userId, currentSession.user.id.toString()))
-      }
-      else {
-        // Clear current session
-        await this.db
-          .update(sessionTable)
-          // eslint-disable-next-line ts/ban-ts-comment
-          // @ts-expect-error
-          .set({ isDeleted: 1 })
-          .where(eq(sessionTable.id, currentSession.user.sessionId))
-      }
+    // eslint-disable-next-line ts/ban-ts-comment
+    // @ts-expect-error
+    const updateQuery = this.db.update(sessionTable).set({ isDeleted: 1 })
+
+    if (isAll) {
+      await updateQuery.where(eq(sessionTable.userId, currentSession.user.id.toString()))
+    }
+    else {
+      await updateQuery.where(eq(sessionTable.id, currentSession.user.sessionId))
     }
 
-    // Clear the current user session
     return await clearUserSession(this.event)
   }
 
@@ -219,7 +209,6 @@ class AuthManager {
       where: and(
         eq(sessionTable.userId, userId),
         eq(sessionTable.isDeleted, 1),
-        gt(sessionTable.expiresAt, Date.now()),
       ),
     })
   }
