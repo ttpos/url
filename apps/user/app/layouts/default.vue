@@ -5,32 +5,93 @@ const appConfig = useAppConfig()
 const links = [
   {
     id: 'home',
-    label: 'Home',
+    label: '短链接',
     icon: 'i-heroicons-home',
     to: '/',
     tooltip: {
-      text: 'Home',
-      shortcuts: ['G', 'H'],
+      text: '短链接',
+      shortcuts: ['S', 'L'],
+    },
+  },
+  {
+    id: 'qrcode',
+    label: 'QR Code',
+    icon: 'i-heroicons-inbox',
+    to: '/qrcode',
+    badge: '4',
+    tooltip: {
+      text: 'QR Code',
+      shortcuts: ['Q', 'R'],
+    },
+  },
+  {
+    id: 'marketing',
+    label: '营销活动',
+    icon: 'i-heroicons-user-group',
+    to: '/marketing',
+    tooltip: {
+      text: '营销活动',
+      shortcuts: ['M', 'A'],
+    },
+  },
+  {
+    id: 'domain',
+    label: '自定义域名',
+    icon: 'i-heroicons-user-group',
+    to: '/domain',
+    tooltip: {
+      text: '自定义域名',
+      shortcuts: ['D', 'L'],
     },
   },
   {
     id: 'settings',
-    label: 'Settings',
+    label: '设置',
     to: '/settings',
     icon: 'i-heroicons-cog-8-tooth',
     children: [
       {
-        label: 'General',
+        label: '通用',
         to: '/settings',
         exact: true,
       },
     ],
     tooltip: {
-      text: 'Settings',
+      text: '设置',
       shortcuts: ['G', 'S'],
     },
   },
 ]
+
+// const links = [
+//   {
+//     id: 'home',
+//     label: 'Home',
+//     icon: 'i-heroicons-home',
+//     to: '/',
+//     tooltip: {
+//       text: 'Home',
+//       shortcuts: ['G', 'H'],
+//     },
+//   },
+//   {
+//     id: 'settings',
+//     label: 'Settings',
+//     to: '/settings',
+//     icon: 'i-heroicons-cog-8-tooth',
+//     children: [
+//       {
+//         label: 'General',
+//         to: '/settings',
+//         exact: true,
+//       },
+//     ],
+//     tooltip: {
+//       text: 'Settings',
+//       shortcuts: ['G', 'S'],
+//     },
+//   },
+// ]
 
 const groups = [
   {
