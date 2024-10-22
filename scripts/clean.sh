@@ -6,6 +6,7 @@ DIRS_TO_DELETE=(
   "apps/*/dist"
   "apps/*/.nuxt"
   "apps/*/.output"
+  "apps/*/.wrangler"
 )
 
 echo "Start cleaning up directories: ${DIRS_TO_DELETE[*]}"

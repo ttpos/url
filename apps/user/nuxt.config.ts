@@ -2,26 +2,19 @@
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  extends: ['@nuxt/ui-pro'],
   app: {
     cdnURL: process.env.NUXT_CDNURL,
   },
   modules: [
     'nuxt-auth-utils',
-    '@nuxt/fonts',
-    '@nuxt/ui',
     '@vueuse/nuxt',
     '@nuxtjs/turnstile',
-    'nuxt-csurf',
+    // 'nuxt-csurf',
   ],
 
   sourcemap: {
     server: false,
     client: false,
-  },
-
-  ui: {
-    safelistColors: ['primary', 'red', 'orange', 'green'],
   },
 
   colorMode: {
@@ -92,17 +85,6 @@ export default defineNuxtConfig({
     methodsToProtect: ['POST', 'PUT', 'PATCH'],
     addCsrfTokenToEventCtx: true,
     headerName: 'X-CSRF-TOKEN',
-  },
-
-  // eslint-disable-next-line ts/ban-ts-comment
-  // @ts-ignore
-  eslint: {
-    config: {
-      stylistic: {
-        commaDangle: 'never',
-        braceStyle: '1tbs',
-      },
-    },
   },
 
   compatibilityDate: '2024-07-11',
