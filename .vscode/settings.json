@@ -46,5 +46,18 @@
     "scss",
     "pcss",
     "postcss"
-  ]
+  ],
+  "i18n-ally.localesPaths": [
+    "i18n"
+  ],
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.sortKeys": true,
+  "i18n-ally.enabledParsers": [
+    "ts"
+  ],
+  "i18n-ally.sourceLanguage": "enUs",
+  "i18n-ally.displayLanguage": "enUs",
+  "i18n-ally.parsers.typescript.compilerOptions": {
+    "moduleResolution": "node"
+  }
 }

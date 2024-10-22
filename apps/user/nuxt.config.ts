@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/turnstile',
     'nuxt-csurf',
+    '@nuxtjs/i18n',
   ],
 
   sourcemap: {
@@ -92,6 +93,18 @@ export default defineNuxtConfig({
     methodsToProtect: ['POST', 'PUT', 'PATCH'],
     addCsrfTokenToEventCtx: true,
     headerName: 'X-CSRF-TOKEN',
+  },
+
+  i18n: {
+    lazy: true,
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'user_i18n_redirected',
+      redirectOn: 'root',
+      fallbackLocale: 'enUs',
+    },
+    locales: ['enUs', 'zhCn'],
+    defaultLocale: 'enUs',
   },
 
   // eslint-disable-next-line ts/ban-ts-comment

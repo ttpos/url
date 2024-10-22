@@ -2,6 +2,8 @@
 const route = useRoute()
 const appConfig = useAppConfig()
 
+const { locale, t } = useI18n()
+
 const links = [
   {
     id: 'home',
@@ -63,36 +65,6 @@ const links = [
   },
 ]
 
-// const links = [
-//   {
-//     id: 'home',
-//     label: 'Home',
-//     icon: 'i-heroicons-home',
-//     to: '/',
-//     tooltip: {
-//       text: 'Home',
-//       shortcuts: ['G', 'H'],
-//     },
-//   },
-//   {
-//     id: 'settings',
-//     label: 'Settings',
-//     to: '/settings',
-//     icon: 'i-heroicons-cog-8-tooth',
-//     children: [
-//       {
-//         label: 'General',
-//         to: '/settings',
-//         exact: true,
-//       },
-//     ],
-//     tooltip: {
-//       text: 'Settings',
-//       shortcuts: ['G', 'S'],
-//     },
-//   },
-// ]
-
 const groups = [
   {
     key: 'links',
@@ -127,6 +99,34 @@ const colors = computed(() =>
     active: appConfig.ui.primary === color.label,
   })),
 )
+
+const i18nLinks = computed(() => [
+  {
+    label: t('common.i18n'),
+    icon: 'i-heroicons:language',
+    children: [
+      {
+        label: 'English',
+        key: 'enUs',
+        click: () => changeLanguage('enUs'),
+        active: locale.value === 'enUs',
+      },
+      {
+        label: '简体中文',
+        key: 'zhCn',
+        click: () => changeLanguage('zhCn'),
+        active: locale.value === 'zhCn',
+      },
+    ],
+  },
+])
+
+function changeLanguage(lang: string) {
+  locale.value = lang
+  // TODO: key read in env
+  const i18nRedirected = useCookie('user_i18n_redirected')
+  i18nRedirected.value = lang
+}
 </script>
 
 <template>
@@ -158,6 +158,10 @@ const colors = computed(() =>
           :links="[{ label: 'Colors', draggable: true, children: colors }]"
           @update:links="colors => defaultColors = colors"
         />
+
+        <UDivider />
+
+        <UDashboardSidebarLinks :links="i18nLinks" />
 
         <div class="flex-1" />
 
