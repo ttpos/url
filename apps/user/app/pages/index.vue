@@ -29,11 +29,24 @@ const typeOptions = ref([
   },
 ])
 
+const dropdownItems = [[
+  {
+    label: '详情',
+    icon: 'i-heroicons:document-magnifying-glass',
+  },
+  {
+    label: '删除',
+    icon: 'i-heroicons:trash',
+  },
+]]
+
 const peopleSelected = ref('')
 const typeSelected = ref()
 const isOpen = ref(false)
 const groupName = ref('')
 const loading = ref(false)
+const page = ref(1)
+const items = ref(Array.from({ length: 55 }))
 
 function handleGroupsChange(val: string) {
   console.log('groups changed', val)
@@ -106,9 +119,89 @@ function handleSumbit() {}
       </div>
 
       <UDashboardPanelContent>
-        <div class="grid lg:grid-cols-2 lg:items-start gap-8 mt-8">
+        <div class="grid gap-8">
+          <UCard
+            v-for="(item) in 4"
+            :key="item"
+          >
+            <template #header>
+              <div class="flex items-center justify-between">
+                <div class="flex items-start justify-between gap-4 font-medium text-gray-700 dark:text-gray-200">
+                  <UCheckbox :model-value="false" />
+
+                  <UIcon name="i-heroicons-light-bulb" class="w-5 h-5" />
+                  <p>
+                    OpenAI 任命政治老将莱恩为全球政策主管
+                  </p>
+                </div>
+
+                <div class="flex items-start gap-4">
+                  <UTooltip text="COPY">
+                    <UButton
+                      icon="i-ic:baseline-content-copy"
+                      variant="ghost"
+                    />
+                  </UTooltip>
+
+                  <UTooltip text="SHARE">
+                    <UButton
+                      icon="i-heroicons:arrow-top-right-on-square-solid"
+                      variant="ghost"
+                    />
+                  </UTooltip>
+
+                  <UTooltip text="EDIT">
+                    <UButton
+                      icon="i-heroicons:pencil-square"
+                      variant="ghost"
+                    />
+                  </UTooltip>
+
+                  <UDropdown :items="dropdownItems" mode="hover">
+                    <UButton
+                      icon="i-heroicons-ellipsis-vertical"
+                      variant="ghost"
+                    />
+                  </UDropdown>
+                </div>
+              </div>
+            </template>
+
+            <Placeholder class="h-32" />
+
+            <div class="flex items-start flex-col gap-4">
+              <UButton
+                to="tiny.com/4g4eaaa"
+                :padded="false"
+                variant="link"
+                target="_blank"
+              >
+                tiny.com/4g4eaaa
+              </UButton>
+              <UButton
+                to="https://volta.net"
+                :padded="false"
+                variant="link"
+                target="_blank"
+                color="black"
+              >
+                https://readhub.cn/topic/8cUL78YJZ5P
+              </UButton>
+            </div>
+
+            <template #footer>
+              <div class="flex items-start gap-4">
+                <UBadge label="2024-10-22 16:49:46" variant="subtle" />
+                <UBadge label="Default Group" variant="subtle" />
+              </div>
+            </template>
+          </UCard>
           <!-- <HomeSales />
           <HomeCountries /> -->
+        </div>
+
+        <div class="flex justify-end mt-8">
+          <UPagination v-model="page" :page-count="5" :total="items.length" />
         </div>
       </UDashboardPanelContent>
     </UDashboardPanel>
