@@ -4,72 +4,72 @@ const appConfig = useAppConfig()
 
 const { locale, t } = useI18n()
 
-const links = [
+const links = computed(() => [
   {
     id: 'home',
-    label: '短链接',
+    label: t('common.nav.shortLink'),
     icon: 'i-heroicons-home',
     to: '/',
     tooltip: {
-      text: '短链接',
+      text: t('common.nav.shortLink'),
       shortcuts: ['S', 'L'],
     },
   },
   {
     id: 'qrcode',
-    label: 'QR Code',
+    label: t('common.nav.qrCode'),
     icon: 'i-heroicons-inbox',
     to: '/qrcode',
     badge: '4',
     tooltip: {
-      text: 'QR Code',
+      text: t('common.nav.qrCode'),
       shortcuts: ['Q', 'R'],
     },
   },
   {
     id: 'marketing',
-    label: '营销活动',
+    label: t('common.nav.marketing'),
     icon: 'i-heroicons-user-group',
     to: '/marketing',
     tooltip: {
-      text: '营销活动',
+      text: t('common.nav.marketing'),
       shortcuts: ['M', 'A'],
     },
   },
   {
     id: 'domain',
-    label: '自定义域名',
+    label: t('common.nav.customDomain'),
     icon: 'i-heroicons-user-group',
     to: '/domain',
     tooltip: {
-      text: '自定义域名',
+      text: t('common.nav.customDomain'),
       shortcuts: ['D', 'L'],
     },
   },
   {
     id: 'settings',
-    label: '设置',
+    label: t('common.nav.settings'),
     to: '/settings',
     icon: 'i-heroicons-cog-8-tooth',
     children: [
       {
-        label: '通用',
+        label: t('common.nav.general'),
         to: '/settings',
         exact: true,
       },
     ],
     tooltip: {
-      text: '设置',
+      text: t('common.nav.settings'),
       shortcuts: ['G', 'S'],
     },
   },
-]
+])
 
 const groups = [
   {
     key: 'links',
     label: 'Go to',
-    commands: links.map(link => ({ ...link, shortcuts: link.tooltip?.shortcuts })),
+    commands: links.value.map(link => ({ ...link, shortcuts: link.tooltip?.shortcuts })),
   },
   {
     key: 'code',

@@ -3,42 +3,53 @@ definePageMeta({
   middleware: ['protected'],
 })
 
-const peopleOptions = ref([
-  {
-    value: 'add',
-    label: 'Add Group',
-    icon: 'i-ep:circle-plus',
-  },
-])
-const typeOptions = ref([
-  {
-    value: '',
-    label: '全部',
-  },
-  {
-    value: '2',
-    label: '随机后缀短链接',
-  },
-  {
-    value: '3',
-    label: '自定义后缀链接',
-  },
-  {
-    value: '4',
-    label: '批量短链接',
-  },
-])
+const { t } = useI18n()
 
-const dropdownItems = [[
-  {
-    label: '详情',
-    icon: 'i-heroicons:document-magnifying-glass',
-  },
-  {
-    label: '删除',
-    icon: 'i-heroicons:trash',
-  },
-]]
+const peopleOptions = computed(() =>
+  [
+    {
+      value: 'add',
+      label: t('shortLink.addGroup'),
+      icon: 'i-ep:circle-plus',
+    },
+  ],
+)
+
+const typeOptions = computed(() =>
+  [
+    {
+      value: '',
+      label: t('shortLink.all'),
+    },
+    {
+      value: '2',
+      label: t('shortLink.randomSuffix'),
+    },
+    {
+      value: '3',
+      label: t('shortLink.customSuffix'),
+    },
+    {
+      value: '4',
+      label: t('shortLink.batchShortLink'),
+    },
+  ],
+)
+
+const dropdownItems = computed(() =>
+  [
+    [
+      {
+        label: t('shortLink.details'),
+        icon: 'i-heroicons:document-magnifying-glass',
+      },
+      {
+        label: t('shortLink.delete'),
+        icon: 'i-heroicons:trash',
+      },
+    ],
+  ],
+)
 
 const peopleSelected = ref('')
 const typeSelected = ref()
@@ -49,6 +60,7 @@ const page = ref(1)
 const items = ref(Array.from({ length: 55 }))
 
 function handleGroupsChange(val: string) {
+  // eslint-disable-next-line no-console
   console.log('groups changed', val)
 
   if (val === 'add') {
@@ -66,28 +78,28 @@ function handleSumbit() {}
         <UDashboardNavbarToggle class="pb-4 pl-0" />
 
         <p class="text-gray-900 dark:text-white font-semibold">
-          TinyLink 短链接
+          {{ t('shortLink.title') }}
         </p>
 
         <div class="mt-1 text-gray-500 dark:text-gray-400 text-sm">
-          TinyLink 短链接用于将长网址简化为更短、更易于分享的链接，同时保持对原始内容的访问。
+          {{ t('shortLink.description') }}
         </div>
 
         <div class="grid lg:grid-cols-2 lg:items-start gap-4 mt-8">
           <div class="flex items-start gap-4">
             <UButton
-              label="创建短链接"
+              :label="t('shortLink.createShortLink')"
               icon="i-heroicons-plus"
             />
             <UButton
-              label="批量创建短链接"
+              :label="t('shortLink.batchCreateShortLink')"
               icon="i-heroicons-plus"
             />
           </div>
           <div class="flex lg:justify-end gap-4">
             <div class="flex items-center gap-2">
               <span class="text-gray-500 dark:text-gray-400 text-sm hidden lg:inline">
-                分组
+                {{ t('shortLink.group') }}
               </span>
               <USelectMenu
                 v-model="peopleSelected"
@@ -103,7 +115,7 @@ function handleSumbit() {}
             </div>
             <div class="flex items-center gap-2">
               <span class="text-gray-500 dark:text-gray-400 text-sm hidden lg:inline">
-                类型
+                {{ t('shortLink.type') }}
               </span>
               <USelectMenu
                 v-model="typeSelected"
@@ -136,26 +148,26 @@ function handleSumbit() {}
                 </div>
 
                 <div class="flex items-start gap-4">
-                  <UTooltip text="COPY">
-                    <UButton
-                      icon="i-ic:baseline-content-copy"
-                      variant="ghost"
-                    />
-                  </UTooltip>
+                  <UTooltip :text="t('shortLink.copy')">
+  <UButton
+    icon="i-ic:baseline-content-copy"
+    variant="ghost"
+  />
+</UTooltip>
 
-                  <UTooltip text="SHARE">
-                    <UButton
-                      icon="i-heroicons:arrow-top-right-on-square-solid"
-                      variant="ghost"
-                    />
-                  </UTooltip>
+<UTooltip :text="t('shortLink.share')">
+  <UButton
+    icon="i-heroicons:arrow-top-right-on-square-solid"
+    variant="ghost"
+  />
+</UTooltip>
 
-                  <UTooltip text="EDIT">
-                    <UButton
-                      icon="i-heroicons:pencil-square"
-                      variant="ghost"
-                    />
-                  </UTooltip>
+<UTooltip :text="t('shortLink.edit')">
+  <UButton
+    icon="i-heroicons:pencil-square"
+    variant="ghost"
+  />
+</UTooltip>
 
                   <UDropdown :items="dropdownItems" mode="hover">
                     <UButton
@@ -166,8 +178,6 @@ function handleSumbit() {}
                 </div>
               </div>
             </template>
-
-            <Placeholder class="h-32" />
 
             <div class="flex items-start flex-col gap-4">
               <UButton
@@ -211,18 +221,17 @@ function handleSumbit() {}
         <template #header>
           <div class="flex items-center justify-between">
             <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
-              添加分组
+              {{ t('shortLink.addGroup') }}
             </h3>
             <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="isOpen = false" />
           </div>
         </template>
 
-        <UFormGroup label="分组名称" required :error="!groupName && '请输入分组名称'">
-          <!-- <UInput v-model="groupName" placeholder="请输入分组名称" /> -->
+        <UFormGroup :label="t('shortLink.groupName')" required :error="!groupName && t('shortLink.pleaseEnterGroupName')">
           <UInput
             v-model="groupName"
             name="groupName"
-            placeholder="请输入分组名称"
+            :placeholder="t('shortLink.pleaseEnterGroupName')"
             autocomplete="off"
             :ui="{ icon: { trailing: { pointer: '' } } }"
           >
@@ -241,8 +250,8 @@ function handleSumbit() {}
 
         <template #footer>
           <div class="flex items-center justify-end gap-2">
-            <UButton color="white" label="取消" @click="isOpen = false" />
-            <UButton label="确认" :loading="loading" @click="handleSumbit" />
+            <UButton color="white" :label="t('shortLink.cancel')" @click="isOpen = false" />
+            <UButton :label="t('shortLink.confirm')" :loading="loading" @click="handleSumbit" />
           </div>
         </template>
       </UCard>
