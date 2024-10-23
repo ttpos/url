@@ -65,6 +65,10 @@ export default defineNuxtConfig({
     turnstile: {
       secretKey: process.env.NUXT_TURNSTILE_SECRET_KEY,
     },
+
+    public: {
+      i18nCookieKey: process.env.NUXT_I18N_COOKIE_KEY,
+    },
   },
 
   nitro: {
@@ -96,15 +100,21 @@ export default defineNuxtConfig({
   },
 
   i18n: {
-    lazy: true,
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'user_i18n_redirected',
-      redirectOn: 'root',
-      fallbackLocale: 'enUs',
+    compilation: {
+      strictMessage: false,
+      escapeHtml: true,
     },
-    locales: ['enUs', 'zhCn'],
-    defaultLocale: 'enUs',
+    lazy: true,
+    locales: ['en-US', 'zh-CN'],
+    defaultLocale: 'en-US',
+    skipSettingLocaleOnNavigate: true,
+    detectBrowserLanguage: false,
+    // detectBrowserLanguage: {
+    //   useCookie: true,
+    //   cookieKey: 'user_i18n_redirected',
+    //   redirectOn: 'root',
+    //   fallbackLocale: 'en-US',
+    // },
   },
 
   // eslint-disable-next-line ts/ban-ts-comment

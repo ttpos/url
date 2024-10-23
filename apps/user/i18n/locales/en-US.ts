@@ -4,6 +4,7 @@ export default {
     abbreviations: 'En',
     current_language: 'English',
     nav: {
+      index: 'Home Page',
       shortLink: 'Short Link',
       qrCode: 'QR Code',
       marketing: 'Marketing Campaign',
@@ -12,6 +13,14 @@ export default {
       general: 'General',
       multiLanguage: 'Multi Language',
     },
+  },
+  index: {
+    dashboard: 'Dashboard',
+    ctaTitle: 'Simplify Your Links, Amplify Your Reach',
+    ctaDescription: 'Create, manage, and track short links effortlessly. Boost your online presence with our powerful URL shortening service.',
+    getStarted: 'Get Started',
+    learnMore: 'Learn More',
+    dashboardImage: 'Short Link Dashboard Preview',
   },
   shortLink: {
     title: 'TinyLink Short Link',

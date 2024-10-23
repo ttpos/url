@@ -4,6 +4,7 @@ export default {
     abbreviations: '简中',
     current_language: '简体中文',
     nav: {
+      index: '首页',
       shortLink: '短链接',
       qrCode: 'QR Code',
       marketing: '营销活动',
@@ -12,6 +13,14 @@ export default {
       general: '通用',
       multiLanguage: '多语言',
     },
+  },
+  index: {
+    dashboard: '仪表板',
+    ctaTitle: '简化您的链接，扩大您的影响力',
+    ctaDescription: '轻松创建、管理和跟踪短链接。通过我们强大的URL缩短服务提升您的在线影响力。',
+    getStarted: '立即开始',
+    learnMore: '了解更多',
+    dashboardImage: '短链接仪表板预览',
   },
   shortLink: {
     title: 'TinyLink 短链接',

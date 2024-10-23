@@ -34,25 +34,27 @@ useSeoMeta({
 // console.log('🚀 ~ defineNuxtRouteMiddleware ~ userSession:', userSession)
 
 const { locale } = useI18n()
+const {
+  public: {
+    i18nCookieKey,
+  },
+} = useRuntimeConfig()
 
 function initializeLanguage() {
-  // TODO: key read in env
-  const i18nRedirected = useCookie('user_i18n_redirected')
+  const i18nRedirected = useCookie(i18nCookieKey)
   if (i18nRedirected.value) {
     locale.value = i18nRedirected.value
-  } else {
-    const browserLang = navigator.language.split('-')[0]
-    const supportedLangs = ['en', 'zh']
-    const detectedLang = supportedLangs.includes(browserLang) ? browserLang : 'en'
-    
-    locale.value = detectedLang === 'en' ? 'enUs' : 'zhCn'
+  }
+  else {
+    const browserLang = navigator.language
+    const supportedLangs = ['en-US', 'zh-CN']
+
+    locale.value = supportedLangs.includes(browserLang) ? browserLang : 'en-US'
     i18nRedirected.value = locale.value
   }
 }
 
-onMounted(() => {
-  initializeLanguage()
-})
+initializeLanguage()
 </script>
 
 <template>

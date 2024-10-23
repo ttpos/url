@@ -2,9 +2,9 @@ import { enUs, zhCn } from './i18n'
 
 export default defineI18nConfig(() => ({
   legacy: false,
-  locale: 'enUs',
+  locale: 'en-US',
   messages: {
-    enUs,
-    zhCn,
+    'en-US': enUs,
+    'zh-CN': zhCn,
   },
 }))

@@ -1,4 +1,9 @@
 <script setup lang="ts">
+const {
+  public: {
+    i18nCookieKey,
+  },
+} = useRuntimeConfig()
 const route = useRoute()
 const appConfig = useAppConfig()
 
@@ -7,9 +12,19 @@ const { locale, t } = useI18n()
 const links = computed(() => [
   {
     id: 'home',
-    label: t('common.nav.shortLink'),
+    label: t('common.nav.index'),
     icon: 'i-heroicons-home',
     to: '/',
+    tooltip: {
+      text: t('common.nav.index'),
+      shortcuts: ['S', 'L'],
+    },
+  },
+  {
+    id: 'shortLink',
+    label: t('common.nav.shortLink'),
+    icon: 'i-heroicons-home',
+    to: '/shortLink',
     tooltip: {
       text: t('common.nav.shortLink'),
       shortcuts: ['S', 'L'],
@@ -69,19 +84,27 @@ const groups = [
   {
     key: 'links',
     label: 'Go to',
-    commands: links.value.map(link => ({ ...link, shortcuts: link.tooltip?.shortcuts })),
+    commands: links.value.map(link => ({
+      ...link,
+      shortcuts: link.tooltip?.shortcuts,
+    })),
   },
   {
     key: 'code',
     label: 'Code',
-    commands: [{
-      id: 'source',
-      label: 'View page source',
-      icon: 'i-simple-icons-github',
-      click: () => {
-        window.open(`https://github.com/nuxt-ui-pro/dashboard/blob/main/pages${route.path === '/' ? '/index' : route.path}.vue`, '_blank')
+    commands: [
+      {
+        id: 'source',
+        label: 'View page source',
+        icon: 'i-simple-icons-github',
+        click: () => {
+          window.open(
+            `https://github.com/nuxt-ui-pro/dashboard/blob/main/pages${route.path === '/' ? '/index' : route.path}.vue`,
+            '_blank',
+          )
+        },
       },
-    }],
+    ],
   },
 ]
 
@@ -107,15 +130,15 @@ const i18nLinks = computed(() => [
     children: [
       {
         label: 'English',
-        key: 'enUs',
-        click: () => changeLanguage('enUs'),
-        active: locale.value === 'enUs',
+        key: 'en-US',
+        click: () => changeLanguage('en-US'),
+        active: locale.value === 'en-US',
       },
       {
         label: '简体中文',
-        key: 'zhCn',
-        click: () => changeLanguage('zhCn'),
-        active: locale.value === 'zhCn',
+        key: 'zh-CN',
+        click: () => changeLanguage('zh-CN'),
+        active: locale.value === 'zh-CN',
       },
     ],
   },
@@ -123,23 +146,17 @@ const i18nLinks = computed(() => [
 
 function changeLanguage(lang: string) {
   locale.value = lang
-  // TODO: key read in env
-  const i18nRedirected = useCookie('user_i18n_redirected')
+
+  const i18nRedirected = useCookie(i18nCookieKey)
+
   i18nRedirected.value = lang
 }
 </script>
 
 <template>
   <UDashboardLayout>
-    <UDashboardPanel
-      :width="250"
-      :resizable="{ min: 200, max: 300 }"
-      collapsible
-    >
-      <UDashboardNavbar
-        class="!border-transparent"
-        :ui="{ left: 'flex-1' }"
-      >
+    <UDashboardPanel :width="250" :resizable="{ min: 200, max: 300 }" collapsible>
+      <UDashboardNavbar class="!border-transparent" :ui="{ left: 'flex-1' }">
         <template #left>
           <TeamsDropdown />
         </template>
@@ -156,7 +173,7 @@ function changeLanguage(lang: string) {
 
         <UDashboardSidebarLinks
           :links="[{ label: 'Colors', draggable: true, children: colors }]"
-          @update:links="colors => defaultColors = colors"
+          @update:links="(colors) => (defaultColors = colors)"
         />
 
         <UDivider />
