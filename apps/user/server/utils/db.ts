@@ -16,7 +16,7 @@ class DatabaseManger {
     }
     DatabaseManger.instance = this
 
-    logger.info('Creating DatabaseManger instance')
+    logger.info?.('Creating DatabaseManger instance')
     const { dbType, libsqlUrl, libsqlAuthToken } = useRuntimeConfig(event)
 
     switch (dbType) {

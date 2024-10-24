@@ -107,6 +107,8 @@ async function onSubmit(data: FormSubmitEvent<any>) {
 
     const key = selectedMethod.value === 0 ? 'email' : 'phone'
     const payload = {
+      // eslint-disable-next-line ts/ban-ts-comment
+      // @ts-expect-error
       [key]: data[key],
       // eslint-disable-next-line ts/ban-ts-comment
       // @ts-expect-error
@@ -127,7 +129,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
     // await navigateTo(selectedMethod.value === 0 ? '/auth/verify-email' : '/auth/verify-phone')
     await navigateTo('/')
   }
-  catch (error) {
+  catch (error: any) {
     toast.add({ title: error.data?.message ?? null, color: 'red' })
   }
   finally {

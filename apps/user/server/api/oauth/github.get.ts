@@ -1,6 +1,6 @@
 import { sessionTable, usersOauthTable, userTable } from '@@/server/database/schema'
 import { generateCode, useAuth, useDrizzle } from '@@/server/utils'
-import { and, eq, sql } from 'drizzle-orm'
+import { and, eq } from 'drizzle-orm'
 import type { GitHubUser } from '~~/server/types'
 
 export default defineOAuthGitHubEventHandler({
@@ -11,24 +11,24 @@ export default defineOAuthGitHubEventHandler({
     try {
       const db = useDrizzle(event)
       const auth = useAuth(event)
-      logger.log('🚀 ~ onSuccess ~ githubUser:', user)
+      logger.log?.('🚀 ~ onSuccess ~ githubUser:', user)
 
       /**
        * Check if the user already has a GitHub OAuth record
        *
        * 检查用户是否已经有GitHub OAuth记录
        */
-      // const existingOauthRecord = await db.query.usersOauthTable.findFirst({
+      // const existingOauthRecord = await db?.query.usersOauthTable.findFirst({
       //   where: table => eq(table.provider, 'github') && eq(table.providerUserId, githubUser.id.toString()),
       // })
-      const existingOauthRecord = await db.query.usersOauthTable.findFirst({
+      const existingOauthRecord = await db?.query.usersOauthTable.findFirst({
         where: and(
           eq(usersOauthTable.provider, 'github'),
           eq(usersOauthTable.providerUserId, user.id.toString()),
         ),
       })
 
-      logger.log('Existing OAuth Record:', existingOauthRecord)
+      logger.log?.('Existing OAuth Record:', existingOauthRecord)
 
       /**
        * Check if there's an active session
@@ -36,9 +36,9 @@ export default defineOAuthGitHubEventHandler({
        * 检查是否有活动会话
        */
       const sessionId = getCookie(event, 'Set-Cookie')
-      logger.log('🚀 ~ onSuccess ~ sessionId:', sessionId)
+      logger.log?.('🚀 ~ onSuccess ~ sessionId:', sessionId)
       const activeSession = sessionId
-        ? await db.query.sessionTable.findFirst({
+        ? await db?.query.sessionTable.findFirst({
           where: eq(sessionTable.id, sessionId),
         })
         : null
@@ -49,10 +49,10 @@ export default defineOAuthGitHubEventHandler({
          *
          * GitHub 帐户已链接到用户
          */
-        const existingUser = await db.query.userTable.findFirst({
-          where: eq(userTable.id, existingOauthRecord.userId),
+        const existingUser = await db?.query.userTable.findFirst({
+          where: eq(userTable.id, existingOauthRecord.userId!),
         })
-        logger.log('🚀 ~ defineEventHandler ~ existingUser:', existingUser)
+        logger.log?.('🚀 ~ defineEventHandler ~ existingUser:', existingUser)
 
         if (existingUser) {
           if (activeSession && activeSession.userId !== existingUser.id) {
@@ -68,7 +68,7 @@ export default defineOAuthGitHubEventHandler({
             return sendRedirect(event, '/oauth/link-accounts?provider=github')
           }
 
-          await auth.createUserSession(existingUser, 'github')
+          await auth.createUserSession(existingUser as any, 'github')
 
           return sendRedirect(event, '/')
         }
@@ -85,7 +85,7 @@ export default defineOAuthGitHubEventHandler({
            *
            * 用户已登录，将GitHub绑定到当前账户
            */
-          await db.insert(usersOauthTable).values({
+          await db?.insert(usersOauthTable).values({
             id: generateCode(15),
             userId: activeSession.userId,
             provider: 'github',
@@ -103,7 +103,7 @@ export default defineOAuthGitHubEventHandler({
            * 用户未登录
            * 检查是否存在具有相同电子邮件地址的现有用户
            */
-          const existingUser = await db.query.userTable.findFirst({
+          const existingUser = await db?.query.userTable.findFirst({
             where: eq(userTable.email, user.email || ''),
           })
 
@@ -127,9 +127,9 @@ export default defineOAuthGitHubEventHandler({
             // Generate a unique ID for the OAuth record
             const oauthId = generateCode(15)
 
-            await db.batch([
+            await db?.batch([
               // Insert a new user with the GitHub information
-              db.insert(userTable).values({
+              db?.insert(userTable).values({
                 id: userId,
                 email: user.email || '',
                 // oauthRegisterId: oauthId,
@@ -137,31 +137,31 @@ export default defineOAuthGitHubEventHandler({
               }),
 
               // Insert the new OAuth record
-              db.insert(usersOauthTable).values({
+              db?.insert(usersOauthTable).values({
                 id: oauthId,
                 userId,
                 provider: 'github',
                 providerUserId: userId,
               }),
 
-              db.update(userTable).set({
+              db?.update(userTable).set({
                 oauthRegisterId: oauthId,
               }).where(eq(userTable.id, userId)),
             ])
 
             // 查询 userId 用户
-            const userRow = await db.query.userTable.findFirst({
+            const userRow = await db?.query.userTable.findFirst({
               where: eq(userTable.id, userId),
             })
 
-            await auth.createUserSession(userRow, 'github')
+            await auth.createUserSession(userRow as any, 'github')
             return sendRedirect(event, '/')
           }
         }
       }
     }
     catch (error) {
-      logger.error('🚀 ~ GitHub OAuth onSuccess ~ error:', error)
+      logger.error?.('🚀 ~ GitHub OAuth onSuccess ~ error:', error)
 
       throw createError({
         status: 500,
@@ -170,8 +170,8 @@ export default defineOAuthGitHubEventHandler({
     }
   },
   // Optional, will return a json error and 401 status code by default
-  onError(event, error) {
-    logger.error('GitHub OAuth error:', error)
+  onError(_event, error) {
+    logger.error?.('GitHub OAuth error:', error)
 
     throw createError({
       message: error.message,

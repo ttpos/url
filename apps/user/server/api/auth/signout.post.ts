@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
     }
   }
   catch (error: any) {
-    logger.error('🚀 ~ defineEventHandler ~ error:', error)
+    logger.error?.('🚀 ~ defineEventHandler ~ error:', error)
     throw createError({
       message: error?.message,
       statusCode: 400,

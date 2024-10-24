@@ -31,7 +31,6 @@
     "@unovis/ts": "^1.4.4",
     "@unovis/vue": "^1.4.4",
     "@vueuse/nuxt": "^11.1.0",
-    "date-fns": "^4.1.0",
     "drizzle-orm": "^0.33.0",
     "nanoid": "^5.0.7",
     "nodemailer": "^6.9.15",
@@ -46,6 +45,7 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240909.0",
     "@nuxtjs/turnstile": "^0.9.10",
+    "@types/nodemailer": "^6.4.16",
     "drizzle-kit": "^0.24.2",
     "nitro-cloudflare-dev": "^0.1.6",
     "vue-tsc": "latest",

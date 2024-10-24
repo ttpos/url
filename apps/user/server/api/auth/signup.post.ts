@@ -1,10 +1,11 @@
 import { useAuth, useUser } from '@@/server/utils'
 
 interface Query {
-  email?: string
-  phone?: string
-  password: string
-  captchaToken: string
+  'email'?: string
+  'phone'?: string
+  'password': string
+  'captchaToken': string
+  'cf-turnstile-response': string
 }
 
 export default defineEventHandler(async (event) => {
@@ -47,7 +48,7 @@ export default defineEventHandler(async (event) => {
     }
   }
   catch (error: any) {
-    logger.error('🚀 ~ defineEventHandler ~ error:', error)
+    logger.error?.('🚀 ~ defineEventHandler ~ error:', error)
     throw createError({
       message: error.message,
       statusCode: 400,

@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   extends: ['@nuxt/ui-pro'],
   app: {
     cdnURL: process.env.NUXT_CDNURL,
+    // keepalive: true,
   },
   modules: [
     'nuxt-auth-utils',
@@ -35,7 +36,16 @@ export default defineNuxtConfig({
   },
 
   typescript: {
-    strict: false,
+    tsConfig: {
+      compilerOptions: {
+        noImplicitOverride: true,
+        noUncheckedIndexedAccess: true,
+        noUnusedLocals: true,
+        noUnusedParameters: true,
+      },
+    },
+    typeCheck: true,
+    // strict: false,
   },
 
   future: {

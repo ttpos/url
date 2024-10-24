@@ -6,11 +6,11 @@ export default defineEventHandler(async (event) => {
   try {
     const db = useDrizzle(event)
 
-    const { session_id } = event.context.params
+    const session_id = event.context.params?.session_id || ''
 
-    await db.update(sessionTable)
+    await db?.update(sessionTable)
       // eslint-disable-next-line ts/ban-ts-comment
-      // @ts-expect-error
+      // @ts-ignore
       .set({ isDeleted: 1 })
       .where(eq(sessionTable.id, session_id))
 
@@ -18,8 +18,8 @@ export default defineEventHandler(async (event) => {
       message: 'Session deleted successfully!',
     }
   }
-  catch (error) {
-    logger.error('🚀 ~ defineEventHandler ~ error:', error)
+  catch (error: any) {
+    logger.error?.('🚀 ~ defineEventHandler ~ error:', error)
     throw createError({
       statusMessage: error.message,
       statusCode: 400,

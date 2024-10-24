@@ -1,8 +1,9 @@
 /* eslint-disable ts/no-use-before-define */
 
 import { blob, integer, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core'
-
 import type { SessionSource, VerificationType } from '~~/server/types'
+
+import type { AnySQLiteColumn } from 'drizzle-orm/sqlite-core'
 
 const trackingFields = {
   createdAt: integer('created_at', { mode: 'timestamp' })
@@ -25,7 +26,7 @@ export const userTable = sqliteTable(
     emailHash: text('email_hash'),
     phone: text('phone'),
     phoneHash: text('phone_hash'),
-    oauthRegisterId: text('oauth_register_id').references(() => usersOauthTable.id),
+    oauthRegisterId: text('oauth_register_id').references((): AnySQLiteColumn => usersOauthTable.id),
     password: text('password'),
     isEmailVerified: integer('is_email_verified').default(0),
     isPhoneVerified: integer('is_phone_verified').default(0),

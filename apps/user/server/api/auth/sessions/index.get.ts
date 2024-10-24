@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
     return userCookie || null
   }
   catch (error) {
-    logger.error('Error in auth handler:', error)
+    logger.error?.('Error in auth handler:', error)
 
     return null
   }

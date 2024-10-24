@@ -30,7 +30,7 @@ export default defineEventHandler(async (event) => {
 
     // * dev mode only
     if (!debug) {
-      const emailVerificationRequest = await db.query.verificationTable.findFirst({
+      const emailVerificationRequest = await db?.query.verificationTable.findFirst({
         where: table => eq(table.userId, userId) && eq(table.verifyData, code),
       })
 
@@ -51,15 +51,17 @@ export default defineEventHandler(async (event) => {
     }
 
     await db
-      .update(verificationTable)
+      ?.update(verificationTable)
       .set({
+        // eslint-disable-next-line ts/ban-ts-comment
+        // @ts-ignore
         status: 1,
         isDeleted: 1,
       })
       .where(eq(verificationTable.userId, userId))
 
     await db
-      .update(userTable)
+      ?.update(userTable)
       .set({
         isEmailVerified: 1,
       })
@@ -70,7 +72,7 @@ export default defineEventHandler(async (event) => {
     }
   }
   catch (error: any) {
-    logger.error('🚀 ~ defineEventHandler ~ error:', error)
+    logger.error?.('🚀 ~ defineEventHandler ~ error:', error)
     throw createError({
       statusMessage: error.message,
       statusCode: 400,

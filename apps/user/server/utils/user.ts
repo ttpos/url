@@ -6,7 +6,7 @@ import type { EventHandlerRequest, H3Event } from 'h3'
 interface ValidationResult {
   user: {
     [x: string]: any
-  }
+  } | null
   isValid: boolean
   message?: string
 }
@@ -72,7 +72,7 @@ class UserManager {
    * @returns Promise<ValidationResult>
    */
   private async handleOauthSignIn(userId: string, email: string): Promise<ValidationResult> {
-    const checkUserSignedWithOauth = await this.db.query.usersOauthTable.findFirst({
+    const checkUserSignedWithOauth = await this.db?.query.usersOauthTable.findFirst({
       where: table => eq(table.userId, userId),
     })
 
@@ -109,7 +109,7 @@ class UserManager {
     }
 
     // Check if user exists
-    const user = await this.db.query.userTable.findFirst({
+    const user = await this.db?.query.userTable.findFirst({
       where: eq(userTable.email, email),
     })
 
@@ -163,12 +163,12 @@ class UserManager {
 
     if (email) {
       // Check if user exists
-      const existingUser = await this.db.query.userTable.findFirst({
+      const existingUser = await this.db?.query.userTable.findFirst({
         where: eq(userTable.email, email),
       })
 
       // TODO
-      // const existingUser = await db.query.userTable.findFirst({
+      // const existingUser = await db?.query.userTable.findFirst({
       //   where: table =>
       //     sql`${table.email} = ${email}` && eq(table.oauthRegisterId, 1),
       // })
@@ -209,7 +209,7 @@ class UserManager {
     // TODO: pseudo-code
     // Optionally check for existing phone number
     if (phone) {
-      const existingPhoneUser = await this.db.query.userTable.findFirst({
+      const existingPhoneUser = await this.db?.query.userTable.findFirst({
         where: eq(userTable.phone, phone),
       })
       if (existingPhoneUser) {
@@ -222,7 +222,7 @@ class UserManager {
     }
 
     // Insert user into userTable
-    await this.db.insert(userTable).values({
+    await this.db?.insert(userTable).values({
       id: userId,
       email: email || null,
       phone: phone || null,
@@ -230,9 +230,9 @@ class UserManager {
       status: 1,
     })
 
-    const user = await this.db.query.userTable.findFirst({
+    const user = await this.db?.query.userTable.findFirst({
       where: eq(userTable.id, userId),
-    })
+    }) || {}
 
     return {
       user,

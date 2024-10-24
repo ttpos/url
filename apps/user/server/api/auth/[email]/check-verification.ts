@@ -9,13 +9,13 @@ export default defineEventHandler(async (event) => {
     const email = getRouterParam(event, 'email')
 
     // Check if user exists
-    const userEmail = await db.query.userTable.findFirst({
+    const userEmail = await db?.query.userTable.findFirst({
       where: sql`${userTable.email} = ${email}`,
       columns: {
         isEmailVerified: true,
       },
     })
-    logger.log('🚀 ~ userEmail ~ userEmail:', userEmail)
+    logger.log?.('🚀 ~ userEmail ~ userEmail:', userEmail)
 
     return {
       isEmailVerified: userEmail?.isEmailVerified,

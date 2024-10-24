@@ -29,7 +29,7 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    const user = await db.query.userTable.findFirst({
+    const user = await db?.query.userTable.findFirst({
       where: table => eq(table.email, email),
     })
 
@@ -42,7 +42,7 @@ export default defineEventHandler(async (event) => {
 
     // * dev mode only
     if (!debug) {
-      const resetPasswordRequest = await db.query.verificationTable.findFirst({
+      const resetPasswordRequest = await db?.query.verificationTable.findFirst({
         where: table =>
           sql`${table.userId} = ${user?.id}` && eq(table.verifyData, code),
       })
@@ -69,7 +69,7 @@ export default defineEventHandler(async (event) => {
     const hashedPassword = await hashPasswordFn(password)
 
     await db
-      .update(userTable)
+      ?.update(userTable)
       .set({
         password: hashedPassword,
       })
@@ -80,7 +80,7 @@ export default defineEventHandler(async (event) => {
     }
   }
   catch (error: any) {
-    logger.error('🚀 ~ defineEventHandler ~ error:', error)
+    logger.error?.('🚀 ~ defineEventHandler ~ error:', error)
     throw createError({
       statusMessage: error.message,
       statusCode: 400,

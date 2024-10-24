@@ -21,6 +21,10 @@ class AuthManager {
     const maxRetries = 3
     let retries = 0
 
+    if (!user.id) {
+      throw new Error('User ID is required')
+    }
+
     while (retries < maxRetries) {
       const sessionData = {
         id: generateCode(15),
@@ -39,7 +43,7 @@ class AuthManager {
       }
 
       try {
-        await this.db.insert(sessionTable).values(sessionData)
+        await this.db?.insert(sessionTable).values(sessionData)
 
         // set user cookie
         if (remember) {
@@ -62,7 +66,7 @@ class AuthManager {
             user: {
               id: user.id,
               sessionId: sessionData.id,
-              nickname: user.nickname,
+              nickname: user.nickname || '',
               email: user.email || '',
               phone: user.phone || '',
             },
@@ -77,7 +81,7 @@ class AuthManager {
         )
       }
       catch (error) {
-        logger.error(`Failed to insert session data. Attempt ${retries + 1} of ${maxRetries}`, error)
+        logger.error?.(`Failed to insert session data. Attempt ${retries + 1} of ${maxRetries}`, error)
         retries++
 
         if (retries >= maxRetries) {
@@ -119,13 +123,13 @@ class AuthManager {
 
       const decryptedData = decrypt(this.config.encryptionKey, encryptedCookie)
       const userData = JSON.parse(decryptedData)
-      logger.log('🚀 ~ AuthManager ~ checkUserCookie ~ userData:', userData)
+      logger.log?.('🚀 ~ AuthManager ~ checkUserCookie ~ userData:', userData)
 
       // 如果 _nn.sessionId 在反查 sessionTable 是否存在
       // 存在是否在有效期内 expiresAt 并且 删除状态是否正确
       // 如果在有效期内，更新 sessionTable 表 expiresAt 字段 + 30 day
       // 之后再更新 setUserCookie
-      const session = await this.db.query.sessionTable.findFirst({
+      const session = await this.db?.query.sessionTable.findFirst({
         where: and(
           eq(sessionTable.id, userData.sessionId),
           eq(sessionTable.isDeleted, 0),
@@ -136,7 +140,7 @@ class AuthManager {
         const newExpiryDate = Date.now() + Number(sessionExpiryDays) * 24 * 60 * 60 * 1000
 
         await this.db
-          .update(sessionTable)
+          ?.update(sessionTable)
           .set({ expiresAt: newExpiryDate })
           .where(eq(sessionTable.id, userData.sessionId))
 
@@ -155,12 +159,12 @@ class AuthManager {
         return userData
       }
       else {
-        logger.warn('The session does not exist or has expired')
+        logger.warn?.('The session does not exist or has expired')
         return null
       }
     }
     catch (error) {
-      logger.error('Failed to decrypt, failed to determine cookie', error)
+      logger.error?.('Failed to decrypt, failed to determine cookie', error)
 
       return null
     }
@@ -172,11 +176,13 @@ class AuthManager {
       return null
     }
 
-    const user = await this.db.query.userTable.findFirst({
-      where: eq(userTable.id, session.user.id),
+    const user = await this.db?.query.userTable.findFirst({
+      where: eq(userTable.id, String(session.user.id)),
     })
 
-    if (user) {
+    if (user && user.password) {
+      // eslint-disable-next-line ts/ban-ts-comment
+      // @ts-ignore
       delete user.password
     }
     return user
@@ -191,21 +197,21 @@ class AuthManager {
       return await clearUserSession(this.event)
 
     // eslint-disable-next-line ts/ban-ts-comment
-    // @ts-expect-error
-    const updateQuery = this.db.update(sessionTable).set({ isDeleted: 1 })
+    // @ts-ignore
+    const updateQuery = this.db?.update(sessionTable).set({ isDeleted: 1 })
 
     if (isAll) {
-      await updateQuery.where(eq(sessionTable.userId, currentSession.user.id.toString()))
+      await updateQuery?.where(eq(sessionTable.userId, currentSession.user.id.toString()))
     }
     else {
-      await updateQuery.where(eq(sessionTable.id, currentSession.user.sessionId))
+      await updateQuery?.where(eq(sessionTable.id, currentSession.user.sessionId))
     }
 
     return await clearUserSession(this.event)
   }
 
   public async getUserActiveSessions(userId: string) {
-    return await this.db.query.sessionTable.findMany({
+    return await this.db?.query.sessionTable.findMany({
       where: and(
         eq(sessionTable.userId, userId),
         eq(sessionTable.isDeleted, 1),

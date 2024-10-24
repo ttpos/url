@@ -24,7 +24,9 @@ export async function sendEmail({
   subject: string
   html: string
 }) {
-  const info = await transporter.sendMail({
+  // eslint-disable-next-line ts/ban-ts-comment
+  // @ts-ignore
+  const _info = await transporter.sendMail({
     from: `"Nuxt Lucia Auth" <${process.env.NUXT_GMAIL_EMAIL_USER}>`, // sender address
     to, // list of receivers
     subject, // Subject line

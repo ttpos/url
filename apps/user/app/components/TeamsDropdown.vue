@@ -14,6 +14,7 @@ const team = ref({
     variant="ghost"
     class="w-full"
     :icon="team.icon"
+    to="/"
   >
     <!-- <UAvatar :src="team.avatar.src" size="2xs" /> -->
 

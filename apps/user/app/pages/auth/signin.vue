@@ -108,7 +108,7 @@ async function onSubmit(data: FormSubmitEvent<any>) {
 
     await navigateTo('/')
   }
-  catch (error) {
+  catch (error: any) {
     toast.add({ title: error.data?.message ?? null })
   }
   finally {

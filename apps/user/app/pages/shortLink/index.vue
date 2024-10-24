@@ -5,6 +5,14 @@ definePageMeta({
 
 const { t } = useI18n()
 
+// Variables
+const peopleSelected = ref('')
+const typeSelected = ref()
+const isAddGroupModalOpen = ref(false)
+const page = ref(1)
+const items = ref(Array.from({ length: 55 }))
+
+// Computed
 const peopleOptions = computed(() =>
   [
     {
@@ -51,24 +59,15 @@ const dropdownItems = computed(() =>
   ],
 )
 
-const peopleSelected = ref('')
-const typeSelected = ref()
-const isOpen = ref(false)
-const groupName = ref('')
-const loading = ref(false)
-const page = ref(1)
-const items = ref(Array.from({ length: 55 }))
-
+// Functions
 function handleGroupsChange(val: string) {
   // eslint-disable-next-line no-console
   console.log('groups changed', val)
 
   if (val === 'add') {
-    isOpen.value = true
+    isAddGroupModalOpen.value = true
   }
 }
-
-function handleSumbit() {}
 </script>
 
 <template>
@@ -90,10 +89,12 @@ function handleSumbit() {}
             <UButton
               :label="$t('shortLink.createShortLink')"
               icon="i-heroicons-plus"
+              :to="{ path: '/shortLink/create' }"
             />
             <UButton
               :label="$t('shortLink.batchCreateShortLink')"
               icon="i-heroicons-plus"
+              :to="{ path: '/shortLink/create', query: { mode: 'batch' } }"
             />
           </div>
           <div class="flex lg:justify-end gap-4">
@@ -138,7 +139,7 @@ function handleSumbit() {}
           >
             <template #header>
               <div class="flex items-center justify-between">
-                <div class="flex items-start justify-between gap-4 font-medium text-gray-700 dark:text-gray-200">
+                <div class="flex items-start justify-between gap-4 text-gray-900 dark:text-white font-medium">
                   <UCheckbox :model-value="false" />
 
                   <UIcon name="i-heroicons-light-bulb" class="w-5 h-5" />
@@ -206,55 +207,20 @@ function handleSumbit() {}
               </div>
             </template>
           </UCard>
-          <!-- <HomeSales />
-          <HomeCountries /> -->
         </div>
 
         <div class="flex justify-end mt-8">
-          <UPagination v-model="page" :page-count="5" :total="items.length" />
+          <UPagination v-model="page" :page-count="5" :total="items.length" show-last show-first />
         </div>
       </UDashboardPanelContent>
     </UDashboardPanel>
 
-    <UModal v-model="isOpen" prevent-close>
-      <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
-        <template #header>
-          <div class="flex items-center justify-between">
-            <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
-              {{ $t('shortLink.addGroup') }}
-            </h3>
-            <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="isOpen = false" />
-          </div>
-        </template>
-
-        <UFormGroup :label="$t('shortLink.groupName')" required :error="!groupName && $t('shortLink.pleaseEnterGroupName')">
-          <UInput
-            v-model="groupName"
-            name="groupName"
-            :placeholder="$t('shortLink.pleaseEnterGroupName')"
-            autocomplete="off"
-            :ui="{ icon: { trailing: { pointer: '' } } }"
-          >
-            <template #trailing>
-              <UButton
-                v-show="groupName !== ''"
-                color="gray"
-                variant="link"
-                icon="i-heroicons-x-mark-20-solid"
-                :padded="false"
-                @click="groupName = ''"
-              />
-            </template>
-          </UInput>
-        </UFormGroup>
-
-        <template #footer>
-          <div class="flex items-center justify-end gap-2">
-            <UButton color="white" :label="$t('shortLink.cancel')" @click="isOpen = false" />
-            <UButton :label="$t('shortLink.confirm')" :loading="loading" @click="handleSumbit" />
-          </div>
-        </template>
-      </UCard>
-    </UModal>
+    <UDashboardModal
+      v-model="isAddGroupModalOpen"
+      :title="$t('shortLink.addGroup')"
+      :ui="{ width: 'sm:max-w-md' }"
+    >
+      <ShortLinkAddGroupForm @close="isAddGroupModalOpen = false" />
+    </UDashboardModal>
   </UDashboardPage>
 </template>

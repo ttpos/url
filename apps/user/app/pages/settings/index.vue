@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { FormError, FormSubmitEvent } from '#ui/types'
 
-const fileRef = ref<HTMLInputElement>()
 const isDeleteAccountModalOpen = ref(false)
 
 const user = useAuthenticatedUser()
@@ -25,10 +24,6 @@ function validate(state: any): FormError[] {
   if ((state.password_current && !state.password_new) || (!state.password_current && state.password_new))
     errors.push({ path: 'password', message: 'Please enter a valid password.' })
   return errors
-}
-
-function onFileClick() {
-  fileRef.value?.click()
 }
 
 async function onSubmit(event: FormSubmitEvent<any>) {

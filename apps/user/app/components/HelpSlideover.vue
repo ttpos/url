@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { Button } from '#ui/types'
+
 const { isHelpSlideoverOpen } = useDashboard()
 const { metaSymbol } = useShortcuts()
 
@@ -27,7 +29,7 @@ const links = [
     to: 'https://github.com/ttpos/url',
     target: '_blank',
   },
-]
+] as Button[]
 
 const categories = computed(() => [
   {
