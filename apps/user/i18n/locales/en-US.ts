@@ -5,6 +5,7 @@ export default {
     current_language: 'English',
     cancel: 'Cancel',
     confirm: 'Confirm',
+    save: 'Save',
     optional: 'Optional',
     nav: {
       index: 'Home Page',
@@ -27,6 +28,7 @@ export default {
   },
   shortLink: {
     title: 'TinyLink Short Link',
+    batchTitle: 'Batch Create Short Links',
     description: 'TinyLink short links are used to simplify long URLs into shorter, more shareable links while maintaining access to the original content.',
     createShortLink: 'Create Short Link',
     batchCreateShortLink: 'Batch Create Short Links',
@@ -46,11 +48,15 @@ export default {
     delete: 'Delete',
     groupName: 'Group Name',
     pleaseEnterGroupName: 'Please enter group name',
+    copySuccess: 'Copy Success',
+    copyFailed: 'Copy Failed',
+    shareTitle: 'Share Short Link',
     create: {
       title: 'Create Short Link',
       back: 'Back',
       create: 'Create',
       longUrl: 'Long URL',
+      redirectUrl: 'Redirect URL',
       remainingLinks: 'You can create {count} more links this month',
       batchUrlPlaceholder: 'Enter multiple URLs, one per line',
       singleUrlPlaceholder: 'Enter a URL starting with https:// or http://',
@@ -74,6 +80,33 @@ export default {
       group1: 'Group 1',
       group2: 'Group 2',
       group3: 'Group 3',
+    },
+    editPage: {
+      title: 'Edit Short Link',
+    },
+    qrPreview: {
+      meta: {
+        title: 'QR Code Preview - TinyLink',
+      },
+      header: {
+        title: 'You\'re almost there!',
+        subtitle: 'Don\'t forget to finish creating your QR Code.',
+      },
+      description: 'If you are seeing this message, your QR Code is still a preview. Make sure you finish customizing your QR Code and then select \'Create QR Code\'.',
+      features: {
+        intro: {
+          text: 'While you are here...',
+          subtext: 'Check out what else you can do with TinyLink',
+        },
+        shortLink: {
+          title: 'Link Management',
+          description: 'Personalize, share, and track your short links',
+        },
+        tinyPage: {
+          title: 'TinyLink Page',
+          description: 'Showcase your important links with a TinyLink page',
+        },
+      },
     },
   },
 }

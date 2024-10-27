@@ -8,9 +8,30 @@ const { t } = useI18n()
 // Variables
 const peopleSelected = ref('')
 const typeSelected = ref()
+const shortLinks = ref([
+  {
+    id: 1,
+    title: 'OpenAI 任命政治老将莱恩为全球政策主管',
+    shortUrl: 'tiny.com/4g4eaaa',
+    originalUrl: 'https://readhub.cn/topic/8cUL78YJZ5P',
+    createdAt: '2024-10-22 16:49:46',
+    group: 'Default Group',
+  },
+  {
+    id: 2,
+    title: 'OpenAI 任命政治老将莱恩为全球政策主管2',
+    shortUrl: 'tiny.com/4g4ebbbb',
+    originalUrl: 'https://readhub.cn/1111topic/8cUL78YJZ5P',
+    createdAt: '2024-10-26 11:02:06',
+    group: 'Group 1',
+  },
+])
+
 const isAddGroupModalOpen = ref(false)
 const page = ref(1)
-const items = ref(Array.from({ length: 55 }))
+
+const isShareModalOpen = ref(false)
+const shareUrl = ref('')
 
 // Computed
 const peopleOptions = computed(() =>
@@ -44,21 +65,6 @@ const typeOptions = computed(() =>
   ],
 )
 
-const dropdownItems = computed(() =>
-  [
-    [
-      {
-        label: t('shortLink.details'),
-        icon: 'i-heroicons:document-magnifying-glass',
-      },
-      {
-        label: t('shortLink.delete'),
-        icon: 'i-heroicons:trash',
-      },
-    ],
-  ],
-)
-
 // Functions
 function handleGroupsChange(val: string) {
   // eslint-disable-next-line no-console
@@ -66,6 +72,28 @@ function handleGroupsChange(val: string) {
 
   if (val === 'add') {
     isAddGroupModalOpen.value = true
+  }
+}
+
+function handleCardAction(action: string, item: any) {
+  switch (action) {
+    case 'check':
+      break
+    case 'copy':
+      break
+    case 'share':
+      isShareModalOpen.value = true
+      shareUrl.value = item.shortUrl
+      break
+    case 'edit':
+      break
+    case 'delete':
+      break
+
+    default:
+    // eslint-disable-next-line no-console
+      console.log('unknown action', action)
+      break
   }
 }
 </script>
@@ -133,84 +161,21 @@ function handleGroupsChange(val: string) {
 
       <UDashboardPanelContent>
         <div class="grid gap-8">
-          <UCard
-            v-for="(item) in 4"
-            :key="item"
-          >
-            <template #header>
-              <div class="flex items-center justify-between">
-                <div class="flex items-start justify-between gap-4 text-gray-900 dark:text-white font-medium">
-                  <UCheckbox :model-value="false" />
-
-                  <UIcon name="i-heroicons-light-bulb" class="w-5 h-5" />
-                  <p>
-                    OpenAI 任命政治老将莱恩为全球政策主管
-                  </p>
-                </div>
-
-                <div class="flex items-start gap-4">
-                  <UTooltip :text="$t('shortLink.copy')">
-                    <UButton
-                      icon="i-ic:baseline-content-copy"
-                      variant="ghost"
-                    />
-                  </UTooltip>
-
-                  <UTooltip :text="$t('shortLink.share')">
-                    <UButton
-                      icon="i-heroicons:arrow-top-right-on-square-solid"
-                      variant="ghost"
-                    />
-                  </UTooltip>
-
-                  <UTooltip :text="$t('shortLink.edit')">
-                    <UButton
-                      icon="i-heroicons:pencil-square"
-                      variant="ghost"
-                    />
-                  </UTooltip>
-
-                  <UDropdown :items="dropdownItems" mode="hover">
-                    <UButton
-                      icon="i-heroicons-ellipsis-vertical"
-                      variant="ghost"
-                    />
-                  </UDropdown>
-                </div>
-              </div>
-            </template>
-
-            <div class="flex items-start flex-col gap-4">
-              <UButton
-                to="tiny.com/4g4eaaa"
-                :padded="false"
-                variant="link"
-                target="_blank"
-              >
-                tiny.com/4g4eaaa
-              </UButton>
-              <UButton
-                to="https://volta.net"
-                :padded="false"
-                variant="link"
-                target="_blank"
-                color="black"
-              >
-                https://readhub.cn/topic/8cUL78YJZ5P
-              </UButton>
-            </div>
-
-            <template #footer>
-              <div class="flex items-start gap-4">
-                <UBadge label="2024-10-22 16:49:46" variant="subtle" />
-                <UBadge label="Default Group" variant="subtle" />
-              </div>
-            </template>
-          </UCard>
+          <ShortLinkCard
+            v-for="item in shortLinks"
+            :key="item.id"
+            :item="item"
+            :show-checkbox="true"
+            @check="handleCardAction('check', $event)"
+            @copy="handleCardAction('copy', $event)"
+            @share="handleCardAction('share', $event)"
+            @edit="handleCardAction('edit', $event)"
+            @delete="handleCardAction('delete', $event)"
+          />
         </div>
 
         <div class="flex justify-end mt-8">
-          <UPagination v-model="page" :page-count="5" :total="items.length" show-last show-first />
+          <UPagination v-model="page" :page-count="5" :total="shortLinks.length" show-last show-first />
         </div>
       </UDashboardPanelContent>
     </UDashboardPanel>
@@ -222,5 +187,10 @@ function handleGroupsChange(val: string) {
     >
       <ShortLinkAddGroupForm @close="isAddGroupModalOpen = false" />
     </UDashboardModal>
+
+    <ShortLinkShareModal
+      v-model="isShareModalOpen"
+      :share-url="shareUrl"
+    />
   </UDashboardPage>
 </template>

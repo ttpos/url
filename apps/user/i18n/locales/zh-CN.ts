@@ -5,6 +5,7 @@ export default {
     current_language: '简体中文',
     cancel: '取消',
     confirm: '确认',
+    save: '保存',
     optional: '可选',
     nav: {
       index: '首页',
@@ -46,11 +47,15 @@ export default {
     delete: '删除',
     groupName: '分组名称',
     pleaseEnterGroupName: '请输入分组名称',
+    copySuccess: '复制成功',
+    copyFailed: '复制失败',
+    shareTitle: '分享短链接',
     create: {
       title: '创建短链接',
+      batchTitle: '批量创建短链接',
       back: '返回',
       create: '创建',
-      longUrl: '长链接',
+      redirectUrl: '跳转 URL',
       remainingLinks: '本月您还可以创建 {count} 个链接',
       batchUrlPlaceholder: '输入多个URL，每行一个',
       singleUrlPlaceholder: '输入以 https:// 或 http:// 开头的URL',
@@ -74,6 +79,33 @@ export default {
       group1: '分组1',
       group2: '分组2',
       group3: '分组3',
+    },
+    editPage: {
+      title: '编辑短链接',
+    },
+    qrPreview: {
+      meta: {
+        title: 'QR 码预览 - TinyLink',
+      },
+      header: {
+        title: '即将完成！',
+        subtitle: '别忘了完成你的二维码创建。',
+      },
+      description: '如果你看到此消息，说明你的二维码仍处于预览状态。请确保完成二维码的自定义设置，然后点击 \'创建二维码\' ',
+      features: {
+        intro: {
+          text: '在此期间...',
+          subtext: '来看看 TinyLink 还能做什么',
+        },
+        shortLink: {
+          title: '链接管理',
+          description: '个性化、分享并追踪你的短链接',
+        },
+        tinyPage: {
+          title: 'TinyLink 页面',
+          description: '用 TinyLink 页面展示你的重要链接',
+        },
+      },
     },
   },
 }
