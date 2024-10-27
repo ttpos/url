@@ -10,16 +10,17 @@ useSeoMeta({
 
 <template>
   <ULandingSection
-    description="If you are seeing this message, your QR Code is still a preview. Make sure you finish customizating your QR Code and then select 'Create QR Code'."
+    :description="$t('qrPreview.description')"
     align="center"
-    :ui="{ title: 'text-2xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-3xl lg:text-4xl' }"
+    :ui="{
+      title: 'text-2xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-3xl lg:text-4xl',
+      description: 'mt-4 text-lg leading-relaxed text-gray-600 dark:text-gray-300',
+    }"
   >
     <template #title>
-      <p>
-        You're almost there!
-      </p>
+      <p>{{ $t('qrPreview.header.title') }}</p>
       <p class="mt-6 text-2xl text-gray-600 dark:text-gray-300">
-        Don't forget to finish creating your QR Code.
+        {{ $t('qrPreview.header.subtitle') }}
       </p>
     </template>
 
@@ -31,22 +32,22 @@ useSeoMeta({
     </template> -->
 
     <template #links>
-      <p class="text-center mt-6 text-xl text-gray-600 dark:text-gray-300">
-        While you are here... <br>
-        Check out what else you can do with TinyLink
+      <p class="text-center my-6 text-xl text-gray-600 dark:text-gray-300">
+        {{ $t('qrPreview.features.intro.text') }}<br>
+        {{ $t('qrPreview.features.intro.subtext') }}
       </p>
       <ULandingGrid>
         <ULandingCard
           class="col-span-6 row-span-2"
           icon="icon-park-outline:link-two"
-          title=""
-          description="Personalize, share, and track your short links"
+          :title="$t('qrPreview.features.shortLink.title')"
+          :description="$t('qrPreview.features.shortLink.description')"
         />
         <ULandingCard
           class="col-span-6 row-span-2"
-          icon="i-heroicons-wrench-screwdriver"
-          title=""
-          description="Showcase your important links with a TinyLink page"
+          icon="ic:baseline-pages"
+          :title="$t('qrPreview.features.tinyPage.title')"
+          :description="$t('qrPreview.features.tinyPage.description')"
         />
       </ULandingGrid>
     </template>

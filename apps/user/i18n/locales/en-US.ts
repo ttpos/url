@@ -84,28 +84,28 @@ export default {
     editPage: {
       title: 'Edit Short Link',
     },
-    qrPreview: {
-      meta: {
-        title: 'QR Code Preview - TinyLink',
+  },
+  qrPreview: {
+    meta: {
+      title: 'QR Code Preview - TinyLink',
+    },
+    header: {
+      title: 'You\'re almost there!',
+      subtitle: 'Don\'t forget to finish creating your QR Code.',
+    },
+    description: 'If you are seeing this message, your QR Code is still a preview. Make sure you finish customizing your QR Code and then select \'Create QR Code\'.',
+    features: {
+      intro: {
+        text: 'While you are here...',
+        subtext: 'Check out what else you can do with TinyLink',
       },
-      header: {
-        title: 'You\'re almost there!',
-        subtitle: 'Don\'t forget to finish creating your QR Code.',
+      shortLink: {
+        title: 'Link Management',
+        description: 'Personalize, share, and track your short links',
       },
-      description: 'If you are seeing this message, your QR Code is still a preview. Make sure you finish customizing your QR Code and then select \'Create QR Code\'.',
-      features: {
-        intro: {
-          text: 'While you are here...',
-          subtext: 'Check out what else you can do with TinyLink',
-        },
-        shortLink: {
-          title: 'Link Management',
-          description: 'Personalize, share, and track your short links',
-        },
-        tinyPage: {
-          title: 'TinyLink Page',
-          description: 'Showcase your important links with a TinyLink page',
-        },
+      tinyPage: {
+        title: 'TinyLink Page',
+        description: 'Showcase your important links with a TinyLink page',
       },
     },
   },

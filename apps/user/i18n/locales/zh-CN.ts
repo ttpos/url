@@ -83,28 +83,28 @@ export default {
     editPage: {
       title: '编辑短链接',
     },
-    qrPreview: {
-      meta: {
-        title: 'QR 码预览 - TinyLink',
+  },
+  qrPreview: {
+    meta: {
+      title: 'QR 码预览 - TinyLink',
+    },
+    header: {
+      title: '即将完成！',
+      subtitle: '别忘了完成你的二维码创建。',
+    },
+    description: '如果你看到此消息，说明你的二维码仍处于预览状态。请确保完成二维码的自定义设置，然后点击 \'创建二维码\' ',
+    features: {
+      intro: {
+        text: '在此期间...',
+        subtext: '来看看 TinyLink 还能做什么',
       },
-      header: {
-        title: '即将完成！',
-        subtitle: '别忘了完成你的二维码创建。',
+      shortLink: {
+        title: '链接管理',
+        description: '个性化、分享并追踪你的短链接',
       },
-      description: '如果你看到此消息，说明你的二维码仍处于预览状态。请确保完成二维码的自定义设置，然后点击 \'创建二维码\' ',
-      features: {
-        intro: {
-          text: '在此期间...',
-          subtext: '来看看 TinyLink 还能做什么',
-        },
-        shortLink: {
-          title: '链接管理',
-          description: '个性化、分享并追踪你的短链接',
-        },
-        tinyPage: {
-          title: 'TinyLink 页面',
-          description: '用 TinyLink 页面展示你的重要链接',
-        },
+      tinyPage: {
+        title: 'TinyLink 页面',
+        description: '用 TinyLink 页面展示你的重要链接',
       },
     },
   },
