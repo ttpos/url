@@ -32,12 +32,12 @@ const dropdownItems = computed(() => {
   const items = []
   if (props.showDetailsButton) {
     items.push({
-      label: t('shortLink.details'),
+      label: t('common.operation.edit'),
       onClick: () => emit('details', props.item),
     })
   }
   items.push({
-    label: t('shortLink.delete'),
+    label: t('common.operation.delete'),
     labelClass: 'text-red-500 dark:text-red-400',
     onClick: () => emit('delete', props.item),
   })
@@ -46,7 +46,7 @@ const dropdownItems = computed(() => {
 
 function copyFn(str: string) {
   copy(str)
-  toast.add({ title: isSupported ? t('shortLink.copySuccess') : t('shortLink.copyFailed') })
+  toast.add({ title: isSupported ? t('common.operation.copySuccess') : t('common.operation.copyFailed') })
   emit('copy', props.item)
 }
 
@@ -63,6 +63,7 @@ const titleComponent = computed(() => props.enableNavigation ? UButton : 'span')
           <component
             :is="titleComponent"
             v-bind="enableNavigation ? { to: `/shortLink/${item.shortUrl.split('/').pop()}/details`, padded: false, variant: 'link', color: 'black' } : {}"
+            class="text-lg"
             @click="!enableNavigation && emit('details', item)"
           >
             {{ item.title }}
@@ -70,7 +71,7 @@ const titleComponent = computed(() => props.enableNavigation ? UButton : 'span')
         </div>
 
         <div class="flex items-start gap-4">
-          <UTooltip :text="$t('shortLink.copy')">
+          <UTooltip :text="$t('common.operation.copy')">
             <UButton
               icon="i-ic:baseline-content-copy"
               variant="ghost"
@@ -79,7 +80,7 @@ const titleComponent = computed(() => props.enableNavigation ? UButton : 'span')
             />
           </UTooltip>
 
-          <UTooltip :text="$t('shortLink.share')">
+          <UTooltip :text="$t('common.operation.share')">
             <UButton
               icon="i-heroicons:arrow-top-right-on-square-solid"
               variant="ghost"
@@ -88,7 +89,7 @@ const titleComponent = computed(() => props.enableNavigation ? UButton : 'span')
             />
           </UTooltip>
 
-          <UTooltip :text="$t('shortLink.edit')">
+          <UTooltip :text="$t('common.operation.edit')">
             <UButton
               :to="`/shortLink/${item.shortUrl.split('/').pop()}/edit`"
               icon="i-heroicons:pencil-square"

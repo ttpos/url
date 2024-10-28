@@ -23,7 +23,7 @@ const links = computed(() => [
   {
     id: 'shortLink',
     label: t('common.nav.shortLink'),
-    icon: 'i-heroicons-home',
+    icon: 'icon-park-outline:link-two',
     to: '/shortLink',
     tooltip: {
       text: t('common.nav.shortLink'),
@@ -31,11 +31,10 @@ const links = computed(() => [
     },
   },
   {
-    id: 'qrcode',
+    id: 'qrc',
     label: t('common.nav.qrCode'),
-    icon: 'i-heroicons-inbox',
-    to: '/qrcode',
-    badge: '4',
+    icon: 'i-mdi:qrcode-scan',
+    to: '/qrc',
     tooltip: {
       text: t('common.nav.qrCode'),
       shortcuts: ['Q', 'R'],
@@ -44,7 +43,7 @@ const links = computed(() => [
   {
     id: 'marketing',
     label: t('common.nav.marketing'),
-    icon: 'i-heroicons-user-group',
+    icon: 'i-hugeicons:marketing',
     to: '/marketing',
     tooltip: {
       text: t('common.nav.marketing'),
@@ -54,7 +53,7 @@ const links = computed(() => [
   {
     id: 'domain',
     label: t('common.nav.customDomain'),
-    icon: 'i-heroicons-user-group',
+    icon: 'i-gridicons:domains',
     to: '/domain',
     tooltip: {
       text: t('common.nav.customDomain'),

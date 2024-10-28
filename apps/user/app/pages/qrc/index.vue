@@ -30,6 +30,8 @@ const shortLinks = ref([
 const isAddGroupModalOpen = ref(false)
 const page = ref(1)
 
+const isShareModalOpen = ref(false)
+const shareUrl = ref('')
 
 // Computed
 const peopleOptions = computed(() =>
@@ -72,6 +74,28 @@ function handleGroupsChange(val: string) {
     isAddGroupModalOpen.value = true
   }
 }
+
+function handleCardAction(action: string, item: any) {
+  switch (action) {
+    case 'check':
+      break
+    case 'copy':
+      break
+    case 'share':
+      isShareModalOpen.value = true
+      shareUrl.value = item.shortUrl
+      break
+    case 'edit':
+      break
+    case 'delete':
+      break
+
+    default:
+    // eslint-disable-next-line no-console
+      console.log('unknown action', action)
+      break
+  }
+}
 </script>
 
 <template>
@@ -82,31 +106,26 @@ function handleGroupsChange(val: string) {
 
         <div class="pt-2 pb-6">
           <p class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white tracking-tight">
-            {{ $t('shortLink.title') }}
+            {{ $t('qrc.title') }}
           </p>
 
           <p class="mt-3 text-lg text-gray-500 dark:text-gray-400">
-            {{ $t('shortLink.description') }}
+            {{ $t('qrc.description') }}
           </p>
         </div>
 
         <div class="grid lg:grid-cols-2 lg:items-start gap-8">
           <div class="flex items-start gap-4">
             <UButton
-              :label="$t('shortLink.createShortLink')"
+              :label="$t('qrc.createButton')"
               icon="i-heroicons-plus"
-              :to="{ path: '/shortLink/create' }"
-            />
-            <UButton
-              :label="$t('shortLink.batchCreateShortLink')"
-              icon="i-heroicons-plus"
-              :to="{ path: '/shortLink/create', query: { mode: 'batch' } }"
+              :to="{ path: '/qrc/create' }"
             />
           </div>
           <div class="flex lg:justify-end gap-4">
             <div class="flex items-center gap-2">
               <span class="text-gray-500 dark:text-gray-400 text-sm hidden lg:inline">
-                {{ $t('shortLink.group') }}
+                {{ $t('qrc.group') }}
               </span>
               <USelectMenu
                 v-model="peopleSelected"
@@ -114,7 +133,7 @@ function handleGroupsChange(val: string) {
                 :clear-search-on-close="true"
                 searchable
                 :options="peopleOptions"
-                :placeholder="$t('shortLink.selectGroups')"
+                :placeholder="$t('qrc.selectGroups')"
                 value-attribute="value"
                 option-attribute="label"
                 @change="handleGroupsChange"
@@ -122,13 +141,13 @@ function handleGroupsChange(val: string) {
             </div>
             <div class="flex items-center gap-2">
               <span class="text-gray-500 dark:text-gray-400 text-sm hidden lg:inline">
-                {{ $t('shortLink.type') }}
+                {{ $t('qrc.type') }}
               </span>
               <USelectMenu
                 v-model="typeSelected"
                 class="w-[9rem]"
                 :options="typeOptions"
-                :placeholder="$t('shortLink.selectType')"
+                :placeholder="$t('qrc.selectType')"
                 value-attribute="value"
                 option-attribute="label"
               />
@@ -139,10 +158,16 @@ function handleGroupsChange(val: string) {
 
       <UDashboardPanelContent>
         <div class="grid gap-8">
-          <ShortLinkCard
+          <QrcCard
             v-for="item in shortLinks"
             :key="item.id"
             :item="item"
+            :show-checkbox="true"
+            @check="handleCardAction('check', $event)"
+            @copy="handleCardAction('copy', $event)"
+            @share="handleCardAction('share', $event)"
+            @edit="handleCardAction('edit', $event)"
+            @delete="handleCardAction('delete', $event)"
           />
         </div>
 
@@ -151,13 +176,5 @@ function handleGroupsChange(val: string) {
         </div>
       </UDashboardPanelContent>
     </UDashboardPanel>
-
-    <UDashboardModal
-      v-model="isAddGroupModalOpen"
-      :title="$t('shortLink.addGroup')"
-      :ui="{ width: 'sm:max-w-md' }"
-    >
-      <ShortLinkAddGroupForm @close="isAddGroupModalOpen = false" />
-    </UDashboardModal>
   </UDashboardPage>
 </template>

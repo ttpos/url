@@ -59,13 +59,13 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
     <div class="flex justify-end gap-3">
       <UButton
-        :label="$t('common.cancel')"
+        :label="$t('common.operation.cancel')"
         color="white"
         @click="emit('close')"
       />
       <UButton
         type="submit"
-        :label="$t('common.confirm')"
+        :label="$t('common.operation.confirm')"
         :loading="loading"
       />
     </div>

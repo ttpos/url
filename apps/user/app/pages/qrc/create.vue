@@ -2,8 +2,6 @@
 import QrcodeVue from 'qrcode.vue'
 import { computed, reactive, ref } from 'vue'
 
-import { useRoute } from 'vue-router'
-
 import { z } from 'zod'
 import type { Form, FormSubmitEvent } from '#ui/types'
 
@@ -12,7 +10,6 @@ definePageMeta({
 })
 
 const requestURL = useRequestURL()
-const route = useRoute()
 const { t } = useI18n()
 
 const fileRef = ref<HTMLInputElement>()
@@ -57,7 +54,6 @@ type Schema = z.infer<typeof schema>
 const formRef = ref<Form<Schema> | null>(null)
 
 // Computed
-const isBatchMode = computed(() => route.query.mode === 'batch')
 const domainOptions = computed(() => [
   { label: t('shortLink.create.domain1'), value: 'domain-1' },
   { label: t('shortLink.create.domain2'), value: 'domain-2' },
@@ -111,7 +107,7 @@ function onFileClick() {
 </script>
 
 <template>
-  <SubPage :title="isBatchMode ? $t('shortLink.create.batchTitle') : $t('shortLink.create.title')">
+  <SubPage :title="$t('shortLink.create.title')">
     <UForm
       ref="formRef"
       :schema="schema"
@@ -124,14 +120,7 @@ function onFileClick() {
         :label="$t('shortLink.create.redirectUrl')"
         :help="$t('shortLink.create.remainingLinks', { count: 10 })"
       >
-        <UTextarea
-          v-if="isBatchMode"
-          v-model="state.longUrl"
-          autoresize
-          :placeholder="$t('shortLink.create.batchUrlPlaceholder')"
-        />
         <UInput
-          v-else
           v-model="state.longUrl"
           :placeholder="$t('shortLink.create.singleUrlPlaceholder')"
         />
@@ -142,21 +131,13 @@ function onFileClick() {
         name="title"
         :hint="$t('common.operation.optional')"
       >
-        <UTextarea
-          v-if="isBatchMode"
-          v-model="state.title"
-          autoresize
-          :placeholder="$t('shortLink.create.batchTitlePlaceholder')"
-        />
         <UInput
-          v-else
           v-model="state.title"
           :placeholder="$t('shortLink.create.singleTitlePlaceholder')"
         />
       </UFormGroup>
 
       <UFormGroup
-        v-if="!isBatchMode"
         name="generateQrCode"
         label="qrCode"
         :hint="$t('common.operation.optional')"
@@ -240,20 +221,7 @@ function onFileClick() {
         </div>
       </UFormGroup>
 
-      <UFormGroup
-        v-if="isBatchMode"
-        name="domain"
-        :label="$t('shortLink.create.selectDomain')"
-        class="flex-1"
-      >
-        <USelect
-          v-model="state.domain"
-          :placeholder="$t('shortLink.create.selectPlaceholder')"
-          :options="domainOptions"
-        />
-      </UFormGroup>
-
-      <UFormGroup v-else :label="$t('shortLink.create.shortLinkDomain')">
+      <UFormGroup :label="$t('shortLink.create.shortLinkDomain')">
         <div class="flex items-center">
           <UFormGroup name="domain" :label="$t('shortLink.create.domain')" class="flex-1">
             <USelect

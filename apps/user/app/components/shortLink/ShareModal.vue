@@ -20,14 +20,14 @@ const toast = useToast()
 
 function copyFn(str: string) {
   copy(str)
-  toast.add({ title: isSupported ? t('shortLink.copySuccess') : t('shortLink.copyFailed') })
+  toast.add({ title: isSupported ? t('common.operation.copySuccess') : t('common.operation.copyFailed') })
 }
 </script>
 
 <template>
   <UDashboardModal
     :model-value="modelValue"
-    :title="$t('shortLink.shareTitle')"
+    :title="$t('common.operation.shareTitle')"
     :ui="{ width: 'sm:max-w-md' }"
     @update:model-value="emit('update:modelValue', $event)"
   >
