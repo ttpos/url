@@ -80,6 +80,11 @@ export default {
       group1: 'Group 1',
       group2: 'Group 2',
       group3: 'Group 3',
+      color: 'Color',
+      logo: 'Logo',
+      logoHelpText: 'For best results, use a PNG image with a 1:1 aspect ratio and file size less than 5MB.',
+      selectFile: 'Select File',
+      preview: 'Preview',
     },
     editPage: {
       title: 'Edit Short Link',

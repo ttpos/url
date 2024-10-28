@@ -79,6 +79,11 @@ export default {
       group1: '分组1',
       group2: '分组2',
       group3: '分组3',
+      color: '颜色',
+      logo: 'Logo',
+      logoHelpText: '为获得最佳效果，请使用长宽比为 1:1 的 PNG 格式图像，文件大小不超过 5MB。',
+      selectFile: '选择文件',
+      preview: '预览',
     },
     editPage: {
       title: '编辑短链接',
