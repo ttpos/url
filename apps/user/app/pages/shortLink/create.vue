@@ -18,14 +18,14 @@ const { t } = useI18n()
 const fileRef = ref<HTMLInputElement>()
 
 const colorList = [
-  '#000000', // 黑色 (原 rgb(0, 0, 0))
-  '#DE3121', // 红色 (原 rgb(222, 49, 33))
-  '#EF8000', // 橙色 (原 rgb(239, 128, 0))
-  '#198639', // 绿色 (原 rgb(25, 134, 57))
-  '#229CE0', // 浅蓝 (原 rgb(34, 156, 224))
-  '#2A5BD7', // 蓝色 (原 rgb(42, 91, 215))
-  '#6B52D1', // 紫色 (原 rgb(107, 82, 209))
-  '#D84280', // 粉色 (原 rgb(216, 66, 128))
+  '#000000',
+  '#DE3121',
+  '#EF8000',
+  '#198639',
+  '#229CE0',
+  '#2A5BD7',
+  '#6B52D1',
+  '#D84280',
 ]
 
 // Variables
@@ -34,7 +34,7 @@ const state = reactive({
   title: '',
   domain: '',
   customSuffix: '',
-  generateQrCode: true,
+  generateQrCode: false,
   avatar: '',
   group: '',
   selectedColor: '#000000',
@@ -156,6 +156,7 @@ function onFileClick() {
       </UFormGroup>
 
       <UFormGroup
+        v-if="!isBatchMode"
         name="generateQrCode"
         label="qrCode"
         :hint="$t('common.optional')"
