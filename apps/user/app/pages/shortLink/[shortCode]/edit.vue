@@ -134,7 +134,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
       <div class="flex space-x-4">
         <UButton variant="outline" @click="formRef && formRef.clear()">
-          {{ t('common.operation.cancel') }}
+          {{ t('common.operation.reset') }}
         </UButton>
         <UButton type="submit">
           {{ t('common.operation.save') }}

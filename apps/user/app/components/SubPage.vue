@@ -28,7 +28,7 @@ function goBack() {
           color="gray"
           variant="link"
           icon="i-gravity-ui:arrow-shape-turn-up-left"
-          :label="$t('shortLink.create.back')"
+          :label="$t('common.operation.back')"
           @click="goBack"
         />
       </div>

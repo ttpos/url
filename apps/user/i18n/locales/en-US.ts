@@ -14,6 +14,9 @@ export default {
       multiLanguage: 'Multi Language',
     },
     operation: {
+      index: 'Operation',
+      back: 'Back',
+      reset: 'Reset',
       cancel: 'Cancel',
       confirm: 'Confirm',
       save: 'Save',
@@ -55,7 +58,6 @@ export default {
     shareTitle: 'Share Short Link',
     create: {
       title: 'Create Short Link',
-      back: 'Back',
       create: 'Create',
       longUrl: 'Long URL',
       redirectUrl: 'Redirect URL',
@@ -124,5 +126,78 @@ export default {
     type: 'Type',
     selectGroups: 'Please select groups',
     selectType: 'Please select type',
+    create: {
+      title: 'Create New QR Code',
+      create: 'Create',
+      redirectUrl: 'Redirect URL',
+      remainingLinks: 'You can create {count} more links this month',
+      batchUrlPlaceholder: 'Enter multiple URLs, one per line',
+      singleUrlPlaceholder: 'Enter a URL starting with https:// or http://',
+      linkTitle: 'Title',
+      batchTitlePlaceholder: 'Enter titles, one per line',
+      singleTitlePlaceholder: 'Enter a title for your link',
+      qrCode: 'QR Code',
+      generateQrCode: 'Generate QR Code',
+      selectDomain: 'Select Short Link Domain',
+      shortLinkDomain: 'TinyLink Short Link',
+      domain: 'Domain',
+      customSuffix: 'Custom Domain Suffix',
+      customSuffixPlaceholder: 'Enter custom suffix',
+      group: 'Group',
+      selectPlaceholder: 'Please select...',
+      validUrl: 'Please enter a valid URL',
+      requiredField: 'This field is required',
+      domain1: 'Domain 1',
+      domain2: 'Domain 2',
+      domain3: 'Domain 3',
+      group1: 'Group 1',
+      group2: 'Group 2',
+      group3: 'Group 3',
+      style: 'Select Style',
+      color: 'Select Color',
+      logo: 'Add Logo',
+      logoHelpText: 'For best results, use a PNG image with a 1:1 aspect ratio, file size under 5MB.',
+      selectFile: 'Select File',
+      preview: 'Preview',
+      reset: 'Reset to Default',
+    },
+  },
+  domain: {
+    title: 'TinyLink Custom Domain',
+    description: 'Use a custom domain to personalize your short links, replace the default "tiny.com" domain, take full control of your content, and enhance your brand image.',
+    createButton: 'Add Domain',
+    domainName: 'Domain Name',
+    shortLinkCount: 'Short Link Count',
+    addedTime: 'Added Time',
+    resolutionStatus: 'Resolution Status',
+    create: {
+      title: 'Add Domain',
+      domain: 'Domain Name',
+      remainingLinks: 'Remaining available links: {count}',
+      domainTypes: {
+        rootDomain: 'Use Root Domain',
+        subdomain: 'Use Subdomain'
+      },
+      rootDomainNote: {
+        title: 'Please ensure this root domain is not bound to any website.',
+        description: 'After binding, the generated short link format will be tiny.com/xxxx.'
+      },
+      subdomainNote: {
+        title: 'Please enter a subdomain, e.g.: abc.tiny.com.',
+        description: 'After binding, the created short link format will be abc.tiny.com/xxxx.'
+      },
+      subdomainField: {
+        label: 'Subdomain',
+        placeholder: 'Enter subdomain'
+      },
+      domainPlaceholder: 'Enter root domain without www, e.g. tiny.com',
+      success: {
+        title: 'Domain Added Successfully',
+        message: 'Domain has been added successfully. Please go to your DNS management panel to add the following CNAME record.',
+        recordType: 'Record Type',
+        hostRecord: 'Host Record',
+        recordValue: 'Record Value'
+      }
+    }
   },
 }

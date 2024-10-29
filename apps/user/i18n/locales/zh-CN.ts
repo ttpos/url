@@ -14,6 +14,9 @@ export default {
       multiLanguage: '多语言',
     },
     operation: {
+      index: '操作',
+      back: '返回',
+      reset: '重置',
       cancel: '取消',
       confirm: '确认',
       save: '保存',
@@ -55,7 +58,6 @@ export default {
     create: {
       title: '创建短链接',
       batchTitle: '批量创建短链接',
-      back: '返回',
       create: '创建',
       redirectUrl: '跳转 URL',
       remainingLinks: '本月您还可以创建 {count} 个链接',
@@ -123,5 +125,81 @@ export default {
     type: '类型',
     selectGroups: '请选择分组',
     selectType: '请选择类型',
+    create: {
+      title: '创建新的 QR 码',
+      create: '创建',
+      redirectUrl: '跳转 URL',
+      remainingLinks: '本月您还可以创建 {count} 个链接',
+      batchUrlPlaceholder: '输入多个URL，每行一个',
+      singleUrlPlaceholder: '输入以 https:// 或 http:// 开头的URL',
+      linkTitle: '标题',
+      batchTitlePlaceholder: '输入标题，每行一个',
+      singleTitlePlaceholder: '为您的链接输入一个标题',
+      qrCode: '二维码',
+      generateQrCode: '同时生成二维码',
+      selectDomain: '选择短链接域名',
+      shortLinkDomain: 'TinyLink 短链接',
+      domain: '域名',
+      customSuffix: '自定义域名后缀',
+      customSuffixPlaceholder: '输入自定义后缀',
+      group: '分组',
+      selectPlaceholder: '请选择...',
+      validUrl: '请输入有效的URL',
+      requiredField: '此字段为必填项',
+      domain1: '域名1',
+      domain2: '域名2',
+      domain3: '域名3',
+      group1: '分组1',
+      group2: '分组2',
+      group3: '分组3',
+      style: '选择风格',
+      color: '选择颜色',
+      logo: '添加 Logo',
+      logoHelpText: '为获得最佳效果，请使用长宽比为 1:1 的 PNG 格式图像，文件大小不超过 5MB。',
+      selectFile: '选择文件',
+      preview: '预览',
+      reset: '恢复默认',
+    },
+    editPage: {
+      title: '编辑短链接',
+    },
+  },
+  domain: {
+    title: 'TinyLink 自定义域名码',
+    description: '使用自定义域名为短链接添加个性化域名标识，替换默认的 "tiny.com" 域名，全面掌控内容并提升品牌形象。',
+    createButton: '添加域名',
+    domainName: '域名',
+    shortLinkCount: '短链接数量',
+    addedTime: '添加时间',
+    resolutionStatus: '解析状态',
+    create: {
+      title: '添加自定义域名',
+      domain: '域名',
+      remainingLinks: '剩余可用链接数：{count}',
+      domainTypes: {
+        rootDomain: '使用一级域名',
+        subdomain: '使用二级域名'
+      },
+      rootDomainNote: {
+        title: '请确保该一级域名未绑定任何网站。',
+        description: '完成绑定后，生成的短链接形式将为 tiny.com/xxxx。'
+      },
+      subdomainNote: {
+        title: '请输入一个二级域名，例如：abc.tiny.com。',
+        description: '完成绑定后，创建的短链形式为 abc.tiny.com/xxxx。'
+      },
+      subdomainField: {
+        label: '二级域名',
+        placeholder: '输入二级域名'
+      },
+      domainPlaceholder: '输入不带有 www 的一级域名，例如 tiny.com',
+      success: {
+        title: '域名添加成功',
+        message: '域名添加成功，请前往域名 DNS 管理后台添加下方 CNAME 记录。',
+        recordType: '记录类型',
+        hostRecord: '主机记录',
+        recordValue: '记录值'
+      }
+    }
   },
 }

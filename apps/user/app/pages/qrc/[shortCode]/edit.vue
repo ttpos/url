@@ -104,7 +104,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-  <SubPage :title="$t('shortLink.editPage.title')">
+  <SubPage :title="$t('qrc.editPage.title')">
     <UForm ref="formRef" :schema="schema" :state="state" class="w-full lg:w-3/5 2xl:w-2/5 space-y-6" @submit="onSubmit">
       <UFormGroup :name="t('shortLink.create.redirectUrl')" :label="t('shortLink.create.redirectUrl')" :help="t('shortLink.create.remainingLinks', { count: 10 })">
         <UInput v-model="state.longUrl" :placeholder="t('shortLink.create.singleUrlPlaceholder')" />
@@ -134,7 +134,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
       <div class="flex space-x-4">
         <UButton variant="outline" @click="formRef && formRef.clear()">
-          {{ t('common.operation.cancel') }}
+          {{ t('common.operation.reset') }}
         </UButton>
         <UButton type="submit">
           {{ t('common.operation.save') }}

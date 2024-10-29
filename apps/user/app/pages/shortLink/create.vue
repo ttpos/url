@@ -177,7 +177,7 @@ function onFileClick() {
               class="flex-1 mt-5"
               :ui="{ label: { wrapper: 'mb-4' } }"
             >
-              <div class="mx-auto flex flex-wrap items-center justify-between gap-4">
+              <div class="mx-auto flex flex-wrap justify-start gap-4">
                 <span
                   v-for="color in colorList"
                   :key="color"
@@ -289,7 +289,7 @@ function onFileClick() {
 
       <div class="flex space-x-4">
         <UButton variant="outline" @click="formRef && formRef.clear()">
-          {{ $t('common.operation.cancel') }}
+          {{ $t('common.operation.reset') }}
         </UButton>
         <UButton type="submit">
           {{ $t('shortLink.create.create') }}
