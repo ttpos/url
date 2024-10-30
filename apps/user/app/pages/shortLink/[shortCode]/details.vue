@@ -47,7 +47,7 @@ function handleCardAction(action: string, item: any) {
   <SubPage>
     <ShortLinkCard
       :item="shortLinksItem"
-      :show-checkbox="true"
+      :show-checkbox="false"
       :enable-navigation="false"
       :show-details-button="false"
       @check="handleCardAction('check', $event)"

@@ -104,7 +104,7 @@ const titleComponent = computed(() => props.enableNavigation ? UButton : 'span')
             position="bottom-end"
           >
             <UButton
-              icon="i-heroicons-ellipsis-vertical"
+              icon="i-lucide:ellipsis-vertical"
               variant="ghost"
               :ui="{ rounded: 'rounded-full' }"
             />

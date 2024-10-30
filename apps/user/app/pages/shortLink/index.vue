@@ -29,6 +29,8 @@ const shortLinks = ref([
 
 const isAddGroupModalOpen = ref(false)
 const page = ref(1)
+const isShareModalOpen = ref(false)
+const shareUrl = ref('')
 
 // Computed
 const peopleOptions = computed(() =>
@@ -70,6 +72,11 @@ function handleGroupsChange(val: string) {
   if (val === 'add') {
     isAddGroupModalOpen.value = true
   }
+}
+
+function handleShareAction(item: any) {
+  isShareModalOpen.value = true
+  shareUrl.value = item.shortUrl
 }
 </script>
 
@@ -143,6 +150,7 @@ function handleGroupsChange(val: string) {
             :key="item.id"
             show-checkbox
             :item="item"
+            @share="handleShareAction(item)"
           />
         </div>
 
@@ -159,5 +167,10 @@ function handleGroupsChange(val: string) {
     >
       <ShortLinkAddGroupForm @close="isAddGroupModalOpen = false" />
     </UDashboardModal>
+
+    <ShortLinkShareModal
+      v-model="isShareModalOpen"
+      :share-url="shareUrl"
+    />
   </UDashboardPage>
 </template>

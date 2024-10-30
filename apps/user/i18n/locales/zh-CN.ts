@@ -164,6 +164,21 @@ export default {
       title: '编辑短链接',
     },
   },
+  marketing: {
+    title: 'TinyLink 营销活动',
+    description: '营销活动可以帮您在一个地方查看、管理和量化多个链接的数据表现。',
+    createButton: '创建活动',
+    modal: {
+      create: '新增活动',
+      edit: '编辑活动',
+      title: '标题',
+      titlePlaceholder: '请输入标题',
+      titleRequired: '请输入标题',
+    },
+    details: {
+      
+    },
+  },
   domain: {
     title: 'TinyLink 自定义域名码',
     description: '使用自定义域名为短链接添加个性化域名标识，替换默认的 "tiny.com" 域名，全面掌控内容并提升品牌形象。',

@@ -21,9 +21,9 @@ export default {
       confirm: 'Confirm',
       save: 'Save',
       optional: 'Optional',
-      copy: 'COPY',
-      share: 'SHARE',
-      edit: 'EDIT',
+      copy: 'Copy',
+      share: 'Share',
+      edit: 'Ddit',
       details: 'Details',
       delete: 'Delete',
       copySuccess: 'Copy Success',
@@ -160,6 +160,21 @@ export default {
       selectFile: 'Select File',
       preview: 'Preview',
       reset: 'Reset to Default',
+    },
+  },
+  marketing: {
+    title: 'TinyLink Marketing Campaigns',
+    description: 'Marketing campaigns help you view, manage and quantify the performance of multiple links in one place.',
+    createButton: 'Create Campaign',
+    modal: {
+      create: 'Create Activity',
+      edit: 'Edit Activity',
+      title: 'Title',
+      titlePlaceholder: 'Please input title',
+      titleRequired: 'Please input title',
+    },
+    details: {
+
     },
   },
   domain: {

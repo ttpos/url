@@ -27,7 +27,7 @@ function copyFn(str: string) {
 <template>
   <UDashboardModal
     :model-value="modelValue"
-    :title="$t('common.operation.shareTitle')"
+    :title="$t('shortLink.shareTitle')"
     :ui="{ width: 'sm:max-w-md' }"
     @update:model-value="emit('update:modelValue', $event)"
   >
