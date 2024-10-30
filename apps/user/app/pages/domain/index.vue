@@ -30,7 +30,7 @@ const columns = computed(() => [
 
 const people = [{
   id: 1,
-  domain: 'Lindsay Walton',
+  domain: 'example.com',
   shortLinkCount: '10',
   addedTime: '2023-08-01',
   min: 1,
@@ -38,7 +38,7 @@ const people = [{
   resolutionStatus: 'Active',
 }, {
   id: 2,
-  domain: 'Courtney Henry',
+  domain: 'aaa.example.com',
   shortLinkCount: '5',
   addedTime: '2023-08-02',
   min: 1,
@@ -46,7 +46,7 @@ const people = [{
   resolutionStatus: 'Inactive',
 }, {
   id: 3,
-  domain: 'Tom Cook',
+  domain: 'bbb.example.com',
   shortLinkCount: '8',
   addedTime: '2023-08-03',
   min: 1,
@@ -54,7 +54,7 @@ const people = [{
   resolutionStatus: 'Active',
 }, {
   id: 4,
-  domain: 'Whitney Francis',
+  domain: 'example.com',
   shortLinkCount: '12',
   addedTime: '2023-08-04',
   min: 1,
@@ -62,7 +62,7 @@ const people = [{
   resolutionStatus: 'Inactive',
 }, {
   id: 5,
-  domain: 'Leonard Krasner',
+  domain: 'example.com',
   shortLinkCount: '7',
   addedTime: '2023-08-05',
   min: 1,
@@ -70,7 +70,7 @@ const people = [{
   resolutionStatus: 'Active',
 }, {
   id: 6,
-  domain: 'Floyd Miles',
+  domain: 'example.com',
   shortLinkCount: '3',
   addedTime: '2023-08-06',
   min: 1,
@@ -120,7 +120,7 @@ const pageCount = 5
           <template #resolutionStatus-data="{ row }">
             <UBadge
               :label="row.resolutionStatus"
-              :color="row.resolutionStatus === 'Active' ? 'green' : 'red'"
+              :color="row.resolutionStatus !== 'Active' ? 'red' : undefined"
               variant="subtle"
               class="capitalize"
             />

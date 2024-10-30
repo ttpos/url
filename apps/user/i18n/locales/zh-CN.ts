@@ -26,6 +26,8 @@ export default {
       edit: '编辑',
       details: '详情',
       delete: '删除',
+      copySuccess: '复制成功',
+      copyFailed: '复制失败',
     },
   },
   index: {
@@ -52,8 +54,6 @@ export default {
     batchShortLink: '批量短链接',
     groupName: '分组名称',
     pleaseEnterGroupName: '请输入分组名称',
-    copySuccess: '复制成功',
-    copyFailed: '复制失败',
     shareTitle: '分享短链接',
     create: {
       title: '创建短链接',
@@ -178,19 +178,19 @@ export default {
       remainingLinks: '剩余可用链接数：{count}',
       domainTypes: {
         rootDomain: '使用一级域名',
-        subdomain: '使用二级域名'
+        subdomain: '使用二级域名',
       },
       rootDomainNote: {
         title: '请确保该一级域名未绑定任何网站。',
-        description: '完成绑定后，生成的短链接形式将为 tiny.com/xxxx。'
+        description: '完成绑定后，生成的短链接形式将为 tiny.com/xxxx。',
       },
       subdomainNote: {
         title: '请输入一个二级域名，例如：abc.tiny.com。',
-        description: '完成绑定后，创建的短链形式为 abc.tiny.com/xxxx。'
+        description: '完成绑定后，创建的短链形式为 abc.tiny.com/xxxx。',
       },
       subdomainField: {
         label: '二级域名',
-        placeholder: '输入二级域名'
+        placeholder: '输入二级域名',
       },
       domainPlaceholder: '输入不带有 www 的一级域名，例如 tiny.com',
       success: {
@@ -198,8 +198,8 @@ export default {
         message: '域名添加成功，请前往域名 DNS 管理后台添加下方 CNAME 记录。',
         recordType: '记录类型',
         hostRecord: '主机记录',
-        recordValue: '记录值'
-      }
-    }
+        recordValue: '记录值',
+      },
+    },
   },
 }

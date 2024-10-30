@@ -26,6 +26,8 @@ export default {
       edit: 'EDIT',
       details: 'Details',
       delete: 'Delete',
+      copySuccess: 'Copy Success',
+      copyFailed: 'Copy Failed',
     },
   },
   index: {
@@ -53,8 +55,6 @@ export default {
     batchShortLink: 'Batch Short Link',
     groupName: 'Group Name',
     pleaseEnterGroupName: 'Please enter group name',
-    copySuccess: 'Copy Success',
-    copyFailed: 'Copy Failed',
     shareTitle: 'Share Short Link',
     create: {
       title: 'Create Short Link',
@@ -176,19 +176,19 @@ export default {
       remainingLinks: 'Remaining available links: {count}',
       domainTypes: {
         rootDomain: 'Use Root Domain',
-        subdomain: 'Use Subdomain'
+        subdomain: 'Use Subdomain',
       },
       rootDomainNote: {
         title: 'Please ensure this root domain is not bound to any website.',
-        description: 'After binding, the generated short link format will be tiny.com/xxxx.'
+        description: 'After binding, the generated short link format will be tiny.com/xxxx.',
       },
       subdomainNote: {
         title: 'Please enter a subdomain, e.g.: abc.tiny.com.',
-        description: 'After binding, the created short link format will be abc.tiny.com/xxxx.'
+        description: 'After binding, the created short link format will be abc.tiny.com/xxxx.',
       },
       subdomainField: {
         label: 'Subdomain',
-        placeholder: 'Enter subdomain'
+        placeholder: 'Enter subdomain',
       },
       domainPlaceholder: 'Enter root domain without www, e.g. tiny.com',
       success: {
@@ -196,8 +196,8 @@ export default {
         message: 'Domain has been added successfully. Please go to your DNS management panel to add the following CNAME record.',
         recordType: 'Record Type',
         hostRecord: 'Host Record',
-        recordValue: 'Record Value'
-      }
-    }
+        recordValue: 'Record Value',
+      },
+    },
   },
 }

@@ -30,7 +30,6 @@ const shortLinks = ref([
 const isAddGroupModalOpen = ref(false)
 const page = ref(1)
 
-
 // Computed
 const peopleOptions = computed(() =>
   [
@@ -142,6 +141,7 @@ function handleGroupsChange(val: string) {
           <ShortLinkCard
             v-for="item in shortLinks"
             :key="item.id"
+            show-checkbox
             :item="item"
           />
         </div>

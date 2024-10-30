@@ -57,7 +57,7 @@ const titleComponent = computed(() => props.enableNavigation ? UButton : 'span')
   <UCard>
     <template #header>
       <div class="flex items-center justify-between">
-        <div class="flex items-start justify-between gap-4 text-gray-900 dark:text-white font-medium">
+        <div class="flex items-center gap-4 text-gray-900 dark:text-white font-medium">
           <UCheckbox v-if="showCheckbox" :model-value="false" @change="emit('check', $event, item)" />
           <UIcon name="i-heroicons-light-bulb" class="w-5 h-5" />
           <component
