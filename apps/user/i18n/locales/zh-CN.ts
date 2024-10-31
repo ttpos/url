@@ -168,6 +168,7 @@ export default {
     title: 'TinyLink 营销活动',
     description: '营销活动可以帮您在一个地方查看、管理和量化多个链接的数据表现。',
     createButton: '创建活动',
+    viewDetails: '查看详情',
     modal: {
       create: '新增活动',
       edit: '编辑活动',
@@ -176,7 +177,12 @@ export default {
       titleRequired: '请输入标题',
     },
     details: {
-      
+      addLink: '添加链接',
+      edit: '编辑',
+      links: '短链接',
+      statistics: '数据统计',
+      today: '今日',
+      total: '累计',
     },
   },
   domain: {

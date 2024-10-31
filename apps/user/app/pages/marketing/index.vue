@@ -26,7 +26,6 @@ function handleDetails(_item) {}
 // eslint-disable-next-line ts/ban-ts-comment
 // @ts-ignore
 function handleDelete(_item) {}
-
 </script>
 
 <template>
@@ -78,9 +77,11 @@ function handleDelete(_item) {}
           />
         </div>
 
-        <div class="flex justify-end mt-8">
+        <div class="flex items-center justify-end mt-8">
+          Total {{ shortLinks.length }}
           <UPagination
             v-model="page"
+            class="ml-4"
             :page-count="5"
             :total="shortLinks.length"
             show-last

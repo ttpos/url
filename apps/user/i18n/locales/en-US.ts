@@ -166,6 +166,7 @@ export default {
     title: 'TinyLink Marketing Campaigns',
     description: 'Marketing campaigns help you view, manage and quantify the performance of multiple links in one place.',
     createButton: 'Create Campaign',
+    viewDetails: 'View Details',
     modal: {
       create: 'Create Activity',
       edit: 'Edit Activity',
@@ -174,7 +175,12 @@ export default {
       titleRequired: 'Please input title',
     },
     details: {
-
+      addLink: 'Add Link',
+      edit: 'Edit',
+      links: 'Links',
+      statistics: 'Statistics',
+      today: 'Today',
+      total: 'Total',
     },
   },
   domain: {

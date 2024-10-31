@@ -23,7 +23,7 @@ const links = computed(() => [
   {
     id: 'shortLink',
     label: t('common.nav.shortLink'),
-    icon: 'icon-park-outline:link-two',
+    icon: 'i-heroicons-link',
     to: '/shortLink',
     tooltip: {
       text: t('common.nav.shortLink'),
@@ -33,7 +33,7 @@ const links = computed(() => [
   {
     id: 'qrc',
     label: t('common.nav.qrCode'),
-    icon: 'i-mdi:qrcode-scan',
+    icon: 'i-heroicons-qr-code',
     to: '/qrc',
     tooltip: {
       text: t('common.nav.qrCode'),

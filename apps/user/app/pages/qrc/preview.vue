@@ -39,7 +39,7 @@ useSeoMeta({
       <ULandingGrid>
         <ULandingCard
           class="col-span-6 row-span-2"
-          icon="icon-park-outline:link-two"
+          icon="i-heroicons-link"
           :title="$t('qrPreview.features.shortLink.title')"
           :description="$t('qrPreview.features.shortLink.description')"
         />

@@ -42,12 +42,12 @@ const titleComponent = computed(() => props.enableNavigation ? UButton : 'span')
         </div>
 
         <div class="flex items-start gap-4">
-          <UTooltip text="短链">
+          <UTooltip :text="$t('common.nav.shortLink')">
             <UButton
               class="!cursor-default !opacity-100"
               trailing
               disabled
-              icon="icon-park-outline:link-two"
+              icon="i-heroicons-link"
               variant="ghost"
               label="4"
               :ui="{ rounded: 'rounded-full' }"
@@ -55,9 +55,9 @@ const titleComponent = computed(() => props.enableNavigation ? UButton : 'span')
             />
           </UTooltip>
 
-          <UTooltip text="查看详情">
+          <UTooltip :text="$t('marketing.viewDetails')">
             <UButton
-              :to="`/marketing/details/${item.id}`"
+              v-bind="enableNavigation ? { to: `/marketing/details/${item.id}` } : { disabled: true, class: '!cursor-default !opacity-100' }"
               trailing
               icon="i-material-symbols:bar-chart-4-bars-rounded"
               variant="ghost"
