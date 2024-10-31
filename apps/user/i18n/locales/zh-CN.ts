@@ -11,6 +11,8 @@ export default {
       customDomain: '自定义域名',
       settings: '设置',
       general: '通用',
+      equity: '权益',
+      document: '文档',
       multiLanguage: '多语言',
     },
     operation: {
@@ -220,6 +222,18 @@ export default {
         recordType: '记录类型',
         hostRecord: '主机记录',
         recordValue: '记录值',
+      },
+    },
+  },
+  setting: {
+    equity: {
+      title: '账户权益',
+      description: '查看和管理您的账户权益计划。',
+      freePlan: '免费计划',
+      sections: {
+        shortLink: '每月 TinyLink 短链接',
+        qrCode: '每月 TinyLink QR Code',
+        customDomain: 'TinyLink 自定义域名',
       },
     },
   },

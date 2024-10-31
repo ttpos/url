@@ -71,6 +71,10 @@ const links = computed(() => [
         to: '/settings',
         exact: true,
       },
+      {
+        label: t('common.nav.equity'),
+        to: '/settings/equity',
+      },
     ],
     tooltip: {
       text: t('common.nav.settings'),

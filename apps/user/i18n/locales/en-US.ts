@@ -11,6 +11,8 @@ export default {
       customDomain: 'Custom Domain',
       settings: 'Settings',
       general: 'General',
+      equity: 'Equity',
+      document: 'Documentation',
       multiLanguage: 'Multi Language',
     },
     operation: {
@@ -218,6 +220,18 @@ export default {
         recordType: 'Record Type',
         hostRecord: 'Host Record',
         recordValue: 'Record Value',
+      },
+    },
+  },
+  setting: {
+    equity: {
+      title: 'Account Benefits',
+      description: 'View and manage your account benefit plan.',
+      freePlan: 'Free Plan',
+      sections: {
+        shortLink: 'Monthly TinyLink Short Links',
+        qrCode: 'Monthly TinyLink QR Codes',
+        customDomain: 'TinyLink Custom Domain',
       },
     },
   },
