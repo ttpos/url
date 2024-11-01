@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-
 interface Props {
   title?: string
 }
@@ -9,13 +7,6 @@ interface Props {
 withDefaults(defineProps<Props>(), {
   title: '',
 })
-
-const router = useRouter()
-
-// Functions
-function goBack() {
-  router.back()
-}
 </script>
 
 <template>
@@ -29,7 +20,7 @@ function goBack() {
           variant="link"
           icon="i-gravity-ui:arrow-shape-turn-up-left"
           :label="$t('common.operation.back')"
-          @click="goBack"
+          @click="$router.back()"
         />
       </div>
 

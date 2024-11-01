@@ -17,7 +17,7 @@ const links = computed(() => [
     to: '/',
     tooltip: {
       text: t('common.nav.index'),
-      shortcuts: ['S', 'L'],
+      shortcuts: ['U', 'L'],
     },
   },
   {
@@ -27,7 +27,7 @@ const links = computed(() => [
     to: '/shortLink',
     tooltip: {
       text: t('common.nav.shortLink'),
-      shortcuts: ['S', 'L'],
+      shortcuts: ['U', 'L'],
     },
   },
   {
@@ -37,7 +37,7 @@ const links = computed(() => [
     to: '/qrc',
     tooltip: {
       text: t('common.nav.qrCode'),
-      shortcuts: ['Q', 'R'],
+      shortcuts: ['U', 'Q'],
     },
   },
   {
@@ -47,7 +47,7 @@ const links = computed(() => [
     to: '/marketing',
     tooltip: {
       text: t('common.nav.marketing'),
-      shortcuts: ['M', 'A'],
+      shortcuts: ['U', 'M'],
     },
   },
   {
@@ -57,7 +57,7 @@ const links = computed(() => [
     to: '/domain',
     tooltip: {
       text: t('common.nav.customDomain'),
-      shortcuts: ['D', 'L'],
+      shortcuts: ['U', 'D'],
     },
   },
   {
@@ -78,7 +78,7 @@ const links = computed(() => [
     ],
     tooltip: {
       text: t('common.nav.settings'),
-      shortcuts: ['G', 'S'],
+      shortcuts: ['U', 'S'],
     },
   },
 ])

@@ -86,10 +86,11 @@ definePageMeta({
 
 const { t } = useI18n()
 const route = useRoute()
-const router = useRouter()
 
 if (!route.params.id) {
-  router.replace('/marketing')
+  navigateTo('/marketing', {
+    replace: true,
+  })
 }
 
 const marketingItem = ref<MarketingItem>({

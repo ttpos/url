@@ -6,7 +6,6 @@ definePageMeta({
 })
 
 const { t } = useI18n()
-const router = useRouter()
 
 const state = reactive({
   longUrl: '',
@@ -48,7 +47,9 @@ async function onSubmit(event: FormSubmitEvent<any>) {
 }
 
 function handleSubmit() {
-  router.replace('/domain')
+  navigateTo('/domain', {
+    replace: true,
+  })
 }
 </script>
 

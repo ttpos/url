@@ -2,12 +2,15 @@ import { createSharedComposable } from '@vueuse/core'
 
 function _useDashboard() {
   const route = useRoute()
-  const router = useRouter()
   const isHelpSlideoverOpen = ref(false)
 
   defineShortcuts({
-    'g-h': () => router.push('/'),
-    'g-s': () => router.push('/settings'),
+    'u-h': () => navigateTo('/'),
+    'u-l': () => navigateTo('/shortLink'),
+    'u-q': () => navigateTo('/qrc'),
+    'u-m': () => navigateTo('/marketing'),
+    'u-d': () => navigateTo('/domain'),
+    'u-s': () => navigateTo('/settings'),
     '?': () => isHelpSlideoverOpen.value = true,
   })
 

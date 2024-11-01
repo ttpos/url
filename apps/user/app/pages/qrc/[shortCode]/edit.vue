@@ -8,7 +8,6 @@ definePageMeta({
 })
 
 const route = useRoute()
-const router = useRouter()
 const shortCode = route.params.shortCode as string
 
 const shortLinkDetails = ref({})
@@ -16,7 +15,9 @@ const isLoading = ref(true)
 const error = ref(null)
 
 if (!shortCode) {
-  router.replace('/shortLink')
+  navigateTo('/shortLink', {
+    replace: true,
+  })
 }
 
 // eslint-disable-next-line no-console
@@ -95,7 +96,9 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     console.log(event.data)
     // TODO: Implement API call to create short link
 
-    // router.replace('/shortLink')
+    // navigateTo('/shortLink', {
+    //   replace: true,
+    // })
   }
   catch (error) {
     console.error(error)
