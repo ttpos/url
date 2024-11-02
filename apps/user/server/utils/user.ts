@@ -1,7 +1,7 @@
+import type { EventHandlerRequest, H3Event } from 'h3'
 import { userTable } from '@@/server/database/schema'
 import { generateCode, hashPasswordFn, isValidEmail, useDrizzle, verifyPasswordFn } from '@@/server/utils'
 import { eq } from 'drizzle-orm'
-import type { EventHandlerRequest, H3Event } from 'h3'
 
 interface ValidationResult {
   user: {
