@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 subdirs=(
+  "official-website"
   "user"
   "links"
 )
