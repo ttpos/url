@@ -5,20 +5,20 @@ const navigation = inject<Ref<NavItem[]>>('navigation', ref([]))
 
 const links = [{
   label: 'Docs',
-  to: '/docs'
+  to: '/docs',
 }, {
   label: 'Pricing',
-  to: '/pricing'
+  to: '/pricing',
 }, {
   label: 'Blog',
-  to: '/blog'
+  to: '/blog',
 }]
 </script>
 
 <template>
   <UHeader :links="links">
     <template #logo>
-      Nuxt UI Pro <UBadge
+      TinyLink <UBadge
         label="SaaS"
         variant="subtle"
         class="mb-0.5"

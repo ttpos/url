@@ -9,7 +9,7 @@ useSeoMeta({
   title: page.value.title,
   ogTitle: page.value.title,
   description: page.value.description,
-  ogDescription: page.value.description
+  ogDescription: page.value.description,
 })
 </script>
 
@@ -19,6 +19,7 @@ useSeoMeta({
       :title="page.hero.title"
       :description="page.hero.description"
       :links="page.hero.links"
+      :ui="{ title: 'text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl' }"
     >
       <div class="absolute inset-0 landing-grid z-[-1] [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]" />
 
@@ -56,7 +57,7 @@ useSeoMeta({
       <ImagePlaceholder />
     </ULandingSection>
 
-    <ULandingSection
+    <!-- <ULandingSection
       v-for="(section, index) in page.sections"
       :key="index"
       :title="section.title"
@@ -65,7 +66,7 @@ useSeoMeta({
       :features="section.features"
     >
       <ImagePlaceholder />
-    </ULandingSection>
+    </ULandingSection> -->
 
     <ULandingSection
       :title="page.features.title"
@@ -81,6 +82,19 @@ useSeoMeta({
     </ULandingSection>
 
     <ULandingSection
+      :title="page.useCases.title"
+      :description="page.useCases.description"
+    >
+      <UPageGrid>
+        <ULandingCard
+          v-for="(item, index) in page.useCases.items"
+          :key="index"
+          v-bind="item"
+        />
+      </UPageGrid>
+    </ULandingSection>
+
+    <!-- <ULandingSection
       :headline="page.testimonials.headline"
       :title="page.testimonials.title"
       :description="page.testimonials.description"
@@ -97,7 +111,14 @@ useSeoMeta({
           />
         </div>
       </UPageColumns>
-    </ULandingSection>
+    </ULandingSection> -->
+    <ULandingSection
+      :headline="page.testimonials.headline"
+      :title="page.testimonials.title"
+      :description="page.testimonials.description"
+      :links="page.testimonials.links"
+    />
+    <!-- :links="[{ label: 'Explore components', color: 'gray', trailingIcon: 'i-heroicons-arrow-right', size: 'lg' }]" -->
 
     <ULandingSection>
       <ULandingCTA
@@ -111,14 +132,12 @@ useSeoMeta({
 <style scoped>
 .landing-grid {
   background-size: 100px 100px;
-  background-image:
-    linear-gradient(to right, rgb(var(--color-gray-200)) 1px, transparent 1px),
+  background-image: linear-gradient(to right, rgb(var(--color-gray-200)) 1px, transparent 1px),
     linear-gradient(to bottom, rgb(var(--color-gray-200)) 1px, transparent 1px);
 }
 .dark {
   .landing-grid {
-    background-image:
-      linear-gradient(to right, rgb(var(--color-gray-800)) 1px, transparent 1px),
+    background-image: linear-gradient(to right, rgb(var(--color-gray-800)) 1px, transparent 1px),
       linear-gradient(to bottom, rgb(var(--color-gray-800)) 1px, transparent 1px);
   }
 }

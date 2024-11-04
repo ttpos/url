@@ -2,138 +2,133 @@ title: Nuxt UI Pro - SaaS template
 description: Nuxt UI Pro is a collection of premium Vue components built on top of Nuxt UI to create beautiful & responsive Nuxt applications in minutes.
 navigation: false
 hero:
-  title: Build your SaaS in seconds
-  description: This template demonstrates most of Nuxt UI Pro's components. It's a great starting point to build your own SaaS.
+  title: Shorten Your URLs Instantly with TinyLink
+  description: Create branded short links and dynamic QR codes for easy sharing. Boost clicks, grow your brand, and track results with a simple URL shortener, custom domains, and detailed analytics.
   headline:
-    label: Made with Nuxt UI Pro
+    label: Try It Now
     to: https://ui.nuxt.com/pro
     icon: i-heroicons-arrow-top-right-on-square-20-solid
   links:
-    - label: Get started
-      to: '/signup'
+    - label: Get started for free
+      to: /signup
       size: xl
       color: black
       icon: i-heroicons-arrow-right-20-solid
       trailing: true
-    - label: Use this template
-      icon: i-simple-icons-github
-      size: xl
-      color: gray
-      to: https://github.com/nuxt-ui-pro/saas
-      target: _blank
-sections:
-  - title: The power of our service
-    description: Aliqua labore laboris fugiat. Reprehenderit exercitation eu commodo. Officia nostrud sit et aliqua ea ex sunt minim incididunt sunt.
-    id: features
-    align: left
-    features:
-      - name: Easy to use
-        description: Id laborum laboris duis nostrud excepteur ut velit.
-        icon: i-heroicons-cog
-      - name: Reliable
-        description: Magna Lorem ex cillum fugiat ad enim aute irure sit duis minim.
-        icon: i-heroicons-check
-      - name: Secure
-        description: Proident nostrud excepteur sint ut culpa consectetur aute adipisicing.
-        icon: i-heroicons-lock-closed
-    links:
-      - label: Explore components
-        to: /pro/components
-        color: gray
-        icon: i-heroicons-arrow-right-20-solid
-        trailing: true
-        size: md
-        class: ml-8
-  - title: The speed of our service
-    description: Cillum sint enim excepteur ut deserunt qui nisi in deserunt in. Deserunt aliquip quis aliquip eu quis ex velit velit nostrud sit.
-    align: right
-    features:
-      - name: Fast
-        description: Qui reprehenderit nostrud dolore nisi ad fugiat labore eiusmod.
-        icon: i-heroicons-rocket-launch
-      - name: Affordable
-        description: Reprehenderit fugiat elit in do ipsum ut pariatur.
-        icon: i-heroicons-currency-dollar
-      - name: Scalable
-        description: Lorem deserunt et eiusmod. Ea in consectetur minim officia.
-        icon: i-heroicons-chart-bar
-    links:
-      - label: Learn more
-        to: /pro/guide/content
-        color: gray
-        icon: i-heroicons-arrow-right-20-solid
-        trailing: true
-        size: md
-        class: ml-8
+    # - label: Use this template
+    #   icon: i-simple-icons-github
+    #   size: xl
+    #   color: gray
+    #   to: https://github.com/nuxt-ui-pro/saas
+    #   target: _blank
+# sections:
+#   - title: The power of our service
+#     description: Aliqua labore laboris fugiat. Reprehenderit exercitation eu commodo. Officia nostrud sit et aliqua ea ex sunt minim incididunt sunt.
+#     id: features
+#     align: left
+#     features:
+#       - name: Easy to use
+#         description: Id laborum laboris duis nostrud excepteur ut velit.
+#         icon: i-heroicons-cog
+#       - name: Reliable
+#         description: Magna Lorem ex cillum fugiat ad enim aute irure sit duis minim.
+#         icon: i-heroicons-check
+#       - name: Secure
+#         description: Proident nostrud excepteur sint ut culpa consectetur aute adipisicing.
+#         icon: i-heroicons-lock-closed
+#     links:
+#       - label: Explore components
+#         to: /pro/components
+#         color: gray
+#         icon: i-heroicons-arrow-right-20-solid
+#         trailing: true
+#         size: md
+#         class: ml-8
+#   - title: The speed of our service
+#     description: Cillum sint enim excepteur ut deserunt qui nisi in deserunt in. Deserunt aliquip quis aliquip eu quis ex velit velit nostrud sit.
+#     align: right
+#     features:
+#       - name: Fast
+#         description: Qui reprehenderit nostrud dolore nisi ad fugiat labore eiusmod.
+#         icon: i-heroicons-rocket-launch
+#       - name: Affordable
+#         description: Reprehenderit fugiat elit in do ipsum ut pariatur.
+#         icon: i-heroicons-currency-dollar
+#       - name: Scalable
+#         description: Lorem deserunt et eiusmod. Ea in consectetur minim officia.
+#         icon: i-heroicons-chart-bar
+#     links:
+#       - label: Learn more
+#         to: /pro/guide/content
+#         color: gray
+#         icon: i-heroicons-arrow-right-20-solid
+#         trailing: true
+#         size: md
+#         class: ml-8
 features:
-  title: Why choose our service?
-  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  title: TinyLink Key Features
+  description: Effortlessly shorten URLs, enhance brand recognition, and track detailed analytics with these essential tools.
   items:
-    - title: Easy to use
-      description: Id laborum laboris duis nostrud excepteur ut velit nulla magna Lorem proident non.
+    - title: 缩短长链接
+      description: 将原长链接转换为短链接
       icon: i-heroicons-cog
-    - title: Reliable
-      description: Magna Lorem ex cillum fugiat ad enim aute irure sit duis minim.
+    - title: QR Code
+      description: 将原始长链接转换为二维码
       icon: i-heroicons-check
-    - title: Secure
-      description: Proident nostrud excepteur sint ut culpa consectetur aute adipisicing non anim ullamco.
+    - title: 随时修改
+      description: 随时修改已创建链接的信息
       icon: i-heroicons-lock-closed
-    - title: Fast
-      description: Qui reprehenderit nostrud dolore nisi ad fugiat labore eiusmod sint aliquip nisi voluptate.
+    - title: 批量创建
+      description: 同时创建多条链接，提高效率
       icon: i-heroicons-rocket-launch
-    - title: Affordable
-      description: Reprehenderit fugiat elit in do ipsum ut pariatur.
-      icon: i-heroicons-currency-dollar
-    - title: Scalable
-      description: Lorem deserunt et eiusmod. Ea in consectetur minim officia ullamco enim deserunt est.
+    - title: 分组管理
+      description: 支持分组设置，方便管理链接
+      icon: i-heroicons-folder
+    - title: 永久有效
+      description: 生成的链接默认长期有效
+      icon: i-heroicons-clock
+    - title: 访问统计
+      description: 统计链接访问量，生成数据报表
       icon: i-heroicons-chart-bar
-testimonials:
-  headline: Testimonials
-  title: What our customers are saying.
-  description: Proident sunt exercitation minim laborum enim laboris labore esse.
+    - title: 数据导出
+      description: 支持导出不同链接的访问数据
+      icon: i-heroicons-document-arrow-down
+    - title: 自定义域名
+      description: 支持将链接自定义域名
+      icon: i-heroicons-globe
+    - title: 链接重定向
+      description: 支持新增自定义跳转地址
+      icon: i-heroicons-arrow-path
+useCases:
+  title: TinyLink Use Cases
+  description: Discover how TinyLink can simplify sharing, enhance marketing efforts, and optimize user engagement across various platforms.
   items:
-    - quote: Nostrud tempor sunt fugiat. Dolor in sint dolore labore non occaecat adipisicing Lorem labore ullamco enim excepteur. In fugiat Lorem sit velit id veniam esse eiusmod non ea voluptate cupidatat reprehenderit ullamco dolore. Mollit laborum occaecat aliquip.
-      author:
-        name: Rose Roberson
-        description: CEO at Company
-        avatar:
-          src: https://i.pravatar.cc/120?img=1
-          loading: lazy
-    - quote: Eiusmod dolor aute ut nulla pariatur officia consequat aute amet exercitation.
-      author:
-        name: Chace Rodgers
-        description: CEO at Company
-        avatar:
-          src: https://i.pravatar.cc/120?img=7
-          loading: lazy
-    - quote: Id duis velit enim officia ad nisi incididunt magna ex dolor minim deserunt dolor. Esse incididunt cillum nostrud esse do quis amet labore amet nulla eiusmod amet nulla Lorem. Incididunt ex voluptate irure officia laboris ea proident est qui.
-      author:
-        name: Cornelius Sheppard
-        description: CEO at Company
-        avatar:
-          src: https://i.pravatar.cc/120?img=3
-          loading: lazy
-    - quote: Velit consectetur in adipisicing culpa eiusmod commodo eu ex dolore. Officia irure nisi dolor dolore velit fugiat. Aliqua sint aliqua aute elit eu sunt.
-      author:
-        name: Destinee Woods
-        description: CEO at Company
-        avatar:
-          src: https://i.pravatar.cc/120?img=5
-          loading: lazy
-    - quote: Proident quis deserunt qui ex exercitation veniam id Lorem est cupidatat ipsum irure aliquip ad.
-      author:
-        name: Kaleb Mccormick
-        description: CEO at Company
-        avatar:
-          src: https://i.pravatar.cc/120?img=8
-          loading: lazy
-    - quote: Magna officia quis ea ea in officia non voluptate ipsum culpa do labore sunt. Aute est dolore commodo sint officia ad laboris dolor magna aliquip exercitation tempor commodo.
-      author:
-        name: Jazmin Mccall
-        description: CEO at Company
-        avatar:
-          src: https://i.pravatar.cc/120?img=9
-          loading: lazy
+    - title: 营销活动数据统计
+      description: 使用短链接轻松跟踪营销活动的访问量。获取精准的点击数据，实时分析不同渠道的效果，优化广告投放策略。
+      icon: i-heroicons-chart-bar
+    - title: 预先生成二维码
+      description: 提前生成二维码，随时应用于线下活动、广告或产品包装中，确保用户快速安全地访问您最新的网站或产品信息。
+      icon: i-heroicons-qr-code
+    - title: 二维码菜单
+      description: 使用短链二维码菜单简化用餐体验，让顾客可以直接通过智能手机扫描并查看餐厅提供的菜单。
+      icon: i-heroicons-book-open
+    - title: A/B 测试
+      description: 通过 A/B 测试优化营销策略，测试不同版本的着陆页或活动。分析测试结果，最大化效果，并通过多个短链接测试超过不同目标页面。
+      icon: i-heroicons-adjustments-horizontal
+    - title: 短信营销
+      description: 使用字符数限制的链接可降低移动运营商费用。安全的短链接能提升达达率、打开率和转化率。
+      icon: i-heroicons-envelope
+testimonials:
+  headline: Try It Now
+  title: Try tinylink for free. No strings attached.
+  description:
+  links:
+    - label: Get started for free
+      to: /signup
+      size: xl
+      color: black
+      icon: i-heroicons-arrow-right-20-solid
+      trailing: true
 cta:
   title: Get started today
   description: Nisi mollit id aliquip sunt est laborum sit sit.
