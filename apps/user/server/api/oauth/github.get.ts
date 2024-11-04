@@ -1,7 +1,7 @@
+import type { GitHubUser } from '~~/server/types'
 import { sessionTable, usersOauthTable, userTable } from '@@/server/database/schema'
 import { generateCode, useAuth, useDrizzle } from '@@/server/utils'
 import { and, eq } from 'drizzle-orm'
-import type { GitHubUser } from '~~/server/types'
 
 export default defineOAuthGitHubEventHandler({
   config: {

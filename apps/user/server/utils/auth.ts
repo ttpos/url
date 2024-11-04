@@ -1,9 +1,9 @@
-import { sessionTable, userTable } from '@@/server/database/schema'
-import { decrypt, encrypt, generateCode, useDrizzle } from '@@/server/utils'
-import { and, eq } from 'drizzle-orm'
 import type { UserSession } from '#auth-utils'
 import type { SessionSource } from '~~/server/types'
 import type { EventHandlerRequest, H3Event } from 'h3'
+import { sessionTable, userTable } from '@@/server/database/schema'
+import { decrypt, encrypt, generateCode, useDrizzle } from '@@/server/utils'
+import { and, eq } from 'drizzle-orm'
 
 class AuthManager {
   private event: H3Event<EventHandlerRequest>
