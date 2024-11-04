@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// import QrcodeVue from 'qrcode.vue'
+import QrcodeVue from 'qrcode.vue'
 import { computed, reactive, ref } from 'vue'
 
 import { useRoute } from 'vue-router'
@@ -228,18 +228,18 @@ function onFileClick() {
               {{ $t('shortLink.create.preview') }}
             </p>
 
-            <Qrcode
+            <QrcodeVue
               class="wh-100 rounded-md"
               :size="180"
               :margin="2"
               :foreground="state.selectedColor"
               :value="qrcodePreviewUrl"
               :image-settings="imageSettings"
-            :gradient="true"
-            gradient-type="radial"
-            gradient-start-color="#ff0000"
-            gradient-end-color="#0000ff"
             />
+            <!-- :gradient="true"
+              gradient-type="radial"
+              gradient-start-color="#ff0000"
+              gradient-end-color="#0000ff" -->
           </div>
         </div>
       </UFormGroup>
