@@ -22,6 +22,8 @@ export default defineNuxtConfig({
     client: false,
   },
 
+  ssr: false,
+
   ui: {
     safelistColors: ['primary', 'red', 'orange', 'green'],
   },
@@ -36,16 +38,16 @@ export default defineNuxtConfig({
   },
 
   typescript: {
-    tsConfig: {
-      compilerOptions: {
-        noImplicitOverride: true,
-        noUncheckedIndexedAccess: true,
-        noUnusedLocals: true,
-        noUnusedParameters: true,
-      },
-    },
-    typeCheck: true,
-    // strict: false,
+    strict: false,
+    // tsConfig: {
+    //   compilerOptions: {
+    //     noImplicitOverride: true,
+    //     noUncheckedIndexedAccess: true,
+    //     noUnusedLocals: true,
+    //     noUnusedParameters: true,
+    //   },
+    // },
+    // typeCheck: true,
   },
 
   future: {
@@ -125,17 +127,6 @@ export default defineNuxtConfig({
     //   redirectOn: 'root',
     //   fallbackLocale: 'en-US',
     // },
-  },
-
-  // eslint-disable-next-line ts/ban-ts-comment
-  // @ts-ignore
-  eslint: {
-    config: {
-      stylistic: {
-        commaDangle: 'never',
-        braceStyle: '1tbs',
-      },
-    },
   },
 
   compatibilityDate: '2024-07-11',

@@ -1,11 +1,10 @@
 <script setup lang="ts">
+import type { Form, FormSubmitEvent } from '#ui/types'
+
 import QrcodeVue from 'qrcode.vue'
 import { computed, reactive, ref } from 'vue'
-
 import { useRoute } from 'vue-router'
-
 import { z } from 'zod'
-import type { Form, FormSubmitEvent } from '#ui/types'
 
 definePageMeta({
   middleware: ['protected'],
