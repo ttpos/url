@@ -8,19 +8,12 @@ hero:
     label: Try It Now
     to: https://ui.nuxt.com/pro
     icon: i-heroicons-arrow-top-right-on-square-20-solid
+    # <UButton label="Get Started" trailing-icon="i-heroicons-arrow-right-20-solid" size="lg" to="/getting-started/installation" />
   links:
     - label: Get started for free
+      trailing-icon: i-heroicons-arrow-right-20-solid
+      size: lg
       to: /signup
-      size: xl
-      color: black
-      icon: i-heroicons-arrow-right-20-solid
-      trailing: true
-    # - label: Use this template
-    #   icon: i-simple-icons-github
-    #   size: xl
-    #   color: gray
-    #   to: https://github.com/nuxt-ui-pro/saas
-    #   target: _blank
 # sections:
 #   - title: The power of our service
 #     description: Aliqua labore laboris fugiat. Reprehenderit exercitation eu commodo. Officia nostrud sit et aliqua ea ex sunt minim incididunt sunt.
@@ -122,18 +115,68 @@ testimonials:
   headline: Try It Now
   title: Try tinylink for free. No strings attached.
   description:
+  items:
+    - quote: Nostrud tempor sunt fugiat. Dolor in sint dolore labore non occaecat adipisicing Lorem labore ullamco enim excepteur. In fugiat Lorem sit velit id veniam esse eiusmod non ea voluptate cupidatat reprehenderit ullamco dolore. Mollit laborum occaecat aliquip.
+      author:
+        name: Rose Roberson
+        description: CEO at Company
+        avatar:
+          src: https://i.pravatar.cc/120?img=1
+          loading: lazy
+    - quote: Eiusmod dolor aute ut nulla pariatur officia consequat aute amet exercitation.
+      author:
+        name: Chace Rodgers
+        description: CEO at Company
+        avatar:
+          src: https://i.pravatar.cc/120?img=7
+          loading: lazy
+    - quote: Id duis velit enim officia ad nisi incididunt magna ex dolor minim deserunt dolor. Esse incididunt cillum nostrud esse do quis amet labore amet nulla eiusmod amet nulla Lorem. Incididunt ex voluptate irure officia laboris ea proident est qui.
+      author:
+        name: Cornelius Sheppard
+        description: CEO at Company
+        avatar:
+          src: https://i.pravatar.cc/120?img=3
+          loading: lazy
+    - quote: Velit consectetur in adipisicing culpa eiusmod commodo eu ex dolore. Officia irure nisi dolor dolore velit fugiat. Aliqua sint aliqua aute elit eu sunt.
+      author:
+        name: Destinee Woods
+        description: CEO at Company
+        avatar:
+          src: https://i.pravatar.cc/120?img=5
+          loading: lazy
+    - quote: Proident quis deserunt qui ex exercitation veniam id Lorem est cupidatat ipsum irure aliquip ad.
+      author:
+        name: Kaleb Mccormick
+        description: CEO at Company
+        avatar:
+          src: https://i.pravatar.cc/120?img=8
+          loading: lazy
+    - quote: Magna officia quis ea ea in officia non voluptate ipsum culpa do labore sunt. Aute est dolore commodo sint officia ad laboris dolor magna aliquip exercitation tempor commodo.
+      author:
+        name: Jazmin Mccall
+        description: CEO at Company
+        avatar:
+          src: https://i.pravatar.cc/120?img=9
+          loading: lazy
   links:
+    - label: Get started for free
+      to: /signup
+      size: xl
+      color: gray
+      icon: i-heroicons-arrow-right-20-solid
+      trailing: true
+cta:
+  headline: Try It Now
+  title: Try tinylink for free. No strings attached.
+  description:
+  links:
+    # - label: Buy now
+    #   size: xl
+    #   color: black
+    #   to: /pricing
     - label: Get started for free
       to: /signup
       size: xl
       color: black
       icon: i-heroicons-arrow-right-20-solid
       trailing: true
-cta:
-  title: Get started today
-  description: Nisi mollit id aliquip sunt est laborum sit sit.
-  links:
-    - label: Buy now
-      size: xl
-      color: black
-      to: /pricing

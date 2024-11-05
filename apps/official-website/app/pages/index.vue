@@ -19,9 +19,13 @@ useSeoMeta({
       :title="page.hero.title"
       :description="page.hero.description"
       :links="page.hero.links"
-      :ui="{ title: 'text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl' }"
+      :ui="{ base: 'relative z-[1]', container: 'max-w-4xl', title: 'text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl' }"
+      class="relative mb-[calc(var(--header-height)*2)]"
     >
-      <div class="absolute inset-0 landing-grid z-[-1] [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]" />
+      <!-- <div class="absolute inset-0 landing-grid z-[-1] [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]" /> -->
+      <template #top>
+        <Gradient class="absolute inset-x-0 top-0 w-full block" />
+      </template>
 
       <template #headline>
         <UBadge
@@ -51,6 +55,10 @@ useSeoMeta({
           />
         </UBadge>
       </template>
+
+      <ClientOnly>
+        <HomeTetris />
+      </ClientOnly>
     </ULandingHero>
 
     <ULandingSection class="!pt-0">
@@ -112,19 +120,18 @@ useSeoMeta({
         </div>
       </UPageColumns>
     </ULandingSection> -->
-    <ULandingSection
+    <!-- <ULandingSection
       :headline="page.testimonials.headline"
       :title="page.testimonials.title"
       :description="page.testimonials.description"
       :links="page.testimonials.links"
-    />
-    <!-- :links="[{ label: 'Explore components', color: 'gray', trailingIcon: 'i-heroicons-arrow-right', size: 'lg' }]" -->
+    /> -->
 
     <ULandingSection>
       <ULandingCTA
         v-bind="page.cta"
-        class="bg-gray-100/50 dark:bg-gray-800/50"
       />
+      <!-- class="bg-gray-100/50 dark:bg-gray-800/50" -->
     </ULandingSection>
   </div>
 </template>
