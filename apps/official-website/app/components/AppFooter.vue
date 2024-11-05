@@ -34,27 +34,18 @@ const links = [
 <template>
   <UFooter>
     <template #top>
-      <UFooterColumns
-        :links="links"
-        :ui="{
-          wrapper: 'xl:grid xl:grid-cols-4 xl:gap-8 xl:text-center',
-          left: 'xl:text-left',
-          right: 'xl:text-right',
-        }"
-      >
+      <UFooterColumns :links="links">
         <template #left>
           <div class="text-gray-900 dark:text-white text-2xl font-semibold truncate group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors duration-200">
             TinyLink
           </div>
-          <div class="text-base text-gray-500 dark:text-gray-400 mt-1">
+          <div class="text-base text-gray-500 dark:text-gray-400 mt-2">
             简单好用，即刻上手！
           </div>
-        </template>
-        <template #right>
-          <div class="text-gray-900 dark:text-white text-2xl font-semibold truncate group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors duration-200">
+          <div class="text-gray-900 dark:text-white text-2xl font-semibold truncate group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors duration-200 mt-6">
             Download the App
           </div>
-          <div class="flex xl:flex-col xl:items-center xl:ml-16 mt-4 gap-16 sm:gap-y-6">
+          <div class="flex items-start flex-col mt-4 gap-4">
             <UButton
               to="https://www.apple.com.cn/app-store/"
               target="_blank"
