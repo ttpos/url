@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   extends: ['@nuxt/ui-pro'],
 
   modules: [
+    '@nuxtjs/i18n',
     '@nuxt/content',
     '@nuxt/fonts',
     '@nuxt/image',
@@ -36,7 +37,6 @@ export default defineNuxtConfig({
 
   routeRules: {
     '/api/search.json': { prerender: true },
-    '/docs': { redirect: '/docs/getting-started', prerender: false },
   },
 
   typescript: {
@@ -60,7 +60,6 @@ export default defineNuxtConfig({
     prerender: {
       routes: [
         '/',
-        '/docs',
       ],
       crawlLinks: true,
     },
@@ -85,22 +84,53 @@ export default defineNuxtConfig({
     },
   },
 
+  // i18n: {
+  //   compilation: {
+  //     strictMessage: false,
+  //     escapeHtml: true,
+  //   },
+  //   lazy: true,
+  //   locales: ['en-US', 'zh-CN'],
+  //   defaultLocale: 'en-US',
+  //   skipSettingLocaleOnNavigate: true,
+  //   // detectBrowserLanguage: false,
+  //   detectBrowserLanguage: {
+  //     useCookie: true,
+  //     cookieKey: 'official_website_i18n_redirected',
+  //     redirectOn: 'root',
+  //     fallbackLocale: 'en-US',
+  //   },
+  // },
+
   i18n: {
-    compilation: {
-      strictMessage: false,
-      escapeHtml: true,
+    strategy: 'no_prefix',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'official_website_i18n_redirected',
+      redirectOn: 'root',
     },
-    lazy: true,
+    baseUrl: '/',
     locales: ['en-US', 'zh-CN'],
     defaultLocale: 'en-US',
-    skipSettingLocaleOnNavigate: true,
-    detectBrowserLanguage: false,
-    // detectBrowserLanguage: {
-    //   useCookie: true,
-    //   cookieKey: 'user_i18n_redirected',
-    //   redirectOn: 'root',
-    //   fallbackLocale: 'en-US',
-    // },
+  },
+
+  content: {
+    watch: {
+      ws: {
+        showURL: false,
+      },
+    },
+    highlight: {
+      theme: 'github-dark',
+    },
+    navigation: {
+      fields: ['image', '_id'],
+    },
+    markdown: {
+      anchorLinks: false,
+    },
+    locales: ['en-US', 'zh-CN'],
+    defaultLocale: 'en-US',
   },
 
   compatibilityDate: '2024-07-11',

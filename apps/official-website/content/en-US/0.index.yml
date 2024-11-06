@@ -1,5 +1,5 @@
-title: Nuxt UI Pro - SaaS template
-description: Nuxt UI Pro is a collection of premium Vue components built on top of Nuxt UI to create beautiful & responsive Nuxt applications in minutes.
+title: Shorten Your URLs Instantly with TinyLink
+description: Create branded short links and dynamic QR codes for easy sharing. Boost clicks, grow your brand, and track results with a simple URL shortener, custom domains, and detailed analytics.
 navigation: false
 hero:
   title: Shorten Your URLs Instantly with TinyLink
@@ -8,108 +8,63 @@ hero:
     label: Try It Now
     to: https://ui.nuxt.com/pro
     icon: i-heroicons-arrow-top-right-on-square-20-solid
-    # <UButton label="Get Started" trailing-icon="i-heroicons-arrow-right-20-solid" size="lg" to="/getting-started/installation" />
   links:
     - label: Get started for free
       trailing-icon: i-heroicons-arrow-right-20-solid
       size: xl
       to: /signup
-# sections:
-#   - title: The power of our service
-#     description: Aliqua labore laboris fugiat. Reprehenderit exercitation eu commodo. Officia nostrud sit et aliqua ea ex sunt minim incididunt sunt.
-#     id: features
-#     align: left
-#     features:
-#       - name: Easy to use
-#         description: Id laborum laboris duis nostrud excepteur ut velit.
-#         icon: i-heroicons-cog
-#       - name: Reliable
-#         description: Magna Lorem ex cillum fugiat ad enim aute irure sit duis minim.
-#         icon: i-heroicons-check
-#       - name: Secure
-#         description: Proident nostrud excepteur sint ut culpa consectetur aute adipisicing.
-#         icon: i-heroicons-lock-closed
-#     links:
-#       - label: Explore components
-#         to: /pro/components
-#         color: gray
-#         icon: i-heroicons-arrow-right-20-solid
-#         trailing: true
-#         size: md
-#         class: ml-8
-#   - title: The speed of our service
-#     description: Cillum sint enim excepteur ut deserunt qui nisi in deserunt in. Deserunt aliquip quis aliquip eu quis ex velit velit nostrud sit.
-#     align: right
-#     features:
-#       - name: Fast
-#         description: Qui reprehenderit nostrud dolore nisi ad fugiat labore eiusmod.
-#         icon: i-heroicons-rocket-launch
-#       - name: Affordable
-#         description: Reprehenderit fugiat elit in do ipsum ut pariatur.
-#         icon: i-heroicons-currency-dollar
-#       - name: Scalable
-#         description: Lorem deserunt et eiusmod. Ea in consectetur minim officia.
-#         icon: i-heroicons-chart-bar
-#     links:
-#       - label: Learn more
-#         to: /pro/guide/content
-#         color: gray
-#         icon: i-heroicons-arrow-right-20-solid
-#         trailing: true
-#         size: md
-#         class: ml-8
 features:
   title: TinyLink Key Features
   description: Effortlessly shorten URLs, enhance brand recognition, and track detailed analytics with these essential tools.
   items:
-    - title: 缩短长链接
-      description: 将原长链接转换为短链接
+    - title: Shorten Long URLs
+      description: Convert long URLs into short, manageable links
       icon: i-heroicons-cog
     - title: QR Code
-      description: 将原始长链接转换为二维码
+      description: Convert original long URLs into QR codes
       icon: i-heroicons-check
-    - title: 随时修改
-      description: 随时修改已创建链接的信息
+    - title: Edit Anytime
+      description: Modify created link information at any time
       icon: i-heroicons-lock-closed
-    - title: 批量创建
-      description: 同时创建多条链接，提高效率
+    - title: Batch Creation
+      description: Create multiple links simultaneously for improved efficiency
       icon: i-heroicons-rocket-launch
-    - title: 分组管理
-      description: 支持分组设置，方便管理链接
+    - title: Group Management
+      description: Support for group settings to easily manage links
       icon: i-heroicons-folder
-    - title: 永久有效
-      description: 生成的链接默认长期有效
+    - title: Permanent Validity
+      description: Generated links remain valid by default
       icon: i-heroicons-clock
-    - title: 访问统计
-      description: 统计链接访问量，生成数据报表
+    - title: Access Statistics
+      description: Track link visits and generate data reports
       icon: i-heroicons-chart-bar
-    - title: 数据导出
-      description: 支持导出不同链接的访问数据
+    - title: Data Export
+      description: Support for exporting visit data for different links
       icon: i-heroicons-document-arrow-down
-    - title: 自定义域名
-      description: 支持将链接自定义域名
+    - title: Custom Domain
+      description: Support for customizing link domains
       icon: i-heroicons-globe
-    - title: 链接重定向
-      description: 支持新增自定义跳转地址
+    - title: Link Redirection
+      description: Support for adding custom redirect addresses
       icon: i-heroicons-arrow-path
 useCases:
   title: TinyLink Use Cases
   description: Discover how TinyLink can simplify sharing, enhance marketing efforts, and optimize user engagement across various platforms.
   items:
-    - title: 营销活动数据统计
-      description: 使用短链接轻松跟踪营销活动的访问量。获取精准的点击数据，实时分析不同渠道的效果，优化广告投放策略。
+    - title: Marketing Campaign Analytics
+      description: Easily track marketing campaign visits using short links. Get precise click data, analyze different channel effects in real-time, and optimize advertising strategies.
       icon: i-heroicons-chart-bar
-    - title: 预先生成二维码
-      description: 提前生成二维码，随时应用于线下活动、广告或产品包装中，确保用户快速安全地访问您最新的网站或产品信息。
+    - title: Pre-generate QR Codes
+      description: Generate QR codes in advance for offline events, advertising, or product packaging, ensuring users can quickly and safely access your latest website or product information.
       icon: i-heroicons-qr-code
-    - title: 二维码菜单
-      description: 使用短链二维码菜单简化用餐体验，让顾客可以直接通过智能手机扫描并查看餐厅提供的菜单。
+    - title: QR Code Menus
+      description: Simplify dining experiences using short link QR code menus, allowing customers to directly view restaurant menus through their smartphones.
       icon: i-heroicons-book-open
-    - title: A/B 测试
-      description: 通过 A/B 测试优化营销策略，测试不同版本的着陆页或活动。分析测试结果，最大化效果，并通过多个短链接测试超过不同目标页面。
+    - title: A/B Testing
+      description: Optimize marketing strategies through A/B testing, test different landing page versions or campaigns. Analyze test results, maximize effectiveness, and test multiple target pages using different short links.
       icon: i-heroicons-adjustments-horizontal
-    - title: 短信营销
-      description: 使用字符数限制的链接可降低移动运营商费用。安全的短链接能提升达达率、打开率和转化率。
+    - title: SMS Marketing
+      description: Use character-limited links to reduce mobile carrier costs. Secure short links can improve deliverability, open rates, and conversion rates.
       icon: i-heroicons-envelope
 testimonials:
   headline: Try It Now

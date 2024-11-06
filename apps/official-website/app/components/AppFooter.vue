@@ -1,34 +1,39 @@
 <script setup lang="ts">
-const links = [
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
+const links = computed(() => [
   {
-    label: 'Features',
+    label: t('footer.features.label'),
     children: [
-      { label: '短链接' },
-      { label: 'QR code' },
-      { label: '自定义域名' },
-      { label: '营销活动' },
+      { label: t('footer.features.children.short_link') },
+      { label: t('footer.features.children.qr_code') },
+      { label: t('footer.features.children.custom_domain') },
+      { label: t('footer.features.children.marketing_campaign') },
     ],
   },
   {
-    label: 'Solutions',
+    label: t('footer.solutions.label'),
     children: [
-      { label: '营销活动访问量统计' },
-      { label: '预先生成二维码' },
-      { label: '二维码菜单' },
-      { label: '简化印刷材料' },
-      { label: '页面 A/B 测试' },
-      { label: '短信营销' },
+      { label: t('footer.solutions.children.analytics') },
+      { label: t('footer.solutions.children.bulk_qr') },
+      { label: t('footer.solutions.children.qr_menu') },
+      { label: t('footer.solutions.children.print_materials') },
+      { label: t('footer.solutions.children.ab_testing') },
+      { label: t('footer.solutions.children.sms_marketing') },
     ],
   },
   {
-    label: 'Contact US',
+    label: t('footer.contact.label'),
     children: [
-      { label: 'About US', to: '/about' },
-      { label: 'Terms of Service', to: '/terms' },
-      { label: 'Privacy Policy', to: '/privacy' },
+      { label: t('footer.contact.children.about'), to: '/about' },
+      { label: t('footer.contact.children.terms'), to: '/terms' },
+      { label: t('footer.contact.children.privacy'), to: '/privacy' },
     ],
   },
-]
+])
 </script>
 
 <template>
@@ -36,14 +41,17 @@ const links = [
     <template #top>
       <UFooterColumns :links="links">
         <template #left>
-          <NuxtLink to="/" class="text-gray-900 dark:text-white text-2xl font-semibold truncate group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors duration-200">
+          <NuxtLink
+            to="/"
+            class="text-gray-900 dark:text-white text-2xl font-semibold truncate group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors duration-200"
+          >
             TinyLink
           </NuxtLink>
           <div class="text-base text-gray-500 dark:text-gray-400 mt-2">
-            简单好用，即刻上手！
+            {{ t('footer.slogan') }}
           </div>
           <div class="text-gray-900 dark:text-white text-2xl font-semibold truncate group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors duration-200 mt-6">
-            Download the App
+            {{ t('footer.download.title') }}
           </div>
           <div class="flex items-start flex-col mt-4 gap-4">
             <UButton
@@ -51,7 +59,7 @@ const links = [
               target="_blank"
               icon="i-simple-icons-appstore"
               color="gray"
-              label="App Store"
+              :label="t('footer.download.app_store')"
               size="lg"
             />
             <UButton
@@ -59,7 +67,7 @@ const links = [
               target="_blank"
               icon="i-simple-icons-googleplay"
               color="gray"
-              label="Google Play"
+              :label="t('footer.download.google_play')"
               size="lg"
             />
           </div>
@@ -69,7 +77,7 @@ const links = [
 
     <template #left>
       <p class="text-gray-500 dark:text-gray-400 text-sm">
-        Copyright © {{ new Date().getFullYear() }}. XXX Co., Ltd.
+        {{ t('footer.copyright', { year: new Date().getFullYear() }) }}
       </p>
     </template>
 
@@ -85,6 +93,7 @@ const links = [
         color="gray"
         variant="ghost"
       />
+      <LanguageToggle />
     </template>
   </UFooter>
 </template>

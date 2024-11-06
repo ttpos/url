@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { locale } = useI18n()
 const colorMode = useColorMode()
 
 const color = computed(() => colorMode.value === 'dark' ? '#111827' : 'white')
@@ -26,6 +27,7 @@ useSeoMeta({
   description,
   ogTitle: title,
   ogDescription: description,
+  ogLocale: () => locale.value,
   // ogImage: 'https://dashboard-template.nuxt.dev/social-card.png',
   // twitterImage: 'https://dashboard-template.nuxt.dev/social-card.png',
   // twitterCard: 'summary_large_image',
@@ -40,6 +42,7 @@ useSeoMeta({
       <NuxtPage />
     </NuxtLayout>
 
+    <ScrollToTop />
     <UNotifications />
   </div>
 </template>

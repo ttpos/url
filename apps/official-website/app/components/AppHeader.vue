@@ -3,77 +3,79 @@ import type { NavItem } from '@nuxt/content'
 
 const navigation = inject<Ref<NavItem[]>>('navigation', ref([]))
 
-const links = [
+const { t } = useI18n()
+
+const links = computed(() => [
   {
-    label: 'Product Features',
+    label: t('header.product_features.label'),
     icon: 'i-heroicons-book-open',
     to: '/features',
-    description: '探索我们的核心产品功能，助力您的业务增长',
+    description: t('header.product_features.description'),
     children: [
       {
-        label: '短链接',
+        label: t('header.product_features.children.short_link.label'),
         icon: 'i-heroicons-link',
         to: '/features/shortLink',
-        description: '将冗长的URL转换为简洁的短链接，提升分享效率和用户体验',
+        description: t('header.product_features.children.short_link.description'),
       },
       {
-        label: 'QR Code',
+        label: t('header.product_features.children.qr_code.label'),
         icon: 'i-heroicons-qr-code',
         to: '/features/qrc',
-        description: '生成美观且可定制的二维码，连接线上线下场景',
+        description: t('header.product_features.children.qr_code.description'),
       },
       {
-        label: '自定义域名',
+        label: t('header.product_features.children.custom_domain.label'),
         icon: 'i-gridicons:domains',
         to: '/features/domain',
-        description: '使用自有品牌域名，提升专业形象与品牌认知',
+        description: t('header.product_features.children.custom_domain.description'),
       },
       {
-        label: '营销活动',
+        label: t('header.product_features.children.marketing_campaign.label'),
         icon: 'i-hugeicons:marketing',
         to: '/features/marketing',
-        description: '策划和管理营销活动，提升转化率和客户参与度',
+        description: t('header.product_features.children.marketing_campaign.description'),
       },
     ],
   },
   {
-    label: 'Solutions',
+    label: t('header.solutions.label'),
     icon: 'i-heroicons-square-3-stack-3d',
     to: '/solutions',
-    description: '面向不同场景的专业解决方案',
+    description: t('header.solutions.description'),
     children: [
       {
-        label: '二维码菜单',
-        to: '/solutions/qr-menu',
+        label: t('header.solutions.children.qr_menu.label'),
         icon: 'i-heroicons-squares-2x2',
-        description: '创建交互式二维码菜单，优化餐饮服务体验',
+        to: '/solutions/qr-menu',
+        description: t('header.solutions.children.qr_menu.description'),
       },
       {
-        label: '短信营销',
-        to: '/solutions/sms-marketing',
+        label: t('header.solutions.children.sms_marketing.label'),
         icon: 'i-heroicons-chat-bubble-left-right',
-        description: '精准触达目标用户，提供个性化短信营销服务',
+        to: '/solutions/sms-marketing',
+        description: t('header.solutions.children.sms_marketing.description'),
       },
       {
-        label: '预先生成二维码',
-        to: '/solutions/bulk-qr',
+        label: t('header.solutions.children.bulk_qr.label'),
         icon: 'i-heroicons-queue-list',
-        description: '批量生成和管理二维码，适用于大规模营销活动',
+        to: '/solutions/bulk-qr',
+        description: t('header.solutions.children.bulk_qr.description'),
       },
       {
-        label: '营销活动数据统计',
-        to: '/solutions/analytics',
+        label: t('header.solutions.children.analytics.label'),
         icon: 'i-heroicons-chart-bar',
-        description: '全方位数据分析，助您做出明智的营销决策',
+        to: '/solutions/analytics',
+        description: t('header.solutions.children.analytics.description'),
       },
     ],
   },
   {
-    label: 'About US',
+    label: t('header.about.label'),
     icon: 'i-heroicons-rocket-launch',
     to: '/about',
   },
-]
+])
 </script>
 
 <template>
@@ -98,11 +100,22 @@ const links = [
       />
     </template>
 
+    <!-- <template #panel>
+      <UAsideLinks :links="links" />
+
+      <UDivider type="dashed" class="my-4" />
+
+      <UNavigationTree :links="mapContentNavigation(navigation)" :multiple="false" default-open />
+    </template> -->
+
     <template #panel>
-      <UNavigationTree
+      <UNavigationAccordion :links="links" />
+
+      <!-- <UNavigationTree
         :links="mapContentNavigation(navigation)"
         default-open
-      />
+      /> -->
+      <UNavigationTree :links="mapContentNavigation(navigation)" :multiple="false" default-open />
     </template>
   </UHeader>
 </template>
