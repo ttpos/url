@@ -22,7 +22,6 @@ useSeoMeta({
       :ui="{ base: 'relative z-[1]', container: 'max-w-4xl', title: 'text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl' }"
       class="relative mb-[calc(var(--header-height)*2)]"
     >
-      <!-- <div class="absolute inset-0 landing-grid z-[-1] [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]" /> -->
       <template #top>
         <Gradient class="absolute inset-x-0 top-0 w-full block" />
       </template>
@@ -128,24 +127,11 @@ useSeoMeta({
     /> -->
 
     <ULandingSection>
-      <ULandingCTA
-        v-bind="page.cta"
-      />
-      <!-- class="bg-gray-100/50 dark:bg-gray-800/50" -->
+      <ULandingCTA v-bind="page.cta">
+        <template #title>
+          <span v-html="page.cta?.title" />
+        </template>
+      </ULandingCTA>
     </ULandingSection>
   </div>
 </template>
-
-<style scoped>
-.landing-grid {
-  background-size: 100px 100px;
-  background-image: linear-gradient(to right, rgb(var(--color-gray-200)) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(var(--color-gray-200)) 1px, transparent 1px);
-}
-.dark {
-  .landing-grid {
-    background-image: linear-gradient(to right, rgb(var(--color-gray-800)) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(var(--color-gray-800)) 1px, transparent 1px);
-  }
-}
-</style>

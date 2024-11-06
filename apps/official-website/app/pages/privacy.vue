@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="relative">
+    <LandingGrid />
     <UContainer>
       <UPageHeader
         title="privacy policy"

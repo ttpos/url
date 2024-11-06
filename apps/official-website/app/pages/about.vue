@@ -14,7 +14,8 @@ useSeoMeta({
 </script>
 
 <template>
-  <div v-if="page">
+  <div v-if="page" class="relative">
+    <LandingGrid />
     <UContainer>
       <UBlogPost
         title="团队介绍"

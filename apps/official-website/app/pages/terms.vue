@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <UContainer>
+  <div class="relative">
+    <LandingGrid />
+    <UContainer >
       <UPageHeader
         title="Terms of Service"
         description="Page last updated： August 31, 2022"
