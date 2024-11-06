@@ -12,7 +12,7 @@ hero:
   links:
     - label: Get started for free
       trailing-icon: i-heroicons-arrow-right-20-solid
-      size: lg
+      size: xl
       to: /signup
 # sections:
 #   - title: The power of our service
@@ -170,13 +170,7 @@ cta:
   title: Try tinylink for free. No strings attached.
   description:
   links:
-    # - label: Buy now
-    #   size: xl
-    #   color: black
-    #   to: /pricing
     - label: Get started for free
-      to: /signup
+      trailing-icon: i-heroicons-arrow-right-20-solid
       size: xl
-      color: black
-      icon: i-heroicons-arrow-right-20-solid
-      trailing: true
+      to: /signup

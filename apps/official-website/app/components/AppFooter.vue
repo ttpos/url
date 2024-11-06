@@ -23,9 +23,9 @@ const links = [
   {
     label: 'Contact US',
     children: [
-      { label: 'About US' },
-      { label: 'Terms of Service' },
-      { label: 'Privacy Policy' },
+      { label: 'About US', to: '/about' },
+      { label: 'Terms of Service', to: '/terms' },
+      { label: 'Privacy Policy', to: '/privacy' },
     ],
   },
 ]
@@ -36,9 +36,9 @@ const links = [
     <template #top>
       <UFooterColumns :links="links">
         <template #left>
-          <div class="text-gray-900 dark:text-white text-2xl font-semibold truncate group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors duration-200">
+          <NuxtLink to="/" class="text-gray-900 dark:text-white text-2xl font-semibold truncate group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors duration-200">
             TinyLink
-          </div>
+          </NuxtLink>
           <div class="text-base text-gray-500 dark:text-gray-400 mt-2">
             简单好用，即刻上手！
           </div>
