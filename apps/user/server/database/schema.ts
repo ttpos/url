@@ -1,9 +1,9 @@
 /* eslint-disable ts/no-use-before-define */
 
-import { blob, integer, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core'
 import type { SessionSource, VerificationType } from '~~/server/types'
-
 import type { AnySQLiteColumn } from 'drizzle-orm/sqlite-core'
+
+import { blob, integer, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core'
 
 const trackingFields = {
   createdAt: integer('created_at', { mode: 'timestamp' })
@@ -17,6 +17,39 @@ const trackingFields = {
     .notNull()
     .default(0),
 }
+
+export type GatewayType = 'http' | 'other'
+
+export const gatewayTable = sqliteTable(
+  'gateway',
+  {
+    id: text('id').primaryKey(),
+    name: text('name').notNull(),
+    area: text('area').notNull(),
+    type: text('type').notNull().$type<GatewayType>(),
+    domains: text('domains').notNull(),
+    className: text('class_name').notNull(),
+    defaultCerts: text('default_certs'),
+    createdAt: integer('created_at', { mode: 'timestamp' })
+      .notNull()
+      .$defaultFn(() => new Date()),
+    updatedAt: integer('updated_at', { mode: 'timestamp' })
+      .notNull()
+      .$defaultFn(() => new Date())
+      .$onUpdateFn(() => new Date()),
+    isDeleted: integer('is_deleted')
+      .notNull()
+      .default(0),
+  },
+  (table) => {
+    return {
+      gatewayUniqueIndex: uniqueIndex('gateway_unique_index').on(
+        table.name,
+        table.area,
+      ),
+    }
+  },
+)
 
 export const userTable = sqliteTable(
   'user',

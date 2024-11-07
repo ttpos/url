@@ -1,0 +1,36 @@
+title: Real-time Marketing Campaign Tracking, Monitor Every Click
+description: TinyLink Marketing Campaigns help you centrally view, manage, and measure the performance of multiple links to optimize your marketing strategy.
+navigation:
+  icon: i-heroicons-qr-code
+hero:
+  title: Real-time Marketing Campaign Tracking, Monitor Every Click
+  description: TinyLink Marketing Campaigns help you centrally view, manage, and measure the performance of multiple links to optimize your marketing strategy.
+  links:
+    - label: Start Free
+      trailing-icon: i-heroicons-arrow-right-20-solid
+      size: xl
+      to: /signup
+freedom:
+  title: Analyze Similar Link Data with Marketing Campaigns
+  description: Easily analyze link performance across different platforms within the same campaign, gaining real-time cross-channel data insights.
+sections:
+  - title: Track, View, and Analyze All Link Data in One Place
+    description: Track access data for all links under marketing campaigns, including visit counts, visitor numbers, IP counts, source regions, high-frequency IPs, and operating system information, for comprehensive campaign effectiveness monitoring.
+    id: features
+    align: left
+    features:
+      - name: Compare link data across different platform channels in real-time to enhance digital marketing effectiveness.
+      - name: Understand customer system devices to optimize omni-channel experience.
+      - name: Support direct download or export of data charts.
+  - title: Powerful Service Features
+    description: Comprehensive analysis tools for your marketing success
+    id: features
+    align: left
+    features:
+      - name: Understand end-user behavior through clicks and redirect data
+      - name: Organize personalized statistical reports to capture campaign data for each link
+      - name: Segment audience data by location, device, or IP source
+      - name: Make key decisions or campaign improvements based on data changes
+batch:
+  title: Deep Understanding of Link Audience
+  description: Gain detailed insights into audience click data for each campaign link through statistical charts

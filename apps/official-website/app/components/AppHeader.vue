@@ -9,7 +9,6 @@ const links = computed(() => [
   {
     label: t('header.product_features.label'),
     icon: 'i-heroicons-book-open',
-    to: '/features',
     description: t('header.product_features.description'),
     children: [
       {
@@ -41,7 +40,6 @@ const links = computed(() => [
   {
     label: t('header.solutions.label'),
     icon: 'i-heroicons-square-3-stack-3d',
-    to: '/solutions',
     description: t('header.solutions.description'),
     children: [
       {

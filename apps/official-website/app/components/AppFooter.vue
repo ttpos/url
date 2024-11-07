@@ -8,10 +8,10 @@ const links = computed(() => [
   {
     label: t('footer.features.label'),
     children: [
-      { label: t('footer.features.children.short_link') },
-      { label: t('footer.features.children.qr_code') },
-      { label: t('footer.features.children.custom_domain') },
-      { label: t('footer.features.children.marketing_campaign') },
+      { label: t('footer.features.children.short_link'), to: '/features/shortLink' },
+      { label: t('footer.features.children.qr_code'), to: '/features/qrc' },
+      { label: t('footer.features.children.custom_domain'), to: '/features/domain' },
+      { label: t('footer.features.children.marketing_campaign'), to: '/features/marketing' },
     ],
   },
   {
@@ -39,7 +39,10 @@ const links = computed(() => [
 <template>
   <UFooter>
     <template #top>
-      <UFooterColumns :links="links">
+      <UFooterColumns
+        :links="links"
+        :ui="{ active: 'text-primary-600 dark:text-primary-400 font-medium' }"
+      >
         <template #left>
           <NuxtLink
             to="/"

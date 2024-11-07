@@ -1,0 +1,25 @@
+title: 使用 TinyLink 随时创建可点击的短链接
+description: 使用 TinyLink，轻松生成可随时点击的短链接，提升用户访问体验。无论是社交媒体、电子邮件还是其他平台，助力您的品牌推广和链接可用性。
+navigation:
+  icon: i-heroicons-information-circle
+hero:
+  title: 使用 TinyLink 随时创建可点击的短链接
+  description: 使用 TinyLink，轻松生成可随时点击的短链接，提升用户访问体验。无论是社交媒体、电子邮件还是其他平台，助力您的品牌推广和链接可用性。
+  links:
+    - label: 免费开始使用
+      trailing-icon: i-heroicons-arrow-right-20-solid
+      size: xl
+      to: /signup
+sections:
+  freedom:
+    title: 自定义您的短链接
+    description: TinyLink 支持自定义短链接后缀，并允许使用自有域名。
+  redirect:
+    title: 重定向短链接地址
+    description: 随时编辑重定向链接跳转地址，确保您的受众轻松访问最新内容。
+  batch:
+    title: 批量创建多个短链接
+    description: 支持批量创建短链接，快速建立连接。无论是营销活动、产品推广，还是日常运营，批量创建功能帮助您高效管理和分享大量链接，节省时间，同时确保链接的一致性和品牌识别度。
+  statistics:
+    title: 链接访问统计
+    description: 查看链接访问数据，包括访问次数、人数、IP 数、访问来源、地区、高频访问 IP 和操作系统信息。
