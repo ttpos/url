@@ -3,6 +3,13 @@ export default {
     i18n: 'Multi Language',
     abbreviations: 'En',
     current_language: 'English',
+    cta: {
+      headline: 'Try It Now',
+      title: 'Try TinyLink for free.',
+      subheading: 'No strings attached.',
+      description: 'Start shortening and managing your links in seconds. Join thousands of satisfied users who trust TinyLink for their link management needs.',
+      get_started: 'Get started for free',
+    },
   },
   header: {
     product_features: {

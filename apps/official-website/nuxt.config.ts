@@ -103,6 +103,11 @@ export default defineNuxtConfig({
   // },
 
   i18n: {
+    compilation: {
+      strictMessage: false,
+      escapeHtml: true,
+    },
+    lazy: true,
     strategy: 'no_prefix',
     detectBrowserLanguage: {
       useCookie: true,

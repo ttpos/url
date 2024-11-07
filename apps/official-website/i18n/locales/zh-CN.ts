@@ -3,6 +3,13 @@ export default {
     i18n: '多语言',
     abbreviations: '简中',
     current_language: '简体中文',
+    cta: {
+      headline: '立即试用',
+      title: '免费试用 TinyLink。',
+      subheading: '无附加条件。',
+      description: '几秒钟即可开始缩短和管理您的链接。加入数千名信赖 TinyLink 进行链接管理的满意用户。',
+      get_started: '免费开始使用',
+    },
   },
   header: {
     product_features: {

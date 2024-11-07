@@ -120,12 +120,3 @@ testimonials:
       color: gray
       icon: i-heroicons-arrow-right-20-solid
       trailing: true
-cta:
-  headline: Try It Now
-  title: Try TinyLink for free. <span class="text-primary">No strings attached.</span>
-  description:
-  links:
-    - label: Get started for free
-      trailing-icon: i-heroicons-arrow-right-20-solid
-      size: xl
-      to: /signup

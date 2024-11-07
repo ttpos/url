@@ -48,10 +48,10 @@ const links = computed(() => [
             TinyLink
           </NuxtLink>
           <div class="text-base text-gray-500 dark:text-gray-400 mt-2">
-            {{ t('footer.slogan') }}
+            {{ $t('footer.slogan') }}
           </div>
           <div class="text-gray-900 dark:text-white text-2xl font-semibold truncate group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors duration-200 mt-6">
-            {{ t('footer.download.title') }}
+            {{ $t('footer.download.title') }}
           </div>
           <div class="flex items-start flex-col mt-4 gap-4">
             <UButton
@@ -59,7 +59,7 @@ const links = computed(() => [
               target="_blank"
               icon="i-simple-icons-appstore"
               color="gray"
-              :label="t('footer.download.app_store')"
+              :label="$t('footer.download.app_store')"
               size="lg"
             />
             <UButton
@@ -67,7 +67,7 @@ const links = computed(() => [
               target="_blank"
               icon="i-simple-icons-googleplay"
               color="gray"
-              :label="t('footer.download.google_play')"
+              :label="$t('footer.download.google_play')"
               size="lg"
             />
           </div>
@@ -77,7 +77,7 @@ const links = computed(() => [
 
     <template #left>
       <p class="text-gray-500 dark:text-gray-400 text-sm">
-        {{ t('footer.copyright', { year: new Date().getFullYear() }) }}
+        {{ $t('footer.copyright', { year: new Date().getFullYear() }) }}
       </p>
     </template>
 

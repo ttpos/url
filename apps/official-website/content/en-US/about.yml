@@ -1,12 +1,9 @@
 title: About TinyLink
 description: Making link management simple and powerful for everyone. Learn about our mission, values, and the team behind TinyLink.
 navigation.icon: i-heroicons-information-circle
-cta:
-  headline: Try It Now
-  title: Try TinyLink for free. <span class="text-primary">No strings attached.</span>
-  description: Start shortening and managing your links in seconds. Join thousands of satisfied users who trust TinyLink for their link management needs.
-  links:
-    - label: Get started for free
-      trailing-icon: i-heroicons-arrow-right-20-solid
-      size: xl
-      to: /signup
+team:
+  title: Team Introduction
+  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum
+contact:
+  title: Contact Us
+  email: example@tinylink.com

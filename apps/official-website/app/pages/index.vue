@@ -5,7 +5,6 @@ const { locale } = useI18n()
 const { data: page } = await useAsyncData(`${route.path}`, () => queryContent(route.path).locale(locale.value).findOne(), {
   watch: [locale],
 })
-// const { data: page } = await useAsyncData('index', () => queryContent('/').findOne())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
@@ -131,13 +130,6 @@ useSeoMeta({
       :description="page.testimonials.description"
       :links="page.testimonials.links"
     /> -->
-
-    <ULandingSection>
-      <ULandingCTA v-bind="page.cta">
-        <template #title>
-          <span v-html="page.cta?.title" />
-        </template>
-      </ULandingCTA>
-    </ULandingSection>
+    <CallToAction />
   </div>
 </template>

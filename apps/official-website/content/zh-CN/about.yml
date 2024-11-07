@@ -1,12 +1,9 @@
 title: 关于 TinyLink
 description: 为所有人提供简单而强大的链接管理工具。了解我们的使命、价值观和 TinyLink 背后的团队。
 navigation.icon: i-heroicons-information-circle
-cta:
-  headline: 立即试用
-  title: 免费试用 TinyLink。<span class="text-primary">无附加条件</span>
-  description: 几秒钟即可开始缩短和管理您的链接。加入数千名信赖 TinyLink 进行链接管理的满意用户。
-  links:
-    - label: 免费开始使用
-      trailing-icon: i-heroicons-arrow-right-20-solid
-      size: xl
-      to: /signup
+team:
+  title: 团队介绍
+  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum
+contact:
+  title: 联系我们
+  email: example@tinylink.com
