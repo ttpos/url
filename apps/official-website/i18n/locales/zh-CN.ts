@@ -5,7 +5,8 @@ export default {
     current_language: '简体中文',
     cta: {
       title: '免费试用 TinyLink。',
-      subheading: '无附加条件。',
+      subTitle: '无附加条件。',
+      description: '免费试用可用。',
       get_started: '免费开始使用',
     },
   },

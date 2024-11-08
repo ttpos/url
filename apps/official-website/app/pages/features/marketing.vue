@@ -80,7 +80,7 @@ useSeoMeta({
     </ULandingSection>
 
     <BoxPlaceholder>
-      <CallToAction />
+      <CallToAction :title="page.cat.title" sub-title="." :description="page.cat.description" />
     </BoxPlaceholder>
   </div>
 </template>

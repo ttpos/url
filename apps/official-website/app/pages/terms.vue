@@ -1,10 +1,11 @@
 <template>
   <div class="relative">
     <LandingGrid />
-    <UContainer >
+    <UContainer>
       <UPageHeader
         title="Terms of Service"
         description="Page last updated： August 31, 2022"
+        class="py-[50px]"
       />
 
       <div class="pb-24 sm:pb-32 mt-6 text-lg/8 text-gray-600 dark:text-gray-300">

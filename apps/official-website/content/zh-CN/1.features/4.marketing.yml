@@ -35,3 +35,6 @@ sections:
 batch:
   title: 深入了解链接受众
   description: 通过统计图表详细了解每一个活动链接的受众点击数据
+cat:
+  title: 通过数据驱动的决策，助力成功的数字营销。
+  description:

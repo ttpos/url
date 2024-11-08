@@ -85,9 +85,9 @@ const links = computed(() => [
     </template>
 
     <template #right>
-      <UColorModeButton size="sm" />
-      <UButton icon="i-simple-icons-x" color="gray" variant="ghost" to="https://x.com/nuxt_js" target="_blank" />
-      <UButton icon="i-simple-icons-discord" color="gray" variant="ghost" to="https://discord.com/invite/ps2h6QT" target="_blank" />
+      <UColorModeButton />
+      <UButton icon="i-simple-icons-x" color="gray" variant="ghost" />
+      <UButton icon="i-simple-icons-discord" color="gray" variant="ghost" />
       <UButton
         to="https://github.com/ttpos/url/"
         target="_blank"

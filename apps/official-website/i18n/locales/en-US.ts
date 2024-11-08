@@ -5,7 +5,8 @@ export default {
     current_language: 'English',
     cta: {
       title: 'Try TinyLink for free.',
-      subheading: 'No strings attached.',
+      subTitle: 'No strings attached.',
+      description: 'Free trial available.',
       get_started: 'Get started for free',
     },
   },

@@ -18,7 +18,9 @@ provide('navigation', navigation)
     <AppHeader />
 
     <UMain>
-      <slot />
+      <div class="overflow-hidden">
+        <slot />
+      </div>
     </UMain>
 
     <AppFooter />
