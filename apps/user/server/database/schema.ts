@@ -18,39 +18,6 @@ const trackingFields = {
     .default(0),
 }
 
-export type GatewayType = 'http' | 'other'
-
-export const gatewayTable = sqliteTable(
-  'gateway',
-  {
-    id: text('id').primaryKey(),
-    name: text('name').notNull(),
-    area: text('area').notNull(),
-    type: text('type').notNull().$type<GatewayType>(),
-    domains: text('domains').notNull(),
-    className: text('class_name').notNull(),
-    defaultCerts: text('default_certs'),
-    createdAt: integer('created_at', { mode: 'timestamp' })
-      .notNull()
-      .$defaultFn(() => new Date()),
-    updatedAt: integer('updated_at', { mode: 'timestamp' })
-      .notNull()
-      .$defaultFn(() => new Date())
-      .$onUpdateFn(() => new Date()),
-    isDeleted: integer('is_deleted')
-      .notNull()
-      .default(0),
-  },
-  (table) => {
-    return {
-      gatewayUniqueIndex: uniqueIndex('gateway_unique_index').on(
-        table.name,
-        table.area,
-      ),
-    }
-  },
-)
-
 export const userTable = sqliteTable(
   'user',
   {
