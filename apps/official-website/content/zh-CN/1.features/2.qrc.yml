@@ -1,7 +1,8 @@
 title: 创建可随时更新的自定义二维码
 description: 创建完全自定义的二维码，为用户提供始终最新的内容。
-navigation:
-  icon: i-heroicons-qr-code
+navigation: false
+# navigation:
+#   icon: i-heroicons-qr-code
 hero:
   title: 创建可随时更新的自定义二维码
   description: 创建完全自定义的二维码，为用户提供始终最新的内容。

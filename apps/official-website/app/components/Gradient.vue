@@ -4,7 +4,7 @@
       <path d="M0 0H1440V181H0V0Z" />
     </mask>
     <path d="M0 0H1440V181H0V0Z" fill="url(#paint0_linear_1086_7239)" fill-opacity="0.22" />
-    <!-- <path d="M0 2H1440V-2H0V2Z" fill="url(#paint1_linear_1086_7239)" mask="url(#path-1-inside-1_1086_7239)" /> -->
+    <path d="M0 2H1440V-2H0V2Z" fill="url(#paint1_linear_1086_7239)" mask="url(#path-1-inside-1_1086_7239)" />
     <defs>
       <linearGradient
         id="paint0_linear_1086_7239"

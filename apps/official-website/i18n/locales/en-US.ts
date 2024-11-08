@@ -54,8 +54,23 @@ export default {
         },
       },
     },
-    about: {
-      label: 'About Us',
+    contact: {
+      label: 'Contact Us',
+      description: 'Learn more about our services and connect with us',
+      children: {
+        about: {
+          label: 'About Us',
+          description: 'Learn about our vision, mission and team',
+        },
+        terms: {
+          label: 'Terms of Service',
+          description: 'Review our terms of service and usage agreement',
+        },
+        privacy: {
+          label: 'Privacy Policy',
+          description: 'Understand how we protect and handle your information',
+        },
+      },
     },
   },
   footer: {

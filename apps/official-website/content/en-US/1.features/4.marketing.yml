@@ -1,12 +1,13 @@
 title: Real-time Marketing Campaign Tracking, Monitor Every Click
 description: TinyLink Marketing Campaigns help you centrally view, manage, and measure the performance of multiple links to optimize your marketing strategy.
-navigation:
-  icon: i-heroicons-qr-code
+navigation: false
+# navigation:
+#   icon: i-hugeicons:marketing
 hero:
   title: Real-time Marketing Campaign Tracking, Monitor Every Click
   description: TinyLink Marketing Campaigns help you centrally view, manage, and measure the performance of multiple links to optimize your marketing strategy.
   links:
-    - label: Start Free
+    - label: Get started for free
       trailing-icon: i-heroicons-arrow-right-20-solid
       size: xl
       to: /signup

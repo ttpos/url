@@ -1,7 +1,8 @@
 title: Shorten Your URLs Instantly with TinyLink
 description: 'Create branded short links and dynamic QR codes for easy sharing. Boost clicks, grow your brand, and track results with a simple URL shortener, custom domains, and detailed analytics.'
-navigation:
-  icon: i-heroicons-link
+navigation: false
+# navigation:
+#   icon: i-heroicons-link
 hero:
   title: Shorten Your URLs Instantly with TinyLink
   description: 'Create branded short links and dynamic QR codes for easy sharing. Boost clicks, grow your brand, and track results with a simple URL shortener, custom domains, and detailed analytics.'

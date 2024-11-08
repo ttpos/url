@@ -1,7 +1,8 @@
 title: 'Create custom QR codes that ''scan'''
 description: Create fully customized QR codes that always provide the latest content for users.
-navigation:
-  icon: i-heroicons-qr-code
+navigation: false
+# navigation:
+#   icon: i-heroicons-qr-code
 hero:
   title: 'Create custom QR codes that ''scan'''
   description: Create fully customized QR codes that always provide the latest content for users.

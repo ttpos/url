@@ -54,8 +54,23 @@ export default {
         },
       },
     },
-    about: {
-      label: '关于我们',
+    contact: {
+      label: '联系我们',
+      description: '了解更多关于我们的信息与服务',
+      children: {
+        about: {
+          label: '关于我们',
+          description: '了解我们的愿景、使命和团队',
+        },
+        terms: {
+          label: '服务条款',
+          description: '查看我们的服务条款和使用协议',
+        },
+        privacy: {
+          label: '隐私政策',
+          description: '了解我们如何保护和处理您的信息',
+        },
+      },
     },
   },
   footer: {

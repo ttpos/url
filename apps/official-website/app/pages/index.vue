@@ -73,10 +73,11 @@ useSeoMeta({
         title="How tinylink Works?"
         description="Visitors are redirected to the original URL while the system records their visit data."
       >
-        <img
+        <!-- <img
           src="https://picsum.photos/640/360"
           class="w-full rounded-md shadow-xl ring-1 ring-gray-300 dark:ring-gray-700"
-        >
+        > -->
+        <ImagePlaceholder />
       </ULandingSection>
     </BoxPlaceholder>
 

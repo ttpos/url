@@ -69,9 +69,29 @@ const links = computed(() => [
     ],
   },
   {
-    label: t('header.about.label'),
+    label: t('header.contact.label'),
     icon: 'i-heroicons-rocket-launch',
-    to: '/about',
+    description: t('header.contact.description'),
+    children: [
+      {
+        label: t('header.contact.children.about.label'),
+        description: t('header.contact.children.about.description'),
+        to: '/about',
+        icon: 'i-heroicons-information-circle',
+      },
+      {
+        label: t('header.contact.children.terms.label'),
+        description: t('header.contact.children.terms.description'),
+        to: '/terms',
+        icon: 'i-heroicons-clipboard-document-list',
+      },
+      {
+        label: t('header.contact.children.privacy.label'),
+        description: t('header.contact.children.privacy.description'),
+        to: '/privacy',
+        icon: 'i-heroicons-shield-check',
+      },
+    ],
   },
 ])
 </script>
@@ -98,21 +118,11 @@ const links = computed(() => [
       />
     </template>
 
-    <!-- <template #panel>
-      <UAsideLinks :links="links" />
-
-      <UDivider type="dashed" class="my-4" />
-
-      <UNavigationTree :links="mapContentNavigation(navigation)" :multiple="false" default-open />
-    </template> -->
-
     <template #panel>
       <UNavigationAccordion :links="links" />
 
-      <!-- <UNavigationTree
-        :links="mapContentNavigation(navigation)"
-        default-open
-      /> -->
+      <!-- <UDivider type="dashed" class="my-4" /> -->
+
       <UNavigationTree :links="mapContentNavigation(navigation)" :multiple="false" default-open />
     </template>
   </UHeader>

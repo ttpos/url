@@ -36,10 +36,11 @@ useSeoMeta({
         align="center"
         :ui="{ wrapper: 'py-12 sm:py-16' }"
       >
-        <img
+        <!-- <img
           src="https://picsum.photos/640/360"
           class="h-[320px] rounded-md shadow-xl ring-1 ring-gray-300 dark:ring-gray-700"
-        >
+        > -->
+        <ImagePlaceholder />
       </ULandingSection>
     </BoxPlaceholder>
 
@@ -71,10 +72,11 @@ useSeoMeta({
       :description="page.batch.description"
       align="left"
     >
-      <img
+      <!-- <img
         src="https://picsum.photos/640/360"
         class="w-full rounded-md shadow-xl ring-1 ring-gray-300 dark:ring-gray-700"
-      >
+      > -->
+      <ImagePlaceholder />
     </ULandingSection>
 
     <BoxPlaceholder>

@@ -1,7 +1,8 @@
 title: Shorten Links with Your Own Domain
 description: 'Shorten, personalize, and share fully branded short URLs. Own your brand with every link.'
-navigation:
-  icon: 'i-gridicons:domains'
+navigation: false
+# navigation:
+#   icon: i-gridicons:domains
 hero:
   title: Shorten Links with Your Own Domain
   description: 'Shorten, personalize, and share fully branded short URLs. Own your brand with every link.'
@@ -25,7 +26,6 @@ features:
       description: 'Uses SSL encryption by default for security, redirecting through HTTPS protocol to enhance user trust'
     - title: Bulk Creation
       description: Create multiple links simultaneously to improve efficiency
-      icon: i-heroicons-rocket-launch
     - title: Enhanced Brand Recognition
       description: 'Use your own domain to strengthen brand recognition, increase link exposure and trust, boosting marketing campaigns.'
 redirect:

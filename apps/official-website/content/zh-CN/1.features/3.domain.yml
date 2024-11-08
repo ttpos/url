@@ -1,7 +1,8 @@
 title: 使用自有域名生成短链接
 description: 使用您的品牌域名创建、个性化和分享短链接。让每个链接都彰显品牌价值。
-navigation:
-  icon: 'i-gridicons:domains'
+navigation: false
+# navigation:
+#   icon: i-gridicons:domains
 hero:
   title: 使用自有域名生成短链接
   description: 使用您的品牌域名创建、个性化和分享短链接。让每个链接都彰显品牌价值。
@@ -25,7 +26,6 @@ features:
       description: 默认使用 SSL 加密，确保安全性，通过 HTTPS 协议进行跳转，提升用户信任度
     - title: 批量创建
       description: 同时创建多条链接，提高效率
-      icon: i-heroicons-rocket-launch
     - title: 提升品牌辨识度
       description: 使用自有域名增强品牌识别度，提升链接曝光率和信任感，助力营销活动。
 redirect:
