@@ -21,7 +21,7 @@ watch(current, (newLocale) => {
 </script>
 
 <template>
-  <div class="z-99 flex items-center gap-3 rounded-lg border border-white/10 bg-gray-900/90 px-3 py-1 backdrop-blur-xl">
+  <div class="z-99 flex items-center gap-3 rounded-lg border border-gray-200/80 dark:border-white/10 bg-white/80 dark:bg-gray-900/80 px-3 py-1 backdrop-blur-xl">
     <ClientOnly>
       <div
         v-for="locale in locales"
@@ -31,7 +31,9 @@ watch(current, (newLocale) => {
       >
         <span
           class="font-semibold"
-          :class="locale.code === currentLocale.code ? 'text-white' : 'text-gray-500'"
+          :class="locale.code === currentLocale.code
+            ? 'text-gray-900 dark:text-white'
+            : 'text-gray-500'"
         >
           {{ locale.name }}
         </span>

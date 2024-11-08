@@ -3,6 +3,9 @@ const { locale } = useI18n()
 const colorMode = useColorMode()
 
 const color = computed(() => colorMode.value === 'dark' ? '#111827' : 'white')
+const htmlAttrs = computed(() => ({
+  lang: locale.value,
+}))
 
 useHead({
   meta: [
@@ -13,9 +16,7 @@ useHead({
   link: [
     { rel: 'icon', href: '/logo.svg' },
   ],
-  htmlAttrs: {
-    lang: 'en',
-  },
+  htmlAttrs,
 })
 
 // SEO config
