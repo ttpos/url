@@ -17,12 +17,12 @@ const links = computed(() => [
   {
     label: t('footer.solutions.label'),
     children: [
-      { label: t('footer.solutions.children.analytics') },
-      { label: t('footer.solutions.children.bulk_qr') },
-      { label: t('footer.solutions.children.qr_menu') },
+      { label: t('footer.solutions.children.analytics'), to: '/solutions/analytics' },
+      { label: t('footer.solutions.children.bulk_qr'), to: '/solutions/bulk-qr' },
+      { label: t('footer.solutions.children.qr_menu'), to: '/solutions/qr-menu' },
       { label: t('footer.solutions.children.print_materials') },
       { label: t('footer.solutions.children.ab_testing') },
-      { label: t('footer.solutions.children.sms_marketing') },
+      { label: t('footer.solutions.children.sms_marketing'), to: '/solutions/sms-marketing' },
     ],
   },
   {

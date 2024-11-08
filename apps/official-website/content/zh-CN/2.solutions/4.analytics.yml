@@ -1,0 +1,36 @@
+title: 营销活动数据统计
+description: 使用短链接轻松跟踪营销活动的访问量。获取精准的点击数据，实时分析不同渠道的效果，优化营销策略，提高参与度。
+navigation: false
+# navigation:
+#   icon: i-heroicons-chart-bar
+hero:
+  title: 营销活动数据统计
+  description: 使用短链接轻松跟踪营销活动的访问量。获取精准的点击数据，实时分析不同渠道的效果，优化营销策略，提高参与度。
+  links:
+    - label: 免费开始使用
+      trailing-icon: i-heroicons-arrow-right-20-solid
+      size: xl
+      to: /signup
+features:
+  title: 创建营销活动链接
+  description: 快速生成个性化短链接与二维码，助您轻松分享和推广营销活动，提升参与度与品牌影响力。
+  items:
+    - title: 创建营销活动
+      description: 为不同的营销创建活动分组，高效管理参与活动链接，并及时跟踪链接数据。
+      icon: i-heroicons-document-text
+    - title: 快速生成短链接和二维码
+      description: 通过轻松创建独特的短链接和二维码，快速分享，助力您的营销活动。
+      icon: i-heroicons-squares-2x2
+    - title: 个性化推荐与营销
+      description: 通过短链接或二维码发送个性化的推荐和促销信息，发现最能吸引客户参与的因素。
+      icon: i-heroicons-presentation-chart-bar
+    - title: 提升品牌认知度
+      description: 使用品牌短链接和二维码，获取更多点击与扫描，提升品牌知名度与客户信任感。
+      icon: i-heroicons-photo
+sections:
+  - title: 跟踪营销活动链接数据
+    description: 实时跟踪活动链接数据，包括访问次数、人数、IP 数、访问来源、地区、高频访问 IP 和操作系统信息，帮助您全面了解营销活动的成效。无论是社交媒体、电子邮件、短信还是网站，只需分享短链接和二维码，您便能即时获取数据反馈，分析不同渠道链接的表现。
+    align: left
+  - title: 调整优化营销策略
+    description: 通过对数据图表的深入分析，识别出最具吸引力的链接和活动形式，从而制定更有效的营销策略，提升转化率。这些数据帮助您深入了解受众的行为模式，明确哪些渠道最具吸引力，从而优化未来的营销活动。同时，您可以轻松导出详细的数据报表，为团队决策提供有力的数据支持，确保每次营销活动的成功。借助精准的数据分析，提升营销活动的有效性，最大化投资回报率。
+    align: left

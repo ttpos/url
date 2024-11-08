@@ -1,0 +1,66 @@
+title: Pre-generate QR Codes
+description: 'Generate short link QR codes in advance for offline events, advertising, or product packaging. You can modify the redirect link address at any time to ensure users always access your latest web pages or product information.'
+navigation: false
+# navigation:
+#   icon: i-heroicons-queue-list
+hero:
+  title: Pre-generate QR Codes
+  description: 'Generate short link QR codes in advance for offline events, advertising, or product packaging. You can modify the redirect link address at any time to ensure users always access your latest web pages or product information.'
+  links:
+    - label: Get started for free
+      trailing-icon: i-heroicons-arrow-right-20-solid
+      size: xl
+      to: /signup
+features:
+  - title: Drive Sales with Personalized QR Codes
+    description: 'Generate unique QR codes for each product, linking to product details and promotional information to increase user engagement.'
+    items:
+      - title: Enhance Product Experience
+        description: 'Guide consumers to product tutorial videos through QR codes, helping them better understand and use your products.'
+        icon: i-heroicons-document-text
+      - title: Simplify Online Ordering
+        description: 'Add QR codes to product manuals for quick access to online ordering pages, making repurchasing effortless.'
+        icon: i-heroicons-squares-2x2
+      - title: Boost Brand Awareness
+        description: Custom QR codes on packaging not only enhance brand recognition but also optimize overall customer experience.
+        icon: i-heroicons-presentation-chart-bar
+      - title: 'Reduce Costs, Improve Efficiency'
+        description: 'Update QR code redirect links anytime, reducing risks of errors or information changes without reprinting, lowering costs.'
+        icon: i-heroicons-photo
+  - title: Tracking and Analysis
+    description: 'Track scanning behavior through the platform, obtain data on audience preferences, geographic location, and interaction times to optimize marketing strategies.'
+    items:
+      - title: Deep Data Insights
+        description: 'Track every QR code scan, collecting user preferences and access times.'
+        icon: i-heroicons-arrow-trending-up
+      - title: Geographic Analysis
+        description: Understand consumer geographical distribution through location data to adjust regional marketing strategies.
+        icon: i-heroicons-arrow-path
+      - title: Optimize Interaction
+        description: Analyze scanning frequency and system types to enhance interaction effects and optimize user experience.
+        icon: i-heroicons-banknotes
+  - title: Centralized QR Code Management
+    description: 'Manage all product QR codes on the tinylink platform, update anytime to improve efficiency and flexibility.'
+    items:
+      - title: Unified Management Platform
+        description: 'Manage multiple QR codes on one platform, easily modify links and content.'
+        icon: i-heroicons-arrow-trending-up
+      - title: Real-time Updates
+        description: Update redirect target links or page content anytime without regenerating QR codes.
+        icon: i-heroicons-arrow-path
+      - title: Improve Efficiency
+        description: Simplify operations and improve response time through centralized management.
+        icon: i-heroicons-banknotes
+sections:
+  title: Try Generating QR Codes?
+  description: ''
+  id: features
+  align: left
+  features:
+    - name: 'Log in to tinylink, navigate to ''QR code'', click ''Create QR code'' to begin.'
+    - name: Fill in your target URL and all relevant information.
+    - name: 'Modify the QR code''s frame, pattern, and colors.'
+    - name: Generate the QR code.
+    - name: Test the QR code using a tablet or smartphone camera.
+    - name: Download the generated QR code image.
+    - name: 'Paste or upload the QR code image where you want to display it, test scanning to ensure the QR code is accessible.'

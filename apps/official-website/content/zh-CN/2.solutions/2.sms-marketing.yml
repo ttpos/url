@@ -1,0 +1,52 @@
+title: 创建短信营销友好短链接
+description: 营销短信常包含较长的跳转链接，使用 tinylink 短链接工具可以缩短 SMS 正文内容节省短信费用，同时提升用户体验。
+navigation: false
+# navigation:
+#   icon: i-heroicons-chat-bubble-left-right
+hero:
+  title: 创建短信营销友好短链接
+  description: 营销短信常包含较长的跳转链接，使用 tinylink 短链接工具可以缩短 SMS 正文内容节省短信费用，同时提升用户体验。
+  links:
+    - label: 免费开始使用
+      trailing-icon: i-heroicons-arrow-right-20-solid
+      size: xl
+      to: /signup
+features:
+  - title: 短信营销的痛点
+    description: ''
+    items:
+      - title: 费用增加
+        description: 过长的短信内容会被拆分成多条，导致营销成本上升。
+        icon: i-heroicons-document-text
+      - title: 内容限制
+        description: 短信字符数有限，无法提供详细的产品信息或促销活动，影响信息传达的完整性。
+        icon: i-heroicons-squares-2x2
+      - title: 用户体验不佳
+        description: 过长的链接不容易辨别真假，跳转可能让用户感到困惑或不信任，降低参与度。
+        icon: i-heroicons-presentation-chart-bar
+      - title: 缺乏精准营销
+        description: 短链工具只能提供访问次数，无法追踪具体的手机号，限制了个性化和精准营销的能力。
+        icon: i-heroicons-photo
+  - title: 短链接在营销短信中的优势
+    description: ''
+    items:
+      - title: 统计访问量
+        description: tinylink 短链接提供详细的统计数据，包括点击次数、地理位置、设备类型等信息。这些数据可以帮助营销人员分析短信的效果，并根据数据调整营销策略。
+        icon: i-heroicons-arrow-trending-up
+      - title: 简洁高效
+        description: tinylink 短链接不仅能缩短URL，还能提供自定义短链接选项，使链接更加易记和品牌化。
+        icon: i-heroicons-arrow-path
+      - title: 降低运营成本
+        description: 营销短信常包含较长的跳转链接，过长的短信内容可能会被拆分成多条，导致费用增加。使用短链接，能有效避免分段发送，降低短信成本。
+        icon: i-heroicons-banknotes
+sections:
+  title: 如何生成短链接？
+  description: ''
+  id: features
+  align: left
+  features:
+    - name: 登录 tinylink ，导航至"短链接"，点击"创建短链接"。
+    - name: 填写您的目标网址和所有相关信息（可以同步生成 QR code）。
+    - name: 在电脑或手机浏览器测试访问短链接。
+    - name: 复制短链接地址。
+    - name: 将短链接地址粘贴到您想要显示链接的位置（例如网站、社媒等），尝试点击访问短链接以确保链接能够正常访问。

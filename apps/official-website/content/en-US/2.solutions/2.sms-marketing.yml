@@ -1,0 +1,52 @@
+title: Create SMS Marketing-Friendly Short Links
+description: 'Marketing SMS often contains long redirect links. Using tinylink''s URL shortener can reduce SMS content to save messaging costs while improving user experience.'
+navigation: false
+# navigation:
+#   icon: i-heroicons-chat-bubble-left-right
+hero:
+  title: Create SMS Marketing-Friendly Short Links
+  description: 'Marketing SMS often contains long redirect links. Using tinylink''s URL shortener can reduce SMS content to save messaging costs while improving user experience.'
+  links:
+    - label: Get started for free
+      trailing-icon: i-heroicons-arrow-right-20-solid
+      size: xl
+      to: /signup
+features:
+  - title: SMS Marketing Pain Points
+    description: ''
+    items:
+      - title: Increased Costs
+        description: 'Long SMS content gets split into multiple messages, increasing marketing costs.'
+        icon: i-heroicons-document-text
+      - title: Content Limitations
+        description: 'Limited SMS characters restrict detailed product information or promotional activities, affecting information completeness.'
+        icon: i-heroicons-squares-2x2
+      - title: Poor User Experience
+        description: 'Long links are difficult to verify, redirects may confuse users or create distrust, reducing engagement.'
+        icon: i-heroicons-presentation-chart-bar
+      - title: Lack of Precise Marketing
+        description: 'URL shorteners only provide visit counts, cannot track specific phone numbers, limiting personalization and precise marketing capabilities.'
+        icon: i-heroicons-photo
+  - title: Advantages of Short Links in Marketing SMS
+    description: ''
+    items:
+      - title: Track Visits
+        description: 'tinylink short links provide detailed statistics, including click counts, geographic location, device types, etc. This data helps marketers analyze SMS effectiveness and adjust marketing strategies accordingly.'
+        icon: i-heroicons-arrow-trending-up
+      - title: Simple and Efficient
+        description: 'tinylink short links not only shorten URLs but also offer custom short link options, making links more memorable and brand-friendly.'
+        icon: i-heroicons-arrow-path
+      - title: Reduce Operating Costs
+        description: 'Marketing SMS often contains long redirect links, which may split into multiple messages, increasing costs. Using short links effectively prevents segmented sending, reducing SMS costs.'
+        icon: i-heroicons-banknotes
+sections:
+  title: How to Generate Short Links?
+  description: ''
+  id: features
+  align: left
+  features:
+    - name: 'Log in to tinylink, navigate to ''Short Links'', click ''Create Short Link''.'
+    - name: Fill in your target URL and all relevant information (QR code can be generated simultaneously).
+    - name: Test the short link in computer or mobile browser.
+    - name: Copy the short link address.
+    - name: 'Paste the short link address where you want to display it (e.g., websites, social media, etc.), try clicking to ensure the link works properly.'
