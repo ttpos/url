@@ -27,7 +27,7 @@ useSeoMeta({
         :description="page.team?.description"
         orientation="vertical"
         :image="{ src: 'https://picsum.photos/640/360', alt: 'Nuxt 3.9' }"
-        class="pt-16"
+        class="py-24 sm:py-32 md:py-40"
       >
         <div class="text-gray-900 dark:text-white text-xl font-semibold truncate group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors duration-200 mt-4">
           {{ page.contact?.title }}
@@ -41,7 +41,10 @@ useSeoMeta({
           </a>
         </template>
       </UBlogPost>
-      <CallToAction />
     </UContainer>
+
+    <BoxPlaceholder>
+      <CallToAction />
+    </BoxPlaceholder>
   </div>
 </template>
