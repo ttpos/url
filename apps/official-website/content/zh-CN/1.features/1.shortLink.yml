@@ -15,12 +15,16 @@ sections:
   freedom:
     title: 自定义您的短链接
     description: TinyLink 支持自定义短链接后缀，并允许使用自有域名。
+    align: center
   redirect:
     title: 重定向短链接地址
     description: 随时编辑重定向链接跳转地址，确保您的受众轻松访问最新内容。
+    align: left
   batch:
     title: 批量创建多个短链接
     description: 支持批量创建短链接，快速建立连接。无论是营销活动、产品推广，还是日常运营，批量创建功能帮助您高效管理和分享大量链接，节省时间，同时确保链接的一致性和品牌识别度。
+    align: right
   statistics:
     title: 链接访问统计
     description: 查看链接访问数据，包括访问次数、人数、IP 数、访问来源、地区、高频访问 IP 和操作系统信息。
+    align: center

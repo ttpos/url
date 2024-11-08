@@ -33,7 +33,7 @@ useSeoMeta({
       <ULandingSection
         :title="page.sections.freedom.title"
         :description="page.sections.freedom.description"
-        align="center"
+        :align="page.sections.freedom.align"
         :ui="{ wrapper: 'py-12 sm:py-16' }"
       >
         <!-- <img
@@ -47,7 +47,7 @@ useSeoMeta({
     <ULandingSection
       :title="page.sections.redirect.title"
       :description="page.sections.redirect.description"
-      align="left"
+        :align="page.sections.redirect.align"
     >
       <!-- <img
         src="https://picsum.photos/640/360"
@@ -60,7 +60,7 @@ useSeoMeta({
       <ULandingSection
         :title="page.sections.batch.title"
         :description="page.sections.batch.description"
-        align="left"
+        :align="page.sections.batch.align"
       >
         <!-- <img
           src="https://picsum.photos/640/360"
@@ -74,7 +74,7 @@ useSeoMeta({
       <ULandingSection
         :title="page.sections.statistics.title"
         :description="page.sections.statistics.description"
-        align="center"
+        :align="page.sections.statistics.align"
         :ui="{ wrapper: 'py-12 sm:py-16' }"
       >
         <!-- <img

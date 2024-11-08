@@ -14,6 +14,7 @@ hero:
 freedom:
   title: Connect Your Custom Domain
   description: 'Map your custom domain to the TinyLink platform to generate brand-specific short links, enhancing link brand recognition and professionalism.'
+  align: center
 features:
   title: Generate Short Links with Your Domain
   description: Comprehensive features for custom domain integration

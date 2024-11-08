@@ -33,7 +33,7 @@ useSeoMeta({
       <ULandingSection
         :title="page.freedom.title"
         :description="page.freedom.description"
-        align="center"
+        :align="page.freedom.align"
         :ui="{ wrapper: 'py-12 sm:py-16' }"
       >
         <!-- <img
@@ -70,7 +70,7 @@ useSeoMeta({
     <ULandingSection
       :title="page.batch.title"
       :description="page.batch.description"
-      align="left"
+      :align="page.batch.align"
     >
       <!-- <img
         src="https://picsum.photos/640/360"

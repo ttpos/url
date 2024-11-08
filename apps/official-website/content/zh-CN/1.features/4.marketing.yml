@@ -14,6 +14,7 @@ hero:
 freedom:
   title: 借助营销活动分析类似链接数据
   description: 轻松分析同一活动下不同平台的链接表现，实时获取全渠道数据洞察。
+  align: center
 sections:
   - title: 在一个地方跟踪、查看和分析所有链接数据
     description: 跟踪营销活动下所有链接的访问数据，包括访问次数、访客数、IP 数、来源地区、高频 IP 和操作系统信息，全面掌握活动效果。
@@ -35,6 +36,7 @@ sections:
 batch:
   title: 深入了解链接受众
   description: 通过统计图表详细了解每一个活动链接的受众点击数据
+  align: left
 cat:
   title: 通过数据驱动的决策，助力成功的数字营销。
   description:

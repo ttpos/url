@@ -11,24 +11,16 @@ hero:
       trailing-icon: i-heroicons-arrow-right-20-solid
       size: xl
       to: /signup
-freedom:
-  title: 绑定自有域名
-  description: 将自有域名解析到 tinylink 短链接平台，生成品牌专属的短链接，提升链接的品牌辨识度和专业性。
-features:
-  title: 使用自有域名生成短链接
-  description:
-  items:
-    - title: 多线路解析
-      description: 支持 AWS、Google Cloud、Azure 等云服务商，确保链接快速稳定访问
-    - title: 自定义短链后缀
-      description: 生成短链接时，可以根据需要自定义短链接的 URL 后缀 ，满足自定义要求
-    - title: 支持 HTTPS 协议
-      description: 默认使用 SSL 加密，确保安全性，通过 HTTPS 协议进行跳转，提升用户信任度
-    - title: 批量创建
-      description: 同时创建多条链接，提高效率
-      icon: i-heroicons-rocket-launch
-    - title: 提升品牌辨识度
-      description: 使用自有域名增强品牌识别度，提升链接曝光率和信任感，助力营销活动。
-redirect:
-  title: 自有域名使用流程
-  description:
+sections:
+  freedom:
+    title: 定制 QR code 风格
+    description: 个性化您的 QR code，吸引并转化您的受众。<br />生成个性化二维码，广泛应用于名片、活动礼品、数字资产、社交媒体等各个场景。<br />自定义独一无二的二维码图像或品牌 logo，提升品牌信任度和用户参与度。
+    align: left
+  redirect:
+    title: 重定向 QR code 地址
+    description: 随时编辑重定向链接，确保您的受众轻松获取最新内容。<br />通过可修改的二维码和目标链接，发布后仍可轻松调整，避免高昂的后续成本。<br />借助一站式二维码跟踪和链接管理平台，轻松掌控数据和访问趋势。
+    align: right
+  batch:
+    title: QR code 扫码访问统计
+    description: 查看链接访问数据，包括访问次数、人数、IP 数、访问来源、地区、高频访问 IP 和操作系统信息。
+    align: center

@@ -33,7 +33,7 @@ useSeoMeta({
       <ULandingSection
         :title="page.freedom.title"
         :description="page.freedom.description"
-        align="center"
+        :align="page.freedom.description"
         :ui="{ wrapper: 'py-12 sm:py-16' }"
       >
         <!-- <img
