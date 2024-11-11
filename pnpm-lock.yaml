@@ -64,46 +64,6 @@ importers:
         specifier: ^3.84.1
         version: 3.84.1(@cloudflare/workers-types@4.20241022.0)
 
-  apps/official-website:
-    dependencies:
-      '@iconify-json/heroicons':
-        specifier: ^1.2.1
-        version: 1.2.1
-      '@iconify-json/simple-icons':
-        specifier: ^1.2.9
-        version: 1.2.9
-      '@nuxt/content':
-        specifier: ^2.13.4
-        version: 2.13.4(ioredis@5.4.1)(magicast@0.3.5)(nuxt@3.13.2(@parcel/watcher@2.4.1)(@types/node@22.8.6)(eslint@9.14.0(jiti@2.3.3))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.21.1)(sass@1.80.6)(terser@5.31.6)(typescript@5.6.3)(vite@5.4.9(@types/node@22.8.6)(sass@1.80.6)(terser@5.31.6))(vue-tsc@2.1.10(typescript@5.6.3))(webpack-sources@3.2.3))(rollup@4.21.1)(vue@3.5.12(typescript@5.6.3))(webpack-sources@3.2.3)
-      '@nuxt/fonts':
-        specifier: ^0.10.0
-        version: 0.10.1(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.21.1)(vite@5.4.9(@types/node@22.8.6)(sass@1.80.6)(terser@5.31.6))(webpack-sources@3.2.3)
-      '@nuxt/image':
-        specifier: ^1.8.1
-        version: 1.8.1(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.21.1)(webpack-sources@3.2.3)
-      '@nuxt/ui-pro':
-        specifier: ^1.4.4
-        version: 1.4.4(focus-trap@7.6.0)(magicast@0.3.5)(rollup@4.21.1)(vite@5.4.9(@types/node@22.8.6)(sass@1.80.6)(terser@5.31.6))(vue@3.5.12(typescript@5.6.3))(webpack-sources@3.2.3)
-      '@nuxtjs/i18n':
-        specifier: ^9.0.0
-        version: 9.0.0(@vue/compiler-dom@3.5.12)(eslint@9.14.0(jiti@2.3.3))(magicast@0.3.5)(rollup@4.21.1)(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3))(webpack-sources@3.2.3)
-      '@vueuse/nuxt':
-        specifier: ^11.1.0
-        version: 11.1.0(magicast@0.3.5)(nuxt@3.13.2(@parcel/watcher@2.4.1)(@types/node@22.8.6)(eslint@9.14.0(jiti@2.3.3))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.21.1)(sass@1.80.6)(terser@5.31.6)(typescript@5.6.3)(vite@5.4.9(@types/node@22.8.6)(sass@1.80.6)(terser@5.31.6))(vue-tsc@2.1.10(typescript@5.6.3))(webpack-sources@3.2.3))(rollup@4.21.1)(vue@3.5.12(typescript@5.6.3))(webpack-sources@3.2.3)
-      nuxt:
-        specifier: ^3.13.2
-        version: 3.13.2(@libsql/client@0.14.0)(@parcel/watcher@2.4.1)(@types/node@22.8.6)(drizzle-orm@0.33.0(@cloudflare/workers-types@4.20241022.0)(@libsql/client@0.14.0)(@types/react@18.3.3)(react@18.3.1))(eslint@9.14.0(jiti@2.3.3))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.21.1)(sass@1.80.6)(terser@5.31.6)(typescript@5.6.3)(vite@5.4.9(@types/node@22.8.6)(sass@1.80.6)(terser@5.31.6))(vue-tsc@2.1.10(typescript@5.6.3))(webpack-sources@3.2.3)
-      nuxt-og-image:
-        specifier: ^3.0.6
-        version: 3.0.8(magicast@0.3.5)(rollup@4.21.1)(vite@5.4.9(@types/node@22.8.6)(sass@1.80.6)(terser@5.31.6))(vue@3.5.12(typescript@5.6.3))(webpack-sources@3.2.3)
-    devDependencies:
-      '@nuxthq/studio':
-        specifier: ^2.1.1
-        version: 2.2.1(magicast@0.3.5)(rollup@4.21.1)(webpack-sources@3.2.3)
-      vue-tsc:
-        specifier: ^2.1.10
-        version: 2.1.10(typescript@5.6.3)
-
   apps/user:
     dependencies:
       '@iconify-json/heroicons':
@@ -200,6 +160,46 @@ importers:
       wrangler:
         specifier: ^3.84.1
         version: 3.84.1(@cloudflare/workers-types@4.20241022.0)
+
+  apps/website:
+    dependencies:
+      '@iconify-json/heroicons':
+        specifier: ^1.2.1
+        version: 1.2.1
+      '@iconify-json/simple-icons':
+        specifier: ^1.2.9
+        version: 1.2.9
+      '@nuxt/content':
+        specifier: ^2.13.4
+        version: 2.13.4(ioredis@5.4.1)(magicast@0.3.5)(nuxt@3.13.2(@parcel/watcher@2.4.1)(@types/node@22.8.6)(eslint@9.14.0(jiti@2.3.3))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.21.1)(sass@1.80.6)(terser@5.31.6)(typescript@5.6.3)(vite@5.4.9(@types/node@22.8.6)(sass@1.80.6)(terser@5.31.6))(vue-tsc@2.1.10(typescript@5.6.3))(webpack-sources@3.2.3))(rollup@4.21.1)(vue@3.5.12(typescript@5.6.3))(webpack-sources@3.2.3)
+      '@nuxt/fonts':
+        specifier: ^0.10.0
+        version: 0.10.1(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.21.1)(vite@5.4.9(@types/node@22.8.6)(sass@1.80.6)(terser@5.31.6))(webpack-sources@3.2.3)
+      '@nuxt/image':
+        specifier: ^1.8.1
+        version: 1.8.1(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.21.1)(webpack-sources@3.2.3)
+      '@nuxt/ui-pro':
+        specifier: ^1.4.4
+        version: 1.4.4(focus-trap@7.6.0)(magicast@0.3.5)(rollup@4.21.1)(vite@5.4.9(@types/node@22.8.6)(sass@1.80.6)(terser@5.31.6))(vue@3.5.12(typescript@5.6.3))(webpack-sources@3.2.3)
+      '@nuxtjs/i18n':
+        specifier: ^9.0.0
+        version: 9.0.0(@vue/compiler-dom@3.5.12)(eslint@9.14.0(jiti@2.3.3))(magicast@0.3.5)(rollup@4.21.1)(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3))(webpack-sources@3.2.3)
+      '@vueuse/nuxt':
+        specifier: ^11.1.0
+        version: 11.1.0(magicast@0.3.5)(nuxt@3.13.2(@parcel/watcher@2.4.1)(@types/node@22.8.6)(eslint@9.14.0(jiti@2.3.3))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.21.1)(sass@1.80.6)(terser@5.31.6)(typescript@5.6.3)(vite@5.4.9(@types/node@22.8.6)(sass@1.80.6)(terser@5.31.6))(vue-tsc@2.1.10(typescript@5.6.3))(webpack-sources@3.2.3))(rollup@4.21.1)(vue@3.5.12(typescript@5.6.3))(webpack-sources@3.2.3)
+      nuxt:
+        specifier: ^3.13.2
+        version: 3.13.2(@libsql/client@0.14.0)(@parcel/watcher@2.4.1)(@types/node@22.8.6)(drizzle-orm@0.33.0(@cloudflare/workers-types@4.20241022.0)(@libsql/client@0.14.0)(@types/react@18.3.3)(react@18.3.1))(eslint@9.14.0(jiti@2.3.3))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.21.1)(sass@1.80.6)(terser@5.31.6)(typescript@5.6.3)(vite@5.4.9(@types/node@22.8.6)(sass@1.80.6)(terser@5.31.6))(vue-tsc@2.1.10(typescript@5.6.3))(webpack-sources@3.2.3)
+      nuxt-og-image:
+        specifier: ^3.0.6
+        version: 3.0.8(magicast@0.3.5)(rollup@4.21.1)(vite@5.4.9(@types/node@22.8.6)(sass@1.80.6)(terser@5.31.6))(vue@3.5.12(typescript@5.6.3))(webpack-sources@3.2.3)
+    devDependencies:
+      '@nuxthq/studio':
+        specifier: ^2.1.1
+        version: 2.2.1(magicast@0.3.5)(rollup@4.21.1)(webpack-sources@3.2.3)
+      vue-tsc:
+        specifier: ^2.1.10
+        version: 2.1.10(typescript@5.6.3)
 
 packages:
 
