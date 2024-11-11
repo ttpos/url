@@ -1,9 +1,9 @@
 /* eslint-disable ts/no-use-before-define */
 
-import { blob, integer, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core'
 import type { SessionSource, VerificationType } from '~~/server/types'
-
 import type { AnySQLiteColumn } from 'drizzle-orm/sqlite-core'
+
+import { blob, integer, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core'
 
 const trackingFields = {
   createdAt: integer('created_at', { mode: 'timestamp' })

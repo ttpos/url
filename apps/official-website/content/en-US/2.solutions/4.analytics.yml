@@ -1,0 +1,36 @@
+title: Marketing Campaign Analytics
+description: 'Easily track marketing campaign traffic using short links. Get precise click data, analyze performance across different channels in real-time, optimize marketing strategies, and increase engagement.'
+navigation: false
+# navigation:
+#   icon: i-heroicons-chart-bar
+hero:
+  title: Marketing Campaign Analytics
+  description: 'Easily track marketing campaign traffic using short links. Get precise click data, analyze performance across different channels in real-time, optimize marketing strategies, and increase engagement.'
+  links:
+    - label: Start Free
+      trailing-icon: i-heroicons-arrow-right-20-solid
+      size: xl
+      to: /signup
+features:
+  title: Create Marketing Campaign Links
+  description: 'Quickly generate personalized short links and QR codes to help you easily share and promote marketing campaigns, boost engagement and brand influence.'
+  items:
+    - title: Create Marketing Campaigns
+      description: 'Create campaign groups for different marketing initiatives, efficiently manage campaign links, and track link data in real-time.'
+      icon: i-heroicons-document-text
+    - title: Quick Short Link and QR Code Generation
+      description: Easily create unique short links and QR codes for quick sharing to support your marketing campaigns.
+      icon: i-heroicons-squares-2x2
+    - title: Personalized Recommendations and Marketing
+      description: 'Send personalized recommendations and promotional information via short links or QR codes, discover what factors best attract customer engagement.'
+      icon: i-heroicons-presentation-chart-bar
+    - title: Enhance Brand Awareness
+      description: 'Use branded short links and QR codes to gain more clicks and scans, increasing brand recognition and customer trust.'
+      icon: i-heroicons-photo
+sections:
+  - title: Track Marketing Campaign Link Data
+    description: 'Track campaign link data in real-time, including visit counts, unique visitors, IP counts, traffic sources, regions, high-frequency IP visits, and operating system information, helping you comprehensively understand marketing campaign effectiveness. Whether through social media, email, SMS, or websites, simply share short links and QR codes to receive instant data feedback and analyze link performance across different channels.'
+    align: left
+  - title: Adjust and Optimize Marketing Strategies
+    description: 'Through in-depth analysis of data charts, identify the most attractive links and campaign formats to develop more effective marketing strategies and improve conversion rates. This data helps you understand audience behavior patterns, identify which channels are most appealing, and optimize future marketing campaigns. Additionally, you can easily export detailed data reports to provide powerful data support for team decisions, ensuring the success of each marketing campaign. Leverage precise data analysis to enhance marketing campaign effectiveness and maximize return on investment.'
+    align: left

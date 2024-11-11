@@ -1,0 +1,57 @@
+title: QR Code Menu
+description: 'Simplify the dining experience with branded QR code menus, allowing customers to view restaurant offerings directly through their smartphones. Customers can quickly browse menus, place orders, and make payments by scanning QR codes, reducing manual processing and error risks. Additionally, QR codes simplify marketing promotion and data collection, support real-time menu updates, save printing costs, and enhance customer interaction.'
+navigation: false
+# navigation:
+#   icon: i-heroicons-squares-2x2
+hero:
+  title: QR Code Menu
+  description: 'Simplify the dining experience with branded QR code menus, allowing customers to view restaurant offerings directly through their smartphones. Customers can quickly browse menus, place orders, and make payments by scanning QR codes, reducing manual processing and error risks. Additionally, QR codes simplify marketing promotion and data collection, support real-time menu updates, save printing costs, and enhance customer interaction.'
+  links:
+    - label: Get started for free
+      trailing-icon: i-heroicons-arrow-right-20-solid
+      size: xl
+      to: /signup
+features:
+  - title: Using Digital QR Code Menus in Restaurants
+    description: 'Replace traditional physical menus with QR codes, allowing customers to access digital menus by scanning codes on their tables.'
+    items:
+      - title: On Menu
+        description: 'Restaurant menus are the most obvious and effective place to display QR codes. Customers can scan to view detailed information about dishes, including ingredients, allergens, nutritional values, and customer reviews.'
+        icon: i-heroicons-document-text
+      - title: On Table
+        description: 'You can paste QR code images directly on a corner of the dining table, which is also one of the most visible and effective places to display QR codes. Customers can scan the QR code to view detailed dish information right after being seated.'
+        icon: i-heroicons-squares-2x2
+      - title: Table Display
+        description: 'Restaurant table inserts (or table tents) are small cards or signs placed on tables as promotional or informational materials. These inserts can display QR codes linking customers to the restaurant''s website, online ordering system, or registration page.'
+        icon: i-heroicons-presentation-chart-bar
+      - title: Restaurant Posters
+        description: 'QR codes can also be displayed prominently and creatively on restaurant posters. Posters can promote special events, new menus, or ordering processes.'
+        icon: i-heroicons-photo
+  - title: Advantages of QR Code Menus
+    description: ''
+    items:
+      - title: Improve Operational Efficiency
+        description: 'QR codes streamline restaurant operations, allowing customers to browse menus, place orders, and make payments by scanning, reducing manual operations and error risks. Servers can also access order information more quickly, improving service efficiency and creating a smoother dining experience.'
+        icon: i-heroicons-arrow-trending-up
+      - title: Real-time Menu Updates
+        description: 'QR codes support instant menu updates, ensuring customers see the latest dishes and prices, suitable for specials and seasonal adjustments, reducing the need for frequent printing.'
+        icon: i-heroicons-arrow-path
+      - title: Enhanced Marketing
+        description: 'QR codes facilitate targeted promotions and data collection. Customers can participate in loyalty programs, submit reviews or surveys through scanning, and restaurants can gather customer preferences to support future marketing efforts.'
+        icon: i-heroicons-megaphone
+      - title: Lower Operating Costs
+        description: 'QR codes replace physical menus, saving paper and printing costs, while supporting real-time promotions and reducing the use of traditional marketing materials like flyers and posters, lowering overall costs.'
+        icon: i-heroicons-banknotes
+sections:
+  title: Create QR Code Menu for My Restaurant Now
+  description: ''
+  id: features
+  align: left
+  features:
+    - name: 'Log in to tinylink, navigate to ''QR code'', and click ''Create QR code'' to begin.'
+    - name: Fill in your target URL and all relevant information.
+    - name: 'Modify the QR code''s frame, pattern, and colors.'
+    - name: Generate the QR code.
+    - name: Test the QR code using a tablet or smartphone camera.
+    - name: Download the generated QR code image.
+    - name: 'Paste or upload the QR code image to your desired location (e.g., posters, table inserts, or menus). Test scanning to ensure the QR code is accessible.'

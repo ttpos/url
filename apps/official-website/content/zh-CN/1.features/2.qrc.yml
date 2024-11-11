@@ -1,0 +1,26 @@
+title: 创建可随时更新的自定义二维码
+description: 创建完全自定义的二维码，为用户提供始终最新的内容。
+navigation: false
+# navigation:
+#   icon: i-heroicons-qr-code
+hero:
+  title: 创建可随时更新的自定义二维码
+  description: 创建完全自定义的二维码，为用户提供始终最新的内容。
+  links:
+    - label: 免费开始使用
+      trailing-icon: i-heroicons-arrow-right-20-solid
+      size: xl
+      to: /signup
+sections:
+  freedom:
+    title: 定制 QR code 风格
+    description: 个性化您的 QR code，吸引并转化您的受众。<br />生成个性化二维码，广泛应用于名片、活动礼品、数字资产、社交媒体等各个场景。<br />自定义独一无二的二维码图像或品牌 logo，提升品牌信任度和用户参与度。
+    align: left
+  redirect:
+    title: 重定向 QR code 地址
+    description: 随时编辑重定向链接，确保您的受众轻松获取最新内容。<br />通过可修改的二维码和目标链接，发布后仍可轻松调整，避免高昂的后续成本。<br />借助一站式二维码跟踪和链接管理平台，轻松掌控数据和访问趋势。
+    align: right
+  batch:
+    title: QR code 扫码访问统计
+    description: 查看链接访问数据，包括访问次数、人数、IP 数、访问来源、地区、高频访问 IP 和操作系统信息。
+    align: center

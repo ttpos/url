@@ -1,0 +1,66 @@
+title: 预先生成二维码
+description: 提前生成短链二维码图，随时应用于线下活动、广告或产品包装中，后续可随时修改对应的跳转链接地址，确保用户始终访问到您最新的的网页或产品信息。
+navigation: false
+# navigation:
+#   icon: i-heroicons-queue-list
+hero:
+  title: 预先生成二维码
+  description: 提前生成短链二维码图，随时应用于线下活动、广告或产品包装中，后续可随时修改对应的跳转链接地址，确保用户始终访问到您最新的的网页或产品信息。
+  links:
+    - label: 免费开始使用
+      trailing-icon: i-heroicons-arrow-right-20-solid
+      size: xl
+      to: /signup
+features:
+  - title: 使用个性化的二维码推动销售
+    description: 每个产品生成独特的二维码，链接至产品详情、促销信息，提高用户参与度。
+    items:
+      - title: 提高产品使用体验
+        description: 通过二维码引导消费者观看产品教程视频，帮助他们更好地理解并使用您的产品。
+        icon: i-heroicons-document-text
+      - title: 简化在线订购流程
+        description: 在产品说明书中添加二维码，方便快速访问在线订购页面，轻松完成再购买。
+        icon: i-heroicons-squares-2x2
+      - title: 增强品牌认知度
+        description: 通过包装上的定制二维码不仅能提升品牌认知，还能优化客户的整体体验。
+        icon: i-heroicons-presentation-chart-bar
+      - title: 降低成本，提升效率
+        description: 随时更新二维码跳转链接，减少错误或信息变更的风险，无需重新印刷，降低成本。
+        icon: i-heroicons-photo
+  - title: 追踪与分析
+    description: 通过平台追踪扫描行为，获取受众偏好、地理位置和互动时间等数据，优化营销策略。
+    items:
+      - title: 深度数据洞察
+        description: 追踪每次二维码扫描行为，收集用户偏好和访问时间。
+        icon: i-heroicons-arrow-trending-up
+      - title: 地理位置分析
+        description: 通过位置数据，了解消费者的地域分布，调整区域营销策略。
+        icon: i-heroicons-arrow-path
+      - title: 优化互动体验
+        description: 分析扫描频率及系统类型，提升互动效果，优化用户体验。
+        icon: i-heroicons-banknotes
+  - title: 集中管理您的二维码
+    description: 在 tinylink 平台上管理所有产品的二维码，随时更新，提升效率和灵活性。
+    items:
+      - title: 统一管理平台
+        description: 在一个平台上管理多个二维码，轻松修改链接和内容。
+        icon: i-heroicons-arrow-trending-up
+      - title: 实时更新
+        description: 无需重新生成二维码，即可随时更新跳转目标链接或页面内容。
+        icon: i-heroicons-arrow-path
+      - title: 提升效率
+        description: 通过集中管理，简化操作流程，提升响应速度。
+        icon: i-heroicons-banknotes
+sections:
+  title: 尝试生成二维码？
+  description: ''
+  id: features
+  align: left
+  features:
+    - name: 登录 tinylink ，导航至"QR code"，点击"创建 QR code"开始创建二维码。
+    - name: 填写您的目标网址和所有相关信息。
+    - name: 更改二维码的框架、图案和颜色。
+    - name: 创建二维码。
+    - name: 使用平板电脑或手机的相机测试二维码。
+    - name: 下载生成的二维码图片。
+    - name: 将二维码图片粘贴或上传到您想要显示的位置，测试扫描以确保二维码能够访问。

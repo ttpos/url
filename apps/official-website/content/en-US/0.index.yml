@@ -1,0 +1,68 @@
+title: Shorten Your URLs Instantly with TinyLink
+description: Create branded short links and dynamic QR codes for easy sharing. Boost clicks, grow your brand, and track results with a simple URL shortener, custom domains, and detailed analytics.
+navigation: false
+hero:
+  title: Shorten Your URLs Instantly with TinyLink
+  description: Create branded short links and dynamic QR codes for easy sharing. Boost clicks, grow your brand, and track results with a simple URL shortener, custom domains, and detailed analytics.
+  headline:
+    label: Try It Now
+    to: https://ui.nuxt.com/pro
+    icon: i-heroicons-arrow-top-right-on-square-20-solid
+  links:
+    - label: Get started for free
+      trailing-icon: i-heroicons-arrow-right-20-solid
+      size: xl
+      to: /signup
+features:
+  title: TinyLink Key Features
+  description: Effortlessly shorten URLs, enhance brand recognition, and track detailed analytics with these essential tools.
+  items:
+    - title: Shorten Long URLs
+      description: Convert long URLs into short, manageable links
+      icon: i-heroicons-cog
+    - title: QR Code
+      description: Convert original long URLs into QR codes
+      icon: i-heroicons-check
+    - title: Edit Anytime
+      description: Modify created link information at any time
+      icon: i-heroicons-lock-closed
+    - title: Batch Creation
+      description: Create multiple links simultaneously for improved efficiency
+      icon: i-heroicons-rocket-launch
+    - title: Group Management
+      description: Support for group settings to easily manage links
+      icon: i-heroicons-folder
+    - title: Permanent Validity
+      description: Generated links remain valid by default
+      icon: i-heroicons-clock
+    - title: Access Statistics
+      description: Track link visits and generate data reports
+      icon: i-heroicons-chart-bar
+    - title: Data Export
+      description: Support for exporting visit data for different links
+      icon: i-heroicons-document-arrow-down
+    - title: Custom Domain
+      description: Support for customizing link domains
+      icon: i-heroicons-globe
+    - title: Link Redirection
+      description: Support for adding custom redirect addresses
+      icon: i-heroicons-arrow-path
+useCases:
+  title: TinyLink Use Cases
+  description: Discover how TinyLink can simplify sharing, enhance marketing efforts, and optimize user engagement across various platforms.
+  items:
+    - title: Marketing Campaign Analytics
+      description: Easily track marketing campaign visits using short links. Get precise click data, analyze different channel effects in real-time, and optimize advertising strategies.
+      icon: i-heroicons-chart-bar
+    - title: Pre-generate QR Codes
+      description: Generate QR codes in advance for offline events, advertising, or product packaging, ensuring users can quickly and safely access your latest website or product information.
+      icon: i-heroicons-qr-code
+    - title: QR Code Menus
+      description: Simplify dining experiences using short link QR code menus, allowing customers to directly view restaurant menus through their smartphones.
+      icon: i-heroicons-book-open
+    - title: A/B Testing
+      description: Optimize marketing strategies through A/B testing, test different landing page versions or campaigns. Analyze test results, maximize effectiveness, and test multiple target pages using different short links.
+      icon: i-heroicons-adjustments-horizontal
+    - title: SMS Marketing
+      description: Use character-limited links to reduce mobile carrier costs. Secure short links can improve deliverability, open rates, and conversion rates.
+      icon: i-heroicons-envelope

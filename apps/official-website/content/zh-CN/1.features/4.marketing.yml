@@ -1,0 +1,42 @@
+title: 营销活动数据实时追踪，轻松掌握每次点击
+description: TinyLink 营销活动助您集中查看、管理和量化多个链接的表现，优化您的营销策略。
+navigation: false
+# navigation:
+#   icon: i-hugeicons:marketing
+hero:
+  title: 营销活动数据实时追踪，轻松掌握每次点击
+  description: TinyLink 营销活动助您集中查看、管理和量化多个链接的表现，优化您的营销策略。
+  links:
+    - label: 免费开始使用
+      trailing-icon: i-heroicons-arrow-right-20-solid
+      size: xl
+      to: /signup
+freedom:
+  title: 借助营销活动分析类似链接数据
+  description: 轻松分析同一活动下不同平台的链接表现，实时获取全渠道数据洞察。
+  align: center
+sections:
+  - title: 在一个地方跟踪、查看和分析所有链接数据
+    description: 跟踪营销活动下所有链接的访问数据，包括访问次数、访客数、IP 数、来源地区、高频 IP 和操作系统信息，全面掌握活动效果。
+    id: features
+    align: left
+    features:
+      - name: 实时对比不同平台渠道的链接数据，提升数字营销效果。
+      - name: 了解客户使用的系统设备，优化全渠道体验。
+      - name: 支持直接下载或导出数据图表。
+  - title: 强大的服务功能
+    description: 全方位的分析工具，助力您的营销成功
+    id: features
+    align: left
+    features:
+      - name: 通过点击、重定向数据了解最终用户的行为
+      - name: 整理个性化统计报表以捕获每个链接的活动数据
+      - name: 按位置、设备、或 IP 来源细分受众数据
+      - name: 通过数据改变来做出关键决策或活动改进
+batch:
+  title: 深入了解链接受众
+  description: 通过统计图表详细了解每一个活动链接的受众点击数据
+  align: left
+cat:
+  title: 通过数据驱动的决策，助力成功的数字营销。
+  description:

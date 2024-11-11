@@ -1,0 +1,37 @@
+title: Shorten Links with Your Own Domain
+description: 'Shorten, personalize, and share fully branded short URLs. Own your brand with every link.'
+navigation: false
+# navigation:
+#   icon: i-gridicons:domains
+hero:
+  title: Shorten Links with Your Own Domain
+  description: 'Shorten, personalize, and share fully branded short URLs. Own your brand with every link.'
+  links:
+    - label: Get started for free
+      trailing-icon: i-heroicons-arrow-right-20-solid
+      size: xl
+      to: /signup
+freedom:
+  title: Connect Your Custom Domain
+  description: 'Map your custom domain to the TinyLink platform to generate brand-specific short links, enhancing link brand recognition and professionalism.'
+  align: center
+features:
+  title: Generate Short Links with Your Domain
+  description: Comprehensive features for custom domain integration
+  items:
+    - title: Multi-Region Resolution
+      description: 'Supports AWS, Google Cloud, Azure, and other cloud providers to ensure fast and stable link access'
+    - title: Custom URL Suffix
+      description: Customize the URL suffix when generating short links to meet your specific requirements
+    - title: HTTPS Protocol Support
+      description: 'Uses SSL encryption by default for security, redirecting through HTTPS protocol to enhance user trust'
+    - title: Bulk Creation
+      description: Create multiple links simultaneously to improve efficiency
+    - title: Enhanced Brand Recognition
+      description: 'Use your own domain to strengthen brand recognition, increase link exposure and trust, boosting marketing campaigns.'
+redirect:
+  title: Custom Domain Setup Process
+  description: Step-by-step guide to configure your domain
+cat:
+  title: Add your domain name now.
+  description: Quickly add your own domain name to enhance brand image and link recognition.Create exclusive short links to enhance user trust and boost marketing campaigns.

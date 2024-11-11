@@ -1,0 +1,68 @@
+title: 使用 TinyLink 即时缩短您的网址
+description: 创建品牌短链接和动态二维码，轻松分享。通过简单的网址缩短工具、自定义域名和详细分析，提升点击率，发展您的品牌，并跟踪结果。
+navigation: false
+hero:
+  title: 使用 TinyLink 即时缩短您的网址
+  description: 创建品牌短链接和动态二维码，轻松分享。通过简单的网址缩短工具、自定义域名和详细分析，提升点击率，发展您的品牌，并跟踪结果。
+  headline:
+    label: 立即试用
+    to: https://ui.nuxt.com/pro
+    icon: i-heroicons-arrow-top-right-on-square-20-solid
+  links:
+    - label: 免费开始使用
+      trailing-icon: i-heroicons-arrow-right-20-solid
+      size: xl
+      to: /signup
+features:
+  title: TinyLink 核心功能
+  description: 通过这些基本工具，轻松缩短网址，提升品牌认知度，并跟踪详细分析。
+  items:
+    - title: 缩短长链接
+      description: 将原长链接转换为短链接
+      icon: i-heroicons-cog
+    - title: 二维码生成
+      description: 将原始长链接转换为二维码
+      icon: i-heroicons-check
+    - title: 随时修改
+      description: 随时修改已创建链接的信息
+      icon: i-heroicons-lock-closed
+    - title: 批量创建
+      description: 同时创建多条链接，提高效率
+      icon: i-heroicons-rocket-launch
+    - title: 分组管理
+      description: 支持分组设置，方便管理链接
+      icon: i-heroicons-folder
+    - title: 永久有效
+      description: 生成的链接默认长期有效
+      icon: i-heroicons-clock
+    - title: 访问统计
+      description: 统计链接访问量，生成数据报表
+      icon: i-heroicons-chart-bar
+    - title: 数据导出
+      description: 支持导出不同链接的访问数据
+      icon: i-heroicons-document-arrow-down
+    - title: 自定义域名
+      description: 支持将链接自定义域名
+      icon: i-heroicons-globe
+    - title: 链接重定向
+      description: 支持新增自定义跳转地址
+      icon: i-heroicons-arrow-path
+useCases:
+  title: TinyLink 使用场景
+  description: 探索 TinyLink 如何简化分享、增强营销效果，并在各种平台上优化用户互动。
+  items:
+    - title: 营销活动数据统计
+      description: 使用短链接轻松跟踪营销活动的访问量。获取精准的点击数据，实时分析不同渠道的效果，优化广告投放策略。
+      icon: i-heroicons-chart-bar
+    - title: 预先生成二维码
+      description: 提前生成二维码，随时应用于线下活动、广告或产品包装中，确保用户快速安全地访问您最新的网站或产品信息。
+      icon: i-heroicons-qr-code
+    - title: 二维码菜单
+      description: 使用短链二维码菜单简化用餐体验，让顾客可以直接通过智能手机扫描并查看餐厅提供的菜单。
+      icon: i-heroicons-book-open
+    - title: A/B 测试
+      description: 通过 A/B 测试优化营销策略，测试不同版本的着陆页或活动。分析测试结果，最大化效果，并通过多个短链接测试不同目标页面。
+      icon: i-heroicons-adjustments-horizontal
+    - title: 短信营销
+      description: 使用字符数限制的链接可降低移动运营商费用。安全的短链接能提升达达率、打开率和转化率。
+      icon: i-heroicons-envelope

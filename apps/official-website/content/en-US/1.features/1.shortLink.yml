@@ -1,0 +1,30 @@
+title: Shorten Your URLs Instantly with TinyLink
+description: 'Create branded short links and dynamic QR codes for easy sharing. Boost clicks, grow your brand, and track results with a simple URL shortener, custom domains, and detailed analytics.'
+navigation: false
+# navigation:
+#   icon: i-heroicons-link
+hero:
+  title: Shorten Your URLs Instantly with TinyLink
+  description: 'Create branded short links and dynamic QR codes for easy sharing. Boost clicks, grow your brand, and track results with a simple URL shortener, custom domains, and detailed analytics.'
+  links:
+    - label: Get started for free
+      trailing-icon: i-heroicons-arrow-right-20-solid
+      size: xl
+      to: /signup
+sections:
+  freedom:
+    title: Customize your short links
+    description: TinyLink supports customized short link suffixes and allows the use of own domain names.
+    align: center
+  redirect:
+    title: Redirect Short Links
+    description: Edit redirect destinations anytime to ensure your audience easily accesses the latest content.
+    align: left
+  batch:
+    title: Create Multiple Short Links in Batch
+    description: 'Support batch creation of short links for quick connectivity. Whether for marketing campaigns, product promotions, or daily operations, the batch creation feature helps you efficiently manage and share large numbers of links, saving time while maintaining consistency and brand recognition.'
+    align: right
+  statistics:
+    title: Link Access Statistics
+    description: 'View link access data, including visit counts, unique visitors, IP counts, traffic sources, regions, high-frequency IP addresses, and operating system information.'
+    align: center

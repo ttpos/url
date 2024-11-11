@@ -1,0 +1,37 @@
+title: 使用自有域名生成短链接
+description: 使用您的品牌域名创建、个性化和分享短链接。让每个链接都彰显品牌价值。
+navigation: false
+# navigation:
+#   icon: i-gridicons:domains
+hero:
+  title: 使用自有域名生成短链接
+  description: 使用您的品牌域名创建、个性化和分享短链接。让每个链接都彰显品牌价值。
+  links:
+    - label: 免费开始使用
+      trailing-icon: i-heroicons-arrow-right-20-solid
+      size: xl
+      to: /signup
+freedom:
+  title: 绑定自有域名
+  description: 将自有域名解析到 TinyLink 短链接平台，生成品牌专属的短链接，提升链接的品牌辨识度和专业性。
+  align: center
+features:
+  title: 使用自有域名生成短链接
+  description: 全方位的自定义域名集成功能
+  items:
+    - title: 多线路解析
+      description: 支持 AWS、Google Cloud、Azure 等云服务商，确保链接快速稳定访问
+    - title: 自定义短链后缀
+      description: 生成短链接时，可以根据需要自定义短链接的 URL 后缀，满足自定义要求
+    - title: 支持 HTTPS 协议
+      description: 默认使用 SSL 加密，确保安全性，通过 HTTPS 协议进行跳转，提升用户信任度
+    - title: 批量创建
+      description: 同时创建多条链接，提高效率
+    - title: 提升品牌辨识度
+      description: 使用自有域名增强品牌识别度，提升链接曝光率和信任感，助力营销活动。
+redirect:
+  title: 自有域名使用流程
+  description: 域名配置的详细步骤指南
+cat:
+  title: 立即添加您的域名。
+  description: 快速添加自有域名，提升品牌形象和链接识别度。创建专属短链接，增强用户信任感，助力营销活动。

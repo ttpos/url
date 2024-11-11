@@ -1,0 +1,26 @@
+title: Create custom QR codes that 'scan'
+description: Create fully customized QR codes that always provide the latest content for users.
+navigation: false
+# navigation:
+#   icon: i-heroicons-qr-code
+hero:
+  title: Create custom QR codes that 'scan'
+  description: Create fully customized QR codes that always provide the latest content for users.
+  links:
+    - label: Get started for free
+      trailing-icon: i-heroicons-arrow-right-20-solid
+      size: xl
+      to: /signup
+sections:
+  freedom:
+    title: Customize QR Code Style
+    description: Personalize your QR codes to attract and convert your audience.<br />Generate unique QR codes for business cards, event merchandise, digital assets, social media, and more.<br />Create distinctive QR code designs or incorporate brand logos to enhance brand trust and user engagement.
+    align: left
+  redirect:
+    title: Redirect QR Code URLs
+    description: Edit redirect links anytime to ensure your audience always accesses the latest content.<br />Modify QR codes and target links even after publication, avoiding costly updates.<br />Easily track data and access trends through our all-in-one QR code tracking and link management platform.
+    align: right
+  batch:
+    title: QR Code Scan Statistics
+    description: View link access data, including visit count, unique visitors, IP addresses, traffic sources, regions, frequent IP addresses, and operating system information.
+    align: center

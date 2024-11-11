@@ -1,0 +1,57 @@
+title: 二维码菜单
+description: 使用品牌二维码菜单简化用餐体验，让顾客可以直接通过智能手机扫码并查看餐厅提供的菜品。顾客通过扫描二维码即可快速浏览菜单、下单和付款，减少人工处理和出错风险。同时，二维码简化营销推广和数据收集，支持实时更新菜单，节省印刷成本并加强顾客互动体验。
+navigation: false
+# navigation:
+#   icon: i-heroicons-squares-2x2
+hero:
+  title: 二维码菜单
+  description: 使用品牌二维码菜单简化用餐体验，让顾客可以直接通过智能手机扫码并查看餐厅提供的菜品。顾客通过扫描二维码即可快速浏览菜单、下单和付款，减少人工处理和出错风险。同时，二维码简化营销推广和数据收集，支持实时更新菜单，节省印刷成本并加强顾客互动体验。
+  links:
+    - label: 免费开始使用
+      trailing-icon: i-heroicons-arrow-right-20-solid
+      size: xl
+      to: /signup
+features:
+  - title: 在餐厅使用二维码数字菜单
+    description: 使用二维码替代传统实体菜单，顾客只需扫描桌上的二维码即可访问数字菜单。
+    items:
+      - title: 菜单上
+        description: 餐厅菜单是展示二维码最明显、最有效的地方。顾客可以扫描二维码查看菜品的详细信息，包括配料、过敏原、营养价值和顾客评论。
+        icon: i-heroicons-document-text
+      - title: 餐桌上
+        description: 您可以直接将二维码图片粘贴在餐桌一角，这也是展示二维码最明显、最有效的地方。顾客可以在就座后直接扫描二维码查看菜品的详细信息。
+        icon: i-heroicons-squares-2x2
+      - title: 桌面摆件
+        description: 餐厅桌面插页（或桌面标签）是放置在桌子上的小卡片或标志，用作促销或信息材料。这些插页可以显示二维码，将顾客链接到餐厅的网站、在线订购系统或注册页面。
+        icon: i-heroicons-presentation-chart-bar
+      - title: 餐厅海报
+        description: 也可以在餐厅海报上展示二维码，可以突出且富有创意。海报可以宣传特别活动、新菜单或订购流程。
+        icon: i-heroicons-photo
+  - title: 二维码菜单的优势
+    description: ''
+    items:
+      - title: 提高运营效率
+        description: 二维码简化餐厅运营流程，顾客扫描二维码即可浏览菜单、下单和付款，减少人工操作和出错风险。服务员也能更快获取订单信息，提高服务效率，带来更顺畅的用餐体验。
+        icon: i-heroicons-arrow-trending-up
+      - title: 实时更新菜单
+        description: 二维码支持随时更新菜单，确保顾客查看最新菜品和价格，适用于特价和季节调整，减少频繁印刷的需求。
+        icon: i-heroicons-arrow-path
+      - title: 加强营销力度
+        description: 二维码助力定向促销和数据收集，顾客通过扫描可参与忠诚计划、填写评价或调查，餐厅还可以借此获取顾客偏好，为后续营销提供数据支持。
+        icon: i-heroicons-megaphone
+      - title: 降低运营成本
+        description: 二维码替代实体菜单，节省纸张和印刷费用，同时支持实时推广，减少传单和海报等传统营销材料的使用，降低成本。
+        icon: i-heroicons-banknotes
+sections:
+  title: 立即为我的餐厅创建二维码菜单
+  description: ''
+  id: features
+  align: left
+  features:
+    - name: '登录 tinylink ，导航至''QR code''，点击''创建 QR code''开始创建二维码。'
+    - name: 填写您的目标网址和所有相关信息。
+    - name: 更改二维码的框架、图案和颜色。
+    - name: 创建二维码。
+    - name: 使用平板电脑或手机的相机测试二维码。
+    - name: 下载生成的二维码图片。
+    - name: 将二维码图片粘贴或上传到您想要显示的位置（例如海报、桌面插页或菜单）。测试扫描以确保二维码能够访问。
