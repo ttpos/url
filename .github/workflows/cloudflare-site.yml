@@ -30,4 +30,3 @@ jobs:
           pnpm install
           pnpm build
           npx wrangler pages deploy dist/ --project-name ${{ vars.WEBSITE_PAGES_NAME }}
-
