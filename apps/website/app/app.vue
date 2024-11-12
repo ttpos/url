@@ -29,9 +29,9 @@ useSeoMeta({
   ogTitle: title,
   ogDescription: description,
   ogLocale: () => locale.value,
-  // ogImage: 'https://dashboard-template.nuxt.dev/social-card.png',
-  // twitterImage: 'https://dashboard-template.nuxt.dev/social-card.png',
-  // twitterCard: 'summary_large_image',
+  ogImage: 'https://web.a.app/20241112141248.png',
+  twitterImage: 'https://web.a.app/20241112141248.png',
+  twitterCard: 'summary_large_image',
 })
 </script>
 
