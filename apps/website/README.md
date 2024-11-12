@@ -1,125 +1,96 @@
-![nuxt-ui-saas-social-card](https://github.com/nuxt-ui-pro/saas/assets/739984/50bf4ddd-c4d5-47e5-a09e-0f699513dfb5)
+<a href="https://web.a.app">
+  <img width="1200" alt="URL Website Preview" src="./public/20241112141248.png">
+</a>
 
-# Nuxt UI Pro - SaaS template
+# @ttpos/a-app-website
 
-[![Nuxt UI Pro](https://img.shields.io/badge/Made%20with-Nuxt%20UI%20Pro-00DC82?logo=nuxt.js&labelColor=020420)](https://ui.nuxt.com/pro)
+URL website application built with Nuxt.js, live at [web.a.app](https://web.a.app)
 
-- [Live demo](https://saas-template.nuxt.dev/)
-- [Play on Stackblitz](https://stackblitz.com/github/nuxt-ui-pro/saas)
-- [Documentation](https://ui.nuxt.com/pro/getting-started)
+## Features
 
-[![Deploy to NuxtHub](https://hub.nuxt.com/button.svg)](https://hub.nuxt.com/new?repo=nuxt-ui-pro/saas)
+- 🚀 Built with [Nuxt.js](https://nuxt.com/) for optimal performance
+- 🔄 Continuous deployment via GitHub Actions
+- ☁️ Hosted on Cloudflare Pages
+- 📱 Responsive design for all devices
+- 🎨 Powered by [@nuxt/ui-pro](https://ui.nuxt.com/pro)
 
-## Quick Start
+## Prerequisites
 
-```bash [Terminal]
-npx nuxi init -t github:nuxt-ui-pro/saas
+Before you begin, ensure you have installed:
+- [Node.js](https://nodejs.org/) (v20.14.0)
+- [pnpm](https://pnpm.io/) (v9.9.0)
+
+## Getting Started
+
+### Environment Setup
+
+1. Set up your environment variables:
+```bash
+cp .env.example .env
 ```
 
-## Setup
+2. Configure the `.env` file with your credentials:
+```env
+# Docker images name
+POD_NAME=
 
-Make sure to install the dependencies:
+# Production license for @nuxt/ui-pro, get one at https://ui.nuxt.com/pro/purchase
+NUXT_UI_PRO_LICENSE=
 
+# Public URL, used for OG Image when running nuxt generate
+NUXT_PUBLIC_SITE_URL=
+
+# Public URL for the static assets. Default is the root URL.
+NUXT_CDNURL=
+
+# Nitro Configuration
+# The Nitro runtime preset to use for deployment.
+# Options include:
+# - 'cloudflare_module': For deploying to Cloudflare worker.
+# - 'vercel': For deploying to Vercel.
+# - 'node': For using the Node.js runtime.
+# - 'node_cluster': For deploying with Node.js in a clustered setup.
+# This variable allows you to dynamically select the appropriate runtime environment
+# based on your deployment target.
+DEPLOY_RUNTIME=cloudflare_module
+
+# Debug Mode
+# Toggle debug mode. Set to true for enabling debug logs and features.
+NUXT_DEBUG=true
+```
+
+### Development
+
+1. Install dependencies:
 ```bash
-# npm
-npm install
-
-# pnpm
 pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
+2. Start the development server:
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+pnpm dev
 ```
 
-## Production
+3. Open [http://localhost:5000](http://localhost:5000) in your browser.
+
+## Build and Production
 
 Build the application for production:
-
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+pnpm generate
 ```
 
-Locally preview production build:
-
+Preview the production build:
 ```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+pnpm preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## Deployment
 
-## Nuxt Studio integration
+This project uses GitHub Actions for CI/CD. The deployment workflow is defined in `.github/workflows/cloudflare-site.yml`.
 
-Add `@nuxthq/studio` dependency to your package.json:
+### Notes
 
-```bash
-# npm
-npm install --save-dev @nuxthq/studio
-
-# pnpm
-pnpm add -D @nuxthq/studio
-
-# yarn
-yarn add -D @nuxthq/studio
-
-# bun
-bun add -d @nuxthq/studio
-```
-
-Add this module to your `nuxt.config.ts`:
-
-```ts
-export default defineNuxtConfig({
-  ...
-  modules: [
-    ...
-    '@nuxthq/studio'
-  ]
-})
-```
-
-Read more on [Nuxt Studio docs](https://nuxt.studio/docs/get-started/setup).
-
-## Renovate integration
-
-Install [Renovate GitHub app](https://github.com/apps/renovate/installations/select_target) on your repository and you are good to go.
+- Make sure to obtain a valid [@nuxt/ui-pro license](https://ui.nuxt.com/pro/purchase) before deploying to production
+- The deployment process will automatically handle static asset optimization and CDN distribution
+- For local development, `NUXT_DEBUG=true` provides additional debugging information
