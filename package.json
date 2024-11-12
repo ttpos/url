@@ -14,10 +14,10 @@
   "scripts": {
     "dev:links": "pnpm -C apps/links dev",
     "dev:user": "pnpm -C apps/user dev",
-    "dev:ow": "pnpm -C apps/website dev",
+    "dev:website": "pnpm -C apps/website dev",
     "preview:links": "pnpm -C apps/links preview",
     "preview:user": "pnpm -C apps/user preview",
-    "preview:ow": "pnpm -C apps/website preview",
+    "preview:website": "pnpm -C apps/website preview",
     "build": "pnpm -r build",
     "clean": "bash ./scripts/clean.sh",
     "prepare": "bash ./scripts/init.sh",
