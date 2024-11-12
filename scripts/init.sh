@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 subdirs=(
-  "official-website"
-  "user"
   "links"
+  "user"
+  "website"
 )
 
 cd apps || { echo "Directory 'apps' does not exist."; exit 1; }

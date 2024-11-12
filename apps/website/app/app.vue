@@ -20,8 +20,8 @@ useHead({
 })
 
 // SEO config
-const title = '@ttpos/a-app-official-website'
-const description = '@ttpos/a-app-official-website SaaS'
+const title = '@ttpos/a-app-website'
+const description = '@ttpos/a-app-website SaaS'
 
 useSeoMeta({
   title,
