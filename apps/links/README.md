@@ -1,6 +1,22 @@
-# 短链 Links
+# @ttpos/a-app-links
 
-简单且高效的URL短链接生成器。
+URL shortening service built with Nuxt.js, deployed at [t.a.app](https://t.a.app).
+
+## Features
+
+- 🔗 Efficient URL shortening and redirection
+- 📱 Custom page display support
+- 🔒 JWT-based authentication
+- ⚡️ Edge Functions for fast response
+- 🌍 Global acceleration via Cloudflare CDN
+
+## Tech Stack
+
+- 🚀 [Nuxt 3](https://nuxt.com/) - Full-stack framework
+- 💪 [TypeScript](https://www.typescriptlang.org/) - Type safety
+- ☁️ [Cloudflare Pages](https://pages.cloudflare.com/) - Deployment platform
+- 🔐 JWT - Authentication mechanism
+- 📦 SQLite - Data storage with Drizzle ORM
 
 ### 路由定义
 
