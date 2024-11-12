@@ -6,7 +6,7 @@ hero:
   description: 创建品牌短链接和动态二维码，轻松分享。通过简单的网址缩短工具、自定义域名和详细分析，提升点击率，发展您的品牌，并跟踪结果。
   headline:
     label: 立即试用
-    to: https://ui.nuxt.com/pro
+    to:
     icon: i-heroicons-arrow-top-right-on-square-20-solid
   links:
     - label: 免费开始使用

@@ -6,7 +6,7 @@ hero:
   description: Create branded short links and dynamic QR codes for easy sharing. Boost clicks, grow your brand, and track results with a simple URL shortener, custom domains, and detailed analytics.
   headline:
     label: Try It Now
-    to: https://ui.nuxt.com/pro
+    to:
     icon: i-heroicons-arrow-top-right-on-square-20-solid
   links:
     - label: Get started for free
