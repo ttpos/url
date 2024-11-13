@@ -1,13 +1,8 @@
 <script setup lang="ts">
-const {
-  public: {
-    i18nCookieKey,
-  },
-} = useRuntimeConfig()
 const route = useRoute()
 const appConfig = useAppConfig()
 
-const { locale, t } = useI18n()
+const { locale, t, setLocaleCookie } = useI18n()
 
 const links = computed(() => [
   {
@@ -134,26 +129,22 @@ const i18nLinks = computed(() => [
       {
         label: 'English',
         key: 'en-US',
-        click: () => changeLanguage('en-US'),
+        click: () => locale.value = 'en-US',
         active: locale.value === 'en-US',
       },
       {
         label: '简体中文',
         key: 'zh-CN',
-        click: () => changeLanguage('zh-CN'),
+        click: () => locale.value = 'zh-CN',
         active: locale.value === 'zh-CN',
       },
     ],
   },
 ])
 
-function changeLanguage(lang: string) {
-  locale.value = lang
-
-  const i18nRedirected = useCookie(i18nCookieKey)
-
-  i18nRedirected.value = lang
-}
+watch(locale, (newLocale) => {
+  setLocaleCookie(newLocale)
+})
 </script>
 
 <template>

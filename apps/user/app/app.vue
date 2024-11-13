@@ -3,8 +3,6 @@ import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from '~/composables'
 
 // Composables
 const colorMode = useColorMode()
-const { locale } = useI18n()
-const { public: { i18nCookieKey } } = useRuntimeConfig()
 
 // Computed
 const themeColor = computed(() => colorMode.value === 'dark' ? '#111827' : 'white')
@@ -36,36 +34,6 @@ useSeoMeta({
   // ogImage: 'https://dashboard-template.nuxt.dev/social-card.png',
   // twitterImage: 'https://dashboard-template.nuxt.dev/social-card.png',
   // twitterCard: 'summary_large_image',
-})
-
-// Language initialization
-function getPreferredLanguage(): string {
-  try {
-    const browserLang = navigator.language
-    return SUPPORTED_LANGUAGES.includes(browserLang as typeof SUPPORTED_LANGUAGES[number])
-      ? browserLang
-      : DEFAULT_LANGUAGE
-  }
-  catch {
-    return DEFAULT_LANGUAGE
-  }
-}
-
-function initializeLanguage() {
-  const i18nRedirected = useCookie(i18nCookieKey)
-
-  if (i18nRedirected.value) {
-    locale.value = i18nRedirected.value
-    return
-  }
-
-  const preferredLang = getPreferredLanguage()
-  locale.value = preferredLang
-  i18nRedirected.value = preferredLang
-}
-
-onMounted(() => {
-  initializeLanguage()
 })
 </script>
 

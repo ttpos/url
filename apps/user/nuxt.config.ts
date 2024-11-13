@@ -79,7 +79,6 @@ export default defineNuxtConfig({
     },
 
     public: {
-      i18nCookieKey: process.env.NUXT_I18N_COOKIE_KEY,
     },
   },
 
@@ -117,16 +116,15 @@ export default defineNuxtConfig({
       escapeHtml: true,
     },
     lazy: true,
+    strategy: 'no_prefix',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'user_i18n_redirected',
+      redirectOn: 'root',
+    },
+    baseUrl: '/',
     locales: ['en-US', 'zh-CN'],
     defaultLocale: 'en-US',
-    skipSettingLocaleOnNavigate: true,
-    detectBrowserLanguage: false,
-    // detectBrowserLanguage: {
-    //   useCookie: true,
-    //   cookieKey: 'user_i18n_redirected',
-    //   redirectOn: 'root',
-    //   fallbackLocale: 'en-US',
-    // },
   },
 
   compatibilityDate: '2024-07-11',
